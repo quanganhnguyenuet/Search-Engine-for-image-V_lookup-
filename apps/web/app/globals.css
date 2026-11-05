@@ -24,6 +24,18 @@
 }
 
 :root { --paper: #faf8f3; --ink: #2e352e; --red: #a74432; --line: #e6e2d9; }
+.search-modes { display: flex; justify-content: center; gap: 5px; margin: 0 auto 15px; }
+.search-modes button { border: 1px solid var(--line); border-radius: 4px; background: transparent; padding: 9px 13px; font-size: 12px; color: #65705c; }
+.search-modes button.active { color: white; background: #3e493c; border-color: #3e493c; }
+.image-query-controls { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 12px; font-size: 12px; color: #65705c; }
+.image-query-controls button { background: transparent; border: 1px solid var(--line); padding: 6px 10px; border-radius: 3px; }
+.image-query-controls > span { max-width: 65%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rag-answer { background: #efeee4; border-left: 3px solid var(--red); padding: 24px; margin-bottom: 24px; border-radius: 4px; }
+.answer-text { font-size: 14px; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; margin: 15px 0; }
+.rag-citations { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.rag-citations button { border: 1px solid #ccc9b9; border-radius: 3px; padding: 7px 10px; font-size: 12px; background: var(--paper); }
+.rag-answer small, .semantic-note { color: #69705f; font-size: 11px; line-height: 1.7; }
+.semantic-note { margin: 0 0 20px; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 button, input { font: inherit; }
