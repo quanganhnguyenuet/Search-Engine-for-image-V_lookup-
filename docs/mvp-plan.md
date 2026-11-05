@@ -1,5 +1,11 @@
 # VisualSeek MVP Plan
 
+> Ưu tiên đã duyệt ngày 05/11/2026: text → tìm ảnh có sẵn, bổ sung tags/description và LLM.
+> Xem [kế hoạch text-to-image search V1](text-to-image-search-plan.md) và
+> [triển khai contextual search](contextual-image-search.md).
+> Tài liệu dưới đây là roadmap dài hạn,
+> không phải toàn bộ phạm vi của đợt text search V1.
+
 > Cập nhật triển khai: theo yêu cầu bổ sung, đã có script Kaggle tạo SigLIP2 artifact,
 > exact cosine retrieval chạy CPU và RAG tùy chọn qua Ollama. Hướng dẫn tại
 > [kaggle-embedding-rag.md](kaggle-embedding-rag.md). Exact search hiện là baseline

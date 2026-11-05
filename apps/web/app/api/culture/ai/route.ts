@@ -14,15 +14,16 @@ export async function POST(request: Request) {
   } catch {
     return Response.json({ error: "Dữ liệu tìm kiếm không hợp lệ." }, { status: 400 });
   }
-  if (!body || typeof body !== "object" || !["semantic", "rag"].includes(body.mode)) {
+  if (!body || typeof body !== "object" || !["contextual", "semantic", "rag"].includes(body.mode)) {
     return Response.json({ error: "Chế độ tìm kiếm không hợp lệ." }, { status: 400 });
   }
   try {
-    const response = await fetch(`${apiUrl}/api/v1/search/${body.mode}`, {
+    const response = await fetch(`${apiUrl}/api/v1/search/${body.mode === "contextual" ? "text" : body.mode}`, {
       method: "POST", headers: { "Content-Type": "application/json" }, cache: "no-store",
       body: JSON.stringify({ query: body.query || undefined, image_base64: body.image_base64,
-        category: body.category || undefined, top_k: body.mode === "rag" ? 5 : 24 }),
-      signal: AbortSignal.any([request.signal, AbortSignal.timeout(150_000)]),
+        category: body.category || undefined, top_k: body.mode === "rag" ? 5 : 24,
+        ...(body.mode === "contextual" ? { use_llm: body.use_llm } : {}) }),
+      signal: AbortSignal.any([request.signal, AbortSignal.timeout(body.mode === "semantic" ? 10_000 : 210_000)]),
     });
     const data = await response.json();
     if (!response.ok) {

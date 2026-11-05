@@ -9,6 +9,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 
 import _bootstrap  # noqa: F401
 import numpy as np
+from enrich_embeddings import add_metadata
 
 from visualseek_embedding.siglip2 import (
     MODEL_ID,
@@ -143,7 +144,8 @@ def export_embeddings(args: argparse.Namespace, encoder_factory=Siglip2Encoder) 
         images, valid = [], []
         for row in pending[start : start + args.batch_size]:
             try:
-                images.append(load_image(root / row["image_path"]))
+                # Offline corpus includes legitimate 44 MP photos; online uploads stay at 36 MP.
+                images.append(load_image(root / row["image_path"], max_pixels=72_000_000))
                 valid.append(row)
             except (OSError, ValueError, Warning) as exc:
                 failures.append({"asset_id": row["asset_id"], "error": str(exc)})
@@ -201,6 +203,8 @@ def export_embeddings(args: argparse.Namespace, encoder_factory=Siglip2Encoder) 
         encoding="utf-8",
     )
     log("[smoke] Loading index and checking text-to-image retrieval")
+    if getattr(args, "with_metadata", False):
+        add_metadata(output, encoder, args.batch_size)
     index = ArtifactIndex(output)
     queries = args.query or [
         "người mặc áo dài",
@@ -256,6 +260,8 @@ def export_embeddings(args: argparse.Namespace, encoder_factory=Siglip2Encoder) 
         with ZipFile(output / "culture-embeddings.zip", "w", ZIP_DEFLATED) as archive:
             for name in ("manifest.json", "vectors.npy", "assets.jsonl", "smoke_report.json"):
                 archive.write(output / name, name)
+            if index.metadata_vectors is not None:
+                archive.write(output / "metadata_vectors.npy", "metadata_vectors.npy")
     log(f"[done] Output: {output}; failures={len(failures)}")
     print(
         json.dumps(
@@ -286,6 +292,8 @@ def main() -> int:
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--query", action="append")
     parser.add_argument("--zip", action="store_true")
+    parser.add_argument("--with-metadata", action="store_true",
+                        help="Also embed title/tags/description for contextual hybrid search")
     args = parser.parse_args()
     if args.limit_per_category < 0 or args.batch_size < 1:
         parser.error("limit must be nonnegative and batch-size positive")

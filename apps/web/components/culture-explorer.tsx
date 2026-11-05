@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import Image from "next/image";
 import { categories, type CultureAsset, type SearchResponse } from "@/lib/culture-types";
 
-type SearchMode = "semantic" | "rag" | "keyword";
+type SearchMode = "contextual" | "semantic" | "rag" | "keyword";
 
 function SearchIcon() {
   return <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.3" /><path d="m16 16 5 5" /></svg>;
@@ -33,6 +33,7 @@ function Detail({ asset, close, search }: { asset: CultureAsset; close: () => vo
         <span className="eyebrow">{asset.categoryLabel}</span>
         <h2 id="detail-title">{asset.title}</h2>
         <p>{asset.description}</p>
+        {asset.match_reason && <p className="source-note">Lý do gợi ý theo chú thích: {asset.match_reason}</p>}
         <div className="tag-list">{asset.tags.map((tag, index) => <button key={`${tag}-${index}`} onClick={() => { close(); search(tag); }}>{tag}</button>)}</div>
         {asset.context.regional_significance && <section><h3>Dấu ấn vùng miền</h3><p>{asset.context.regional_significance}</p></section>}
         {asset.context.historical_context && <section><h3>Câu chuyện văn hóa</h3><p>{asset.context.historical_context}</p></section>}
@@ -53,7 +54,7 @@ export default function CultureExplorer() {
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
   const [selected, setSelected] = useState<CultureAsset | null>(null);
-  const [mode, setMode] = useState<SearchMode>("semantic");
+  const [mode, setMode] = useState<SearchMode>("contextual");
   const [imageQuery, setImageQuery] = useState<{ name: string; base64: string } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -65,7 +66,7 @@ export default function CultureExplorer() {
     const selectedCategory = params.get("category") ?? "";
     const requestedPage = Number(params.get("page") ?? 1);
     const requestedMode = params.get("mode");
-    setMode(requestedMode === "keyword" || requestedMode === "rag" ? requestedMode : "semantic");
+    setMode(requestedMode === "keyword" || requestedMode === "rag" || requestedMode === "semantic" ? requestedMode : "contextual");
     setImageQuery(null);
     setDraft(term); setQuery(term);
     setCategory(categories.some(({ id }) => id === selectedCategory) ? selectedCategory : "");
@@ -94,21 +95,24 @@ export default function CultureExplorer() {
         if (!response.ok) throw new Error(result.error ?? "Không thể tải thư viện ảnh. Vui lòng thử lại.");
         return result as SearchResponse;
       })
-      .then(setData)
-      .catch((reason) => { if (reason.name !== "AbortError") setError(reason.message); })
+      .then((result) => { if (!controller.signal.aborted) setData(result); })
+      .catch((reason) => { if (!controller.signal.aborted) setError(reason.message); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
   }, [query, category, page, retry, mode, imageQuery]);
 
   function navigate(term: string, nextCategory = category, nextPage = 1, nextMode = mode) {
-    const cleaned = term.trim().slice(0, 200);
+    const cleaned = term.normalize("NFC").trim();
+    if (cleaned.length > (nextMode === "contextual" ? 1000 : 200)) {
+      setError("Mô tả quá dài. Hãy rút gọn trước khi tìm kiếm."); return;
+    }
     setDraft(cleaned); setQuery(cleaned); setCategory(nextCategory); setPage(nextPage);
     setMode(nextMode); setImageQuery(null);
     const params = new URLSearchParams();
     if (cleaned) params.set("q", cleaned);
     if (nextCategory) params.set("category", nextCategory);
     if (nextPage > 1) params.set("page", String(nextPage));
-    if (nextMode !== "semantic") params.set("mode", nextMode);
+    if (nextMode !== "contextual") params.set("mode", nextMode);
     window.history.pushState(null, "", params.size ? `?${params}` : "/");
     resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -155,19 +159,19 @@ export default function CultureExplorer() {
         <h1>Một góc nhìn.<br />Muôn nét <em>Việt Nam.</em></h1>
         <p className="hero-description">Từ hương vị thân quen đến những di sản lâu đời.<br className="desktop-break" /> Khám phá câu chuyện Việt Nam qua từng khung hình.</p>
         <div className="search-modes" role="group" aria-label="Chế độ tìm kiếm">
-          {([ ["semantic", "Tìm theo ngữ nghĩa"], ["rag", "Hỏi đáp RAG"], ["keyword", "Từ khóa"] ] as const).map(([value, label]) =>
+          {([ ["contextual", "Tìm theo yêu cầu"], ["semantic", "Ngữ nghĩa"], ["keyword", "Từ khóa"] ] as const).map(([value, label]) =>
             <button type="button" key={value} aria-pressed={mode === value} className={mode === value ? "active" : ""} onClick={() => navigate(query, category, 1, value)}>{label}</button>)}
         </div>
         <form className="search-form" onSubmit={submit} role="search">
           <label className="sr-only" htmlFor="culture-search">Tìm kiếm ảnh văn hóa Việt Nam</label>
           <SearchIcon />
-          <input ref={searchRef} id="culture-search" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={mode === "rag" ? "Bạn muốn hỏi điều gì về văn hóa Việt?" : mode === "semantic" ? "Mô tả khung hình bạn muốn tìm…" : "Nhập tên, tags hoặc từ khóa…"} maxLength={200} autoComplete="off" enterKeyHint="search" />
+          <input ref={searchRef} id="culture-search" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={mode === "keyword" ? "Nhập tên, tags hoặc từ khóa…" : "Mô tả ảnh bạn muốn tìm, ví dụ: áo dài đỏ trước phố cổ…"} maxLength={mode === "contextual" ? 1000 : 200} autoComplete="off" enterKeyHint="search" />
           {draft && <button className="clear-search" type="button" onClick={() => { setDraft(""); searchRef.current?.focus(); }} aria-label="Xóa từ khóa">×</button>}
           <button className="search-submit" type="submit">Tìm kiếm <span aria-hidden="true">↗</span></button>
         </form>
         {mode === "semantic" && <div className="image-query-controls"><input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" aria-label="Chọn ảnh để tìm ảnh tương tự" onChange={(event) => uploadImage(event.target.files?.[0])} /><button onClick={() => fileRef.current?.click()}>▧ Tìm bằng ảnh</button>{imageQuery && <span>{imageQuery.name} <button onClick={() => navigate("", "")} aria-label="Xóa ảnh tìm kiếm">×</button></span>}</div>}
-        <div className="suggestions"><span>Thử khám phá</span>{["áo dài", "lễ hội", "Hội An", "gốm"].map((term) => <button key={term} onClick={() => navigate(term, "")}>{term}<span aria-hidden="true">↗</span></button>)}</div>
-        <div className="hero-foot"><span>{mode === "keyword" ? "Tìm từ khóa có dấu hoặc không dấu" : mode === "rag" ? "Trả lời từ chú thích của ảnh liên quan, kèm dẫn nguồn" : "Tìm bằng mô tả tự nhiên hoặc một ảnh tương tự"}</span><span>VĂN HÓA KẾT NỐI CHÚNG TA <span aria-hidden="true">↓</span></span></div>
+        <div className="suggestions"><span>Thử khám phá</span>{["người mặc áo dài đỏ", "ruộng bậc thang xanh", "phố cổ Hội An", "nghệ nhân làm gốm"].map((term) => <button key={term} onClick={() => navigate(term, "")}>{term}<span aria-hidden="true">↗</span></button>)}</div>
+        <div className="hero-foot"><span>{mode === "keyword" ? "Tìm từ khóa có dấu hoặc không dấu" : mode === "contextual" ? "Tìm nhanh bằng tên, tags hoặc mô tả ảnh" : "Tìm bằng mô tả tự nhiên hoặc một ảnh tương tự"}</span><span>VĂN HÓA KẾT NỐI CHÚNG TA <span aria-hidden="true">↓</span></span></div>
       </section>
 
       <section className="collection" id="collection" ref={resultsRef}>
@@ -180,6 +184,8 @@ export default function CultureExplorer() {
 
         {!loading && !error && data?.answer && <section className="rag-answer" aria-label="Câu trả lời RAG"><p className="eyebrow">{data.abstained ? "CHƯA ĐỦ BẰNG CHỨNG" : "CÂU TRẢ LỜI TỪ THƯ VIỆN"}</p><p className="answer-text">{data.answer}</p><div className="rag-citations">{data.citations?.map((citation) => <button key={citation.id} onClick={() => { const asset = data.items.find((item) => item.id === citation.asset_id); if (asset) setSelected(asset); }}>[{citation.id}] {citation.title} ↗</button>)}</div><small>Tổng hợp từ chú thích dataset, chưa phải xác minh lịch sử độc lập.{data.generator_model ? ` · ${data.generator_model}` : ""}</small></section>}
         {!loading && !error && data?.result_scope === "top_k" && <p className="semantic-note">Hiển thị {data.items.length} ảnh gần nhất trong {data.libraryTotal.toLocaleString("vi-VN")} ảnh đã index. Số ảnh theo chủ đề là thống kê của index.{data.timings ? ` · Embedding ${Math.round(data.timings.embedding_ms)} ms · Retrieval ${Math.round(data.timings.retrieval_ms)} ms` : ""}</p>}
+        {!loading && !error && data?.coverage_complete === false && <p className="semantic-note" role="status">Index hiện mới có {data.libraryTotal.toLocaleString("vi-VN")}{data.corpus_total ? ` / ${data.corpus_total.toLocaleString("vi-VN")}` : ""} ảnh. Kết quả chỉ lấy từ phần đã index.</p>}
+        {!loading && !error && data?.interpretation && <section className="rag-answer" aria-label="Cách hiểu yêu cầu"><p className="eyebrow">YÊU CẦU ĐƯỢC HIỂU LÀ</p><p>{data.interpretation.intent}</p><small>Ảnh được gợi ý theo chú thích trong thư viện; chưa xác minh trực tiếp từng chi tiết trong ảnh.</small></section>}
 
         {error ? <div className="empty-state"><span aria-hidden="true">↻</span><h3>Thư viện đang tạm nghỉ một chút</h3><p>{error}</p><button onClick={() => setRetry((value) => value + 1)}>Thử lại</button></div> : loading ? <div className="photo-grid" aria-busy="true" aria-label="Đang tải ảnh">{Array.from({ length: 12 }, (_, index) => <div key={index} className="skeleton-card"><div /><span /><span /></div>)}</div> : !data?.items.length ? <div className="empty-state"><SearchIcon /><h3>{data?.libraryTotal ? "Chưa tìm thấy khung hình phù hợp" : "Thư viện đang chờ những khung hình đầu tiên"}</h3><p>{data?.libraryTotal ? "Thử một từ khóa ngắn hơn, không dấu hoặc chọn chủ đề khác." : "Chuẩn bị dataset ảnh local rồi làm mới trang để bắt đầu khám phá."}</p><button onClick={() => navigate("", "")}>Khám phá tất cả</button></div> : <>
           <div className="photo-grid">{data.items.map((asset, index) => <article className="photo-card" key={asset.id}><button className="photo-open" onClick={() => setSelected(asset)} aria-label={`Xem ${asset.title}`}><div className="photo-frame"><AssetImage asset={asset} eager={index < 4} /><span className="photo-category">{asset.categoryLabel}</span><span className="photo-arrow" aria-hidden="true">↗</span></div><div className="photo-caption"><h3>{asset.title}</h3><p>{asset.tags.slice(0, 2).join(" · ") || asset.categoryLabel}</p></div></button></article>)}</div>

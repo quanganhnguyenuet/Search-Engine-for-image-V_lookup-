@@ -12,16 +12,28 @@ export type CultureAsset = {
   description: string; tags: string[]; context: Record<string, string>;
   imageUrl: string; sourceUrl: string;
   score?: number;
+  match_reason?: string | null;
+  match_kind?: string | null;
 };
 
 export type SearchResponse = {
   items: CultureAsset[]; total: number; page: number; pages: number;
   libraryTotal: number; counts: Record<string, number>;
-  mode?: "semantic" | "rag";
+  mode?: "contextual" | "semantic" | "rag";
+  corpus_total?: number | null;
+  coverage_complete?: boolean;
+  interpretation?: { intent: string; visual_query: string; metadata_query: string;
+    keywords: string[]; exclusions: string[] } | null;
+  query_model?: string | null;
+  search_route?: "lexical" | "hybrid" | "llm_hybrid";
+  llm_used?: boolean;
+  llm_call_count?: number;
+  vector_cache_hit?: boolean;
   result_scope?: "top_k";
   answer?: string;
   abstained?: boolean;
   citations?: { id: string; asset_id: string; title: string }[];
   generator_model?: string | null;
-  timings?: { embedding_ms: number; retrieval_ms: number; generation_ms?: number };
+  timings?: { embedding_ms: number; retrieval_ms: number; generation_ms?: number;
+    planning_ms?: number; reranking_ms?: number; total_ms?: number };
 };

@@ -1,9 +1,19 @@
 # VisualSeek — Multimodal AI Image Search Engine
 
+Current focus: [contextual text-to-image search](docs/contextual-image-search.md),
+with automatic routing: exact names/tags use a local lookup, ordinary descriptions
+use local hybrid retrieval, and logical/multi-clause requests use an OpenAI planner.
+The web defaults to **Tìm theo yêu cầu**. Only the LLM path and RAG require a backend
+`OPENAI_API_KEY`; semantic and keyword baselines remain available for comparison.
+See the [approved plan and scope update](docs/text-to-image-search-plan.md).
+For Qdrant credentials, see [Qdrant Cloud setup](docs/qdrant-cloud-setup.md).
+The current search backend remains NumPy; credentials alone do not enable Qdrant retrieval.
+
 VisualSeek is a monorepo for a multimodal image-search system. The **VietNam Culture**
-frontend now searches the downloaded cultural image dataset by keyword and category.
-SigLIP2 export/import, CPU vector retrieval and Ollama RAG are available as the next
-baseline. OCR and production storage adapters remain future work.
+frontend searches a local cultural corpus through natural-language requests, semantic
+similarity, or keywords. SigLIP2 exports image and tag/description vectors; OpenAI
+interprets user intent before CPU hybrid retrieval. OCR and production storage adapters
+remain future work.
 
 ## Embedding on Kaggle and RAG
 

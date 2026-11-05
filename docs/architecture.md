@@ -1,5 +1,11 @@
 # Architecture boundaries
 
+Current implementation: [contextual image search](contextual-image-search.md).
+`web -> FastAPI -> local query router` selects exact title/tag lookup, direct local
+SigLIP2 + NumPy hybrid RRF, or an OpenAI planner for logical/multi-clause requests.
+LLM reranking is optional and only runs on the LLM path; no production DB
+adapter is in the search path. The initialization notes below describe the original boundaries.
+
 VisualSeek starts as a modular monorepo with explicit dependency directions:
 
 ```text

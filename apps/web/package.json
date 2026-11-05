@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "test:search": "node --test tests/culture-search.test.cjs",
     "test:http": "node tests/http-smoke.mjs",
-    "test:ai": "node tests/ai-http-smoke.mjs"
+    "test:ai": "node tests/ai-http-smoke.mjs",
+    "test:contextual": "node tests/contextual-http-smoke.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.1.2",

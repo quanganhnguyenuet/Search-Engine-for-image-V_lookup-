@@ -14,14 +14,14 @@ MODEL_REVISION = "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2"
 PREPROCESS_VERSION = "siglip2-fixres224-exif-rgb-l2-v1"
 
 
-def load_image(source: Path | bytes) -> Image.Image:
+def load_image(source: Path | bytes, *, max_pixels: int = 36_000_000) -> Image.Image:
     """Decode pixels only. Metadata and annotations never enter the image encoder."""
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("error", Image.DecompressionBombWarning)
             with Image.open(io.BytesIO(source) if isinstance(source, bytes) else source) as image:
-                if image.width * image.height > 36_000_000:
-                    raise ValueError("Image exceeds the 36 megapixel limit")
+                if image.width * image.height > max_pixels:
+                    raise ValueError(f"Image exceeds the {max_pixels // 1_000_000} megapixel limit")
                 return ImageOps.exif_transpose(image).convert("RGB")
     except (Image.DecompressionBombError, Image.DecompressionBombWarning) as exc:
         raise ValueError("Image exceeds the pixel limit") from exc
@@ -97,6 +97,9 @@ class Siglip2Encoder:
 
     def encode_texts(self, texts: list[str]) -> np.ndarray:
         with self.lock, self.torch.inference_mode():
+            lengths = self.processor.tokenizer(texts, truncation=False)["input_ids"]
+            if any(len(tokens) > 64 for tokens in lengths):
+                raise ValueError("Text exceeds SigLIP2's 64-token budget; shorten the query")
             inputs = self.processor(
                 text=texts,
                 padding="max_length",
@@ -106,3 +109,28 @@ class Siglip2Encoder:
             ).to(self.device)
             vectors = self.model.get_text_features(**inputs)
             return unit_vectors(vectors.float().cpu().numpy())
+
+    def encode_documents(self, texts: list[str], batch_size: int = 32) -> np.ndarray:
+        """Embed every token of metadata; mean-pool normalized 64-token chunks."""
+        tokenizer = self.processor.tokenizer
+        budget = 64 - tokenizer.num_special_tokens_to_add(pair=False)
+        chunks, owners = [], []
+        for owner, text in enumerate(texts):
+            tokens = tokenizer.encode(text, add_special_tokens=False)
+            for start in range(0, max(1, len(tokens)), budget):
+                chunks.append(tokenizer.prepare_for_model(
+                    tokens[start:start + budget], padding="max_length", max_length=64,
+                    truncation=False, return_attention_mask=False,
+                ))
+                owners.append(owner)
+        pooled = np.zeros((len(texts), self.dimension), dtype=np.float32)
+        with self.lock, self.torch.inference_mode():
+            for start in range(0, len(chunks), batch_size):
+                inputs = tokenizer.pad(
+                    chunks[start:start + batch_size], padding="max_length",
+                    max_length=64, return_tensors="pt", return_attention_mask=False,
+                ).to(self.device)
+                vectors = self.model.get_text_features(**inputs)
+                values = unit_vectors(vectors.float().cpu().numpy())
+                np.add.at(pooled, owners[start:start + batch_size], values)
+        return unit_vectors(pooled)

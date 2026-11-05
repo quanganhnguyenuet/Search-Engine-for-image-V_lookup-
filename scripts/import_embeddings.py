@@ -1,6 +1,7 @@
 """Validate a Kaggle export and atomically install it into a new artifact directory."""
 
 import argparse
+import json
 import shutil
 import tempfile
 from pathlib import Path
@@ -19,7 +20,12 @@ def import_archive(archive_path: Path, output: Path) -> int:
         stage = Path(temporary) / "artifact"
         stage.mkdir()
         with ZipFile(archive_path) as archive:
-            names = ("manifest.json", "vectors.npy", "assets.jsonl")
+            if archive.getinfo("manifest.json").file_size > 1024 * 1024:
+                raise ValueError("Artifact manifest exceeds 1 MiB")
+            manifest = json.loads(archive.read("manifest.json"))
+            names = ["manifest.json", "vectors.npy", "assets.jsonl"]
+            if manifest.get("schema_version") == 2:
+                names.append("metadata_vectors.npy")
             if sum(archive.getinfo(name).file_size for name in names) > 512 * 1024 * 1024:
                 raise ValueError("Artifact exceeds 512 MiB import limit")
             # Never extract arbitrary paths or executable files from the archive.

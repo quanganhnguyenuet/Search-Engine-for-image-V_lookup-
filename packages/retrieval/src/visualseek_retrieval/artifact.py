@@ -30,7 +30,7 @@ class ArtifactIndex:
         self.directory = directory
         self.manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
         manifest = self.manifest
-        if manifest.get("schema_version") != 1 or manifest.get("normalization") != "l2":
+        if manifest.get("schema_version") not in (1, 2) or manifest.get("normalization") != "l2":
             raise ValueError("Unsupported artifact schema or normalization")
         if manifest.get("preprocess_version") != "siglip2-fixres224-exif-rgb-l2-v1":
             raise ValueError("Unsupported preprocessing version")
@@ -65,6 +65,19 @@ class ArtifactIndex:
             raise ValueError("Stored vectors must be finite and unit-normalized")
         self.counts = dict(Counter(row["category"] for row in self.assets))
         self.dimension = manifest["dimension"]
+        self.metadata_vectors = None
+        if manifest["schema_version"] == 2:
+            if manifest.get("metadata_version") != "title-tags-description-chunk-mean-l2-v2":
+                raise ValueError("Unsupported metadata preprocessing")
+            name = "metadata_vectors.npy"
+            if sha256_file(directory / name) != manifest["files"].get(name):
+                raise ValueError("Artifact checksum mismatch: metadata_vectors.npy")
+            values = np.load(directory / name, mmap_mode="r", allow_pickle=False)
+            if (values.dtype != np.float32 or values.shape != self.vectors.shape
+                or not np.isfinite(values).all()
+                or not np.allclose(np.linalg.norm(values, axis=1), 1, atol=2e-3)):
+                raise ValueError("Invalid metadata vectors")
+            self.metadata_vectors = values
 
     def search(
         self, vector: np.ndarray, limit: int = 10, category: str | None = None

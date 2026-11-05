@@ -1,8 +1,9 @@
+import unicodedata
 from functools import lru_cache
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, StrictBool, model_validator
 
 from visualseek_api.application.search import SearchService
 from visualseek_api.core.config import get_settings
@@ -50,6 +51,20 @@ class RagRequest(BaseModel):
         return self
 
 
+class TextSearchRequest(BaseModel):
+    query: str = Field(min_length=1, max_length=1000)
+    category: Category | None = None
+    top_k: int = Field(default=24, ge=1, le=50)
+    use_llm: StrictBool | None = None
+
+    @model_validator(mode="after")
+    def meaningful_query(self):
+        self.query = unicodedata.normalize("NFC", self.query.strip())
+        if not self.query:
+            raise ValueError("Query must not be empty")
+        return self
+
+
 @router.get("/status")
 def search_status(service: ServiceDependency):
     try:
@@ -59,17 +74,59 @@ def search_status(service: ServiceDependency):
     return {
         "index_ready": True,
         "model_loaded": service.encoder is not None,
+        "encoder_ready": service.encoder_ready,
+        "query_model_last_success": service.query_model_ready,
+        "readiness_note": "LLM status records last uncached plan, not a live availability probe",
         "indexed": len(index.assets),
         "export_complete": index.manifest.get("complete", False),
         "scope": index.manifest.get("scope", {}),
         "model": index.manifest["model_id"],
         "backend": "numpy-exact",
+        "metadata_ready": index.metadata_vectors is not None,
+        "contextual_backend": "numpy-hybrid-rrf",
+        "query_routing": "auto",
+        "query_model": service.settings.search_llm_model,
+        "reasoning_effort": (service.settings.openai_reasoning_effort
+                             if service.settings.search_llm_model == "gpt-5.6-luna" else None),
+        "llm_provider": "openai",
+        "openai_key_configured": bool(service.settings.openai_api_key.get_secret_value().strip()),
+        "artifact_fingerprint": index.manifest["files"],
+        **service.coverage(),
     }
+
+
+class WarmupRequest(BaseModel):
+    include_llm: bool = False
+
+
+@router.post("/warmup")
+def warmup(body: WarmupRequest, service: ServiceDependency):
+    index = service.get_index()
+    if index.metadata_vectors is None:
+        raise ApplicationError("Index chưa có metadata embeddings.",
+                               code="metadata_index_unavailable", status_code=503)
+    service.get_encoder().encode_documents(["ảnh văn hóa Việt Nam"])
+    service.get_retriever()
+    service.encoder_ready = True
+    if body.include_llm:
+        # Probe the model even if the same warm-up request was cached previously.
+        try:
+            service.understanding.plan("Tìm ảnh áo dài")
+        except ApplicationError:
+            service.query_model_ready = False
+            raise
+        service.query_model_ready = True
+    return search_status(service)
 
 
 @router.post("/semantic")
 def semantic_search(body: SemanticRequest, service: ServiceDependency):
     return service.search(**body.model_dump())
+
+
+@router.post("/text")
+def text_search(body: TextSearchRequest, service: ServiceDependency):
+    return service.text_search(**body.model_dump())
 
 
 @router.post("/rag")

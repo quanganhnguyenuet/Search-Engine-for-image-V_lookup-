@@ -31,6 +31,11 @@ class EncoderDouble:
     def encode_texts(self, texts):
         return np.array([[1, 0, 0] for _ in texts], dtype=np.float32)
 
+    def encode_documents(self, texts, batch_size=32):
+        assert all("Do not export this VQA label" not in text for text in texts)
+        assert all("Original description" in text and "tag" in text for text in texts)
+        return np.array([[0, 0, 1] for _ in texts], dtype=np.float32)
+
 
 @pytest.fixture
 def export_args(tmp_path):
@@ -142,3 +147,30 @@ def test_import_rejects_corruption_and_ignores_zip_traversal(export_args, tmp_pa
     with pytest.raises(ValueError, match="checksum"):
         import_archive(corrupt, tmp_path / "rejected")
     assert not (tmp_path / "rejected").exists()
+
+
+def test_metadata_export_resume_and_import(export_args, tmp_path):
+    export_args.with_metadata = True
+    export_embeddings(export_args, encoder_factory=EncoderDouble)
+    index = ArtifactIndex(export_args.output)
+    assert index.metadata_vectors.shape == index.vectors.shape
+    assert index.manifest["schema_version"] == 2
+    installed = tmp_path / "contextual-installed"
+    import_archive(export_args.output / "culture-embeddings.zip", installed)
+    assert np.array_equal(ArtifactIndex(installed).metadata_vectors, index.metadata_vectors)
+    # Both pixel and annotation checkpoints can be reused on repeat runs.
+    export_embeddings(export_args, encoder_factory=EncoderDouble)
+    assert np.array_equal(
+        ArtifactIndex(export_args.output).metadata_vectors, index.metadata_vectors)
+
+
+def test_metadata_checksum_import_failure(export_args, tmp_path):
+    export_args.with_metadata = True
+    export_embeddings(export_args, encoder_factory=EncoderDouble)
+    archive = tmp_path / "bad-metadata.zip"
+    with ZipFile(archive, "w") as file:
+        for name in ("manifest.json", "vectors.npy", "assets.jsonl", "metadata_vectors.npy"):
+            content = (export_args.output / name).read_bytes()
+            file.writestr(name, content + b"bad" if name == "metadata_vectors.npy" else content)
+    with pytest.raises(ValueError, match="checksum"):
+        import_archive(archive, tmp_path / "bad-install")

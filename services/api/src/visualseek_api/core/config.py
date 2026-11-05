@@ -1,5 +1,7 @@
 from functools import lru_cache
+from typing import Literal
 
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -20,12 +22,18 @@ class Settings(BaseSettings):
     qdrant_url: str = "http://localhost:6333"
     qdrant_api_key: str = ""
 
-    embedding_artifact_dir: str = "data/embeddings/culture-siglip2"
+    embedding_artifact_dir: str = "data/embeddings/culture-contextual-demo-v1"
     embedding_cache_dir: str = "data/models/huggingface"
     embedding_device: str = "cpu"
     embedding_cpu_threads: int = 4
-    ollama_url: str = "http://localhost:11434"
-    rag_model: str = "qwen2.5:3b"
+    corpus_manifest_path: str = "data/processed/culture-search/assets.jsonl"
+    openai_api_key: SecretStr = SecretStr("")
+    openai_base_url: str = "https://api.openai.com/v1"
+    openai_reasoning_effort: Literal["none", "low", "medium", "high", "xhigh", "max"] = "low"
+    search_llm_model: str = "gpt-4o-mini"
+    search_llm_timeout_seconds: float = 90
+    search_llm_rerank: bool = False
+    rag_model: str = "gpt-4o-mini"
     rag_min_score: float = 0.10
     rag_timeout_seconds: float = 120
 

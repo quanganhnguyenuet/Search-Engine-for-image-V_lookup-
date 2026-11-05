@@ -32,11 +32,17 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://visualseek:visualseek@postgres:5432/visualseek}
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
-      EMBEDDING_ARTIFACT_DIR: /data/embeddings/culture-siglip2
+      EMBEDDING_ARTIFACT_DIR: ${DOCKER_EMBEDDING_ARTIFACT_DIR:-/data/embeddings/culture-contextual-demo-v1}
       EMBEDDING_CACHE_DIR: /data/models/huggingface
       EMBEDDING_DEVICE: cpu
-      OLLAMA_URL: http://ollama:11434
-      RAG_MODEL: ${RAG_MODEL:-qwen2.5:3b}
+      CORPUS_MANIFEST_PATH: /data/processed/culture-search/assets.jsonl
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_REASONING_EFFORT: ${OPENAI_REASONING_EFFORT:-low}
+      SEARCH_LLM_MODEL: ${SEARCH_LLM_MODEL:-gpt-4o-mini}
+      SEARCH_LLM_TIMEOUT_SECONDS: ${SEARCH_LLM_TIMEOUT_SECONDS:-90}
+      SEARCH_LLM_RERANK: ${SEARCH_LLM_RERANK:-false}
+      RAG_MODEL: ${RAG_MODEL:-gpt-4o-mini}
       R2_ENDPOINT_URL: ${R2_ENDPOINT_URL:-http://object-storage:9000}
       R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-visualseek}
       R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-visualseek-local-secret}
@@ -59,14 +65,6 @@ services:
       timeout: 3s
       retries: 5
       start_period: 10s
-
-  ollama:
-    image: ollama/ollama:0.40.14
-    profiles: ["rag"]
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_models:/root/.ollama
 
   postgres:
     image: postgres:16-alpine
@@ -109,5 +107,4 @@ volumes:
   postgres_data:
   qdrant_data:
   object_storage_data:
-  ollama_models:
 

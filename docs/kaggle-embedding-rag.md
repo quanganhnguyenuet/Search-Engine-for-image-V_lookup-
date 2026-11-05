@@ -1,3 +1,10 @@
+> Cập nhật provider LLM
+>
+> Luồng chạy hiện tại đã chuyển sang GPT-4o mini qua OpenAI API; xem
+> [contextual-image-search.md](contextual-image-search.md). Các phần Ollama bên dưới
+> ghi lại baseline cũ. Export/import embedding SigLIP2 vẫn dùng được, không cần
+> embedding lại khi đổi provider LLM.
+
 # Embedding trên Kaggle → Hugging Face Dataset → tìm kiếm và RAG local
 
 ## 1. Phân chia công việc
@@ -216,9 +223,11 @@ def materialize_bundle(source, destination, required_files):
 
 code_files = [
     'scripts/kaggle_embed.py', 'scripts/_bootstrap.py', 'scripts/kaggle-requirements.txt',
+    'scripts/enrich_embeddings.py',
     'packages/embedding/src/visualseek_embedding/__init__.py',
     'packages/embedding/src/visualseek_embedding/contracts.py',
     'packages/embedding/src/visualseek_embedding/siglip2.py',
+    'packages/embedding/src/visualseek_embedding/metadata.py',
     'packages/retrieval/src/visualseek_retrieval/__init__.py',
     'packages/retrieval/src/visualseek_retrieval/contracts.py',
     'packages/retrieval/src/visualseek_retrieval/artifact.py',
@@ -365,6 +374,7 @@ subprocess.check_call([
     '--limit-per-category', str(LIMIT_PER_CATEGORY),
     '--batch-size', '16',
     '--device', 'cuda',
+    '--with-metadata',  # tạo thêm vectors cho tags/description, dùng cho contextual search
     '--zip',
 ])
 ```
