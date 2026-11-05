@@ -1,0 +1,5 @@
+# Kaggle supplies torch/CUDA. Keep its torch build; do not reinstall GPU drivers.
+transformers==4.57.6
+sentencepiece>=0.2,<0.3
+Pillow>=10.4,<12
+numpy>=1.26,<3

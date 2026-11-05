@@ -2,7 +2,15 @@
 
 VisualSeek is a monorepo for a multimodal image-search system. The **VietNam Culture**
 frontend now searches the downloaded cultural image dataset by keyword and category.
-The AI embedding, OCR, vector retrieval, and production storage adapters remain future work.
+SigLIP2 export/import, CPU vector retrieval and Ollama RAG are available as the next
+baseline. OCR and production storage adapters remain future work.
+
+## Embedding on Kaggle and RAG
+
+See [Kaggle embedding and local RAG](docs/kaggle-embedding-rag.md) for runnable notebook
+cells, model setup, portable vector artifacts, and the semantic/RAG API. The browser
+now supports semantic search, image queries, grounded answers, and keyword comparison.
+An imported artifact and the real model runtimes are required for the AI modes.
 
 ## VietNam Culture keyword search
 

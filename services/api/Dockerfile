@@ -17,7 +17,14 @@ COPY services/api ./services/api
 
 RUN uv sync --frozen --package visualseek-api --no-dev
 
+# The company/development baseline uses CPU; Kaggle keeps its preinstalled CUDA torch.
+ARG INSTALL_EMBEDDING_MODEL=true
+RUN if [ "$INSTALL_EMBEDDING_MODEL" = "true" ]; then \
+      uv pip install 'torch==2.7.1+cpu' --index-url https://download.pytorch.org/whl/cpu && \
+      uv pip install 'transformers==4.57.6' 'sentencepiece>=0.2,<0.3'; \
+    fi
+
 EXPOSE 8000
 
-CMD ["uvicorn", "visualseek_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "visualseek_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
 

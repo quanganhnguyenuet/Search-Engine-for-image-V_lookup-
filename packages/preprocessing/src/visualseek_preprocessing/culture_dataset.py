@@ -196,8 +196,9 @@ def reconcile_records(records: list[dict], paths: list[str]) -> tuple[list[dict]
     matched = set()
     for name in sorted(set(paths)):
         parts = PurePosixPath(name).parts
+        extensions = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
         if (len(parts) < 4 or parts[0] != "images" or parts[1] not in CATEGORIES
-                or PurePosixPath(name).suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp", ".gif"}):
+                or PurePosixPath(name).suffix.lower() not in extensions):
             continue
         image_path({"image_path": name, "category": parts[1]})
         source = name if name in originals else None
@@ -248,9 +249,13 @@ def make_asset(record: dict, root: Path) -> dict:
             "file": PREFIX + path,
             "annotation_image_id": record.get("image_id") if has_annotation else None,
             "declared_license": "Apache-2.0",
-            "annotation_image_path": (record.get("annotation_image_path", record["image_path"])
-                                      if has_annotation else None),
-            "annotation_status": (record.get("metadata") or {}).get("annotation_status", "available"),
+            "annotation_image_path": (
+                record.get("annotation_image_path", record["image_path"])
+                if has_annotation else None
+            ),
+            "annotation_status": (record.get("metadata") or {}).get(
+                "annotation_status", "available"
+            ),
         },
         "cultural_context": record.get("cultural_context", {}),
         "questions": record.get("questions", []),
@@ -309,7 +314,9 @@ def main() -> int:
         inventory = [str(path.relative_to(args.root))
                      for category in CATEGORIES
                      for path in (args.root / "images" / category).rglob("*") if path.is_file()]
-    reconciled, aliases = reconcile_records(records, inventory) if inventory is not None else (records, [])
+    reconciled, aliases = (
+        reconcile_records(records, inventory) if inventory is not None else (records, [])
+    )
     selected = select_records(reconciled, args.limit_per_category)
     selected_paths = {image_path(row) for row in selected}
     aliases = [row for row in aliases if row["image_path"] in selected_paths]

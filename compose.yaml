@@ -9,6 +9,7 @@ services:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
       CULTURE_DATA_DIR: /data
       CULTURE_IMAGE_ROOT: /data/raw/vietnamese-culture-vqa
+      SEARCH_API_URL: http://api:8000
     ports:
       - "3000:3000"
     volumes:
@@ -31,6 +32,11 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://visualseek:visualseek@postgres:5432/visualseek}
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
+      EMBEDDING_ARTIFACT_DIR: /data/embeddings/culture-siglip2
+      EMBEDDING_CACHE_DIR: /data/models/huggingface
+      EMBEDDING_DEVICE: cpu
+      OLLAMA_URL: http://ollama:11434
+      RAG_MODEL: ${RAG_MODEL:-qwen2.5:3b}
       R2_ENDPOINT_URL: ${R2_ENDPOINT_URL:-http://object-storage:9000}
       R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-visualseek}
       R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-visualseek-local-secret}
@@ -39,6 +45,7 @@ services:
       - "8000:8000"
     volumes:
       - ./services/api:/workspace/services/api
+      - ./data:/data
     depends_on:
       postgres:
         condition: service_healthy
@@ -52,6 +59,14 @@ services:
       timeout: 3s
       retries: 5
       start_period: 10s
+
+  ollama:
+    image: ollama/ollama:0.40.14
+    profiles: ["rag"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
 
   postgres:
     image: postgres:16-alpine
@@ -94,4 +109,5 @@ volumes:
   postgres_data:
   qdrant_data:
   object_storage_data:
+  ollama_models:
 

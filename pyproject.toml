@@ -25,7 +25,7 @@ members = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["services/api/tests"]
+testpaths = ["services/api/tests", "scripts/tests", "packages/preprocessing/tests"]
 addopts = "-q"
 
 [tool.ruff]

@@ -1,5 +1,9 @@
 # VietNam Culture — tìm kiếm ảnh bằng từ khóa
 
+Giao diện hiện có thêm semantic search, query ảnh và hỏi đáp RAG bằng model thật.
+Xem [hướng dẫn Kaggle và RAG](kaggle-embedding-rag.md). Các bước dưới đây mô tả riêng
+chế độ **Từ khóa**, vẫn hoạt động độc lập khi chưa import embedding.
+
 ## Chạy giao diện
 
 Yêu cầu Node.js 22+ và dataset đã được tải theo [culture-dataset.md](culture-dataset.md).

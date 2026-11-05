@@ -8,7 +8,17 @@ dependencies = [
   "pydantic-settings>=2.8.1,<3",
   "structlog>=25.2.0,<26",
   "uvicorn[standard]>=0.34.0,<0.35",
+  "httpx>=0.28.1,<0.29",
+  "visualseek-embedding",
+  "visualseek-retrieval",
 ]
+
+[project.optional-dependencies]
+model = ["visualseek-embedding[model]"]
+
+[tool.uv.sources]
+visualseek-embedding = { workspace = true }
+visualseek-retrieval = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

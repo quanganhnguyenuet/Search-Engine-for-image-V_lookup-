@@ -1,5 +1,11 @@
 # VisualSeek MVP Plan
 
+> Cập nhật triển khai: theo yêu cầu bổ sung, đã có script Kaggle tạo SigLIP2 artifact,
+> exact cosine retrieval chạy CPU và RAG tùy chọn qua Ollama. Hướng dẫn tại
+> [kaggle-embedding-rag.md](kaggle-embedding-rag.md). Exact search hiện là baseline
+> đối chứng; Qdrant/HNSW và benchmark SLO vẫn là giai đoạn tiếp theo. Phần RAG mở rộng
+> phạm vi MVP ban đầu và có latency budget riêng cho generation.
+
 ## 1. Mục tiêu tài liệu
 
 Tài liệu này xác định một MVP duy nhất, có thể chạy được trên một máy có NVIDIA

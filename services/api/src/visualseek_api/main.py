@@ -25,7 +25,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 def create_app() -> FastAPI:
     application = FastAPI(
         title="VisualSeek API",
-        description="API shell for the VisualSeek multimodal image search engine.",
+        description="VietNam Culture image retrieval with SigLIP2 and grounded RAG.",
         version=__version__,
         lifespan=lifespan,
     )
@@ -36,4 +36,3 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
-
