@@ -7,11 +7,14 @@ services:
       target: development
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      CULTURE_DATA_DIR: /data
+      CULTURE_IMAGE_ROOT: /data/raw/vietnamese-culture-vqa
     ports:
       - "3000:3000"
     volumes:
       - ./apps/web:/app
       - web_node_modules:/app/node_modules
+      - ./data:/data:ro
     depends_on:
       api:
         condition: service_healthy

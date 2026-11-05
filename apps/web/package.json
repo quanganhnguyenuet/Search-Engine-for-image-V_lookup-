@@ -6,7 +6,9 @@
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:search": "node --test tests/culture-search.test.cjs",
+    "test:http": "node tests/http-smoke.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.1.2",

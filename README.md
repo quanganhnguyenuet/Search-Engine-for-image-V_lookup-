@@ -1,6 +1,23 @@
 # VisualSeek — Multimodal AI Image Search Engine
 
-VisualSeek is a starter monorepo for a multimodal image-search system. This repository currently contains infrastructure, application shells, and typed boundaries only—OCR, VLM, embeddings, indexing, retrieval algorithms, authentication, and business logic are intentionally not implemented.
+VisualSeek is a monorepo for a multimodal image-search system. The **VietNam Culture**
+frontend now searches the downloaded cultural image dataset by keyword and category.
+The AI embedding, OCR, vector retrieval, and production storage adapters remain future work.
+
+## VietNam Culture keyword search
+
+With the dataset already downloaded, run the web app independently:
+
+```bash
+cd apps/web
+npm ci
+npm run dev
+```
+
+Open <http://localhost:3000>. Search Vietnamese text with or without diacritics,
+filter six cultural categories, and open a photo to read its description and tags.
+Images stay in the existing local data directory; no GPU or external services are
+needed for keyword search. See [keyword search setup](docs/culture-search.md).
 
 ## Repository layout
 
@@ -61,6 +78,21 @@ cd apps/web
 npm ci
 npm run dev
 ```
+
+## Vietnamese culture corpus
+
+Download and prepare the six-domain Kaggle corpus (cuisine, architecture, landscapes,
+festivals, clothing, handicrafts):
+
+```bash
+PYTHONPATH=packages/preprocessing/src python3 -u -m visualseek_preprocessing.culture_dataset \
+  --download-archive data/raw/archives/vietnamese-culture-vqa-v1.zip
+```
+
+This downloads the official version-1 ZIP, extracts all six selected categories,
+and rebuilds the full manifest without a per-category sampling limit.
+See [dataset preparation](docs/culture-dataset.md) for category counts, sampling,
+manifest fields, deduplication, and the indexing handoff. Downloaded data is ignored by Git.
 
 ## Checks
 

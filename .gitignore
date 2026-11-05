@@ -17,3 +17,6 @@ coverage/
 .idea/
 .vscode/
 
+# Local datasets, downloaded images, and generated search manifests
+/data/
+
