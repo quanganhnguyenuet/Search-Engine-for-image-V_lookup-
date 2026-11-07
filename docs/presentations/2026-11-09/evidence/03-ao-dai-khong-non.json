@@ -1,0 +1,939 @@
+{
+  "captured_at": "2026-11-07T20:23:33.211792+07:00",
+  "request": {
+    "query": "người mặc áo dài đỏ, không đội nón",
+    "mode": "contextual",
+    "use_llm": false
+  },
+  "local_fallback": true,
+  "status": 200,
+  "response": {
+    "query_id": "fc7e4516-6f22-4520-859a-2c460cafec0b",
+    "clarification_required": false,
+    "clarification_question": null,
+    "suggested_queries": [],
+    "items": [
+      {
+        "id": "4611aafcf14761184aad393b6abda2553db485d16ccb75b89bdf9aea9e4505a9",
+        "title": "Áo dài Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp toàn thân một người phụ nữ Việt Nam mặc áo dài đỏ thẫm, đội nón lá đỏ, đứng trước phông nền là kiến trúc cổ kính của một khu di tích lịch sử.  Áo dài được thêu họa tiết chim hạc và tre, phần tà áo dài kéo dài xuống đất.",
+        "tags": [
+          "người phụ nữ",
+          "áo dài",
+          "nón lá",
+          "kiến trúc cổ"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài có biến thể tùy theo từng vùng miền (Bắc, Trung, Nam) về chất liệu, kiểu dáng, màu sắc, họa tiết. Hình ảnh này thể hiện một kiểu áo dài hiện đại, được cách tân nhưng vẫn giữ được những nét truyền thống.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều giai đoạn biến đổi, đến nay trở thành trang phục quốc phục của Việt Nam. Nón lá cũng là phụ kiện truyền thống phổ biến của phụ nữ Việt.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng và sử dụng rộng rãi trong các dịp lễ hội, sự kiện quan trọng, hay thậm chí trong đời sống thường ngày, thể hiện sự tự hào về văn hoá dân tộc."
+        },
+        "imageUrl": "/api/culture/images/4611aafcf14761184aad393b6abda2553db485d16ccb75b89bdf9aea9e4505a9",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.03731246286393346,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn thân một người phụ nữ Việt Nam mặc áo dài đỏ thẫm, đội nón lá đỏ, đứng trước phông nền là kiến trúc cổ kính của một khu di tích lịch sử.  Áo dài được thêu họa tiết chim hạc và tre, phần tà áo dài kéo dài xuống đất.",
+        "scores": {
+          "image_cosine": 0.16282787919044495,
+          "metadata_cosine": 0.8072049617767334,
+          "lexical": 21
+        },
+        "ranks": {
+          "image": 6,
+          "metadata": 93,
+          "lexical": 4
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "99c6762711770dd60855109eeeae078c309961fd8467fbabda3119857ae3efc7",
+        "title": "Áo dài Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một phụ nữ trẻ mặc áo dài đỏ thẫm, đội băng đô trang sức và cầm nón lá vàng. Cô đứng trên một vách đá nhìn ra biển, với khung cảnh địa chất ấn tượng ở phía sau. Bối cảnh cho thấy sự kết hợp giữa trang phục truyền thống Việt Nam và một địa điểm tự nhiên không phải ở Việt Nam.",
+        "tags": [
+          "người phụ nữ",
+          "áo dài",
+          "nón lá",
+          "băng đô",
+          "vách đá",
+          "biển"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài phổ biến khắp Việt Nam nhưng có những biến thể về kiểu dáng, màu sắc, chất liệu ở từng vùng miền (Bắc, Trung, Nam). Nón lá cũng có nhiều biến thể tùy theo vùng miền, chất liệu.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng.  Nón lá cũng có lịch sử lâu đời, gắn liền với nông nghiệp và văn hoá Việt Nam.",
+          "modern_relevance": "Áo dài vẫn là trang phục truyền thống được ưa chuộng trong các dịp lễ, hội, sự kiện quan trọng và được nhiều người mặc hàng ngày. Nón lá được sử dụng như một phụ kiện thời trang và vật dụng che nắng."
+        },
+        "imageUrl": "/api/culture/images/99c6762711770dd60855109eeeae078c309961fd8467fbabda3119857ae3efc7",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.029273504273504274,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một phụ nữ trẻ mặc áo dài đỏ thẫm, đội băng đô trang sức và cầm nón lá vàng. Cô đứng trên một vách đá nhìn ra biển, với khung cảnh địa chất ấn tượng ở phía sau. Bối cảnh cho thấy sự kết hợp giữa trang phục truyền thống Việt Na",
+        "scores": {
+          "image_cosine": 0.15814253687858582,
+          "metadata_cosine": 0.7398051023483276,
+          "lexical": 21
+        },
+        "ranks": {
+          "image": 12,
+          "metadata": null,
+          "lexical": 5
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "e96bdcef5b5c0103bfe2ac50b2201d7a6e3776f6701968816f82f6bc6e65929c",
+        "title": "Đám cưới Việt Nam",
+        "category": "le_hoi",
+        "categoryLabel": "Lễ hội",
+        "description": "Hình ảnh chụp một đoàn người trong lễ rước đám cưới truyền thống Việt Nam. Trung tâm là một con rồng được tạo hình từ các loại rau củ quả, được rước bởi các nam thanh niên mặc áo dài đỏ, xung quanh là các phụ nữ mặc áo dài đỏ, cùng với những người xem và hoa tươi trang trí.",
+        "tags": [
+          "rồng làm từ rau củ quả",
+          "áo dài đỏ",
+          "người rước lễ",
+          "hoa tươi",
+          "phụ nữ mặc áo dài"
+        ],
+        "context": {
+          "cultural_category": "lễ hội (đám cưới)",
+          "regional_significance": "Hình ảnh phản ánh phong tục cưới hỏi phổ biến ở nhiều vùng miền Việt Nam, tuy nhiên có thể có những biến tấu nhỏ về trang phục và các lễ nghi phụ thuộc vào vùng miền.",
+          "historical_context": "Việc sử dụng rồng trong các lễ nghi thể hiện ảnh hưởng của tín ngưỡng dân gian Việt Nam, trong khi áo dài đỏ là trang phục truyền thống thể hiện sự trang trọng và may mắn.",
+          "modern_relevance": "Mặc dù nhiều đám cưới hiện đại đã giản lược các nghi lễ truyền thống, hình ảnh này vẫn phản ánh một phần văn hoá cưới hỏi Việt Nam được nhiều người vẫn giữ gìn và trân trọng."
+        },
+        "imageUrl": "/api/culture/images/e96bdcef5b5c0103bfe2ac50b2201d7a6e3776f6701968816f82f6bc6e65929c",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.028484848484848488,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một đoàn người trong lễ rước đám cưới truyền thống Việt Nam. Trung tâm là một con rồng được tạo hình từ các loại rau củ quả, được rước bởi các nam thanh niên mặc áo dài đỏ, xung quanh là các phụ nữ mặc áo dài đỏ, cùng với nhữn",
+        "scores": {
+          "image_cosine": 0.15742287039756775,
+          "metadata_cosine": 0.8542721271514893,
+          "lexical": 15
+        },
+        "ranks": {
+          "image": 15,
+          "metadata": 6,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "099f40eb0b946168f006045f01fef8f41d899433e7bb75b919909811ec4c0662",
+        "title": "Áo dài Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp toàn thân một người phụ nữ mặc áo dài đỏ thêu hình phượng hoàng vàng, đội nón lá.",
+        "tags": [
+          "áo dài",
+          "nón lá",
+          "người phụ nữ"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài phổ biến trên toàn quốc, nhưng có những biến thể nhỏ về kiểu dáng và chất liệu giữa các vùng miền.  Họa tiết phượng hoàng thể hiện sự sang trọng, thường thấy trong trang phục cưới hỏi.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng qua các thời kỳ.  Thiết kế hiện đại này kế thừa và phát triển từ các kiểu áo dài truyền thống.",
+          "modern_relevance": "Áo dài vẫn được mặc trong nhiều dịp quan trọng như lễ hội, đám cưới, hay các sự kiện văn hóa. Nó được coi là biểu tượng của phụ nữ Việt Nam, cũng là một sản phẩm thời trang được nhiều người yêu thích."
+        },
+        "imageUrl": "/api/culture/images/099f40eb0b946168f006045f01fef8f41d899433e7bb75b919909811ec4c0662",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.027757078986587184,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn thân một người phụ nữ mặc áo dài đỏ thêu hình phượng hoàng vàng, đội nón lá.",
+        "scores": {
+          "image_cosine": 0.15296190977096558,
+          "metadata_cosine": 0.7296895980834961,
+          "lexical": 21
+        },
+        "ranks": {
+          "image": 28,
+          "metadata": null,
+          "lexical": 1
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "12e14ad9cda468b8f8edfa1f1c9d8de2b6d3a5cabe749480df64d3da69bf8e05",
+        "title": "Áo tứ thân",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người phụ nữ mặc áo dài đỏ, đứng dưới tán hoa anh đào, tay cầm đèn lồng.  Bối cảnh được trang trí với những chi tiết gợi liên tưởng đến Tết Nguyên Đán.",
+        "tags": [
+          "người phụ nữ",
+          "áo dài đỏ",
+          "nón lá",
+          "đèn lồng",
+          "hoa anh đào"
+        ],
+        "context": {
+          "cultural_category": "trang phục và phong tục",
+          "regional_significance": "Áo dài là trang phục truyền thống của Việt Nam, được sử dụng rộng rãi trên toàn quốc, tuy có những biến thể nhỏ về kiểu dáng và chất liệu ở các vùng miền khác nhau. Nón lá cũng phổ biến khắp Việt Nam nhưng hình dáng cũng có sự khác biệt.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều giai đoạn biến đổi. Nón lá cũng là vật dụng lâu đời của người Việt dùng để che nắng, che mưa. Hình ảnh gợi lên bối cảnh văn hóa truyền thống của Việt Nam, có thể liên quan đến các dịp lễ hội hoặc Tết Nguyên Đán.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng và sử dụng trong các dịp lễ hội, sự kiện quan trọng hoặc như một trang phục truyền thống thể hiện sự tự hào dân tộc. Nón lá được sử dụng ít hơn so với trước nhưng vẫn giữ được giá trị văn hóa đặc biệt."
+        },
+        "imageUrl": "/api/culture/images/12e14ad9cda468b8f8edfa1f1c9d8de2b6d3a5cabe749480df64d3da69bf8e05",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.026263297872340427,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người phụ nữ mặc áo dài đỏ, đứng dưới tán hoa anh đào, tay cầm đèn lồng.  Bối cảnh được trang trí với những chi tiết gợi liên tưởng đến Tết Nguyên Đán.",
+        "scores": {
+          "image_cosine": 0.16630205512046814,
+          "metadata_cosine": 0.742385983467102,
+          "lexical": 18
+        },
+        "ranks": {
+          "image": 4,
+          "metadata": null,
+          "lexical": 34
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "74c1619b749bf319a441a66e3e8b66fa0407373db498a6eda9df9852bbddc6e7",
+        "title": "Đám cưới Việt Nam",
+        "category": "le_hoi",
+        "categoryLabel": "Lễ hội",
+        "description": "Hình ảnh chụp cảnh lễ dâng trà trong đám cưới truyền thống Việt Nam.  Cô dâu và chú rể mặc áo dài đỏ, đang dâng trà cho người lớn tuổi, thường là ông bà hoặc cha mẹ.",
+        "tags": [
+          "cô dâu",
+          "chú rể",
+          "áo dài đỏ",
+          "lễ vật dâng trà (ấm chén)",
+          "người lớn tuổi",
+          "mâm quả",
+          "phông nền trang trí"
+        ],
+        "context": {
+          "cultural_category": "lễ hội (đám cưới)",
+          "regional_significance": "Lễ dâng trà được thực hiện hầu hết trên cả nước, tuy nhiên có thể có một số khác biệt nhỏ về nghi thức và lễ vật ở các vùng miền khác nhau.",
+          "historical_context": "Lễ dâng trà là một nghi lễ lâu đời trong văn hóa Việt, phản ánh truyền thống tôn ti trật tự trong gia đình và xã hội. Nó thể hiện sự kính trọng và tình cảm của con cháu đối với bề trên.",
+          "modern_relevance": "Lễ dâng trà vẫn được giữ gìn và thực hiện trong nhiều đám cưới hiện đại, mặc dù có thể được đơn giản hóa hoặc tùy chỉnh theo sở thích của mỗi gia đình."
+        },
+        "imageUrl": "/api/culture/images/74c1619b749bf319a441a66e3e8b66fa0407373db498a6eda9df9852bbddc6e7",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.026008827238335436,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp cảnh lễ dâng trà trong đám cưới truyền thống Việt Nam.  Cô dâu và chú rể mặc áo dài đỏ, đang dâng trà cho người lớn tuổi, thường là ông bà hoặc cha mẹ.",
+        "scores": {
+          "image_cosine": 0.14890624582767487,
+          "metadata_cosine": 0.8883308172225952,
+          "lexical": 13
+        },
+        "ranks": {
+          "image": 44,
+          "metadata": 1,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "56c18711fa2101dbee8619ae9517740041a0aeb993ef6fa5526cbb30498ce443",
+        "title": "Áo dài cách tân",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp hai người phụ nữ trẻ đang đi bộ, cùng nhau nắm tay. Cả hai đều mặc áo dài cách tân, một người mặc áo màu kem nhạt, người kia mặc áo màu đỏ tươi.  Áo dài được thiết kế hiện đại, với tay áo ba phần, chiều dài trên gối, và kết hợp với quần âu tối màu. Cả hai người đều đội khăn vấn kiểu truyền thống.",
+        "tags": [
+          "Hai người phụ nữ",
+          "Áo dài cách tân (màu kem)",
+          "Áo dài cách tân (màu đỏ)",
+          "Khăn vấn",
+          "Quần âu"
+        ],
+        "context": {
+          "cultural_category": "Trang phục",
+          "regional_significance": "Áo dài là trang phục truyền thống của Việt Nam, mặc dù có sự biến thể về kiểu dáng và chất liệu giữa các vùng miền.  Hình ảnh này không nhấn mạnh đặc điểm vùng miền cụ thể.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều giai đoạn biến đổi.  Áo dài cách tân như trong hình ảnh xuất hiện nhiều hơn trong những thập kỷ gần đây, phản ánh sự thay đổi trong nhận thức và xu hướng thời trang.",
+          "modern_relevance": "Áo dài vẫn là trang phục được ưa chuộng, đặc biệt trong các dịp lễ hội, sự kiện quan trọng và ngày nay, cũng được mặc thường xuyên hơn với các kiểu dáng cách tân phù hợp với nhiều hoàn cảnh khác nhau."
+        },
+        "imageUrl": "/api/culture/images/56c18711fa2101dbee8619ae9517740041a0aeb993ef6fa5526cbb30498ce443",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.0242296918767507,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp hai người phụ nữ trẻ đang đi bộ, cùng nhau nắm tay. Cả hai đều mặc áo dài cách tân, một người mặc áo màu kem nhạt, người kia mặc áo màu đỏ tươi.  Áo dài được thiết kế hiện đại, với tay áo ba phần, chiều dài trên gối, và kết hợ",
+        "scores": {
+          "image_cosine": 0.14878955483436584,
+          "metadata_cosine": 0.7255492806434631,
+          "lexical": 20
+        },
+        "ranks": {
+          "image": 45,
+          "metadata": null,
+          "lexical": 8
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "e52126f7d693cc282c4517649c9788ab4a493c88eba2a0315385d68b3881acea",
+        "title": "Áo dài trẻ em",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một bé gái mặc áo dài đỏ, đứng ngoài trời. Áo dài có họa tiết thêu hoa nổi bật ở ngực.",
+        "tags": [
+          "bé gái",
+          "áo dài",
+          "hoa thêu"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài được mặc phổ biến trên toàn quốc, nhưng có những biến thể nhỏ về kiểu dáng, chất liệu và họa tiết ở các vùng miền khác nhau.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng qua các thời kỳ. Phiên bản áo dài hiện đại phổ biến được thiết kế vào đầu thế kỷ 20.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng và mặc trong nhiều dịp lễ hội, sự kiện quan trọng, và ngày càng được cách tân để phù hợp với xu hướng thời trang hiện đại."
+        },
+        "imageUrl": "/api/culture/images/e52126f7d693cc282c4517649c9788ab4a493c88eba2a0315385d68b3881acea",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02361111111111111,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một bé gái mặc áo dài đỏ, đứng ngoài trời. Áo dài có họa tiết thêu hoa nổi bật ở ngực.",
+        "scores": {
+          "image_cosine": 0.15523621439933777,
+          "metadata_cosine": 0.8271632194519043,
+          "lexical": 14
+        },
+        "ranks": {
+          "image": 20,
+          "metadata": 30,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "eaefb161bc7e731a6e80c18f860159d8a754ef9f1979980e3b06929e7f7627a6",
+        "title": "Áo dài cưới",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người phụ nữ mặc áo dài cưới màu đỏ thẫm, đứng trước phông nền trắng. Cô cầm bó hoa Calla lily trắng và đeo vòng cổ ngọc trai. Bối cảnh có chữ Hán đỏ tượng trưng cho chữ \"song hỉ\" và một bình hoa Heliconia.",
+        "tags": [
+          "Áo dài cưới",
+          "Người phụ nữ",
+          "Bó hoa Calla lily",
+          "Bình hoa Heliconia",
+          "Chữ \"song hỉ\"",
+          "Vòng cổ ngọc trai",
+          "Mấn đội đầu"
+        ],
+        "context": {
+          "cultural_category": "Trang phục truyền thống",
+          "regional_significance": "Áo dài được mặc phổ biến trên khắp Việt Nam, nhưng kiểu dáng, chất liệu và màu sắc có thể có sự biến tấu nhỏ giữa các vùng miền. Màu đỏ thường được ưa chuộng trong áo dài cưới ở khắp mọi miền.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng. Áo dài cưới thường là sự kết hợp giữa truyền thống và hiện đại, thể hiện sự sang trọng và tinh tế của người phụ nữ Việt trong ngày trọng đại.",
+          "modern_relevance": "Áo dài vẫn được sử dụng rộng rãi trong các đám cưới hiện đại, thể hiện sự tôn trọng truyền thống và là biểu tượng của vẻ đẹp người phụ nữ Việt."
+        },
+        "imageUrl": "/api/culture/images/eaefb161bc7e731a6e80c18f860159d8a754ef9f1979980e3b06929e7f7627a6",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.023346828609986506,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người phụ nữ mặc áo dài cưới màu đỏ thẫm, đứng trước phông nền trắng. Cô cầm bó hoa Calla lily trắng và đeo vòng cổ ngọc trai. Bối cảnh có chữ Hán đỏ tượng trưng cho chữ \"song hỉ\" và một bình hoa Heliconia.",
+        "scores": {
+          "image_cosine": 0.1510118991136551,
+          "metadata_cosine": 0.7058386206626892,
+          "lexical": 19
+        },
+        "ranks": {
+          "image": 35,
+          "metadata": null,
+          "lexical": 18
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "ce75553a6260181ba84dc44e9e1d701e377e7230cca596a71941661650456162",
+        "title": "Áo dài Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh quảng cáo áo dài Việt Nam, thể hiện hai người phụ nữ mặc áo dài với hai màu sắc khác nhau trên nền họa tiết trang trí gợi nhớ kiến trúc và cảnh quan Việt Nam.",
+        "tags": [
+          "áo dài xanh dương",
+          "áo dài đỏ",
+          "người phụ nữ mặc áo dài xanh dương",
+          "người phụ nữ mặc áo dài đỏ"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài có nhiều biến thể theo từng vùng miền, nhưng thiết kế cơ bản trong ảnh phổ biến trên toàn quốc.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng, chất liệu, nhưng luôn giữ được nét đẹp truyền thống. Kiểu áo dài trong ảnh là kiểu dáng hiện đại, được cách điệu từ những kiểu dáng cổ truyền.",
+          "modern_relevance": "Áo dài vẫn là trang phục được ưa chuộng trong các sự kiện quan trọng, lễ hội, và ngày nay cũng được mặc thường ngày, thể hiện sự tự hào về văn hoá Việt Nam."
+        },
+        "imageUrl": "/api/culture/images/ce75553a6260181ba84dc44e9e1d701e377e7230cca596a71941661650456162",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02332285115303983,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh quảng cáo áo dài Việt Nam, thể hiện hai người phụ nữ mặc áo dài với hai màu sắc khác nhau trên nền họa tiết trang trí gợi nhớ kiến trúc và cảnh quan Việt Nam.",
+        "scores": {
+          "image_cosine": 0.14878876507282257,
+          "metadata_cosine": 0.7673218250274658,
+          "lexical": 20
+        },
+        "ranks": {
+          "image": 46,
+          "metadata": null,
+          "lexical": 12
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "cd016bc28367ea90b56f00d7ffd1c5d91cb2dc2547b5a30ad8a1f70e1fbb6c28",
+        "title": "Áo dài cách tân",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp toàn thân một người phụ nữ mặc áo dài cách tân màu đỏ, nền đỏ thẫm với họa tiết cành cây hoa, tạo nên một tổng thể trang nhã và hiện đại.",
+        "tags": [
+          "Áo dài cách tân",
+          "Người phụ nữ",
+          "Nền đỏ",
+          "Họa tiết cành cây"
+        ],
+        "context": {
+          "cultural_category": "Trang phục",
+          "regional_significance": "Áo dài là trang phục truyền thống của người Việt Nam, mặc dù có sự biến tấu khác nhau ở các vùng miền (Bắc, Trung, Nam), nhưng vẫn giữ được nét đặc trưng.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng và chất liệu. Áo dài cách tân xuất hiện như một sự thích nghi với xu hướng hiện đại.",
+          "modern_relevance": "Áo dài cách tân được ưa chuộng trong nhiều sự kiện, từ lễ hội truyền thống đến các hoạt động thường ngày, thể hiện sự tự hào về bản sắc văn hóa Việt."
+        },
+        "imageUrl": "/api/culture/images/cd016bc28367ea90b56f00d7ffd1c5d91cb2dc2547b5a30ad8a1f70e1fbb6c28",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.022862309480754326,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn thân một người phụ nữ mặc áo dài cách tân màu đỏ, nền đỏ thẫm với họa tiết cành cây hoa, tạo nên một tổng thể trang nhã và hiện đại.",
+        "scores": {
+          "image_cosine": 0.15002095699310303,
+          "metadata_cosine": 0.7813945412635803,
+          "lexical": 19
+        },
+        "ranks": {
+          "image": 38,
+          "metadata": null,
+          "lexical": 19
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "9dfc7a6fbd0cf52ed88c9fba85f1a84916c7dabe9e6d6dd01bcafa8993d80097",
+        "title": "Áo dài trẻ em",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một gia đình bốn người mặc áo dài đỏ, hai người lớn và hai trẻ em, đứng trên một con phố lát đá.  Áo dài của trẻ em được thiết kế đơn giản hơn áo dài của người lớn, nhưng vẫn giữ được những đặc điểm cơ bản của trang phục truyền thống Việt Nam.",
+        "tags": [
+          "người lớn (mẹ)",
+          "người lớn (bố)",
+          "trẻ em (gái)",
+          "trẻ em (trai)",
+          "áo dài",
+          "phố cổ"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài phổ biến khắp Việt Nam, nhưng có những biến thể nhỏ về kiểu dáng và chất liệu giữa các vùng miền. Thiết kế trong ảnh không mang đặc điểm nổi bật của vùng miền nào cụ thể.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng. Áo dài trẻ em thường được thiết kế đơn giản hơn, tập trung vào sự thoải mái và dễ thương.",
+          "modern_relevance": "Áo dài vẫn là trang phục được ưa chuộng trong nhiều dịp lễ, tết, sự kiện quan trọng và ngày càng được cách tân, hiện đại hoá để phù hợp với xu hướng thời trang."
+        },
+        "imageUrl": "/api/culture/images/9dfc7a6fbd0cf52ed88c9fba85f1a84916c7dabe9e6d6dd01bcafa8993d80097",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.022492753623188408,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một gia đình bốn người mặc áo dài đỏ, hai người lớn và hai trẻ em, đứng trên một con phố lát đá.  Áo dài của trẻ em được thiết kế đơn giản hơn áo dài của người lớn, nhưng vẫn giữ được những đặc điểm cơ bản của trang phục truyề",
+        "scores": {
+          "image_cosine": 0.1590915471315384,
+          "metadata_cosine": 0.7298636436462402,
+          "lexical": 17
+        },
+        "ranks": {
+          "image": 9,
+          "metadata": null,
+          "lexical": 65
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "7f1f1c5baeaf2589d52ebfd341cd0841050180b51fdb64006ecf413b02ae66e2",
+        "title": "Áo dài nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp hai người trẻ tuổi, một nam và một nữ, đang đi dạo trong công viên. Cả hai đều mặc áo dài truyền thống Việt Nam, người nữ mặc áo dài đỏ, người nam mặc áo dài xanh dương. Bối cảnh là một con đường lát gạch trong công viên với nhiều cây xanh.",
+        "tags": [
+          "người phụ nữ",
+          "người đàn ông",
+          "áo dài nữ",
+          "áo dài nam",
+          "mũ"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài phổ biến trên toàn quốc, nhưng có thể có những biến thể nhỏ về kiểu dáng, chất liệu, màu sắc ở mỗi vùng miền.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng.  Áo dài nam xuất hiện từ lâu hơn so với áo dài nữ hiện đại.  Hình ảnh thể hiện một phong cách áo dài tương đối hiện đại.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng và sử dụng trong nhiều dịp lễ hội, sự kiện quan trọng,  cũng như trong đời sống hàng ngày.  Nó được coi là biểu tượng văn hoá Việt Nam, được thế giới biết đến rộng rãi."
+        },
+        "imageUrl": "/api/culture/images/7f1f1c5baeaf2589d52ebfd341cd0841050180b51fdb64006ecf413b02ae66e2",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.022209165687426556,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp hai người trẻ tuổi, một nam và một nữ, đang đi dạo trong công viên. Cả hai đều mặc áo dài truyền thống Việt Nam, người nữ mặc áo dài đỏ, người nam mặc áo dài xanh dương. Bối cảnh là một con đường lát gạch trong công viên với n",
+        "scores": {
+          "image_cosine": 0.15753114223480225,
+          "metadata_cosine": 0.7790644764900208,
+          "lexical": 17
+        },
+        "ranks": {
+          "image": 14,
+          "metadata": null,
+          "lexical": 55
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "ac2766600c9fe4351b421649824c14fe27b73f512c08d448fbd7b6a9c330e331",
+        "title": "Áo dài Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một nhóm áo dài Việt Nam với nhiều màu sắc và họa tiết khác nhau, được trưng bày trên manơcanh trong một không gian có vẻ là cửa hàng hoặc triển lãm. Một người phụ nữ mặc áo dài đang chỉnh sửa một trong những chiếc áo dài.",
+        "tags": [
+          "áo dài Việt Nam",
+          "manơcanh",
+          "người phụ nữ",
+          "nón lá"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài có biến thể về màu sắc, họa tiết, chất liệu tùy theo vùng miền (miền Bắc thường có đường nét tinh tế, miền Nam thường rực rỡ hơn). Nón lá phổ biến rộng rãi khắp Việt Nam.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều giai đoạn biến đổi.  Hình ảnh cho thấy áo dài hiện đại, được cách điệu với họa tiết trang trí cầu kỳ.",
+          "modern_relevance": "Áo dài vẫn là trang phục truyền thống được ưa chuộng, sử dụng trong nhiều dịp như lễ hội, sự kiện quan trọng, và cả trong cuộc sống thường nhật.  Nó là biểu tượng văn hóa Việt Nam, được quảng bá rộng rãi trên thế giới."
+        },
+        "imageUrl": "/api/culture/images/ac2766600c9fe4351b421649824c14fe27b73f512c08d448fbd7b6a9c330e331",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.022154222766217868,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một nhóm áo dài Việt Nam với nhiều màu sắc và họa tiết khác nhau, được trưng bày trên manơcanh trong một không gian có vẻ là cửa hàng hoặc triển lãm. Một người phụ nữ mặc áo dài đang chỉnh sửa một trong những chiếc áo dài.",
+        "scores": {
+          "image_cosine": 0.12915921211242676,
+          "metadata_cosine": 0.8247926235198975,
+          "lexical": 19
+        },
+        "ranks": {
+          "image": null,
+          "metadata": 35,
+          "lexical": 26
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "4ac31f1122ddd7f1fd4fe3d11b753ea063a461c5eb7cc4bb6eefdef1e3146b89",
+        "title": "Đám cưới Việt Nam",
+        "category": "le_hoi",
+        "categoryLabel": "Lễ hội",
+        "description": "Hình ảnh chụp một nhóm phụ nữ trẻ mặc áo dài truyền thống Việt Nam đang trao lì xì trong một bối cảnh lễ hội.  Một cô gái mặc áo dài đỏ đang trao phong bao lì xì cho một nhóm cô gái khác mặc áo dài màu xanh nhạt.",
+        "tags": [
+          "áo dài đỏ",
+          "áo dài xanh nhạt",
+          "lì xì",
+          "phụ nữ trẻ",
+          "hoa trang trí"
+        ],
+        "context": {
+          "cultural_category": "lễ hội, phong tục tập quán",
+          "regional_significance": "Áo dài và phong tục lì xì phổ biến trên toàn quốc, tuy có thể có những biến thể nhỏ về kiểu dáng áo dài và hình thức lì xì ở mỗi vùng miền.",
+          "historical_context": "Áo dài là trang phục truyền thống của phụ nữ Việt Nam, xuất hiện từ lâu đời và trải qua nhiều biến thể. Phong tục lì xì có nguồn gốc từ xa xưa, gắn liền với tín ngưỡng và văn hoá dân gian, tượng trưng cho may mắn, tài lộc và sự thịnh vượng.",
+          "modern_relevance": "Áo dài vẫn được sử dụng phổ biến trong các dịp lễ, tết và sự kiện quan trọng. Phong tục lì xì được duy trì và phát triển, trở thành một phần không thể thiếu trong văn hóa giao tiếp của người Việt Nam."
+        },
+        "imageUrl": "/api/culture/images/4ac31f1122ddd7f1fd4fe3d11b753ea063a461c5eb7cc4bb6eefdef1e3146b89",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.021988089784699953,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một nhóm phụ nữ trẻ mặc áo dài truyền thống Việt Nam đang trao lì xì trong một bối cảnh lễ hội.  Một cô gái mặc áo dài đỏ đang trao phong bao lì xì cho một nhóm cô gái khác mặc áo dài màu xanh nhạt.",
+        "scores": {
+          "image_cosine": 0.14669159054756165,
+          "metadata_cosine": 0.8435474634170532,
+          "lexical": 10
+        },
+        "ranks": {
+          "image": 58,
+          "metadata": 14,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "586b637fb977a4fc056fece9bebbfbf399ec813b850b84fb7d18ed9efe43fc92",
+        "title": "Áo dài nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người đàn ông trẻ tuổi mặc áo dài nam màu đỏ đô, đội mũ đen. Anh ta ngồi trên ghế, tay cầm chuỗi hạt, tạo dáng trang nghiêm.",
+        "tags": [
+          "áo dài nam",
+          "mũ",
+          "chuỗi hạt",
+          "người đàn ông"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Thiết kế áo dài có sự biến đổi nhẹ giữa các vùng miền, nhưng về cơ bản vẫn giữ nguyên kiểu dáng truyền thống.",
+          "historical_context": "Áo dài nam xuất hiện trong lịch sử Việt Nam từ lâu đời, nhưng việc thiết kế và phổ biến rộng rãi như hiện nay là trong thời gian gần đây,  đặc biệt được chú trọng hơn trong những năm gần đây khi có xu hướng hồi phục và nâng tầm trang phục truyền thống.",
+          "modern_relevance": "Được mặc trong các dịp lễ, tết, sự kiện quan trọng, hoặc được thiết kế cách tân để sử dụng trong đời sống thường ngày."
+        },
+        "imageUrl": "/api/culture/images/586b637fb977a4fc056fece9bebbfbf399ec813b850b84fb7d18ed9efe43fc92",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02085133967156439,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người đàn ông trẻ tuổi mặc áo dài nam màu đỏ đô, đội mũ đen. Anh ta ngồi trên ghế, tay cầm chuỗi hạt, tạo dáng trang nghiêm.",
+        "scores": {
+          "image_cosine": 0.15291225910186768,
+          "metadata_cosine": 0.7044483423233032,
+          "lexical": 18
+        },
+        "ranks": {
+          "image": 29,
+          "metadata": null,
+          "lexical": 44
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "393cef3cf41514d093c5c607c5c0636e9aaebeb58352f57a8ea112477093a1be",
+        "title": "Áo dài cách tân",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một phụ nữ trẻ mặc áo dài cách tân màu đỏ đô, nền trắng, đứng giữa không gian kiến trúc mang đậm chất Á Đông, với những chiếc đèn lồng đỏ truyền thống làm nền.",
+        "tags": [
+          "người phụ nữ",
+          "áo dài cách tân",
+          "đèn lồng đỏ",
+          "kiến trúc"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài là trang phục truyền thống của Việt Nam, mặc dù có biến thể theo từng vùng miền, nhưng hình ảnh thể hiện là kiểu cách tân, phổ biến ở nhiều khu vực.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi theo thời gian, áo dài cách tân là sản phẩm của sự giao thoa giữa truyền thống và hiện đại.",
+          "modern_relevance": "Áo dài cách tân vẫn được ưa chuộng trong đời sống hiện đại, phù hợp với nhiều hoàn cảnh, từ sự kiện trang trọng đến sinh hoạt thường ngày. Nó thể hiện sự kết hợp hài hòa giữa nét đẹp truyền thống và xu hướng thời trang hiện đại của Việt Nam."
+        },
+        "imageUrl": "/api/culture/images/393cef3cf41514d093c5c607c5c0636e9aaebeb58352f57a8ea112477093a1be",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.020495214315439034,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một phụ nữ trẻ mặc áo dài cách tân màu đỏ đô, nền trắng, đứng giữa không gian kiến trúc mang đậm chất Á Đông, với những chiếc đèn lồng đỏ truyền thống làm nền.",
+        "scores": {
+          "image_cosine": 0.14833128452301025,
+          "metadata_cosine": 0.7950729727745056,
+          "lexical": 19
+        },
+        "ranks": {
+          "image": 48,
+          "metadata": null,
+          "lexical": 29
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "eba1a470ffbb314e993db2ab7a13dce9bd9bc56c743a79e15cb8b6e108b4261a",
+        "title": "Cung An Định",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp một người phụ nữ mặc áo dài đỏ đứng trước cung An Định.  Cung An Định được thể hiện với kiến trúc Pháp thuộc, màu sắc vàng nhạt, họa tiết trang trí cầu kỳ, và các chi tiết kiến trúc cổ điển.",
+        "tags": [
+          "Cung An Định",
+          "Người phụ nữ mặc áo dài đỏ",
+          "Nón lá"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc, thời trang",
+          "regional_significance": "Cung An Định nằm ở Huế, trung tâm văn hóa của Việt Nam. Áo dài phổ biến khắp cả nước nhưng có những biến thể nhỏ giữa các vùng miền.",
+          "historical_context": "Cung An Định được xây dựng trong thời kỳ Pháp thuộc, phản ánh ảnh hưởng kiến trúc của họ. Áo dài trải qua nhiều giai đoạn phát triển, từ thời Nguyễn đến nay. Nón lá là một phần của văn hóa Việt Nam lâu đời.",
+          "modern_relevance": "Cung An Định hiện nay là di tích lịch sử, thu hút khách du lịch. Áo dài vẫn được sử dụng rộng rãi trong các dịp lễ hội, sự kiện quan trọng và ngày nay được thiết kế hiện đại hơn. Nón lá vẫn được dùng làm phụ kiện thời trang và văn hóa."
+        },
+        "imageUrl": "/api/culture/images/eba1a470ffbb314e993db2ab7a13dce9bd9bc56c743a79e15cb8b6e108b4261a",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02039184326269492,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người phụ nữ mặc áo dài đỏ đứng trước cung An Định.  Cung An Định được thể hiện với kiến trúc Pháp thuộc, màu sắc vàng nhạt, họa tiết trang trí cầu kỳ, và các chi tiết kiến trúc cổ điển.",
+        "scores": {
+          "image_cosine": 0.15413081645965576,
+          "metadata_cosine": 0.7777377367019653,
+          "lexical": 17
+        },
+        "ranks": {
+          "image": 22,
+          "metadata": null,
+          "lexical": 62
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "541815fd1038fa9c6350c2232f57bddf582eef5f5595e144588aaf69f261d8fa",
+        "title": "Nón lá Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp ba người phụ nữ trẻ mặc áo dài trắng truyền thống Việt Nam, đội nón lá, đang đi trên một cây cầu đỏ bắc ngang qua một hồ nước trong công viên. Bối cảnh thiên nhiên xanh tươi, tạo nên khung cảnh thanh bình và đậm chất Việt Nam.",
+        "tags": [
+          "ba người phụ nữ",
+          "áo dài trắng",
+          "nón lá",
+          "cầu đỏ",
+          "hồ nước",
+          "cây xanh"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài và nón lá phổ biến trên toàn quốc nhưng có những biến thể nhỏ về kiểu dáng, chất liệu tùy theo vùng miền.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng. Nón lá là phụ kiện truyền thống gắn liền với hình ảnh người phụ nữ Việt Nam.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng, mặc trong các dịp lễ hội, sự kiện quan trọng và ngày nay được cách tân, ứng dụng trong nhiều hoàn cảnh."
+        },
+        "imageUrl": "/api/culture/images/541815fd1038fa9c6350c2232f57bddf582eef5f5595e144588aaf69f261d8fa",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.020200148257968866,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp ba người phụ nữ trẻ mặc áo dài trắng truyền thống Việt Nam, đội nón lá, đang đi trên một cây cầu đỏ bắc ngang qua một hồ nước trong công viên. Bối cảnh thiên nhiên xanh tươi, tạo nên khung cảnh thanh bình và đậm chất Việt Nam.",
+        "scores": {
+          "image_cosine": 0.1422254741191864,
+          "metadata_cosine": 0.7646576166152954,
+          "lexical": 20
+        },
+        "ranks": {
+          "image": 82,
+          "metadata": null,
+          "lexical": 16
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "ec0aa57e76d372883b918aa5770ee4e9242e79af7dc74dd507e2c3ef589bf107",
+        "title": "Nón quai thao",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người phụ nữ mặc áo dài đỏ truyền thống Việt Nam, đội nón quai thao, trong một khu vườn hoặc rừng cây có ánh sáng tự nhiên, tạo nên một khung cảnh trữ tình, gợi nhắc về vẻ đẹp truyền thống Việt.",
+        "tags": [
+          "người phụ nữ",
+          "áo dài đỏ",
+          "nón quai thao",
+          "hoa sen"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài và nón quai thao là trang phục truyền thống phổ biến khắp Việt Nam, tuy nhiên, kiểu dáng và chất liệu có thể có sự khác biệt nhỏ giữa các vùng miền.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng. Nón quai thao xuất hiện từ lâu đời, gắn liền với hình ảnh người phụ nữ Việt Nam.",
+          "modern_relevance": "Áo dài vẫn được sử dụng rộng rãi trong các dịp lễ hội, sự kiện quan trọng, và ngày càng được cách tân, hiện đại hóa. Nón quai thao chủ yếu được sử dụng trong các hoạt động văn hóa, nghệ thuật hoặc du lịch."
+        },
+        "imageUrl": "/api/culture/images/ec0aa57e76d372883b918aa5770ee4e9242e79af7dc74dd507e2c3ef589bf107",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người phụ nữ mặc áo dài đỏ truyền thống Việt Nam, đội nón quai thao, trong một khu vườn hoặc rừng cây có ánh sáng tự nhiên, tạo nên một khung cảnh trữ tình, gợi nhắc về vẻ đẹp truyền thống Việt.",
+        "scores": {
+          "image_cosine": 0.12140385806560516,
+          "metadata_cosine": 0.8079557418823242,
+          "lexical": 20
+        },
+        "ranks": {
+          "image": null,
+          "metadata": 90,
+          "lexical": 15
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "3ed6ea8f9a8282840820285caeba4439015e4a074161535d21ec8c4a4096bd6e",
+        "title": "Nón lá Huế",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp từ phía sau một người phụ nữ đang đội nón lá Huế. Người phụ nữ mặc áo dài đỏ, tóc dài buông xõa. Bối cảnh là một không gian mờ ảo, có thể là một khu vực tâm linh hoặc cổ kính.",
+        "tags": [
+          "nón lá Huế",
+          "áo dài",
+          "người phụ nữ"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Nón lá Huế nổi tiếng với kiểu dáng thanh lịch, tinh tế, khác biệt so với nón lá các vùng miền khác. Áo dài là trang phục truyền thống của Việt Nam, phổ biến rộng rãi.",
+          "historical_context": "Nón lá Huế có lịch sử lâu đời, gắn liền với văn hóa cung đình và đời sống người dân Huế. Áo dài trải qua nhiều giai đoạn biến đổi, nhưng luôn giữ được nét đẹp truyền thống.",
+          "modern_relevance": "Cả nón lá Huế và áo dài vẫn được ưa chuộng và sử dụng trong nhiều dịp khác nhau, góp phần quảng bá hình ảnh văn hóa Việt Nam ra thế giới. Tuy nhiên, việc sử dụng áo dài trong đời sống hiện đại đang có những thay đổi phù hợp với xu hướng thời trang."
+        },
+        "imageUrl": "/api/culture/images/3ed6ea8f9a8282840820285caeba4439015e4a074161535d21ec8c4a4096bd6e",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.01939655172413793,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ phía sau một người phụ nữ đang đội nón lá Huế. Người phụ nữ mặc áo dài đỏ, tóc dài buông xõa. Bối cảnh là một không gian mờ ảo, có thể là một khu vực tâm linh hoặc cổ kính.",
+        "scores": {
+          "image_cosine": 0.14199578762054443,
+          "metadata_cosine": 0.7566668391227722,
+          "lexical": 19
+        },
+        "ranks": {
+          "image": 85,
+          "metadata": null,
+          "lexical": 20
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "441019b60463031244413cea1e938a201b9e47d85e6cca31b96f3595a429f571",
+        "title": "Áo dài Việt Nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người phụ nữ mặc áo dài đỏ, thiết kế hiện đại với họa tiết bản đồ Việt Nam và hoa văn trống đồng Đông Sơn ở phần thân dưới.  Bối cảnh là phông nền đơn giản, tạo điểm nhấn cho trang phục.",
+        "tags": [
+          "áo dài",
+          "người phụ nữ",
+          "phông nền",
+          "cặp sách"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Áo dài phổ biến trên toàn quốc nhưng có những biến thể về kiểu dáng, chất liệu, và họa tiết ở từng vùng miền. Thiết kế này mang tính hiện đại, ít phản ánh đặc điểm vùng miền cụ thể.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng.  Việc in bản đồ Việt Nam và hoa văn trống đồng Đông Sơn là một cách hiện đại để thể hiện niềm tự hào dân tộc.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng trong các dịp lễ hội, sự kiện quan trọng và ngày nay được cách tân để phù hợp với xu hướng thời trang hiện đại."
+        },
+        "imageUrl": "/api/culture/images/441019b60463031244413cea1e938a201b9e47d85e6cca31b96f3595a429f571",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.01933868600535267,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người phụ nữ mặc áo dài đỏ, thiết kế hiện đại với họa tiết bản đồ Việt Nam và hoa văn trống đồng Đông Sơn ở phần thân dưới.  Bối cảnh là phông nền đơn giản, tạo điểm nhấn cho trang phục.",
+        "scores": {
+          "image_cosine": 0.15449504554271698,
+          "metadata_cosine": 0.7482497096061707,
+          "lexical": 17
+        },
+        "ranks": {
+          "image": 21,
+          "metadata": null,
+          "lexical": 83
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "3d58d088a6cb681eb72869f52c96032b6b364696c7b8f9a78bc380b4673b651e",
+        "title": "Áo dài cưới",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người phụ nữ mặc áo dài cưới màu đỏ, đứng trong một khu vườn có cây xương rồng và cây xanh.",
+        "tags": [
+          "người phụ nữ",
+          "áo dài cưới",
+          "khu vườn"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Mẫu áo dài này không đặc trưng cho một vùng miền cụ thể, nhưng có thể có những biến thể về kiểu dáng, họa tiết tùy thuộc vào sở thích cá nhân và thợ may.",
+          "historical_context": "Áo dài có lịch sử lâu đời, trải qua nhiều biến đổi về kiểu dáng. Áo dài cưới hiện đại thường được thiết kế cầu kỳ, sang trọng hơn.",
+          "modern_relevance": "Áo dài vẫn được ưa chuộng trong các lễ cưới hiện đại của người Việt, thể hiện nét đẹp truyền thống và sự tôn trọng văn hoá."
+        },
+        "imageUrl": "/api/culture/images/3d58d088a6cb681eb72869f52c96032b6b364696c7b8f9a78bc380b4673b651e",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.019230769230769232,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người phụ nữ mặc áo dài cưới màu đỏ, đứng trong một khu vườn có cây xương rồng và cây xanh.",
+        "scores": {
+          "image_cosine": 0.15617872774600983,
+          "metadata_cosine": 0.7930434942245483,
+          "lexical": 17
+        },
+        "ranks": {
+          "image": 18,
+          "metadata": null,
+          "lexical": 96
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "fd59c4cf187f1a16804e8ca50363cea15a5aec949c328f799d307a8f8c3493b6",
+        "title": "Áo dài nam",
+        "category": "trang_phuc",
+        "categoryLabel": "Trang phục",
+        "description": "Hình ảnh chụp một người đàn ông mặc áo dài nam truyền thống màu đỏ với họa tiết hoa văn vàng, đội khăn đóng, và cầm một chiếc quạt xếp đen.",
+        "tags": [
+          "áo dài nam",
+          "khăn đóng",
+          "quạt xếp",
+          "người đàn ông"
+        ],
+        "context": {
+          "cultural_category": "trang phục",
+          "regional_significance": "Mặc dù áo dài có biến thể khác nhau giữa các vùng miền, nhưng kiểu áo dài nam này khá phổ biến trên toàn quốc, đặc biệt trong các dịp lễ hội.",
+          "historical_context": "Áo dài nam có lịch sử lâu đời, chịu ảnh hưởng từ nhiều nguồn văn hóa, nhưng được định hình rõ nét hơn trong thế kỷ 20. Khăn đóng là một phụ kiện truyền thống gắn liền với hình ảnh người đàn ông Việt Nam.",
+          "modern_relevance": "Ngày nay, áo dài nam vẫn được sử dụng trong các dịp lễ hội, đám cưới, sự kiện trang trọng, và cũng được một số người mặc trong đời sống hàng ngày để thể hiện sự yêu thích văn hoá truyền thống."
+        },
+        "imageUrl": "/api/culture/images/fd59c4cf187f1a16804e8ca50363cea15a5aec949c328f799d307a8f8c3493b6",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.01911001911001911,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp một người đàn ông mặc áo dài nam truyền thống màu đỏ với họa tiết hoa văn vàng, đội khăn đóng, và cầm một chiếc quạt xếp đen.",
+        "scores": {
+          "image_cosine": 0.14978733658790588,
+          "metadata_cosine": 0.7273712754249573,
+          "lexical": 18
+        },
+        "ranks": {
+          "image": 39,
+          "metadata": null,
+          "lexical": 51
+        },
+        "metadata_complete": true
+      }
+    ],
+    "total": 24,
+    "page": 1,
+    "pages": 1,
+    "libraryTotal": 15411,
+    "counts": {
+      "le_hoi": 2356,
+      "phong_canh": 2908,
+      "trang_phuc": 2365,
+      "kien_truc": 2947,
+      "thu_cong_my_nghe": 1922,
+      "am_thuc": 2913
+    },
+    "mode": "contextual",
+    "result_scope": "top_k",
+    "retrieval_backend": "numpy-hybrid-rrf",
+    "score_type": "rrf",
+    "search_route": "hybrid",
+    "routing_reason": "llm_disabled",
+    "routing_mode": "auto",
+    "routing_classifier": null,
+    "routing_score": null,
+    "llm_used": false,
+    "llm_call_count": 0,
+    "vector_cache_hit": false,
+    "model": "google/siglip2-base-patch16-224",
+    "model_revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+    "artifact_fingerprint": {
+      "vectors.npy": "6e66a91a8290df9c2f12207628b19e79fb0dfbf694614b8a71a3f8cb73c12126",
+      "assets.jsonl": "1558faac01d10ee6f630d8b4ab780e3c832926411d56a8cc79b1c9ac414c7359",
+      "metadata_vectors.npy": "8af431bc709fd78871e9a5b9607e28fed0e2b5127021007a562a34a6571ba8b1"
+    },
+    "interpretation": null,
+    "query_model": null,
+    "llm_provider": null,
+    "llm_reranked": false,
+    "plan_cache_hit": false,
+    "rerank_candidates": 0,
+    "rerank_evidence": null,
+    "evidence_type": "retrieved-image-annotations",
+    "relevance_gate": {
+      "mode": "shadow",
+      "status": "calibration_required",
+      "candidates": 24,
+      "would_reject": null,
+      "enforced": false
+    },
+    "abstained": false,
+    "abstention_reason": null,
+    "search_config": {
+      "image_weight": 1,
+      "metadata_weight": 1,
+      "lexical_weight": 1,
+      "rank_constant": 60,
+      "image_depth": 100,
+      "metadata_depth": 100,
+      "lexical_depth": 100,
+      "query_roles": true
+    },
+    "selection_scope": "retrieved_candidates",
+    "corpus_total": 15423,
+    "coverage_complete": true,
+    "timings": {
+      "routing_ms": 0.18843100019694248,
+      "planning_ms": 0,
+      "embedding_ms": 108.16104299988183,
+      "retrieval_ms": 12.338173999978608,
+      "reranking_ms": 0.0027449998469819548,
+      "total_ms": 121.03243000001385
+    }
+  }
+}

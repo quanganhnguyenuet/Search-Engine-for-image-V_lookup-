@@ -7,6 +7,11 @@
 
 # Embedding trên Kaggle → Hugging Face Dataset → tìm kiếm và RAG local
 
+Notebook dùng **2 GPU T4 đồng thời** và upload vào
+`Quanganh6905/Embedding_for_searchengine` đã có tại
+[visualseek-kaggle-t4x2-huggingface.ipynb](../notebooks/visualseek-kaggle-t4x2-huggingface.ipynb).
+Xem [hướng dẫn T4 ×2](kaggle-t4x2-huggingface.md). Các cell bên dưới dùng runner một GPU.
+
 ## 1. Phân chia công việc
 
 Luồng triển khai của dự án:

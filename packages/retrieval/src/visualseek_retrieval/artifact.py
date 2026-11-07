@@ -63,7 +63,9 @@ class ArtifactIndex:
             atol=2e-3,
         ):
             raise ValueError("Stored vectors must be finite and unit-normalized")
-        self.counts = dict(Counter(row["category"] for row in self.assets))
+        self.searchable_count = sum(not row.get('search_excluded') for row in self.assets)
+        self.counts = dict(Counter(row['category'] for row in self.assets
+                                   if not row.get('search_excluded')))
         self.dimension = manifest["dimension"]
         self.metadata_vectors = None
         if manifest["schema_version"] == 2:
@@ -91,7 +93,8 @@ class ArtifactIndex:
         if limit < 1 or limit > 100:
             raise ValueError("limit must be between 1 and 100")
         selected = np.array(
-            [i for i, row in enumerate(self.assets) if not category or row["category"] == category],
+            [i for i, row in enumerate(self.assets) if not row.get('search_excluded')
+             and (not category or row["category"] == category)],
             dtype=np.int64,
         )
         if not len(selected):

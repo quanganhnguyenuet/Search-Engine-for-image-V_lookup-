@@ -39,6 +39,8 @@ for package in ('embedding', 'retrieval', 'preprocessing'):
         assert Path(module.__file__).is_relative_to(root), module.__file__
 sys.argv = [str(root / 'scripts/kaggle_embed.py'), '--help']
 runpy.run_path(sys.argv[0], run_name='__main__')
+sys.argv = [str(root / 'scripts/kaggle_embed_multi_gpu.py'), '--help']
+runpy.run_path(sys.argv[0], run_name='__main__')
 """
     result = subprocess.run(
         [sys.executable, "-I", "-S", "-c", probe, str(unpacked), sysconfig.get_path("purelib")],

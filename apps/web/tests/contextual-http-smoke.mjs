@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 const base = process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000";
 const testLLM = process.env.TEST_CONTEXTUAL_LLM === "1";
 const body = { mode: "contextual", query: "ruộng bậc thang xanh ở vùng núi", category: "phong_canh",
-  ...(testLLM ? { use_llm: true } : {}) };
+  use_llm: testLLM };
 async function search(payload) {
   const response = await fetch(`${base}/api/culture/ai`, {
     method: "POST", headers: { "Content-Type": "application/json" },
@@ -15,7 +15,8 @@ async function search(payload) {
 const page = await fetch(base);
 assert.equal(page.status, 200);
 assert.ok((await page.text()).includes("Tìm theo yêu cầu"));
-const fast = await search({ mode: "contextual", query: "bánh đậu xanh", category: "am_thuc" });
+const fast = await search({ mode: "contextual", query: "bánh đậu xanh", category: "am_thuc",
+  use_llm: false });
 assert.equal(fast.status, 200, JSON.stringify(fast.data));
 assert.equal(fast.data.search_route, "lexical");
 assert.equal(fast.data.llm_used, false);

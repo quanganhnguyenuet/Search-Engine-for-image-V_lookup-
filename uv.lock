@@ -1057,6 +1057,12 @@ provides-extras = ["model"]
 name = "visualseek-evaluation"
 version = "0.1.0"
 source = { editable = "packages/evaluation" }
+dependencies = [
+    { name = "visualseek-retrieval" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "visualseek-retrieval", editable = "packages/retrieval" }]
 
 [[package]]
 name = "visualseek-preprocessing"

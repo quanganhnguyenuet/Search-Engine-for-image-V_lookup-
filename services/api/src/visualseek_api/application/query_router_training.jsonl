@@ -1,0 +1,1046 @@
+{"query": "người mặc áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac ao dai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi mac ao dai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người mặc áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "chiếc nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "chiec non la", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chiếc nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh chiec non la", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh chiếc nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "tô phở bò", "needs_reasoning": false, "split": "train"}
+{"query": "to pho bo", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tô phở bò", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh to pho bo", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh tô phở bò", "needs_reasoning": false, "split": "train"}
+{"query": "bánh chưng", "needs_reasoning": false, "split": "train"}
+{"query": "banh chung", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bánh chưng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh banh chung", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh bánh chưng", "needs_reasoning": false, "split": "train"}
+{"query": "bún bò Huế", "needs_reasoning": false, "split": "train"}
+{"query": "bun bo hue", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bún bò Huế", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh bun bo hue", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh bún bò Huế", "needs_reasoning": false, "split": "train"}
+{"query": "mâm bánh truyền thống", "needs_reasoning": false, "split": "train"}
+{"query": "mam banh truyen thong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mâm bánh truyền thống", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh mam banh truyen thong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh mâm bánh truyền thống", "needs_reasoning": false, "split": "train"}
+{"query": "đồ gốm", "needs_reasoning": false, "split": "train"}
+{"query": "do gom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đồ gốm", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh do gom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh đồ gốm", "needs_reasoning": false, "split": "train"}
+{"query": "sản phẩm mây tre", "needs_reasoning": false, "split": "train"}
+{"query": "san pham may tre", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh sản phẩm mây tre", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh san pham may tre", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh sản phẩm mây tre", "needs_reasoning": false, "split": "train"}
+{"query": "tranh dân gian", "needs_reasoning": false, "split": "train"}
+{"query": "tranh dan gian", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tranh dân gian", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh tranh dan gian", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh tranh dân gian", "needs_reasoning": false, "split": "train"}
+{"query": "trống đồng", "needs_reasoning": false, "split": "train"}
+{"query": "trong dong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh trống đồng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh trong dong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh trống đồng", "needs_reasoning": false, "split": "train"}
+{"query": "nhà sàn", "needs_reasoning": false, "split": "train"}
+{"query": "nha san", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nhà sàn", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nha san", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh nhà sàn", "needs_reasoning": false, "split": "train"}
+{"query": "ngôi chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "ngoi chua co", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ngôi chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ngoi chua co", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ngôi chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "cổng đình", "needs_reasoning": false, "split": "train"}
+{"query": "cong dinh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cổng đình", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh cong dinh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh cổng đình", "needs_reasoning": false, "split": "train"}
+{"query": "cầu gỗ", "needs_reasoning": false, "split": "train"}
+{"query": "cau go", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cầu gỗ", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh cau go", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh cầu gỗ", "needs_reasoning": false, "split": "train"}
+{"query": "thuyền đánh cá", "needs_reasoning": false, "split": "train"}
+{"query": "thuyen danh ca", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thuyền đánh cá", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh thuyen danh ca", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh thuyền đánh cá", "needs_reasoning": false, "split": "train"}
+{"query": "ruộng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "ruong lua", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ruong lua", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ruộng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "thác nước", "needs_reasoning": false, "split": "train"}
+{"query": "thac nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thác nước", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh thac nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh thác nước", "needs_reasoning": false, "split": "train"}
+{"query": "bờ biển", "needs_reasoning": false, "split": "train"}
+{"query": "bo bien", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bờ biển", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh bo bien", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh bờ biển", "needs_reasoning": false, "split": "train"}
+{"query": "đèn lồng", "needs_reasoning": false, "split": "train"}
+{"query": "den long", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đèn lồng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh den long", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh đèn lồng", "needs_reasoning": false, "split": "train"}
+{"query": "trang phục dân tộc", "needs_reasoning": false, "split": "train"}
+{"query": "trang phuc dan toc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh trang phục dân tộc", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh trang phuc dan toc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh trang phục dân tộc", "needs_reasoning": false, "split": "train"}
+{"query": "người đang nấu ăn", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi dang nau an", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người đang nấu ăn", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi dang nau an", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người đang nấu ăn", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang nặn gốm", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang nan gom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nghệ nhân đang nặn gốm", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nghe nhan dang nan gom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh nghệ nhân đang nặn gốm", "needs_reasoning": false, "split": "train"}
+{"query": "người đang dệt vải", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi dang det vai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người đang dệt vải", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi dang det vai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người đang dệt vải", "needs_reasoning": false, "split": "train"}
+{"query": "đoàn người rước lễ", "needs_reasoning": false, "split": "train"}
+{"query": "doan nguoi ruoc le", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đoàn người rước lễ", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh doan nguoi ruoc le", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh đoàn người rước lễ", "needs_reasoning": false, "split": "train"}
+{"query": "múa lân ngoài đường", "needs_reasoning": false, "split": "train"}
+{"query": "mua lan ngoai duong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh múa lân ngoài đường", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh mua lan ngoai duong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh múa lân ngoài đường", "needs_reasoning": false, "split": "train"}
+{"query": "chợ đông người", "needs_reasoning": false, "split": "train"}
+{"query": "cho dong nguoi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chợ đông người", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh cho dong nguoi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh chợ đông người", "needs_reasoning": false, "split": "train"}
+{"query": "thuyền di chuyển trên sông", "needs_reasoning": false, "split": "train"}
+{"query": "thuyen di chuyen tren song", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thuyền di chuyển trên sông", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh thuyen di chuyen tren song", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh thuyền di chuyển trên sông", "needs_reasoning": false, "split": "train"}
+{"query": "người đang cấy lúa", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi dang cay lua", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người đang cấy lúa", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi dang cay lua", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người đang cấy lúa", "needs_reasoning": false, "split": "train"}
+{"query": "người đang làm bánh", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi dang lam banh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người đang làm bánh", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi dang lam banh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người đang làm bánh", "needs_reasoning": false, "split": "train"}
+{"query": "lễ hội ngoài trời", "needs_reasoning": false, "split": "train"}
+{"query": "le hoi ngoai troi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lễ hội ngoài trời", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh le hoi ngoai troi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh lễ hội ngoài trời", "needs_reasoning": false, "split": "train"}
+{"query": "biểu diễn múa rối nước", "needs_reasoning": false, "split": "train"}
+{"query": "bieu dien mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh biểu diễn múa rối nước", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh bieu dien mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh biểu diễn múa rối nước", "needs_reasoning": false, "split": "train"}
+{"query": "người bán hàng rong", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi ban hang rong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người bán hàng rong", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi ban hang rong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người bán hàng rong", "needs_reasoning": false, "split": "train"}
+{"query": "phố cổ vào ban đêm", "needs_reasoning": false, "split": "train"}
+{"query": "pho co vao ban dem", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phố cổ vào ban đêm", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh pho co vao ban dem", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh phố cổ vào ban đêm", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc trang phục truyền thống biểu diễn", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac trang phuc truyen thong bieu dien", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc trang phục truyền thống biểu diễn", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi mac trang phuc truyen thong bieu dien", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người mặc trang phục truyền thống biểu diễn", "needs_reasoning": false, "split": "train"}
+{"query": "sinh hoạt trong nhà sàn", "needs_reasoning": false, "split": "train"}
+{"query": "sinh hoat trong nha san", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh sinh hoạt trong nhà sàn", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh sinh hoat trong nha san", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh sinh hoạt trong nhà sàn", "needs_reasoning": false, "split": "train"}
+{"query": "ngư dân trên bãi biển", "needs_reasoning": false, "split": "train"}
+{"query": "ngu dan tren bai bien", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ngư dân trên bãi biển", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ngu dan tren bai bien", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ngư dân trên bãi biển", "needs_reasoning": false, "split": "train"}
+{"query": "làng quê bên sông", "needs_reasoning": false, "split": "train"}
+{"query": "lang que ben song", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh làng quê bên sông", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh lang que ben song", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh làng quê bên sông", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đan giỏ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dan gio", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nghệ nhân đan giỏ", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nghe nhan dan gio", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh nghệ nhân đan giỏ", "needs_reasoning": false, "split": "train"}
+{"query": "chuẩn bị mâm cỗ ngày Tết", "needs_reasoning": false, "split": "train"}
+{"query": "chuan bi mam co ngay tet", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chuẩn bị mâm cỗ ngày Tết", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh chuan bi mam co ngay tet", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh chuẩn bị mâm cỗ ngày Tết", "needs_reasoning": false, "split": "train"}
+{"query": "ruộng bậc thang trên núi", "needs_reasoning": false, "split": "train"}
+{"query": "ruong bac thang tren nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng bậc thang trên núi", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ruong bac thang tren nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ruộng bậc thang trên núi", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc áo dài đỏ đứng trước công trình cổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac ao dai do dung truoc cong trinh co", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài đỏ đứng trước công trình cổ", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi mac ao dai do dung truoc cong trinh co", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người mặc áo dài đỏ đứng trước công trình cổ", "needs_reasoning": false, "split": "train"}
+{"query": "ruộng bậc thang xanh ở vùng núi", "needs_reasoning": false, "split": "train"}
+{"query": "ruong bac thang xanh o vung nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng bậc thang xanh ở vùng núi", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ruong bac thang xanh o vung nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ruộng bậc thang xanh ở vùng núi", "needs_reasoning": false, "split": "train"}
+{"query": "tô phở có thịt bò và rau thơm", "needs_reasoning": false, "split": "train"}
+{"query": "to pho co thit bo va rau thom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tô phở có thịt bò và rau thơm", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh to pho co thit bo va rau thom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh tô phở có thịt bò và rau thơm", "needs_reasoning": false, "split": "train"}
+{"query": "thuyền trên sông giữa những núi đá vôi", "needs_reasoning": false, "split": "train"}
+{"query": "thuyen tren song giua nhung nui da voi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thuyền trên sông giữa những núi đá vôi", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh thuyen tren song giua nhung nui da voi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh thuyền trên sông giữa những núi đá vôi", "needs_reasoning": false, "split": "train"}
+{"query": "đèn lồng nhiều màu vào ban đêm", "needs_reasoning": false, "split": "train"}
+{"query": "den long nhieu mau vao ban dem", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đèn lồng nhiều màu vào ban đêm", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh den long nhieu mau vao ban dem", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh đèn lồng nhiều màu vào ban đêm", "needs_reasoning": false, "split": "train"}
+{"query": "bát bún có thịt nướng và rau sống", "needs_reasoning": false, "split": "train"}
+{"query": "bat bun co thit nuong va rau song", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bát bún có thịt nướng và rau sống", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh bat bun co thit nuong va rau song", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh bát bún có thịt nướng và rau sống", "needs_reasoning": false, "split": "train"}
+{"query": "ngôi chùa có mái cong và sân rộng", "needs_reasoning": false, "split": "train"}
+{"query": "ngoi chua co mai cong va san rong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ngôi chùa có mái cong và sân rộng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ngoi chua co mai cong va san rong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ngôi chùa có mái cong và sân rộng", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc áo dài trắng giữa cây xanh", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac ao dai trang giua cay xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài trắng giữa cây xanh", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi mac ao dai trang giua cay xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người mặc áo dài trắng giữa cây xanh", "needs_reasoning": false, "split": "train"}
+{"query": "thác nước rộng có cây xanh xung quanh", "needs_reasoning": false, "split": "train"}
+{"query": "thac nuoc rong co cay xanh xung quanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thác nước rộng có cây xanh xung quanh", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh thac nuoc rong co cay xanh xung quanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh thác nước rộng có cây xanh xung quanh", "needs_reasoning": false, "split": "train"}
+{"query": "giỏ tre được đan bằng tay", "needs_reasoning": false, "split": "train"}
+{"query": "gio tre duoc dan bang tay", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh giỏ tre được đan bằng tay", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh gio tre duoc dan bang tay", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh giỏ tre được đan bằng tay", "needs_reasoning": false, "split": "train"}
+{"query": "nhà sàn bằng gỗ trên sườn núi", "needs_reasoning": false, "split": "train"}
+{"query": "nha san bang go tren suon nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nhà sàn bằng gỗ trên sườn núi", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nha san bang go tren suon nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh nhà sàn bằng gỗ trên sườn núi", "needs_reasoning": false, "split": "train"}
+{"query": "mâm cơm có nhiều món ăn truyền thống", "needs_reasoning": false, "split": "train"}
+{"query": "mam com co nhieu mon an truyen thong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mâm cơm có nhiều món ăn truyền thống", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh mam com co nhieu mon an truyen thong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh mâm cơm có nhiều món ăn truyền thống", "needs_reasoning": false, "split": "train"}
+{"query": "bãi biển với thuyền và cát trắng", "needs_reasoning": false, "split": "train"}
+{"query": "bai bien voi thuyen va cat trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bãi biển với thuyền và cát trắng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh bai bien voi thuyen va cat trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh bãi biển với thuyền và cát trắng", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc trang phục dân tộc nhiều màu", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac trang phuc dan toc nhieu mau", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc trang phục dân tộc nhiều màu", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh nguoi mac trang phuc dan toc nhieu mau", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh người mặc trang phục dân tộc nhiều màu", "needs_reasoning": false, "split": "train"}
+{"query": "đồ gốm có hoa văn màu xanh", "needs_reasoning": false, "split": "train"}
+{"query": "do gom co hoa van mau xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đồ gốm có hoa văn màu xanh", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh do gom co hoa van mau xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh đồ gốm có hoa văn màu xanh", "needs_reasoning": false, "split": "train"}
+{"query": "cổng đình chạm khắc có mái ngói", "needs_reasoning": false, "split": "train"}
+{"query": "cong dinh cham khac co mai ngoi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cổng đình chạm khắc có mái ngói", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh cong dinh cham khac co mai ngoi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh cổng đình chạm khắc có mái ngói", "needs_reasoning": false, "split": "train"}
+{"query": "lễ hội có cờ và nhiều người", "needs_reasoning": false, "split": "train"}
+{"query": "le hoi co co va nhieu nguoi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lễ hội có cờ và nhiều người", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh le hoi co co va nhieu nguoi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh lễ hội có cờ và nhiều người", "needs_reasoning": false, "split": "train"}
+{"query": "ruộng lúa vàng bên ngọn núi", "needs_reasoning": false, "split": "train"}
+{"query": "ruong lua vang ben ngon nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng lúa vàng bên ngọn núi", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ruong lua vang ben ngon nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ruộng lúa vàng bên ngọn núi", "needs_reasoning": false, "split": "train"}
+{"query": "bánh chưng gói bằng lá xanh", "needs_reasoning": false, "split": "train"}
+{"query": "banh chung goi bang la xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bánh chưng gói bằng lá xanh", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh banh chung goi bang la xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh bánh chưng gói bằng lá xanh", "needs_reasoning": false, "split": "train"}
+{"query": "cảnh làng quê không có nhà cao tầng", "needs_reasoning": false, "split": "train"}
+{"query": "canh lang que khong co nha cao tang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cảnh làng quê không có nhà cao tầng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh canh lang que khong co nha cao tang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh cảnh làng quê không có nhà cao tầng", "needs_reasoning": false, "split": "train"}
+{"query": "áo bà ba", "needs_reasoning": false, "split": "train"}
+{"query": "ao ba ba", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh áo bà ba", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ao ba ba", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh ao ba ba", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh ao ba ba", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh ao ba ba", "needs_reasoning": false, "split": "train"}
+{"query": "đình làng", "needs_reasoning": false, "split": "train"}
+{"query": "dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đình làng", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "gốm Bát Tràng", "needs_reasoning": false, "split": "train"}
+{"query": "gom bat trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh gốm Bát Tràng", "needs_reasoning": false, "split": "train"}
+{"query": "gom Bat Trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh gom Bat Trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh gom Bat Trang", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh gom bat trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh gom Bat Trang", "needs_reasoning": false, "split": "train"}
+{"query": "đan lát", "needs_reasoning": false, "split": "train"}
+{"query": "dan lat", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đan lát", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh dan lat", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh dan lat", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh dan lat", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh dan lat", "needs_reasoning": false, "split": "train"}
+{"query": "múa rối nước", "needs_reasoning": false, "split": "train"}
+{"query": "mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh múa rối nước", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh mua roi nuoc", "needs_reasoning": false, "split": "train"}
+{"query": "bánh xèo", "needs_reasoning": false, "split": "train"}
+{"query": "banh xeo", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bánh xèo", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh banh xeo", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh banh xeo", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh banh xeo", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh banh xeo", "needs_reasoning": false, "split": "train"}
+{"query": "vịnh Hạ Long", "needs_reasoning": false, "split": "train"}
+{"query": "vinh ha long", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh vịnh Hạ Long", "needs_reasoning": false, "split": "train"}
+{"query": "vinh Ha Long", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh vinh Ha Long", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh vinh Ha Long", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh vinh ha long", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh vinh Ha Long", "needs_reasoning": false, "split": "train"}
+{"query": "trang phục H'Mông", "needs_reasoning": false, "split": "train"}
+{"query": "trang phuc hmong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh trang phục H'Mông", "needs_reasoning": false, "split": "train"}
+{"query": "trang phuc H'Mong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh trang phuc H'Mong", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh trang phuc H'Mong", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh trang phuc hmong", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh trang phuc H'Mong", "needs_reasoning": false, "split": "train"}
+{"query": "cầu tre", "needs_reasoning": false, "split": "train"}
+{"query": "cau tre", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cầu tre", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cau tre", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh cau tre", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh cau tre", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh cau tre", "needs_reasoning": false, "split": "train"}
+{"query": "lễ hội đua thuyền", "needs_reasoning": false, "split": "train"}
+{"query": "le hoi dua thuyen", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lễ hội đua thuyền", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh le hoi dua thuyen", "needs_reasoning": false, "split": "train"}
+{"query": "Tìm ảnh le hoi dua thuyen", "needs_reasoning": false, "split": "train"}
+{"query": "tim anh le hoi dua thuyen", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tìm ảnh le hoi dua thuyen", "needs_reasoning": false, "split": "train"}
+{"query": "phố cổ Hội An", "needs_reasoning": false, "split": "train"}
+{"query": "pho co hoi an", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phố cổ Hội An", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh pho co hoi an", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh phố cổ Hội An", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về phố cổ Hội An", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve pho co hoi an", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về phố cổ Hội An", "needs_reasoning": false, "split": "train"}
+{"query": "thác Bản Giốc", "needs_reasoning": false, "split": "train"}
+{"query": "thac ban gioc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thác Bản Giốc", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh thac ban gioc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh thác Bản Giốc", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về thác Bản Giốc", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve thac ban gioc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về thác Bản Giốc", "needs_reasoning": false, "split": "train"}
+{"query": "Văn Miếu Quốc Tử Giám", "needs_reasoning": false, "split": "train"}
+{"query": "van mieu quoc tu giam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Văn Miếu Quốc Tử Giám", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh van mieu quoc tu giam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh Văn Miếu Quốc Tử Giám", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về Văn Miếu Quốc Tử Giám", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve van mieu quoc tu giam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về Văn Miếu Quốc Tử Giám", "needs_reasoning": false, "split": "train"}
+{"query": "chùa Một Cột", "needs_reasoning": false, "split": "train"}
+{"query": "chua mot cot", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chùa Một Cột", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh chua mot cot", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh chùa Một Cột", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về chùa Một Cột", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve chua mot cot", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về chùa Một Cột", "needs_reasoning": false, "split": "train"}
+{"query": "cầu Rồng Đà Nẵng", "needs_reasoning": false, "split": "train"}
+{"query": "cau rong da nang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cầu Rồng Đà Nẵng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh cau rong da nang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh cầu Rồng Đà Nẵng", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về cầu Rồng Đà Nẵng", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve cau rong da nang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về cầu Rồng Đà Nẵng", "needs_reasoning": false, "split": "train"}
+{"query": "lăng Minh Mạng", "needs_reasoning": false, "split": "train"}
+{"query": "lang minh mang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lăng Minh Mạng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh lang minh mang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh lăng Minh Mạng", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về lăng Minh Mạng", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve lang minh mang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về lăng Minh Mạng", "needs_reasoning": false, "split": "train"}
+{"query": "hồ Ba Bể", "needs_reasoning": false, "split": "train"}
+{"query": "ho ba be", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh hồ Ba Bể", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ho ba be", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh hồ Ba Bể", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về hồ Ba Bể", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve ho ba be", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về hồ Ba Bể", "needs_reasoning": false, "split": "train"}
+{"query": "hang Phong Nha", "needs_reasoning": false, "split": "train"}
+{"query": "hang phong nha", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh hang Phong Nha", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh hang phong nha", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh hang Phong Nha", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về hang Phong Nha", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve hang phong nha", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về hang Phong Nha", "needs_reasoning": false, "split": "train"}
+{"query": "ruộng bậc thang Mù Cang Chải", "needs_reasoning": false, "split": "train"}
+{"query": "ruong bac thang mu cang chai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng bậc thang Mù Cang Chải", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh ruong bac thang mu cang chai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh ruộng bậc thang Mù Cang Chải", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về ruộng bậc thang Mù Cang Chải", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve ruong bac thang mu cang chai", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về ruộng bậc thang Mù Cang Chải", "needs_reasoning": false, "split": "train"}
+{"query": "chợ nổi Cái Răng", "needs_reasoning": false, "split": "train"}
+{"query": "cho noi cai rang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chợ nổi Cái Răng", "needs_reasoning": false, "split": "train"}
+{"query": "toi muon tim anh cho noi cai rang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Tôi muốn tìm ảnh chợ nổi Cái Răng", "needs_reasoning": false, "split": "train"}
+{"query": "Hình ảnh về chợ nổi Cái Răng", "needs_reasoning": false, "split": "train"}
+{"query": "hinh anh ve cho noi cai rang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh Hình ảnh về chợ nổi Cái Răng", "needs_reasoning": false, "split": "train"}
+{"query": "tàu vũ trụ trên sao Hỏa", "needs_reasoning": false, "split": "train"}
+{"query": "tau vu tru tren sao hoa", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tàu vũ trụ trên sao Hỏa", "needs_reasoning": false, "split": "train"}
+{"query": "chim cánh cụt trên băng Nam Cực", "needs_reasoning": false, "split": "train"}
+{"query": "chim canh cut tren bang nam cuc", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chim cánh cụt trên băng Nam Cực", "needs_reasoning": false, "split": "train"}
+{"query": "robot trên mặt trăng", "needs_reasoning": false, "split": "train"}
+{"query": "robot tren mat trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh robot trên mặt trăng", "needs_reasoning": false, "split": "train"}
+{"query": "khủng long thật đang chạy trong thành phố", "needs_reasoning": false, "split": "train"}
+{"query": "khung long that dang chay trong thanh pho", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh khủng long thật đang chạy trong thành phố", "needs_reasoning": false, "split": "train"}
+{"query": "người trượt tuyết ở dãy Alps", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi truot tuyet o day alps", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người trượt tuyết ở dãy Alps", "needs_reasoning": false, "split": "train"}
+{"query": "tháp Eiffel ở Paris", "needs_reasoning": false, "split": "train"}
+{"query": "thap eiffel o paris", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tháp Eiffel ở Paris", "needs_reasoning": false, "split": "train"}
+{"query": "tượng Nữ thần Tự do", "needs_reasoning": false, "split": "train"}
+{"query": "tuong nu than tu do", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tượng Nữ thần Tự do", "needs_reasoning": false, "split": "train"}
+{"query": "kim tự tháp Ai Cập", "needs_reasoning": false, "split": "train"}
+{"query": "kim tu thap ai cap", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh kim tự tháp Ai Cập", "needs_reasoning": false, "split": "train"}
+{"query": "gấu Bắc Cực trên băng", "needs_reasoning": false, "split": "train"}
+{"query": "gau bac cuc tren bang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh gấu Bắc Cực trên băng", "needs_reasoning": false, "split": "train"}
+{"query": "cầu Cổng Vàng ở San Francisco", "needs_reasoning": false, "split": "train"}
+{"query": "cau cong vang o san francisco", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cầu Cổng Vàng ở San Francisco", "needs_reasoning": false, "split": "train"}
+{"query": "sân vận động bóng bầu dục Mỹ", "needs_reasoning": false, "split": "train"}
+{"query": "san van dong bong bau duc my", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh sân vận động bóng bầu dục Mỹ", "needs_reasoning": false, "split": "train"}
+{"query": "xe đua trên đường đua Monaco", "needs_reasoning": false, "split": "train"}
+{"query": "xe dua tren duong dua monaco", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh xe đua trên đường đua Monaco", "needs_reasoning": false, "split": "train"}
+{"query": "bên trong trạm vũ trụ quốc tế", "needs_reasoning": false, "split": "train"}
+{"query": "ben trong tram vu tru quoc te", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bên trong trạm vũ trụ quốc tế", "needs_reasoning": false, "split": "train"}
+{"query": "núi lửa trên sao Kim", "needs_reasoning": false, "split": "train"}
+{"query": "nui lua tren sao kim", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh núi lửa trên sao Kim", "needs_reasoning": false, "split": "train"}
+{"query": "quái vật đang bay", "needs_reasoning": false, "split": "train"}
+{"query": "quai vat dang bay", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh quái vật đang bay", "needs_reasoning": false, "split": "train"}
+{"query": "một bức ảnh hoàn toàn trống màu trắng", "needs_reasoning": false, "split": "train"}
+{"query": "mot buc anh hoan toan trong mau trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh một bức ảnh hoàn toàn trống màu trắng", "needs_reasoning": false, "split": "train"}
+{"query": "logo công ty công nghệ ở Silicon Valley", "needs_reasoning": false, "split": "train"}
+{"query": "logo cong ty cong nghe o silicon valley", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh logo công ty công nghệ ở Silicon Valley", "needs_reasoning": false, "split": "train"}
+{"query": "lâu đài băng ở Bắc Âu", "needs_reasoning": false, "split": "train"}
+{"query": "lau dai bang o bac au", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lâu đài băng ở Bắc Âu", "needs_reasoning": false, "split": "train"}
+{"query": "cực quang ở Iceland", "needs_reasoning": false, "split": "train"}
+{"query": "cuc quang o iceland", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cực quang ở Iceland", "needs_reasoning": false, "split": "train"}
+{"query": "hẻm núi Grand Canyon", "needs_reasoning": false, "split": "train"}
+{"query": "hem nui grand canyon", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh hẻm núi Grand Canyon", "needs_reasoning": false, "split": "train"}
+{"query": "người phụ nữ mặc trang phục truyền thống đứng trước ngôi nhà cổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi phu nu mac trang phuc truyen thong dung truoc ngoi nha co", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người phụ nữ mặc trang phục truyền thống đứng trước ngôi nhà cổ", "needs_reasoning": false, "split": "train"}
+{"query": "trụ đá trong kiến trúc Việt Nam", "needs_reasoning": false, "split": "train"}
+{"query": "tru da trong kien truc viet nam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh trụ đá trong kiến trúc Việt Nam", "needs_reasoning": false, "split": "train"}
+{"query": "các trụ cột của ngôi đình", "needs_reasoning": false, "split": "train"}
+{"query": "cac tru cot cua ngoi dinh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh các trụ cột của ngôi đình", "needs_reasoning": false, "split": "train"}
+{"query": "lăng tẩm của những vị vua Việt Nam", "needs_reasoning": false, "split": "train"}
+{"query": "lang tam cua nhung vi vua viet nam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lăng tẩm của những vị vua Việt Nam", "needs_reasoning": false, "split": "train"}
+{"query": "một khu vườn có không gian xanh", "needs_reasoning": false, "split": "train"}
+{"query": "mot khu vuon co khong gian xanh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh một khu vườn có không gian xanh", "needs_reasoning": false, "split": "train"}
+{"query": "không gian trong nhà cổ", "needs_reasoning": false, "split": "train"}
+{"query": "khong gian trong nha co", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh không gian trong nhà cổ", "needs_reasoning": false, "split": "train"}
+{"query": "ruộng bậc thang, mây trắng", "needs_reasoning": false, "split": "train"}
+{"query": "ruong bac thang may trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng bậc thang, mây trắng", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc áo dài đỏ và đội nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac ao dai do va doi non la", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài đỏ và đội nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "áo dài đỏ và nón trắng", "needs_reasoning": false, "split": "train"}
+{"query": "ao dai do va non trang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh áo dài đỏ và nón trắng", "needs_reasoning": false, "split": "train"}
+{"query": "phở bò có rau thơm và hành lá", "needs_reasoning": false, "split": "train"}
+{"query": "pho bo co rau thom va hanh la", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phở bò có rau thơm và hành lá", "needs_reasoning": false, "split": "train"}
+{"query": "mấy cái lăng ở Huế", "needs_reasoning": false, "split": "train"}
+{"query": "may cai lang o hue", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mấy cái lăng ở Huế", "needs_reasoning": false, "split": "train"}
+{"query": "các lăng ở Việt Nam", "needs_reasoning": false, "split": "train"}
+{"query": "cac lang o viet nam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh các lăng ở Việt Nam", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn làm gốm", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon lam gom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn làm gốm", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn ngồi cạnh trẻ nhỏ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon ngoi canh tre nho", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn ngồi cạnh trẻ nhỏ", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn nặn một chiếc bình", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon nan mot chiec binh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn nặn một chiếc bình", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang nặn bình gốm", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang nan binh gom", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nghệ nhân đang nặn bình gốm", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc áo dài đi dạo trên phố", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi mac ao dai di dao tren pho", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài đi dạo trên phố", "needs_reasoning": false, "split": "train"}
+{"query": "phố cổ trong ánh đèn vàng", "needs_reasoning": false, "split": "train"}
+{"query": "pho co trong anh den vang", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phố cổ trong ánh đèn vàng", "needs_reasoning": false, "split": "train"}
+{"query": "những ngôi nhà trên núi", "needs_reasoning": false, "split": "train"}
+{"query": "nhung ngoi nha tren nui", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh những ngôi nhà trên núi", "needs_reasoning": false, "split": "train"}
+{"query": "những chiếc nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "nhung chiec non la", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh những chiếc nón lá", "needs_reasoning": false, "split": "train"}
+{"query": "người hướng dẫn viên du lịch đứng trước chùa", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi huong dan vien du lich dung truoc chua", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người hướng dẫn viên du lịch đứng trước chùa", "needs_reasoning": false, "split": "train"}
+{"query": "tháp cổ bằng gạch đỏ", "needs_reasoning": false, "split": "train"}
+{"query": "thap co bang gach do", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tháp cổ bằng gạch đỏ", "needs_reasoning": false, "split": "train"}
+{"query": "lăng Hồ Chí Minh", "needs_reasoning": false, "split": "train"}
+{"query": "lang ho chi minh", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lăng Hồ Chí Minh", "needs_reasoning": false, "split": "train"}
+{"query": "mâm bánh chay", "needs_reasoning": false, "split": "train"}
+{"query": "mam banh chay", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mâm bánh chay", "needs_reasoning": false, "split": "train"}
+{"query": "bát chè với bánh trôi", "needs_reasoning": false, "split": "train"}
+{"query": "bat che voi banh troi", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bát chè với bánh trôi", "needs_reasoning": false, "split": "train"}
+{"query": "vườn hoa trắng bên hồ", "needs_reasoning": false, "split": "train"}
+{"query": "vuon hoa trang ben ho", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh vườn hoa trắng bên hồ", "needs_reasoning": false, "split": "train"}
+{"query": "đứa trẻ nặn đất sét", "needs_reasoning": false, "split": "train"}
+{"query": "dua tre nan dat set", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đứa trẻ nặn đất sét", "needs_reasoning": false, "split": "train"}
+{"query": "bánh chưng xanh và bánh tét trên mâm", "needs_reasoning": false, "split": "train"}
+{"query": "banh chung xanh va banh tet tren mam", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bánh chưng xanh và bánh tét trên mâm", "needs_reasoning": false, "split": "train"}
+{"query": "người già đội khăn đứng bên cửa", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia doi khan dung ben cua", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người già đội khăn đứng bên cửa", "needs_reasoning": false, "split": "train"}
+{"query": "con thuyền nhỏ trên sông lúc hoàng hôn", "needs_reasoning": false, "split": "train"}
+{"query": "con thuyen nho tren song luc hoang hon", "needs_reasoning": false, "split": "train"}
+{"query": "Tôi muốn tìm ảnh con thuyền nhỏ trên sông lúc hoàng hôn", "needs_reasoning": false, "split": "train"}
+{"query": "áo dài không đội nón", "needs_reasoning": true, "split": "train"}
+{"query": "ao dai khong doi non", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh áo dài không đội nón", "needs_reasoning": true, "split": "train"}
+{"query": "áo dài đỏ không có nón", "needs_reasoning": true, "split": "train"}
+{"query": "ao dai do khong co non", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh áo dài đỏ không có nón", "needs_reasoning": true, "split": "train"}
+{"query": "ruộng bậc thang không có người", "needs_reasoning": true, "split": "train"}
+{"query": "ruong bac thang khong co nguoi", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ruộng bậc thang không có người", "needs_reasoning": true, "split": "train"}
+{"query": "phố cổ không có xe máy", "needs_reasoning": true, "split": "train"}
+{"query": "pho co khong co xe may", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phố cổ không có xe máy", "needs_reasoning": true, "split": "train"}
+{"query": "các lăng ở Việt Nam trừ Lăng Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "cac lang o viet nam tru lang ho chi minh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh các lăng ở Việt Nam trừ Lăng Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "các lăng ở Huế ngoại trừ Lăng Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "cac lang o hue ngoai tru lang ho chi minh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh các lăng ở Huế ngoại trừ Lăng Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "mấy cái lăng bỏ cái lăng của Bác ra nhé", "needs_reasoning": true, "split": "train"}
+{"query": "may cai lang bo cai lang cua bac ra nhe", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mấy cái lăng bỏ cái lăng của Bác ra nhé", "needs_reasoning": true, "split": "train"}
+{"query": "lăng vua nhưng đừng lấy lăng chủ tịch nước", "needs_reasoning": true, "split": "train"}
+{"query": "lang vua nhung dung lay lang chu tich nuoc", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lăng vua nhưng đừng lấy lăng chủ tịch nước", "needs_reasoning": true, "split": "train"}
+{"query": "tìm lăng tẩm loại trừ lăng chủ tịch", "needs_reasoning": true, "split": "train"}
+{"query": "tim lang tam loai tru lang chu tich", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tìm lăng tẩm loại trừ lăng chủ tịch", "needs_reasoning": true, "split": "train"}
+{"query": "đừng hiển thị ảnh nón lá", "needs_reasoning": true, "split": "train"}
+{"query": "dung hien thi anh non la", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đừng hiển thị ảnh nón lá", "needs_reasoning": true, "split": "train"}
+{"query": "người mặc áo dài bỏ những ảnh đội nón ra", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi mac ao dai bo nhung anh doi non ra", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài bỏ những ảnh đội nón ra", "needs_reasoning": true, "split": "train"}
+{"query": "ảnh phố vắng người qua lại", "needs_reasoning": true, "split": "train"}
+{"query": "anh pho vang nguoi qua lai", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ảnh phố vắng người qua lại", "needs_reasoning": true, "split": "train"}
+{"query": "ảnh người mặc áo dài tránh ảnh đám đông", "needs_reasoning": true, "split": "train"}
+{"query": "anh nguoi mac ao dai tranh anh dam dong", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ảnh người mặc áo dài tránh ảnh đám đông", "needs_reasoning": true, "split": "train"}
+{"query": "áo dài đỏ hoặc xanh", "needs_reasoning": true, "split": "train"}
+{"query": "ao dai do hoac xanh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh áo dài đỏ hoặc xanh", "needs_reasoning": true, "split": "train"}
+{"query": "bánh chưng hoặc bánh tét", "needs_reasoning": true, "split": "train"}
+{"query": "banh chung hoac banh tet", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bánh chưng hoặc bánh tét", "needs_reasoning": true, "split": "train"}
+{"query": "chọn một trong hai loại bánh chay hoặc bánh trôi", "needs_reasoning": true, "split": "train"}
+{"query": "chon mot trong hai loai banh chay hoac banh troi", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chọn một trong hai loại bánh chay hoặc bánh trôi", "needs_reasoning": true, "split": "train"}
+{"query": "nghệ nhân hướng dẫn trẻ em làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nghe nhan huong dan tre em lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nghệ nhân hướng dẫn trẻ em làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn chỉ cho trẻ nhỏ cách nặn một chiếc bình", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon chi cho tre nho cach nan mot chiec binh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn chỉ cho trẻ nhỏ cách nặn một chiếc bình", "needs_reasoning": true, "split": "train"}
+{"query": "một người dạy người còn lại dệt vải", "needs_reasoning": true, "split": "train"}
+{"query": "mot nguoi day nguoi con lai det vai", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh một người dạy người còn lại dệt vải", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn đang dạy trẻ nhỏ làm bánh", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon dang day tre nho lam banh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn đang dạy trẻ nhỏ làm bánh", "needs_reasoning": true, "split": "train"}
+{"query": "người thợ truyền nghề cho học trò", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi tho truyen nghe cho hoc tro", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người thợ truyền nghề cho học trò", "needs_reasoning": true, "split": "train"}
+{"query": "người đàn ông giúp đứa trẻ đội nón", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi dan ong giup dua tre doi non", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người đàn ông giúp đứa trẻ đội nón", "needs_reasoning": true, "split": "train"}
+{"query": "ít nhất hai người mặc áo dài", "needs_reasoning": true, "split": "train"}
+{"query": "it nhat hai nguoi mac ao dai", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ít nhất hai người mặc áo dài", "needs_reasoning": true, "split": "train"}
+{"query": "đúng ba người đang nấu ăn", "needs_reasoning": true, "split": "train"}
+{"query": "dung ba nguoi dang nau an", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh đúng ba người đang nấu ăn", "needs_reasoning": true, "split": "train"}
+{"query": "hai nhóm ảnh riêng bánh chưng và áo dài", "needs_reasoning": true, "split": "train"}
+{"query": "hai nhom anh rieng banh chung va ao dai", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh hai nhóm ảnh riêng bánh chưng và áo dài", "needs_reasoning": true, "split": "train"}
+{"query": "tách riêng nhóm phong cảnh và nhóm kiến trúc", "needs_reasoning": true, "split": "train"}
+{"query": "tach rieng nhom phong canh va nhom kien truc", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tách riêng nhóm phong cảnh và nhóm kiến trúc", "needs_reasoning": true, "split": "train"}
+{"query": "mỗi nhóm năm ảnh phở và gốm", "needs_reasoning": true, "split": "train"}
+{"query": "moi nhom nam anh pho va gom", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mỗi nhóm năm ảnh phở và gốm", "needs_reasoning": true, "split": "train"}
+{"query": "so sánh kiến trúc đình và chùa", "needs_reasoning": true, "split": "train"}
+{"query": "so sanh kien truc dinh va chua", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh so sánh kiến trúc đình và chùa", "needs_reasoning": true, "split": "train"}
+{"query": "ảnh nào giống nhà cổ hơn", "needs_reasoning": true, "split": "train"}
+{"query": "anh nao giong nha co hon", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ảnh nào giống nhà cổ hơn", "needs_reasoning": true, "split": "train"}
+{"query": "nơi yên nghỉ của các vua triều Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "noi yen nghi cua cac vua trieu nguyen", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nơi yên nghỉ của các vua triều Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "chỗ an nghỉ của các hoàng đế", "needs_reasoning": true, "split": "train"}
+{"query": "cho an nghi cua cac hoang de", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chỗ an nghỉ của các hoàng đế", "needs_reasoning": true, "split": "train"}
+{"query": "công trình gắn liền với các vua nhà Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "cong trinh gan lien voi cac vua nha nguyen", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh công trình gắn liền với các vua nhà Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "nơi vị lãnh tụ đọc bản tuyên ngôn độc lập", "needs_reasoning": true, "split": "train"}
+{"query": "noi vi lanh tu doc ban tuyen ngon doc lap", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nơi vị lãnh tụ đọc bản tuyên ngôn độc lập", "needs_reasoning": true, "split": "train"}
+{"query": "thành phố nổi tiếng với những chiếc đèn lồng", "needs_reasoning": true, "split": "train"}
+{"query": "thanh pho noi tieng voi nhung chiec den long", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh thành phố nổi tiếng với những chiếc đèn lồng", "needs_reasoning": true, "split": "train"}
+{"query": "món ăn gắn với dịp Tết cổ truyền", "needs_reasoning": true, "split": "train"}
+{"query": "mon an gan voi dip tet co truyen", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh món ăn gắn với dịp Tết cổ truyền", "needs_reasoning": true, "split": "train"}
+{"query": "ngôi chùa được xây trên một cột", "needs_reasoning": true, "split": "train"}
+{"query": "ngoi chua duoc xay tren mot cot", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ngôi chùa được xây trên một cột", "needs_reasoning": true, "split": "train"}
+{"query": "địa danh từng là kinh đô Việt Nam", "needs_reasoning": true, "split": "train"}
+{"query": "dia danh tung la kinh do viet nam", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh địa danh từng là kinh đô Việt Nam", "needs_reasoning": true, "split": "train"}
+{"query": "bức ảnh thể hiện nghề được truyền từ người lớn sang trẻ", "needs_reasoning": true, "split": "train"}
+{"query": "buc anh the hien nghe duoc truyen tu nguoi lon sang tre", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh bức ảnh thể hiện nghề được truyền từ người lớn sang trẻ", "needs_reasoning": true, "split": "train"}
+{"query": "người mặc áo dài đỏ thôi nhưng không lấy ảnh cưới", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi mac ao dai do thoi nhung khong lay anh cuoi", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người mặc áo dài đỏ thôi nhưng không lấy ảnh cưới", "needs_reasoning": true, "split": "train"}
+{"query": "các lăng vua ở Việt Nam bỏ qua lăng Chủ tịch Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "cac lang vua o viet nam bo qua lang chu tich ho chi minh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh các lăng vua ở Việt Nam bỏ qua lăng Chủ tịch Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "các lăng tẩm ở Huế nhưng đừng lấy Hoàng thành", "needs_reasoning": true, "split": "train"}
+{"query": "cac lang tam o hue nhung dung lay hoang thanh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh các lăng tẩm ở Huế nhưng đừng lấy Hoàng thành", "needs_reasoning": true, "split": "train"}
+{"query": "phố cổ mà không có người đi bộ", "needs_reasoning": true, "split": "train"}
+{"query": "pho co ma khong co nguoi di bo", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phố cổ mà không có người đi bộ", "needs_reasoning": true, "split": "train"}
+{"query": "một người cầm nón người kia cầm hoa", "needs_reasoning": true, "split": "train"}
+{"query": "mot nguoi cam non nguoi kia cam hoa", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh một người cầm nón người kia cầm hoa", "needs_reasoning": true, "split": "train"}
+{"query": "hai người nhìn nhau trong lúc làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "hai nguoi nhin nhau trong luc lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh hai người nhìn nhau trong lúc làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn ngồi bên hướng dẫn em nhỏ nặn đất", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon ngoi ben huong dan em nho nan dat", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn ngồi bên hướng dẫn em nhỏ nặn đất", "needs_reasoning": true, "split": "train"}
+{"query": "chỉ chọn lăng của vua không chọn lăng chủ tịch", "needs_reasoning": true, "split": "train"}
+{"query": "chi chon lang cua vua khong chon lang chu tich", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chỉ chọn lăng của vua không chọn lăng chủ tịch", "needs_reasoning": true, "split": "train"}
+{"query": "tìm bánh chay và loại bỏ xương bánh chè", "needs_reasoning": true, "split": "train"}
+{"query": "tim banh chay va loai bo xuong banh che", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tìm bánh chay và loại bỏ xương bánh chè", "needs_reasoning": true, "split": "train"}
+{"query": "không bắt buộc đội nón ưu tiên toàn cảnh", "needs_reasoning": true, "split": "train"}
+{"query": "khong bat buoc doi non uu tien toan canh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh không bắt buộc đội nón ưu tiên toàn cảnh", "needs_reasoning": true, "split": "train"}
+{"query": "ảnh nào vừa có áo dài vừa có múa lân", "needs_reasoning": true, "split": "train"}
+{"query": "anh nao vua co ao dai vua co mua lan", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ảnh nào vừa có áo dài vừa có múa lân", "needs_reasoning": true, "split": "train"}
+{"query": "ảnh có nhiều người hơn ảnh còn lại", "needs_reasoning": true, "split": "train"}
+{"query": "anh co nhieu nguoi hon anh con lai", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ảnh có nhiều người hơn ảnh còn lại", "needs_reasoning": true, "split": "train"}
+{"query": "người đi sau đang giúp người đi trước", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi di sau dang giup nguoi di truoc", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người đi sau đang giúp người đi trước", "needs_reasoning": true, "split": "train"}
+{"query": "tối đa hai người và không có trẻ em", "needs_reasoning": true, "split": "train"}
+{"query": "toi da hai nguoi va khong co tre em", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tối đa hai người và không có trẻ em", "needs_reasoning": true, "split": "train"}
+{"query": "lăng của vị vua cuối cùng triều Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "lang cua vi vua cuoi cung trieu nguyen", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lăng của vị vua cuối cùng triều Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "nơi gắn với việc Bác đọc tuyên ngôn", "needs_reasoning": true, "split": "train"}
+{"query": "noi gan voi viec bac doc tuyen ngon", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nơi gắn với việc Bác đọc tuyên ngôn", "needs_reasoning": true, "split": "train"}
+{"query": "người chỉ dẫn người kia cách làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi chi dan nguoi kia cach lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người chỉ dẫn người kia cách làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn sửa tư thế tay cho trẻ đang nặn gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon sua tu the tay cho tre dang nan gom", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh người lớn sửa tư thế tay cho trẻ đang nặn gốm", "needs_reasoning": true, "split": "train"}
+{"query": "cần thấy bàn tay người thợ đang giúp học trò", "needs_reasoning": true, "split": "train"}
+{"query": "can thay ban tay nguoi tho dang giup hoc tro", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh cần thấy bàn tay người thợ đang giúp học trò", "needs_reasoning": true, "split": "train"}
+{"query": "lấy ảnh áo dài đỏ còn ảnh xanh thì bỏ", "needs_reasoning": true, "split": "train"}
+{"query": "lay anh ao dai do con anh xanh thi bo", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh lấy ảnh áo dài đỏ còn ảnh xanh thì bỏ", "needs_reasoning": true, "split": "train"}
+{"query": "không lấy phở chỉ lấy bánh chưng", "needs_reasoning": true, "split": "train"}
+{"query": "khong lay pho chi lay banh chung", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh không lấy phở chỉ lấy bánh chưng", "needs_reasoning": true, "split": "train"}
+{"query": "loại ảnh đội nón khỏi kết quả", "needs_reasoning": true, "split": "train"}
+{"query": "loai anh doi non khoi ket qua", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh loại ảnh đội nón khỏi kết quả", "needs_reasoning": true, "split": "train"}
+{"query": "mấy tấm lăng ở Huế né cái lăng của Bác nhé", "needs_reasoning": true, "split": "train"}
+{"query": "may tam lang o hue ne cai lang cua bac nhe", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh mấy tấm lăng ở Huế né cái lăng của Bác nhé", "needs_reasoning": true, "split": "train"}
+{"query": "một bên là món ăn một bên là phong cảnh", "needs_reasoning": true, "split": "train"}
+{"query": "mot ben la mon an mot ben la phong canh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh một bên là món ăn một bên là phong cảnh", "needs_reasoning": true, "split": "train"}
+{"query": "tách hai loại ảnh gốm và nón lá", "needs_reasoning": true, "split": "train"}
+{"query": "tach hai loai anh gom va non la", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tách hai loại ảnh gốm và nón lá", "needs_reasoning": true, "split": "train"}
+{"query": "những lăng vua nhưng không có lăng Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "nhung lang vua nhung khong co lang ho chi minh", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh những lăng vua nhưng không có lăng Hồ Chí Minh", "needs_reasoning": true, "split": "train"}
+{"query": "phong cảnh xanh ưu tiên không có nhà cửa", "needs_reasoning": true, "split": "train"}
+{"query": "phong canh xanh uu tien khong co nha cua", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh phong cảnh xanh ưu tiên không có nhà cửa", "needs_reasoning": true, "split": "train"}
+{"query": "tìm những nơi vua chúa được chôn cất", "needs_reasoning": true, "split": "train"}
+{"query": "tim nhung noi vua chua duoc chon cat", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh tìm những nơi vua chúa được chôn cất", "needs_reasoning": true, "split": "train"}
+{"query": "loại nào là trang phục miền Nam", "needs_reasoning": true, "split": "train"}
+{"query": "loai nao la trang phuc mien nam", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh loại nào là trang phục miền Nam", "needs_reasoning": true, "split": "train"}
+{"query": "nghệ nhân đang chỉ dẫn một em bé", "needs_reasoning": true, "split": "train"}
+{"query": "nghe nhan dang chi dan mot em be", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh nghệ nhân đang chỉ dẫn một em bé", "needs_reasoning": true, "split": "train"}
+{"query": "hai đứa trẻ cùng học nghề từ một người thợ", "needs_reasoning": true, "split": "train"}
+{"query": "hai dua tre cung hoc nghe tu mot nguoi tho", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh hai đứa trẻ cùng học nghề từ một người thợ", "needs_reasoning": true, "split": "train"}
+{"query": "chỗ an táng của vua thời Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "cho an tang cua vua thoi nguyen", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh chỗ an táng của vua thời Nguyễn", "needs_reasoning": true, "split": "train"}
+{"query": "ảnh về người thợ kèm cặp học trò", "needs_reasoning": true, "split": "train"}
+{"query": "anh ve nguoi tho kem cap hoc tro", "needs_reasoning": true, "split": "train"}
+{"query": "Tôi muốn tìm ảnh ảnh về người thợ kèm cặp học trò", "needs_reasoning": true, "split": "train"}
+{"query": "một phụ nữ mặc áo dài màu tím đứng cạnh hồ sen", "needs_reasoning": false, "split": "validation"}
+{"query": "đèn lồng treo trên phố Hội An buổi tối", "needs_reasoning": false, "split": "validation"}
+{"query": "người thợ ngồi bên bàn xoay gốm", "needs_reasoning": false, "split": "validation"}
+{"query": "đồi chè xanh dưới nắng sớm", "needs_reasoning": false, "split": "validation"}
+{"query": "trụ đá bên cổng đình", "needs_reasoning": false, "split": "validation"}
+{"query": "những bộ trang phục truyền thống", "needs_reasoning": false, "split": "validation"}
+{"query": "không gian yên tĩnh bên trong chùa", "needs_reasoning": false, "split": "validation"}
+{"query": "đĩa phở cuốn trên bàn gỗ", "needs_reasoning": false, "split": "validation"}
+{"query": "lăng tẩm nhìn từ trên cao", "needs_reasoning": false, "split": "validation"}
+{"query": "ruộng bậc thang và những đám mây trắng", "needs_reasoning": false, "split": "validation"}
+{"query": "áo dài màu hồng bên bờ sông", "needs_reasoning": false, "split": "validation"}
+{"query": "thuyền đánh cá trên biển lúc bình minh", "needs_reasoning": false, "split": "validation"}
+{"query": "cổng làng cổ bằng đá", "needs_reasoning": false, "split": "validation"}
+{"query": "người phụ nữ đội nón bên ruộng lúa", "needs_reasoning": false, "split": "validation"}
+{"query": "làng quê, cây đa, bến nước", "needs_reasoning": false, "split": "validation"}
+{"query": "bát bún bò Huế", "needs_reasoning": false, "split": "validation"}
+{"query": "một người đang làm bánh", "needs_reasoning": false, "split": "validation"}
+{"query": "bức ảnh toàn cảnh ngôi chùa", "needs_reasoning": false, "split": "validation"}
+{"query": "bánh trôi và bánh chay cùng đặt trên đĩa", "needs_reasoning": false, "split": "validation"}
+{"query": "người già đứng cạnh một đứa trẻ", "needs_reasoning": false, "split": "validation"}
+{"query": "mấy lăng tẩm Việt Nam đừng đưa lăng của Bác vào", "needs_reasoning": true, "split": "validation"}
+{"query": "người thợ đang chỉ em bé tạo hình chiếc cốc", "needs_reasoning": true, "split": "validation"}
+{"query": "địa điểm các vua nhà Nguyễn được an táng", "needs_reasoning": true, "split": "validation"}
+{"query": "áo dài màu trắng nhưng đừng có ảnh đội nón", "needs_reasoning": true, "split": "validation"}
+{"query": "hai người cùng nặn gốm người lớn chỉ em nhỏ", "needs_reasoning": true, "split": "validation"}
+{"query": "bánh trôi hay bánh chay đều được", "needs_reasoning": true, "split": "validation"}
+{"query": "năm ảnh kiến trúc rồi năm ảnh phong cảnh tách riêng", "needs_reasoning": true, "split": "validation"}
+{"query": "tìm những lăng ở Huế bỏ lăng chủ tịch ra", "needs_reasoning": true, "split": "validation"}
+{"query": "người hướng dẫn trẻ làm chiếc bình đất", "needs_reasoning": true, "split": "validation"}
+{"query": "ảnh chỉ có hai người lớn không có trẻ nhỏ", "needs_reasoning": true, "split": "validation"}
+{"query": "các di tích từng là nơi vua sinh sống", "needs_reasoning": true, "split": "validation"}
+{"query": "nơi an nghỉ của vị vua nhà Nguyễn", "needs_reasoning": true, "split": "validation"}
+{"query": "phố cổ vắng bóng xe cộ", "needs_reasoning": true, "split": "validation"}
+{"query": "bỏ các ảnh có người ra khỏi kết quả phong cảnh", "needs_reasoning": true, "split": "validation"}
+{"query": "người đứng bên trái đang hướng dẫn người bên phải", "needs_reasoning": true, "split": "validation"}
+{"query": "một trong hai màu áo dài đỏ hoặc trắng", "needs_reasoning": true, "split": "validation"}
+{"query": "ưu tiên ảnh đông người hơn", "needs_reasoning": true, "split": "validation"}
+{"query": "người đàn ông truyền cách làm bánh cho trẻ", "needs_reasoning": true, "split": "validation"}
+{"query": "không cần đội nón nhưng phải mặc áo dài", "needs_reasoning": true, "split": "validation"}
+{"query": "mâm bánh nhưng loại bánh chưng ra", "needs_reasoning": true, "split": "validation"}
+{"query": "người thợ đang làm gốm bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi tho dang lam gom ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người thợ đang nấu ăn bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi tho dang nau an ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người thợ đang dệt vải bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi tho dang det vai ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người thợ đang may áo bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi tho dang may ao ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người thợ đang nặn bình bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi tho dang nan binh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người thợ đang làm bánh bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi tho dang lam banh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người thợ đang chỉ dẫn một em nhỏ làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi tho dang chi dan mot em nho lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "người thợ đang dạy trẻ nặn đất sét", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi tho dang day tre nan dat set", "needs_reasoning": true, "split": "train"}
+{"query": "người thợ giúp người kia tạo hình một cái bình", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi tho giup nguoi kia tao hinh mot cai binh", "needs_reasoning": true, "split": "train"}
+{"query": "nghệ nhân đang làm gốm bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang lam gom ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang nấu ăn bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang nau an ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang dệt vải bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang det vai ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang may áo bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang may ao ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang nặn bình bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang nan binh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang làm bánh bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nghe nhan dang lam banh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "nghệ nhân đang chỉ dẫn một em nhỏ làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nghe nhan dang chi dan mot em nho lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "nghệ nhân đang dạy trẻ nặn đất sét", "needs_reasoning": true, "split": "train"}
+{"query": "nghe nhan dang day tre nan dat set", "needs_reasoning": true, "split": "train"}
+{"query": "nghệ nhân giúp người kia tạo hình một cái bình", "needs_reasoning": true, "split": "train"}
+{"query": "nghe nhan giup nguoi kia tao hinh mot cai binh", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn đang làm gốm bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon dang lam gom ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn đang nấu ăn bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon dang nau an ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn đang dệt vải bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon dang det vai ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn đang may áo bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon dang may ao ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn đang nặn bình bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon dang nan binh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn đang làm bánh bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi lon dang lam banh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người lớn đang chỉ dẫn một em nhỏ làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon dang chi dan mot em nho lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn đang dạy trẻ nặn đất sét", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon dang day tre nan dat set", "needs_reasoning": true, "split": "train"}
+{"query": "người lớn giúp người kia tạo hình một cái bình", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi lon giup nguoi kia tao hinh mot cai binh", "needs_reasoning": true, "split": "train"}
+{"query": "trẻ nhỏ đang làm gốm bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "tre nho dang lam gom ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "trẻ nhỏ đang nấu ăn bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "tre nho dang nau an ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "trẻ nhỏ đang dệt vải bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "tre nho dang det vai ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "trẻ nhỏ đang may áo bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "tre nho dang may ao ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "trẻ nhỏ đang nặn bình bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "tre nho dang nan binh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "trẻ nhỏ đang làm bánh bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "tre nho dang lam banh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "trẻ nhỏ đang chỉ dẫn một em nhỏ làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "tre nho dang chi dan mot em nho lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "trẻ nhỏ đang dạy trẻ nặn đất sét", "needs_reasoning": true, "split": "train"}
+{"query": "tre nho dang day tre nan dat set", "needs_reasoning": true, "split": "train"}
+{"query": "trẻ nhỏ giúp người kia tạo hình một cái bình", "needs_reasoning": true, "split": "train"}
+{"query": "tre nho giup nguoi kia tao hinh mot cai binh", "needs_reasoning": true, "split": "train"}
+{"query": "người già đang làm gốm bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia dang lam gom ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người già đang nấu ăn bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia dang nau an ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người già đang dệt vải bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia dang det vai ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người già đang may áo bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia dang may ao ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người già đang nặn bình bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia dang nan binh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người già đang làm bánh bên cửa sổ", "needs_reasoning": false, "split": "train"}
+{"query": "nguoi gia dang lam banh ben cua so", "needs_reasoning": false, "split": "train"}
+{"query": "người già đang chỉ dẫn một em nhỏ làm gốm", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi gia dang chi dan mot em nho lam gom", "needs_reasoning": true, "split": "train"}
+{"query": "người già đang dạy trẻ nặn đất sét", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi gia dang day tre nan dat set", "needs_reasoning": true, "split": "train"}
+{"query": "người già giúp người kia tạo hình một cái bình", "needs_reasoning": true, "split": "train"}
+{"query": "nguoi gia giup nguoi kia tao hinh mot cai binh", "needs_reasoning": true, "split": "train"}
+{"query": "toàn cảnh lăng vua", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh lang vua", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh lăng vua", "needs_reasoning": false, "split": "train"}
+{"query": "can canh lang vua", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao lăng vua", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao lang vua", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp lăng vua", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup lang vua", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh chua co", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "can canh chua co", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao chua co", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp chùa cổ", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup chua co", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh cánh đồng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh canh dong lua", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh cánh đồng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "can canh canh dong lua", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao cánh đồng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao canh dong lua", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp cánh đồng lúa", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup canh dong lua", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh đồi núi", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh doi nui", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh đồi núi", "needs_reasoning": false, "split": "train"}
+{"query": "can canh doi nui", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao đồi núi", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao doi nui", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp đồi núi", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup doi nui", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh đình làng", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh đình làng", "needs_reasoning": false, "split": "train"}
+{"query": "can canh dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao đình làng", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp đình làng", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup dinh lang", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh đĩa bánh", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh dia banh", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh đĩa bánh", "needs_reasoning": false, "split": "train"}
+{"query": "can canh dia banh", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao đĩa bánh", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao dia banh", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp đĩa bánh", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup dia banh", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh bàn xoay gốm", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh ban xoay gom", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh bàn xoay gốm", "needs_reasoning": false, "split": "train"}
+{"query": "can canh ban xoay gom", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao bàn xoay gốm", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao ban xoay gom", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp bàn xoay gốm", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup ban xoay gom", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh ao dai", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "can canh ao dai", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao ao dai", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp áo dài", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup ao dai", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh một em nhỏ", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh mot em nho", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh một em nhỏ", "needs_reasoning": false, "split": "train"}
+{"query": "can canh mot em nho", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao một em nhỏ", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao mot em nho", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp một em nhỏ", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup mot em nho", "needs_reasoning": false, "split": "train"}
+{"query": "toàn cảnh một người thợ", "needs_reasoning": false, "split": "train"}
+{"query": "toan canh mot nguoi tho", "needs_reasoning": false, "split": "train"}
+{"query": "cận cảnh một người thợ", "needs_reasoning": false, "split": "train"}
+{"query": "can canh mot nguoi tho", "needs_reasoning": false, "split": "train"}
+{"query": "chụp từ trên cao một người thợ", "needs_reasoning": false, "split": "train"}
+{"query": "chup tu tren cao mot nguoi tho", "needs_reasoning": false, "split": "train"}
+{"query": "bức ảnh chụp một người thợ", "needs_reasoning": false, "split": "train"}
+{"query": "buc anh chup mot nguoi tho", "needs_reasoning": false, "split": "train"}
+{"query": "người mặc áo bà ba đứng dưới mái hiên", "needs_reasoning": false, "split": "held-out"}
+{"query": "nhà cổ gỗ bên bờ sông", "needs_reasoning": false, "split": "held-out"}
+{"query": "thợ gốm đang xoay chiếc bình", "needs_reasoning": false, "split": "held-out"}
+{"query": "đĩa bánh chưng đã cắt thành miếng", "needs_reasoning": false, "split": "held-out"}
+{"query": "chùa cổ có mái ngói đỏ", "needs_reasoning": false, "split": "held-out"}
+{"query": "mặt hồ xanh dưới bầu trời nắng", "needs_reasoning": false, "split": "held-out"}
+{"query": "áo dài trắng đứng cạnh cây hoa", "needs_reasoning": false, "split": "held-out"}
+{"query": "cảnh sông núi miền Bắc", "needs_reasoning": false, "split": "held-out"}
+{"query": "gian bếp quê có nồi đất", "needs_reasoning": false, "split": "held-out"}
+{"query": "bánh chay trong bát nước đường", "needs_reasoning": false, "split": "held-out"}
+{"query": "một em nhỏ đang được nghệ nhân giúp nặn gốm", "needs_reasoning": true, "split": "held-out"}
+{"query": "bỏ lăng chủ tịch khỏi danh sách các lăng", "needs_reasoning": true, "split": "held-out"}
+{"query": "những chỗ các vị vua an giấc ngàn thu", "needs_reasoning": true, "split": "held-out"}
+{"query": "áo dài xanh hoặc áo dài vàng", "needs_reasoning": true, "split": "held-out"}
+{"query": "hai bộ ảnh riêng món ăn và nhà cổ", "needs_reasoning": true, "split": "held-out"}
+{"query": "ảnh có ít nhất ba em nhỏ", "needs_reasoning": true, "split": "held-out"}
+{"query": "nơi Bác từng đọc tuyên ngôn độc lập", "needs_reasoning": true, "split": "held-out"}
+{"query": "cảnh phố nhưng tránh các tấm có xe máy", "needs_reasoning": true, "split": "held-out"}
+{"query": "người đàn bà chỉ cách gói bánh cho trẻ", "needs_reasoning": true, "split": "held-out"}
+{"query": "chỉ chọn ảnh không có người đứng trước di tích", "needs_reasoning": true, "split": "held-out"}

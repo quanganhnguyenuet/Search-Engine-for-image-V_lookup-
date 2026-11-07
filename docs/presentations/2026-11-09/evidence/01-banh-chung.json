@@ -1,0 +1,953 @@
+{
+  "captured_at": "2026-11-07T20:23:17.197241+07:00",
+  "request": {
+    "query": "bánh chưng",
+    "mode": "contextual",
+    "use_llm": null
+  },
+  "local_fallback": false,
+  "status": 200,
+  "response": {
+    "query_id": "a1dd9655-ee87-4af9-b747-97810dfedba5",
+    "clarification_required": false,
+    "clarification_question": null,
+    "suggested_queries": [],
+    "items": [
+      {
+        "id": "ad5736c0054502ba7d86fa108297b7d78673f4c6e172e43b5bd22598b8ef5961",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh cận cảnh một chiếc bánh chưng đã được cắt ra, trưng bày trên nền tối, bên cạnh có lá dong và một ít bắp. Bánh chưng được gói bằng lá dong, có màu xanh nhạt, hình khối vuông vức, bên trong lớp nếp dẻo màu trắng ngà và nhân thịt.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "nhân thịt (thịt gà/thịt heo)",
+          "bắp"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Mặc dù có sự khác biệt nhỏ về nguyên liệu và cách chế biến giữa các vùng miền (Bắc, Trung, Nam), bánh chưng vẫn là món ăn không thể thiếu trong ngày Tết của cả nước.",
+          "historical_context": "Nguồn gốc bánh chưng gắn liền với truyền thuyết An Dương Vương và sự tích Lang Liêu, thể hiện sự kính trọng tổ tiên và cầu mong một năm mới tốt lành.",
+          "modern_relevance": "Bánh chưng vẫn được ưa chuộng và chế biến rộng rãi trong dịp Tết hiện đại, thể hiện sự kế thừa và phát triển văn hóa ẩm thực truyền thống."
+        },
+        "imageUrl": "/api/culture/images/ad5736c0054502ba7d86fa108297b7d78673f4c6e172e43b5bd22598b8ef5961",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.1428571428573,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "023f96037bb0e9d3b7831221b71daa1abe2056a35b9cb97f44d19ba75e99e7ff",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một chiếc bánh chưng được gói tỉ mỉ bằng lá dong, buộc chặt bằng lạt tre. Bánh chưng có hình vuông, đặt trên tay người cầm, nền phía sau hơi mờ, gợi không gian ấm cúng. Trên bánh có một hình thoi đỏ ghi chữ \"Tết\" màu vàng.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "lạt tre"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng được làm ở khắp các vùng miền Việt Nam nhưng có một số khác biệt nhỏ về nguyên liệu và cách gói.",
+          "historical_context": "Nguồn gốc bánh chưng gắn liền với truyền thuyết An Dương Vương, trở thành biểu tượng văn hóa lâu đời, thể hiện sự kính trọng tổ tiên.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong đời sống hiện đại, tượng trưng cho sự đoàn viên, sum họp gia đình mỗi độ Tết đến."
+        },
+        "imageUrl": "/api/culture/images/023f96037bb0e9d3b7831221b71daa1abe2056a35b9cb97f44d19ba75e99e7ff",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "0657065fe18d34fafd2788cbbd1b352a57bff3b1532a628210f86c4b37c2951b",
+        "title": "Bánh chưng gù",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một mâm bánh chưng và bánh tét gù (bánh chưng đen) được đặt trong một chiếc thúng tre. Bánh được gói bằng lá dong, lá chuối và được bày biện trên nền lá chuối xanh.",
+        "tags": [
+          "bánh chưng",
+          "bánh tét gù",
+          "lá dong",
+          "lá chuối",
+          "thúng tre"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp Việt Nam, bánh tét gù phổ biến hơn ở miền Bắc và Trung, với những biến thể nhỏ về nguyên liệu và cách gói.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời Hùng Vương, bánh tét gù là biến thể hiện đại, thể hiện sự sáng tạo và thích nghi của người Việt với nguyên liệu địa phương.",
+          "modern_relevance": "Vẫn giữ vai trò quan trọng trong các dịp lễ Tết, đặc biệt là Tết Nguyên Đán, phản ánh sự trường tồn của truyền thống văn hóa."
+        },
+        "imageUrl": "/api/culture/images/0657065fe18d34fafd2788cbbd1b352a57bff3b1532a628210f86c4b37c2951b",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng gù.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "092bc75bf276dca5fdf355730a2dc8ce6d93112bdb8345226829d56da2f9bf70",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh hai gói bánh chưng được đặt trên một chiếc mâm tre. Bánh chưng được gói cẩn thận bằng lá dong, buộc chặt bằng lạt, tạo hình khối vuông vắn. Bối cảnh là một không gian ấm cúng, gợi liên tưởng đến không khí Tết truyền thống của người Việt.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "lạt",
+          "mâm tre"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước, nhưng có một số biến thể nhỏ về nguyên liệu và cách gói ở các vùng miền khác nhau.",
+          "historical_context": "Bánh chưng có nguồn gốc từ rất lâu đời, liên quan đến truyền thuyết An Dương Vương và Mị Châu – Trọng Thủy.  Nó là món ăn không thể thiếu trong các dịp lễ Tết của người Việt.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong đời sống hiện đại, thể hiện sự đoàn kết gia đình, giữ gìn truyền thống trong dịp Tết Nguyên Đán.  Tuy nhiên, ngày nay, nhiều người cũng mua bánh chưng sẵn, tiết kiệm thời gian."
+        },
+        "imageUrl": "/api/culture/images/092bc75bf276dca5fdf355730a2dc8ce6d93112bdb8345226829d56da2f9bf70",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "0b3166593a2e84fc7ccbf6bbe38996569c47f6eb02354330c0e4679ab7eb6d47",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh hai chiếc bánh chưng được gói cẩn thận trong lá dong, đặt trên đĩa trắng, trên nền bàn gỗ nâu. Bánh được trang trí bằng những miếng giấy hình thoi có in hình rồng và chữ Hán. Xung quanh có những cành hoa mai vàng tươi tắn và pháo giấy, gợi lên không khí Tết Nguyên Đán truyền thống của Việt Nam.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "dây lạt",
+          "giấy trang trí",
+          "đĩa",
+          "hoa mai",
+          "pháo"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước, tuy nhiên có thể có những biến thể nhỏ về nguyên liệu và cách gói ở các vùng miền khác nhau.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời xưa, gắn liền với truyền thuyết bánh chưng bánh giày của An Dương Vương, thể hiện sự tôn kính đối với tổ tiên và đất trời.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong đời sống hiện đại của người Việt, là món ăn không thể thiếu trong mâm cỗ Tết, thể hiện sự sum họp gia đình và truyền thống văn hóa."
+        },
+        "imageUrl": "/api/culture/images/0b3166593a2e84fc7ccbf6bbe38996569c47f6eb02354330c0e4679ab7eb6d47",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "159001080b82f10b665b6d7d3dd981f891697d99ba0f55f06d5af72503e44853",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một mâm bánh chưng Tết được trang trí đẹp mắt. Mâm bánh đặt trên một chiếc đĩa lớn, được bao quanh bởi lá chuối xanh mướt, rơm vàng và những bông hoa tươi tắn, tạo nên không khí Tết ấm cúng và truyền thống.",
+        "tags": [
+          "bánh chưng",
+          "lá chuối",
+          "rơm",
+          "hoa tươi",
+          "bao lì xì",
+          "cành mai"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp Việt Nam, nhưng có thể có sự khác biệt nhỏ về nguyên liệu và cách gói giữa các vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ xa xưa, gắn liền với truyền thuyết An Dương Vương và có ý nghĩa văn hóa, tâm linh sâu sắc.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong mỗi gia đình Việt vào dịp Tết Nguyên đán, thể hiện truyền thống và sự đoàn tụ."
+        },
+        "imageUrl": "/api/culture/images/159001080b82f10b665b6d7d3dd981f891697d99ba0f55f06d5af72503e44853",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "376ab4931a573356f456d0452630163d8d9e044a7e2b286b8d3b195442e72238",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh hai chiếc bánh chưng được gói cẩn thận trong lá dong, buộc bằng lạt trắng, đặt trên một chiếc mẹt tre.  Trên mỗi chiếc bánh đều có dán một mảnh giấy đỏ với chữ thư pháp màu đen,  có vẻ là lời chúc Tết.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "lạt trắng",
+          "mẹt tre",
+          "giấy đỏ",
+          "chữ thư pháp"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng có mặt trên khắp cả nước, tuy nhiên, cách gói và nguyên liệu có thể có một số khác biệt nhỏ giữa các vùng miền.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết vua Hùng và là món ăn không thể thiếu trong dịp Tết cổ truyền của người Việt.",
+          "modern_relevance": "Bánh chưng vẫn giữ nguyên vai trò quan trọng trong đời sống văn hóa người Việt hiện đại, là món ăn tượng trưng cho sự sum vầy, may mắn và thịnh vượng trong năm mới."
+        },
+        "imageUrl": "/api/culture/images/376ab4931a573356f456d0452630163d8d9e044a7e2b286b8d3b195442e72238",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "3808ccd53abc24ca040e88ffefb7ed1205ac6dc91e77c73a20af582a8a62aa90",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh hai gói bánh chưng đặt trên một chiếc sàng tre, được bao quanh bởi lá chuối tươi. Phía sau là một chồng bánh chưng khác đã được gói sẵn. Bối cảnh gợi lên không gian chuẩn bị Tết truyền thống của người Việt.",
+        "tags": [
+          "bánh chưng",
+          "lá chuối",
+          "sàng tre",
+          "dây lạt"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước nhưng có sự khác biệt nhỏ về nguyên liệu và cách gói ở các vùng miền.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết bánh chưng bánh giày thời vua Hùng.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong đời sống hiện đại của người Việt, là biểu tượng của Tết Nguyên Đán và sự đoàn tụ gia đình."
+        },
+        "imageUrl": "/api/culture/images/3808ccd53abc24ca040e88ffefb7ed1205ac6dc91e77c73a20af582a8a62aa90",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "50f9bc36f46785e64529d5f028d46ee0a6478fd67fe722889ebaefe6b9a8f1a7",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh hai chiếc bánh chưng được gói tỉ mỉ bằng lá dong, buộc lạt, đặt trên mâm tre cùng với các vật dụng khác liên quan đến Tết Nguyên Đán của người Việt.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          " lạt",
+          "mâm tre",
+          "đĩa đựng đậu xanh",
+          "đĩa đựng gạo nếp",
+          "hoa sen",
+          "pháo",
+          "bao lì xì"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước nhưng có những biến thể nhỏ về nguyên liệu và cách gói tùy theo từng vùng miền.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết vua Hùng và sự ra đời của dân tộc Việt Nam.",
+          "modern_relevance": "Bánh chưng vẫn giữ vị trí quan trọng trong đời sống hiện đại, được xem là biểu tượng của Tết Nguyên Đán, được bày bán rộng rãi và được nhiều gia đình tự làm để đón Tết."
+        },
+        "imageUrl": "/api/culture/images/50f9bc36f46785e64529d5f028d46ee0a6478fd67fe722889ebaefe6b9a8f1a7",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "6389b42125c74f9017a1e6c729ecb3f0edebe08f4c4d31f5adc29b7c86704c3b",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một khay bánh chưng và bánh tét đã được gói và bọc kín bằng màng bọc thực phẩm. Bánh có màu xanh lá mạ đặc trưng, được xếp chồng lên nhau trong một khay kim loại. Một phần bánh tét đã được cắt lát đặt trên đĩa ở phía bên phải.",
+        "tags": [
+          "bánh chưng",
+          "bánh tét",
+          "khay kim loại",
+          "màng bọc thực phẩm",
+          "đĩa"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước, bánh tét phổ biến hơn ở miền Nam, có những biến thể về nhân và cách gói ở mỗi vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời vua Hùng, gắn liền với truyền thuyết bánh chưng bánh giầy. Bánh tét xuất hiện sau này, có lẽ do ảnh hưởng của văn hoá các vùng miền khác.",
+          "modern_relevance": "Vẫn giữ vai trò quan trọng trong văn hóa ẩm thực Việt Nam, đặc biệt trong dịp Tết Nguyên Đán.  Được sản xuất và tiêu thụ với số lượng lớn."
+        },
+        "imageUrl": "/api/culture/images/6389b42125c74f9017a1e6c729ecb3f0edebe08f4c4d31f5adc29b7c86704c3b",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "77a576120dfaad693b057fe0859e4ca9dbb3554f6f2b96bd8391175b93923909",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một chồng bánh chưng được gói cẩn thận bằng lá dong, đặt trên một tấm thảm đỏ có họa tiết trang trí. Xung quanh là các nguyên liệu chuẩn bị cho Tết như thịt lợn, gạo nếp, và các loại hạt. Bối cảnh gợi lên không gian chuẩn bị Tết truyền thống của người Việt.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "thịt lợn",
+          "gạo nếp",
+          "hạt"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng có mặt ở khắp các vùng miền của Việt Nam, nhưng có thể có những biến thể nhỏ về nguyên liệu và cách gói.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết Lang Liêu thời vua Hùng, trở thành món ăn mang tính biểu tượng trong văn hoá Việt Nam.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong ngày Tết của nhiều gia đình Việt Nam hiện đại, thể hiện sự đoàn tụ, sum họp và truyền thống."
+        },
+        "imageUrl": "/api/culture/images/77a576120dfaad693b057fe0859e4ca9dbb3554f6f2b96bd8391175b93923909",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "785f27274cab6097337578de0a3b64c2e5e3ec1cad54d53b74257c40c65311cd",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh hai chiếc bánh chưng được gói cẩn thận bằng lá dong và buộc bằng lạt, đặt trên một bề mặt có hoa văn. Bên cạnh là một thúng đựng gạo nếp trắng. Bối cảnh gợi lên không khí chuẩn bị Tết Nguyên Đán của người Việt.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "lạt",
+          "gạo nếp",
+          "thúng"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp Việt Nam nhưng có một số biến thể nhỏ về nguyên liệu và cách gói tùy theo vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ rất lâu đời, liên quan đến truyền thuyết Bánh chưng, Bánh giầy, tượng trưng cho đất trời và sự thịnh vượng.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong dịp Tết Nguyên Đán của người Việt, thể hiện tình cảm gia đình và nét văn hoá truyền thống."
+        },
+        "imageUrl": "/api/culture/images/785f27274cab6097337578de0a3b64c2e5e3ec1cad54d53b74257c40c65311cd",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "7e2f20bc49db4e47ee2786e73adface56d98a947ea11ba44f00f1fe421b2230e",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một chiếc bánh chưng Tết đặt trên đĩa trắng, nền đỏ. Xung quanh có cành hoa mai vàng và một phong bao lì xì Tết.",
+        "tags": [
+          "bánh chưng",
+          "đĩa",
+          "hoa mai",
+          "phong bao lì xì"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng có mặt khắp các vùng miền Việt Nam nhưng cách làm và nguyên liệu có thể có sự khác biệt nhỏ.",
+          "historical_context": "Nguồn gốc bánh chưng gắn liền với truyền thuyết An Dương Vương và có lịch sử hàng nghìn năm.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong mỗi gia đình Việt Nam mỗi dịp Tết, thể hiện sự sum họp và truyền thống."
+        },
+        "imageUrl": "/api/culture/images/7e2f20bc49db4e47ee2786e73adface56d98a947ea11ba44f00f1fe421b2230e",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "909e864306ed31f96d0f14f980f6276d2f96119c9910b2a15a93ce99ab4201b0",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh ba chiếc bánh chưng và một chiếc bánh tét, được trình bày trên nền lá chuối xanh tươi.  Bánh chưng được gói cẩn thận bằng lá dong, buộc lạt, một trong số đó có thêm một mảnh giấy đỏ với chữ 'Phúc' (福) may mắn.  Bánh tét có màu xanh lá mạ, được cắt ra để lộ nhân bên trong.",
+        "tags": [
+          "bánh chưng",
+          "bánh tét",
+          "lá dong",
+          "lá chuối",
+          "giấy đỏ",
+          "lạt"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước, bánh tét nhiều hơn ở miền Nam, nhưng cả hai đều mang ý nghĩa chung của ngày Tết.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời Hùng Vương, bánh tét xuất hiện sau này, nhưng cả hai đều gắn liền với truyền thống văn hoá lâu đời của người Việt.",
+          "modern_relevance": "Vẫn là món ăn không thể thiếu trong ngày Tết của nhiều gia đình Việt, thể hiện sự đoàn tụ, sum họp."
+        },
+        "imageUrl": "/api/culture/images/909e864306ed31f96d0f14f980f6276d2f96119c9910b2a15a93ce99ab4201b0",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "929764398dbf5f311645e1ba3156b108ade193bb7dc2f5b38c01250a6248ed1d",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một chiếc bánh chưng đã được cắt ra, trưng bày trên đĩa trắng đặt trên thớt gỗ.  Một phần bánh chưng cho thấy nhân bên trong.  Nền là mặt bàn đá cẩm thạch màu trắng xám.  Phía sau có một gói hạt điều rang.",
+        "tags": [
+          "bánh chưng",
+          "đĩa",
+          "thớt gỗ",
+          "gói hạt điều"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng được làm và ăn khắp các vùng miền Việt Nam, tuy nhiên có sự khác biệt nhỏ về nguyên liệu và cách chế biến tùy theo vùng.",
+          "historical_context": "Bánh chưng có nguồn gốc từ rất lâu đời, gắn liền với truyền thuyết Lang Liêu thời vua Hùng, tượng trưng cho trời đất và sự sinh sôi nảy nở.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong ngày Tết của người Việt Nam, được bày bán rộng rãi trên thị trường và được nhiều gia đình tự làm."
+        },
+        "imageUrl": "/api/culture/images/929764398dbf5f311645e1ba3156b108ade193bb7dc2f5b38c01250a6248ed1d",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "9a06814f29e47596129208661096c6f32b12aa54cd6e522fb19cd341a022f161",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một chiếc bánh chưng Tết đã được cắt sẵn, đặt trên đĩa. Một phần bánh đã được lấy ra, cho thấy phần nhân bên trong.",
+        "tags": [
+          "bánh chưng",
+          "đĩa",
+          "đũa"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Món ăn phổ biến toàn quốc, tuy nhiên có những biến thể nhỏ về nguyên liệu và cách chế biến tùy theo từng vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời vua Hùng, tượng trưng cho đất trời và sự thịnh vượng.",
+          "modern_relevance": "Vẫn là món ăn không thể thiếu trong ngày Tết của nhiều gia đình Việt Nam hiện đại, được bán rộng rãi trên thị trường."
+        },
+        "imageUrl": "/api/culture/images/9a06814f29e47596129208661096c6f32b12aa54cd6e522fb19cd341a022f161",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "da99734d15aee72dc6ba692ae26a3ec44e9b21f9b72b774367725d75a64ed299",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một mâm bánh chưng Tết được đặt trên một chiếc mẹt tre. Bánh chưng được gói cẩn thận trong lá dong, buộc bằng lạt, đặt ngay ngắn trên mẹt. Phía trên có một tờ giấy đỏ với chữ 'Bánh Chưng' viết thư pháp.",
+        "tags": [
+          "bánh chưng",
+          "mẹt tre",
+          "lá dong",
+          "lạt",
+          "giấy đỏ"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp Việt Nam, nhưng có những biến thể nhỏ về nguyên liệu và cách gói ở từng vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời Hùng Vương, gắn liền với truyền thuyết Lang Liêu và được xem là món ăn truyền thống mang ý nghĩa tâm linh sâu sắc.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong văn hóa Tết hiện đại, thể hiện sự sum họp gia đình, sự ấm cúng, và truyền thống văn hóa lâu đời."
+        },
+        "imageUrl": "/api/culture/images/da99734d15aee72dc6ba692ae26a3ec44e9b21f9b72b774367725d75a64ed299",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "e1d11dcdd04c6da7ac78e047b82eeb8a30e183578a2fc594849b204a5322c983",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một chiếc bánh chưng đã được cắt thành nhiều phần, đặt trên lá dong. Bối cảnh bao gồm lá dong khác, một bình trà, một bát hành tím ngâm, và hoa cúc vàng.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "bình trà",
+          "bát hành tím",
+          "hoa cúc vàng"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng được làm và ăn trên khắp Việt Nam, nhưng có thể có những biến thể nhỏ về nguyên liệu và cách gói tùy theo vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời vua Hùng, tượng trưng cho đất trời và sự trường tồn.",
+          "modern_relevance": "Vẫn giữ vai trò quan trọng trong văn hóa Tết của người Việt, thể hiện sự sum họp gia đình và truyền thống."
+        },
+        "imageUrl": "/api/culture/images/e1d11dcdd04c6da7ac78e047b82eeb8a30e183578a2fc594849b204a5322c983",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "fd562fcf8ab658a51946f511a1f2bdc888ef860e33cc03743bb3ac3861fb4301",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh ba chiếc bánh chưng Tết được gói cẩn thận trong lá dong, đặt trên một bề mặt có hoa văn. Bánh chưng có kích thước khác nhau, từ nhỏ đến lớn, và được trang trí bằng những nhãn dán mang chữ viết và họa tiết truyền thống.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "nhãn dán",
+          "bề mặt"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước, tuy nhiên có sự khác biệt nhỏ về nguyên liệu và cách chế biến giữa các vùng miền (miền Bắc, miền Trung, miền Nam).",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời Hùng Vương, là món ăn thiêng liêng trong truyền thuyết An Dương Vương và Mị Châu - Trọng Thủy.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong văn hóa Tết hiện đại.  Nó là món ăn không thể thiếu trong ngày Tết, biểu tượng cho sự sum họp gia đình, may mắn và thịnh vượng."
+        },
+        "imageUrl": "/api/culture/images/fd562fcf8ab658a51946f511a1f2bdc888ef860e33cc03743bb3ac3861fb4301",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.125,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "6f4e0fd7ffa86706e317c4757b75d3ae3a694f300da78b99a81e52b9de0f1fe0",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp một nhóm người đang gói bánh chưng trong một không gian truyền thống của Việt Nam. Bối cảnh gợi lên không khí Tết cổ truyền.",
+        "tags": [
+          "bánh chưng",
+          "người gói bánh chưng",
+          "lá dong",
+          "dây lạt",
+          "nếp",
+          "đồ dùng gói bánh"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp Việt Nam, nhưng có thể có một số biến thể nhỏ về nguyên liệu và cách gói tùy thuộc vào từng vùng miền.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết An Dương Vương và đã trở thành biểu tượng văn hóa của người Việt từ hàng trăm năm nay.",
+          "modern_relevance": "Dù xã hội hiện đại, bánh chưng vẫn giữ nguyên giá trị văn hóa và là món ăn không thể thiếu trong mỗi dịp Tết, thể hiện sự sum họp và tình cảm gia đình."
+        },
+        "imageUrl": "/api/culture/images/6f4e0fd7ffa86706e317c4757b75d3ae3a694f300da78b99a81e52b9de0f1fe0",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.1111111111113,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "a14f564f757fb5b2d73f3a1139bd3fed48bf1c12537ba745a39fe3e0659d586c",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cảnh người dân đang gói bánh chưng tại một khu chợ đêm hoặc lễ hội đường phố.  Nhiều người đứng xem, trong đó có trẻ em. Một người đàn ông mặc áo trắng đang tỉ mỉ gói bánh, xung quanh là các giỏ bánh chưng đã được gói sẵn.",
+        "tags": [
+          "bánh chưng",
+          "người gói bánh",
+          "người xem",
+          "giỏ tre",
+          "lá dong",
+          "nếp",
+          "đỗ"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước nhưng có thể có những biến thể nhỏ về nguyên liệu và cách gói tùy theo từng vùng miền.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết An Dương Vương và các lễ hội mùa xuân của người Việt từ xa xưa.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong ngày Tết Nguyên Đán của người Việt Nam, thể hiện sự đoàn viên, sum họp gia đình."
+        },
+        "imageUrl": "/api/culture/images/a14f564f757fb5b2d73f3a1139bd3fed48bf1c12537ba745a39fe3e0659d586c",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.1111111111113,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "b5b439f41ff5e024089e7646a8f60e0b87f9b8f613bb9d528e6b68ea493fcd31",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một số chiếc bánh chưng được gói cẩn thận bằng lá dong, đặt trên nền đỏ, xung quanh là các nguyên liệu chuẩn bị làm bánh chưng như lá dong, nếp, thịt lợn đã được tẩm ướp gia vị, cùng một bó hoa cúc vàng tươi tắn.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          "gạo nếp",
+          "thịt lợn",
+          "hoa cúc vàng"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng có mặt ở khắp các vùng miền Việt Nam, nhưng hình thức và nguyên liệu có thể có sự khác biệt nhỏ.",
+          "historical_context": "Bánh chưng có nguồn gốc từ thời vua Hùng, gắn liền với truyền thuyết bánh chưng bánh dày, là món ăn thể hiện lòng thành kính của con cháu đối với tổ tiên.",
+          "modern_relevance": "Bánh chưng vẫn giữ vai trò quan trọng trong văn hóa ẩm thực Việt Nam hiện đại, là món ăn không thể thiếu trong mỗi dịp Tết Nguyên đán của người Việt."
+        },
+        "imageUrl": "/api/culture/images/b5b439f41ff5e024089e7646a8f60e0b87f9b8f613bb9d528e6b68ea493fcd31",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.1111111111113,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "cb8e9834773b10e5704674d3a6677a4e2d69d038e93bb6a870adab3d13e623d9",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một số lượng bánh chưng được gói cẩn thận bằng lá dong, buộc bằng lạt, đặt trên một bề mặt gỗ. Bối cảnh xung quanh bao gồm các vật liệu tự nhiên như rơm và lá khô, gợi lên không gian làng quê Việt Nam.",
+        "tags": [
+          "bánh chưng",
+          "lá dong",
+          " lạt",
+          "rơm",
+          "lá khô",
+          "bề mặt gỗ"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng có mặt trên khắp cả nước, tuy nhiên, cách gói, nguyên liệu và kích thước có thể khác nhau tùy theo từng vùng miền.",
+          "historical_context": "Bánh chưng có nguồn gốc từ rất lâu đời, gắn liền với truyền thuyết bánh chưng, bánh dày của vua Hùng. Nó là món ăn mang tính biểu tượng, thể hiện sự kính trọng tổ tiên và cầu mong may mắn cho năm mới.",
+          "modern_relevance": "Bánh chưng vẫn là món ăn không thể thiếu trong mỗi gia đình Việt Nam vào dịp Tết Nguyên Đán, thể hiện sự duy trì và phát triển của văn hóa truyền thống."
+        },
+        "imageUrl": "/api/culture/images/cb8e9834773b10e5704674d3a6677a4e2d69d038e93bb6a870adab3d13e623d9",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.1111111111113,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      },
+      {
+        "id": "e30744164be747df1d7153df4d7c17c147c0b4975877648db62cc1c9d0b8a438",
+        "title": "Bánh chưng Tết",
+        "category": "am_thuc",
+        "categoryLabel": "Ẩm thực",
+        "description": "Hình ảnh chụp cận cảnh một số lượng bánh chưng và bánh tét được gói cẩn thận trong lá dong, xếp trên nền rơm khô và khăn trải bàn màu đỏ. Trên mỗi gói bánh đều có dán một mảnh giấy đỏ với chữ thư pháp màu đen, ghi năm và những lời chúc Tết.",
+        "tags": [
+          "bánh chưng",
+          "bánh tét",
+          "lá dong",
+          "rơm",
+          "giấy đỏ",
+          "chữ thư pháp"
+        ],
+        "context": {
+          "cultural_category": "ẩm thực",
+          "regional_significance": "Bánh chưng phổ biến khắp cả nước, bánh tét phổ biến hơn ở miền Nam, nhưng cả hai đều là biểu tượng Tết Nguyên Đán.",
+          "historical_context": "Bánh chưng có lịch sử lâu đời, gắn liền với truyền thuyết An Dương Vương và Mị Châu Trọng Thủy, bánh tét có nguồn gốc từ miền Nam, thể hiện sự đa dạng văn hóa.",
+          "modern_relevance": "Vẫn giữ vai trò quan trọng trong các gia đình Việt Nam hiện đại, tượng trưng cho sự sum họp, may mắn và thịnh vượng trong năm mới."
+        },
+        "imageUrl": "/api/culture/images/e30744164be747df1d7153df4d7c17c147c0b4975877648db62cc1c9d0b8a438",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 3995.1111111111113,
+        "match_kind": "title_variant",
+        "match_reason": "Khớp biến thể trong tên ảnh: Bánh chưng Tết.",
+        "scores": {
+          "exact_title": false,
+          "title_prefix": true,
+          "title_phrase": true,
+          "exact_tag": true,
+          "tag_prefix": true,
+          "variant_extra_words": 1,
+          "description_phrase": true
+        },
+        "ranks": null,
+        "metadata_complete": null
+      }
+    ],
+    "total": 24,
+    "page": 1,
+    "pages": 1,
+    "libraryTotal": 15411,
+    "counts": {
+      "le_hoi": 2356,
+      "phong_canh": 2908,
+      "trang_phuc": 2365,
+      "kien_truc": 2947,
+      "thu_cong_my_nghe": 1922,
+      "am_thuc": 2913
+    },
+    "mode": "contextual",
+    "result_scope": "top_k",
+    "retrieval_backend": "lexical-exact",
+    "score_type": "lexical_exact",
+    "search_route": "lexical",
+    "routing_reason": "single_subject_title_or_tag",
+    "routing_mode": "auto",
+    "routing_classifier": null,
+    "routing_score": null,
+    "llm_used": false,
+    "llm_call_count": 0,
+    "vector_cache_hit": false,
+    "model": "google/siglip2-base-patch16-224",
+    "model_revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+    "artifact_fingerprint": {
+      "vectors.npy": "6e66a91a8290df9c2f12207628b19e79fb0dfbf694614b8a71a3f8cb73c12126",
+      "assets.jsonl": "1558faac01d10ee6f630d8b4ab780e3c832926411d56a8cc79b1c9ac414c7359",
+      "metadata_vectors.npy": "8af431bc709fd78871e9a5b9607e28fed0e2b5127021007a562a34a6571ba8b1"
+    },
+    "interpretation": null,
+    "query_model": null,
+    "llm_provider": null,
+    "llm_reranked": false,
+    "plan_cache_hit": false,
+    "rerank_candidates": 0,
+    "rerank_evidence": null,
+    "evidence_type": "retrieved-image-annotations",
+    "relevance_gate": {
+      "mode": "shadow",
+      "status": "not_applicable_exact",
+      "enforced": false
+    },
+    "abstained": false,
+    "abstention_reason": null,
+    "search_config": {
+      "image_weight": 1,
+      "metadata_weight": 1,
+      "lexical_weight": 1,
+      "rank_constant": 60,
+      "image_depth": 100,
+      "metadata_depth": 100,
+      "lexical_depth": 100,
+      "query_roles": true
+    },
+    "selection_scope": "retrieved_candidates",
+    "corpus_total": 15423,
+    "coverage_complete": true,
+    "timings": {
+      "routing_ms": 0.07183999991866585,
+      "planning_ms": 0,
+      "embedding_ms": 0,
+      "retrieval_ms": 0.0015050000001792796,
+      "reranking_ms": 0,
+      "total_ms": 0.2569349999248516
+    }
+  }
+}

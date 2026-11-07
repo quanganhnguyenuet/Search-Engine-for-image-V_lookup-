@@ -1,0 +1,24 @@
+{
+  "measured_at": "2026-11-07T20:35:30.704958+07:00",
+  "config": {
+    "EMBEDDING_ARTIFACT_DIR": "data/embeddings/culture-labels-v1",
+    "SEARCH_LLM_RERANK": "true",
+    "SEARCH_RERANK_EVIDENCE": "annotations",
+    "SEARCH_RELEVANCE_MODE": "shadow",
+    "SEARCH_LLM_ENABLED": "true",
+    "SEARCH_ROUTING_MODE": "auto"
+  },
+  "artifact": "data/embeddings/culture-labels-v1",
+  "assets": 15423,
+  "searchable": 15411,
+  "excluded": 12,
+  "dimension": 768,
+  "raw_image_files": 15719,
+  "raw_image_bytes": 6988838516,
+  "vector_bytes": 94759168,
+  "metadata_bytes": 48192855,
+  "evaluation_queries": 200,
+  "answerable_confirmed": 0,
+  "judgments_confirmed": 0,
+  "storage_scope": "logical file bytes; not allocated disk, RAM, whole repo, backup or model cache"
+}

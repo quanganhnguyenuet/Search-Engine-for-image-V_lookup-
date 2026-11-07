@@ -3,25 +3,9 @@
 from dataclasses import dataclass
 from functools import lru_cache
 
-from visualseek_retrieval.text import normalize, surface
+from visualseek_retrieval.text import accent_key, normalize, phrase_position, surface
 
-
-def phrase_position(text: str, query: str) -> int | None:
-    """Match whole words; preserve explicit accents while accepting unaccented source labels."""
-    words, requested = surface(text).split(), surface(query).split()
-    if not requested:
-        return None
-    folded = [normalize(word) for word in requested]
-    for start in range(len(words) - len(requested) + 1):
-        window = words[start:start + len(requested)]
-        if [normalize(word) for word in window] != folded:
-            continue
-        # 'phở' must not become 'phố'; ASCII labels such as 'pho' remain usable.
-        if any(q != w and normalize(q) != q and normalize(w) != w
-               for q, w in zip(requested, window, strict=True)):
-            continue
-        return start
-    return None
+__all__ = ["EntityIndex", "EntityMatch", "phrase_position"]
 
 
 @dataclass(frozen=True, slots=True)
@@ -46,6 +30,8 @@ class EntityIndex:
         self.title_postings: dict[str, list[int]] = {}
         self.tag_postings: dict[str, list[int]] = {}
         for position, row in enumerate(assets):
+            if row.get("search_excluded"):
+                continue
             if self.titles[position]:
                 self.title_postings.setdefault(self.titles[position], []).append(position)
             for tag in {normalize(str(value)) for value in row.get("tags", [])} - {""}:
@@ -64,9 +50,50 @@ class EntityIndex:
                 self.tag_prefixes.setdefault(" ".join(words[:end]), set()).add(tag)
         # Per-instance cache avoids retaining old indexes through a global method cache.
         self.ranked_matches = lru_cache(maxsize=128)(self._ranked_matches)
+        self.excluded_positions = lru_cache(maxsize=128)(self._excluded_positions)
 
-    def search(self, term: str, *, category: str | None, limit: int,
-               include_variants: bool = True) -> list[dict] | None:
+    def _excluded_positions(self, terms: tuple[str, ...]) -> frozenset[int]:
+        """Exclude explicit title/tag matches; annotations cannot prove pixel absence."""
+        return frozenset(
+            position
+            for position, row in enumerate(self.assets)
+            if any(
+                phrase_position(str(field), term) is not None
+                for field in [row.get("keyword", ""), *row.get("tags", [])]
+                for term in terms
+            )
+        )
+
+    def ambiguities(self, term: str, category: str | None = None) -> list[str]:
+        term = surface(term)
+        if not term or term != normalize(term):
+            return []
+        width = len(term.split())
+        title_forms, tag_forms = {}, {}
+        for hit in self.ranked_matches(term, True):
+            row = self.assets[hit.position]
+            if category and row["category"] != category:
+                continue
+            # Fully ASCII labels are legacy/unknown spellings, not a second meaning.
+            for field_index, field in enumerate([row.get("keyword", ""), *row.get("tags", [])]):
+                value = surface(str(field))
+                if value == normalize(value):
+                    continue
+                position = phrase_position(value, term)
+                if position is not None:
+                    words = value.split()[position : position + width]
+                    forms = title_forms if field_index == 0 else tag_forms
+                    phrase = " ".join(words)
+                    # 'keo' is itself unaccented; offer 'keo dán gạch' so selecting
+                    # the option resolves the ambiguity rather than asking again.
+                    suggestion = value if phrase == normalize(phrase) or position > 0 else phrase
+                    forms.setdefault(tuple(accent_key(w) for w in words), suggestion)
+        forms = title_forms or tag_forms
+        return sorted(forms.values())[:5] if len(forms) > 1 else []
+
+    def search(
+        self, term: str, *, category: str | None, limit: int, include_variants: bool = True
+    ) -> list[dict] | None:
         matches = self.ranked_matches(surface(term), include_variants)
         if not matches:
             return None
@@ -75,15 +102,23 @@ class EntityIndex:
             row = self.assets[hit.position]
             if category and row["category"] != category:
                 continue
-            results.append({"asset": row, "score": hit.score, "match_kind": hit.kind,
-                            "match_reason": hit.reason,
-                            "scores": {"exact_title": hit.exact_title,
-                                       "title_prefix": hit.title_prefix,
-                                       "title_phrase": hit.title_phrase,
-                                       "exact_tag": hit.exact_tag,
-                                       "tag_prefix": hit.tag_prefix,
-                                       "variant_extra_words": hit.extra_words,
-                                       "description_phrase": hit.description_phrase}})
+            results.append(
+                {
+                    "asset": row,
+                    "score": hit.score,
+                    "match_kind": hit.kind,
+                    "match_reason": hit.reason,
+                    "scores": {
+                        "exact_title": hit.exact_title,
+                        "title_prefix": hit.title_prefix,
+                        "title_phrase": hit.title_phrase,
+                        "exact_tag": hit.exact_tag,
+                        "tag_prefix": hit.tag_prefix,
+                        "variant_extra_words": hit.extra_words,
+                        "description_phrase": hit.description_phrase,
+                    },
+                }
+            )
             if len(results) == limit:
                 break
         return results
@@ -92,10 +127,20 @@ class EntityIndex:
         key = normalize(query)
         if not key:
             return ()
-        title_labels = (self.title_phrases.get(key, set()) if include_variants
-                        else {key} if key in self.title_postings else set())
-        tag_labels = (self.tag_prefixes.get(key, set()) if include_variants
-                      else {key} if key in self.tag_postings else set())
+        title_labels = (
+            self.title_phrases.get(key, set())
+            if include_variants
+            else {key}
+            if key in self.title_postings
+            else set()
+        )
+        tag_labels = (
+            self.tag_prefixes.get(key, set())
+            if include_variants
+            else {key}
+            if key in self.tag_postings
+            else set()
+        )
         candidates = set()
         for title in title_labels:
             candidates.update(self.title_postings[title])
@@ -104,14 +149,17 @@ class EntityIndex:
         matches = []
         for i in candidates:
             row = self.assets[i]
+            if row.get("search_excluded"):
+                continue
             title = str(row.get("keyword", ""))
             title_position = phrase_position(title, query)
             title_extra = len(surface(title).split()) - len(query.split())
             exact_title = title_position == 0 and title_extra == 0
             title_prefix = title_position == 0 and title_extra > 0 and include_variants
             title_phrase = title_position is not None and include_variants
-            matching_tags = [str(tag) for tag in row.get("tags", [])
-                             if phrase_position(str(tag), query) == 0]
+            matching_tags = [
+                str(tag) for tag in row.get("tags", []) if phrase_position(str(tag), query) == 0
+            ]
             exact_tag = any(normalize(tag) == key for tag in matching_tags)
             tag_prefix = bool(matching_tags) and include_variants
             if exact_title:
@@ -137,8 +185,20 @@ class EntityIndex:
             # Tiers and shorter variants dominate; description support breaks close ties.
             evidence = (3 + 1 / (1 + desc_position)) if desc_position is not None else 0
             score = tier * 1000 - min(extra, 90) * 10 + evidence + 2 * exact_tag
-            matches.append(EntityMatch(i, score, kind, exact_title, title_prefix, title_phrase,
-                                       exact_tag, tag_prefix, extra, desc_position is not None,
-                                       reason[:240]))
+            matches.append(
+                EntityMatch(
+                    i,
+                    score,
+                    kind,
+                    exact_title,
+                    title_prefix,
+                    title_phrase,
+                    exact_tag,
+                    tag_prefix,
+                    extra,
+                    desc_position is not None,
+                    reason[:240],
+                )
+            )
         matches.sort(key=lambda hit: (-hit.score, self.assets[hit.position]["asset_id"]))
         return tuple(matches)

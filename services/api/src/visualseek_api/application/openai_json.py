@@ -34,7 +34,8 @@ class OpenAIJson:
         self.settings = settings
 
     def generate(self, schema: dict, system: str, payload: dict, *, model: str,
-                 max_tokens: int = 2048, timeout: float | None = None) -> dict:
+                 max_tokens: int = 2048, timeout: float | None = None,
+                 image_parts: list[dict] | None = None) -> dict:
         key = self.settings.openai_api_key.get_secret_value().strip()
         if not key:
             raise ApplicationError(
@@ -42,6 +43,9 @@ class OpenAIJson:
                 code="openai_key_missing", status_code=503,
             )
         try:
+            user_content = json.dumps(payload, ensure_ascii=False)
+            if image_parts:
+                user_content = [{'type': 'text', 'text': user_content}, *image_parts]
             request_timeout = timeout or self.settings.search_llm_timeout_seconds
             options = {"temperature": 0, "max_completion_tokens": max_tokens}
             if model == "gpt-5.6-luna":
@@ -59,7 +63,7 @@ class OpenAIJson:
                               "schema": strict_schema(schema),
                           }}, "messages": [
                               {"role": "system", "content": system},
-                              {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
+                              {"role": "user", "content": user_content},
                           ]},
                 )
                 response.raise_for_status()

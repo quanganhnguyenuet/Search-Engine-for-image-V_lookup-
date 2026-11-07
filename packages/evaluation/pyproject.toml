@@ -3,7 +3,10 @@ name = "visualseek-evaluation"
 version = "0.1.0"
 description = "Contracts for VisualSeek retrieval evaluation components."
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = ['visualseek-retrieval']
+
+[tool.uv.sources]
+visualseek-retrieval = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

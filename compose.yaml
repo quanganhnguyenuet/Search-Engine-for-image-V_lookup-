@@ -36,11 +36,14 @@ services:
       EMBEDDING_CACHE_DIR: /data/models/huggingface
       EMBEDDING_DEVICE: cpu
       CORPUS_MANIFEST_PATH: /data/processed/culture-search/assets.jsonl
+      SEARCH_IMAGE_ROOT: /data/raw/vietnamese-culture-vqa
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
       OPENAI_REASONING_EFFORT: ${OPENAI_REASONING_EFFORT:-low}
       SEARCH_LLM_MODEL: ${SEARCH_LLM_MODEL:-gpt-4o-mini}
       SEARCH_LLM_TIMEOUT_SECONDS: ${SEARCH_LLM_TIMEOUT_SECONDS:-90}
+      SEARCH_LLM_ENABLED: ${SEARCH_LLM_ENABLED:-false}
+      SEARCH_ROUTING_MODE: ${SEARCH_ROUTING_MODE:-auto}
       SEARCH_LLM_RERANK: ${SEARCH_LLM_RERANK:-false}
       RAG_MODEL: ${RAG_MODEL:-gpt-4o-mini}
       R2_ENDPOINT_URL: ${R2_ENDPOINT_URL:-http://object-storage:9000}

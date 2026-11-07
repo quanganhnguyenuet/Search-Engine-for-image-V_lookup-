@@ -97,7 +97,8 @@ def test_query_cache_does_not_change_ranking_or_grow_unbounded(subjects):
 
 def test_variant_query_does_not_load_encoder_or_call_llm(tmp_path):
     path = metadata_artifact(tmp_path / "artifact")
-    service = SearchService(Settings(embedding_artifact_dir=str(path), openai_api_key=""),
+    service = SearchService(Settings(embedding_artifact_dir=str(path), openai_api_key="",
+                                    search_llm_enabled=False),
                             encoder_factory=DocumentEncoder)
     with patch.object(service, "get_encoder", side_effect=AssertionError("No encoder")), \
          patch.object(service.understanding, "plan", side_effect=AssertionError("No LLM")):

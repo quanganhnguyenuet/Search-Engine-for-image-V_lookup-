@@ -14,6 +14,8 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 from zipfile import ZipFile
 
+from visualseek_preprocessing.labels import repair_labels
+
 DATASET = "blackcubo/vietnamese-culture-vqa-dataset"
 VERSION = 1
 PREFIX = "Vietnamese Culture VQA Dataset/"
@@ -233,7 +235,7 @@ def make_asset(record: dict, root: Path) -> dict:
     analysis = record.get("image_analysis") or {}
     category = record["category"]
     has_annotation = (record.get("metadata") or {}).get("annotation_status") != "missing"
-    return {
+    return repair_labels({
         "asset_id": digest,
         "sha256": digest,
         "image_path": path,
@@ -260,7 +262,7 @@ def make_asset(record: dict, root: Path) -> dict:
         "cultural_context": record.get("cultural_context", {}),
         "questions": record.get("questions", []),
         "annotation_metadata": record.get("metadata", {}),
-    }
+    })
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:

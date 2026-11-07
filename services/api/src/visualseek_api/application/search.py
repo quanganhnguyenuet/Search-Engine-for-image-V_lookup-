@@ -15,17 +15,18 @@ import numpy as np
 from PIL import UnidentifiedImageError
 
 from visualseek_api.application.openai_json import OpenAIJson
-from visualseek_api.application.query_routing import needs_query_planning, search_term
+from visualseek_api.application.query_routing import IntentRouter, search_term
 from visualseek_api.application.query_understanding import QueryUnderstanding
 from visualseek_api.core.config import Settings
 from visualseek_api.core.errors import ApplicationError
 from visualseek_embedding.siglip2 import Siglip2Encoder, load_image
 from visualseek_retrieval.artifact import ArtifactIndex
-from visualseek_retrieval.hybrid import HybridRetriever
+from visualseek_retrieval.hybrid import FusionConfig, HybridRetriever
+from visualseek_retrieval.relevance import RelevancePolicy, apply_relevance, pipeline_signature
 
 
 def display_asset(row: dict, score: float) -> dict:
-    title = (row.get("keyword") or row["category"]).replace("_", " ")
+    title = unicodedata.normalize('NFC', row.get('keyword') or row['category']).replace('_', ' ')
     return {
         "id": row["asset_id"],
         "title": title[:1].upper() + title[1:],
@@ -58,28 +59,60 @@ class SearchService:
         self.understanding = understanding_factory(settings)
         self.generator = OpenAIJson(settings)
         self.hybrid = None
-        self.plan_cache: OrderedDict[str, object] = OrderedDict()
+        self.intent_router = None
+        self.plan_cache: OrderedDict[tuple[str, str | None], object] = OrderedDict()
         self.encoder_ready = False
         self.query_model_ready = False
         self.coverage_signature = None
         self.coverage_result = None
+        self.relevance_policy = None
+        self.relevance_policy_checked = False
+        self.relevance_policy_error = False
 
-    def query_plan(self, query: str):
+    def query_plan(self, query: str, category: str | None = None):
+        self.require_llm()
+        key = (query, category)
         with self.cache_lock:
-            if query in self.plan_cache:
-                self.plan_cache.move_to_end(query)
-                return self.plan_cache[query], True
+            if key in self.plan_cache:
+                self.plan_cache.move_to_end(key)
+                return self.plan_cache[key], True
         try:
-            plan = self.understanding.plan(query)
+            # Bounded corpus vocabulary grounds aliases without routing by trigger words.
+            titles = sorted({str(row.get('keyword', ''))[:120] for row in self.get_index().assets
+                             if not row.get('search_excluded') and
+                             (category is None or row['category'] == category)} - {''})
+            catalog, characters = [], 0
+            for title in titles[:512]:
+                if characters + len(title) > 12_000:
+                    break
+                catalog.append(title)
+                characters += len(title)
+            ambiguous = self.get_retriever().entities.ambiguities(
+                search_term(query, preserve_accents=True), category=category)
+            plan = self.understanding.plan(query, category=category, catalog_titles=catalog,
+                                           ambiguous_names=ambiguous)
         except ApplicationError:
             self.query_model_ready = False
             raise
         self.query_model_ready = True
         with self.cache_lock:
-            self.plan_cache[query] = plan
+            self.plan_cache[key] = plan
             if len(self.plan_cache) > 128:
                 self.plan_cache.popitem(last=False)
         return plan, False
+
+    def require_llm(self) -> None:
+        if not self.settings.search_llm_enabled:
+            raise ApplicationError(
+                'LLM đang tắt. Dùng tìm ảnh local hoặc bật SEARCH_LLM_ENABLED ở backend.',
+                code='llm_disabled', status_code=422,
+            )
+
+    def get_intent_router(self) -> IntentRouter:
+        with self.lock:
+            if self.intent_router is None:
+                self.intent_router = IntentRouter()
+        return self.intent_router
 
     def get_index(self) -> ArtifactIndex:
         with self.lock:
@@ -157,8 +190,51 @@ class SearchService:
         index = self.get_index()
         with self.lock:
             if self.hybrid is None:
-                self.hybrid = HybridRetriever(index)
+                self.hybrid = HybridRetriever(index, self.fusion_config())
         return self.hybrid
+
+    def fusion_config(self) -> FusionConfig:
+        settings = self.settings
+        return FusionConfig(
+            image_weight=settings.search_image_weight,
+            metadata_weight=settings.search_metadata_weight,
+            lexical_weight=settings.search_lexical_weight,
+            rank_constant=settings.search_rrf_constant,
+            image_depth=settings.search_candidate_depth,
+            metadata_depth=settings.search_candidate_depth,
+            lexical_depth=settings.search_candidate_depth,
+        )
+
+    def search_signature(self) -> str:
+        return pipeline_signature(self.get_index(), self.fusion_config(),
+                                  self.settings.search_query_roles)
+
+    def gate(self, hits: list[dict], *, query_profile: str = 'local') -> tuple[list[dict], dict]:
+        mode = self.settings.search_relevance_mode
+        if mode != 'off' and not self.relevance_policy_checked:
+            signature = self.search_signature()
+            with self.lock:
+                if not self.relevance_policy_checked:
+                    if self.settings.search_relevance_policy:
+                        try:
+                            self.relevance_policy = RelevancePolicy.read(
+                                Path(self.settings.search_relevance_policy), signature
+                            )
+                        except (OSError, ValueError, KeyError, TypeError):
+                            self.relevance_policy_error = True
+                    self.relevance_policy_checked = True
+        if mode == 'enforce' and self.relevance_policy is None:
+            raise ApplicationError('Relevance policy thiếu, lỗi hoặc không khớp index/config.',
+                                   code='relevance_policy_unavailable', status_code=503)
+        if mode != 'off' and self.relevance_policy is not None and (
+            self.relevance_policy.query_profile != query_profile
+        ):
+            return hits, {'mode': mode, 'status': 'not_applicable_query_profile',
+                          'enforced': False, 'candidates': len(hits)}
+        filtered, info = apply_relevance(hits, self.relevance_policy, mode)
+        if self.relevance_policy_error:
+            info['status'] = 'policy_mismatch_or_invalid'
+        return filtered, info
 
     def document_vectors(self, texts: list[str]) -> tuple[np.ndarray, bool]:
         values = {}
@@ -186,19 +262,59 @@ class SearchService:
         if not query or len(query) > 1000 or not 1 <= top_k <= 50:
             raise ApplicationError("Mô tả phải có 1–1000 ký tự, top_k từ 1–50.",
                                    code="invalid_query", status_code=422)
+        if not self.settings.search_llm_enabled:
+            if use_llm is True:
+                self.require_llm()
+            use_llm = False
         started = time.perf_counter()
         index = self.get_index()
         retriever = self.get_retriever()
         before = time.perf_counter()
-        should_plan, route_reason = needs_query_planning(query)
-        exact = retriever.exact_search(search_term(query, preserve_accents=True),
-                                       category=category, limit=top_k,
-                                       include_variants=not should_plan)
-        plan, plan_cached, vector_cached = None, False, False
+        term = search_term(query, preserve_accents=True)
+        try_local = use_llm is False or (
+            use_llm is None and self.settings.search_routing_mode == 'auto')
+        local_choices = retriever.entities.ambiguities(term, category=category) if try_local else []
+        exact = (retriever.exact_search(term, category=category, limit=top_k)
+                 if try_local and not local_choices else None)
+        intent = None
+        if use_llm is False:
+            should_plan, route_reason = False, 'llm_disabled'
+        elif use_llm is True or self.settings.search_routing_mode == 'always':
+            should_plan = True
+            route_reason = 'llm_forced' if use_llm is True else 'llm_semantic_planning'
+        elif local_choices or exact is not None:
+            should_plan, route_reason = False, 'local_entity_lookup'
+        else:
+            intent = self.get_intent_router().classify(query)
+            should_plan, route_reason = intent.needs_reasoning, intent.reason
+        routing_ms = (time.perf_counter() - before) * 1000
+        before = time.perf_counter()
+        if should_plan and index.metadata_vectors is None:
+            raise ApplicationError(
+                "Index chưa có embedding tags/description. Chạy enrich_embeddings.py trước.",
+                code="metadata_index_unavailable", status_code=503,
+            )
+        plan, plan_cached = self.query_plan(query, category) if should_plan else (None, False)
+        planning_ms = (time.perf_counter() - before) * 1000 if should_plan else 0.0
+        before = time.perf_counter()
+        clarifications = plan.suggested_queries if plan else local_choices
+        clarification_question = (plan.clarification_question if plan else None)
+        needs_clarification = bool(clarifications or clarification_question)
+        if should_plan:
+            exact = None
+        vector_cached = False
         rerank = False
-        llm_calls = 0
-        planning_ms = embedding_ms = reranking_ms = 0.0
-        if use_llm is not True and exact is not None:
+        shortlist_count = 0
+        gate_info = {'mode': self.settings.search_relevance_mode,
+                     'status': 'not_applicable_exact', 'enforced': False}
+        llm_calls = plan._generation_calls if plan is not None and not plan_cached else 0
+        embedding_ms = reranking_ms = 0.0
+        if needs_clarification:
+            route = 'llm_hybrid' if plan else 'lexical'
+            route_reason = 'llm_clarification' if plan else 'ambiguous_diacritics'
+            hits = []
+            retrieval_ms = (time.perf_counter() - before) * 1000
+        elif exact is not None:
             route, route_reason = "lexical", "single_subject_title_or_tag"
             hits = exact
             retrieval_ms = (time.perf_counter() - before) * 1000
@@ -208,57 +324,84 @@ class SearchService:
                     "Index chưa có embedding tags/description. Chạy enrich_embeddings.py trước.",
                     code="metadata_index_unavailable", status_code=503,
                 )
-            if use_llm is not None:
-                should_plan = use_llm
-                route_reason = "llm_forced" if use_llm else "llm_disabled"
             route = "llm_hybrid" if should_plan else "hybrid"
-            plan, plan_cached = self.query_plan(query) if should_plan else (None, False)
-            llm_calls += int(plan is not None and not plan_cached)
-            planning_ms = (time.perf_counter() - before) * 1000
-            before = time.perf_counter()
-            # Long direct queries remain local and retain all their token chunks.
-            texts = list(dict.fromkeys([query] + (
-                [plan.visual_query, plan.metadata_query] if plan else []
-            )))
+            # Planned retrieval embeds the positive targets, never the original
+            # sentence containing forbidden objects. Constraints go to filters/rerank.
+            texts = list(dict.fromkeys(
+                [plan.visual_query, plan.metadata_query] if plan else [query]))
             vectors, vector_cached = self.document_vectors(texts)
+            roles = {text: vectors[i:i + 1] for i, text in enumerate(texts)}
+            image_vectors = metadata_vectors = None
+            if plan is not None and self.settings.search_query_roles:
+                image_vectors = roles[plan.visual_query]
+                metadata_vectors = roles[plan.metadata_query]
             embedding_ms = (time.perf_counter() - before) * 1000
             before = time.perf_counter()
+            # Local routes never pay for an LLM rerank, including legacy scope=all.
             rerank = plan is not None and self.settings.search_llm_rerank
+            # Retrieve a real shortlist before reranking; the previous cap of 8
+            # prevented returning top_k=24 even when more candidates matched.
+            candidate_limit = (max(top_k, self.settings.search_rerank_candidates)
+                               if rerank else top_k)
             hits = retriever.search(vectors, plan.keywords if plan else [query],
-                                    category=category, limit=min(top_k * 2, 8) if rerank else top_k)
+                                    category=category, limit=candidate_limit,
+                                    image_vectors=image_vectors, metadata_vectors=metadata_vectors,
+                                    exclusions=plan.exclusions if plan else None)
+            hits, gate_info = self.gate(hits, query_profile='planned' if plan else 'local')
             retrieval_ms = (time.perf_counter() - before) * 1000
             before = time.perf_counter()
             llm_calls += int(rerank and bool(hits))
+            shortlist_count = len(hits) if rerank else 0
             hits = self.understanding.select(query, plan, hits, top_k) if rerank else hits[:top_k]
             reranking_ms = (time.perf_counter() - before) * 1000
         return {
             "query_id": str(uuid.uuid4()),
+            'clarification_required': needs_clarification,
+            'clarification_question': clarification_question,
+            'suggested_queries': clarifications,
             "items": [{**display_asset(hit["asset"], hit["score"]),
                        "match_kind": hit.get("match_kind"),
                        "match_reason": hit.get("match_reason") or (
                            "Theo chú thích: " + hit["asset"].get("description", "")[:240]
                            if hit["asset"].get("description") else None),
-                       "scores": hit["scores"]}
+                       "scores": hit["scores"],
+                       "ranks": hit.get('ranks'),
+                       "metadata_complete": hit.get('metadata_complete')}
                       for hit in hits],
             "total": len(hits), "page": 1, "pages": 1,
-            "libraryTotal": len(index.assets), "counts": index.counts,
+            "libraryTotal": index.searchable_count, "counts": index.counts,
             "mode": "contextual", "result_scope": "top_k",
             "retrieval_backend": "lexical-exact" if route == "lexical" else "numpy-hybrid-rrf",
             "score_type": "lexical_exact" if route == "lexical" else "rrf",
             "search_route": route, "routing_reason": route_reason,
-            "llm_used": plan is not None, "llm_call_count": llm_calls,
+            'routing_mode': self.settings.search_routing_mode,
+            'routing_classifier': self.intent_router.version if intent else None,
+            'routing_score': intent.score if intent else None,
+            "llm_used": plan is not None or (rerank and shortlist_count > 0),
+            "llm_call_count": llm_calls,
             "vector_cache_hit": vector_cached,
             "model": index.manifest["model_id"],
             "model_revision": index.manifest["model_revision"],
             "artifact_fingerprint": index.manifest["files"],
             "interpretation": plan.model_dump() if plan else None,
-            "query_model": self.settings.search_llm_model if plan else None,
-            "llm_provider": "openai" if plan else None,
-            "llm_reranked": rerank, "plan_cache_hit": plan_cached,
-            "evidence_type": "retrieved-image-annotations",
+            "query_model": self.settings.search_llm_model if llm_calls or plan else None,
+            "llm_provider": 'openai' if llm_calls or plan else None,
+            "llm_reranked": rerank and shortlist_count > 0, "plan_cache_hit": plan_cached,
+            "rerank_candidates": shortlist_count,
+            "rerank_evidence": self.settings.search_rerank_evidence if rerank else None,
+            "evidence_type": ('retrieved-image-pixels' if rerank and
+                              self.settings.search_rerank_evidence == 'pixels'
+                              else 'retrieved-image-annotations'),
+            "relevance_gate": gate_info,
+            "abstained": not bool(hits),
+            "abstention_reason": (route_reason if needs_clarification else
+                                  'no_supported_candidates' if not hits else None),
+            "search_config": {**self.fusion_config().as_dict(),
+                              'query_roles': self.settings.search_query_roles},
             "selection_scope": "retrieved_candidates",
             **self.coverage(),
-            "timings": {"planning_ms": planning_ms, "embedding_ms": embedding_ms,
+            "timings": {"routing_ms": routing_ms,
+                        "planning_ms": planning_ms, "embedding_ms": embedding_ms,
                         "retrieval_ms": retrieval_ms, "reranking_ms": reranking_ms,
                         "total_ms": (time.perf_counter() - started) * 1000},
         }
@@ -298,7 +441,7 @@ class SearchService:
             "total": len(hits),
             "page": 1,
             "pages": 1,
-            "libraryTotal": len(index.assets),
+            "libraryTotal": index.searchable_count,
             "counts": index.counts,
             "mode": "semantic",
             "result_scope": "top_k",
@@ -309,6 +452,7 @@ class SearchService:
         }
 
     def rag(self, query: str, category: str | None, top_k: int = 5) -> dict:
+        self.require_llm()
         response = self.search(query=query, category=category, top_k=top_k)
         sources = [
             item

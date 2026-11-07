@@ -15,8 +15,8 @@ from visualseek_api.core.errors import ApplicationError
 from visualseek_retrieval.artifact import ArtifactIndex, sha256_file, write_json
 from visualseek_retrieval.hybrid import HybridRetriever
 
-PLAN = {"intent": "Tìm áo dài đỏ, không có nón", "visual_query": "red ao dai without hats",
-        "metadata_query": "áo dài đỏ không có nón", "keywords": ["áo dài", "đỏ"],
+PLAN = {"intent": "Tìm áo dài đỏ, không có nón", "visual_query": "red ao dai",
+        "metadata_query": "áo dài đỏ", "keywords": ["áo dài", "đỏ"],
         "exclusions": ["nón"]}
 
 
@@ -97,7 +97,7 @@ def test_contextual_pipeline_real_ids_no_vqa_and_no_implicit_category(tmp_path):
     assert result["query_model"] == "gpt-4o-mini"
     assert len(json.loads(captured[1]["messages"][1]["content"])["candidates"]) == 3
     assert "SECRET_VQA_LABEL" not in json.dumps(captured)
-    assert service.encoder.texts[0] == "áo dài đỏ không có nón"
+    assert service.encoder.texts == [PLAN['visual_query'], PLAN['metadata_query']]
 
 
 @pytest.mark.parametrize("suggestions", [
@@ -123,7 +123,7 @@ def test_model_empty_result_is_not_filled_with_irrelevant_images():
 def test_invalid_plan_and_model_failure_are_explicit():
     model = QueryUnderstanding(Settings())
     with pytest.raises(ApplicationError) as error:
-        call_model([{**PLAN, "category": "am_thuc"}], lambda: model.plan("áo dài"))
+        call_model([{**PLAN, "category": "am_thuc"}] * 2, lambda: model.plan("áo dài"))
     assert error.value.code == "invalid_query_plan"
     with patch.object(model, "generate", side_effect=ApplicationError(
             "Unavailable", code="query_model_unavailable", status_code=503)):
@@ -205,6 +205,6 @@ def test_contextual_api_contract(tmp_path):
 
 def test_reject_repetitive_plan_instead_of_polluting_retrieval():
     with pytest.raises(ApplicationError) as error:
-        call_model([{**PLAN, "visual_query": "fields: " * 16}],
+        call_model([{**PLAN, "visual_query": "fields: " * 16}] * 2,
                    lambda: QueryUnderstanding(Settings()).plan("ruộng bậc thang"))
     assert error.value.code == "invalid_query_plan"

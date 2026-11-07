@@ -23,7 +23,8 @@ export type SearchResponse = {
   corpus_total?: number | null;
   coverage_complete?: boolean;
   interpretation?: { intent: string; visual_query: string; metadata_query: string;
-    keywords: string[]; exclusions: string[] } | null;
+    keywords: string[]; exclusions: string[]; requirements?: string[]; preferences?: string[];
+    clarification_question?: string | null; suggested_queries?: string[] } | null;
   query_model?: string | null;
   search_route?: "lexical" | "hybrid" | "llm_hybrid";
   llm_used?: boolean;
@@ -32,6 +33,11 @@ export type SearchResponse = {
   result_scope?: "top_k";
   answer?: string;
   abstained?: boolean;
+  abstention_reason?: string | null;
+  clarification_required?: boolean;
+  clarification_question?: string | null;
+  suggested_queries?: string[];
+  evidence_type?: string;
   citations?: { id: string; asset_id: string; title: string }[];
   generator_model?: string | null;
   timings?: { embedding_ms: number; retrieval_ms: number; generation_ms?: number;

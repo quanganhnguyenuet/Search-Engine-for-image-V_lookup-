@@ -1,0 +1,941 @@
+{
+  "captured_at": "2026-11-07T20:23:29.934521+07:00",
+  "request": {
+    "query": "ruộng bậc thang xanh ở vùng núi",
+    "mode": "contextual",
+    "use_llm": null
+  },
+  "local_fallback": false,
+  "status": 200,
+  "response": {
+    "query_id": "7930ee64-c6ba-4a93-aca8-fb962903c9f8",
+    "clarification_required": false,
+    "clarification_question": null,
+    "suggested_queries": [],
+    "items": [
+      {
+        "id": "2c249994c9113a61b56782b1a1242c6424b405ff110a56a149f20ad644314b7f",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp toàn cảnh những thửa ruộng bậc thang ở vùng núi phía Bắc Việt Nam. Ruộng bậc thang uốn lượn theo sườn đồi, tạo nên một khung cảnh thiên nhiên hùng vĩ và đẹp mắt. Màu sắc của ruộng lúa thay đổi từ xanh mướt đến vàng óng ả, tùy thuộc vào thời điểm thu hoạch.",
+        "tags": [
+          "ruộng bậc thang",
+          "núi",
+          "lúa",
+          "đường đi",
+          "nhà dân"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc nông nghiệp",
+          "regional_significance": "Phổ biến ở các tỉnh miền núi phía Bắc Việt Nam như Sapa, Mù Cang Chải, Lai Châu,... Mỗi vùng có đặc điểm ruộng bậc thang riêng biệt về hình dáng, quy mô.",
+          "historical_context": "Ruộng bậc thang đã có từ lâu đời, là kết quả của quá trình lao động cần cù, sáng tạo của người dân tộc thiểu số vùng cao trong việc khai thác đất đai, thích nghi với địa hình dốc.",
+          "modern_relevance": "Ruộng bậc thang không chỉ là nguồn sống của người dân mà còn là điểm đến du lịch hấp dẫn, góp phần phát triển kinh tế địa phương. Hiện nay, có nhiều nỗ lực bảo tồn và phát triển bền vững ruộng bậc thang."
+        },
+        "imageUrl": "/api/culture/images/2c249994c9113a61b56782b1a1242c6424b405ff110a56a149f20ad644314b7f",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.039940533837784994,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh những thửa ruộng bậc thang ở vùng núi phía Bắc Việt Nam. Ruộng bậc thang uốn lượn theo sườn đồi, tạo nên một khung cảnh thiên nhiên hùng vĩ và đẹp mắt. Màu sắc của ruộng lúa thay đổi từ xanh mướt đến vàng óng ả, tùy ",
+        "scores": {
+          "image_cosine": 0.15068769454956055,
+          "metadata_cosine": 0.898658037185669,
+          "lexical": 24
+        },
+        "ranks": {
+          "image": 7,
+          "metadata": 37,
+          "lexical": 8
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "3e03af200c4e28bd1651de85a11a6767fec3381037eec5798014c4d9fb723c1c",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Hình ảnh thể hiện một khung cảnh thiên nhiên tươi đẹp với những thửa ruộng bậc thang uốn lượn trên sườn đồi, xen kẽ là những ngôi nhà dân cư đơn sơ và cây cối xanh mướt. Nền là những dãy núi trùng điệp.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà ở dân cư",
+          "đường mòn",
+          "núi non",
+          "cây cối"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang là đặc trưng của vùng núi Tây Bắc, đặc biệt là Sapa, Lai Châu, Hà Giang.  Kiến trúc nhà ở thể hiện sự thích nghi với điều kiện tự nhiên và văn hóa của các dân tộc thiểu số.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, thể hiện sự khéo léo và trí tuệ của người dân trong việc khai thác tối đa nguồn tài nguyên đất đai ở vùng núi dốc. Các ngôi nhà thể hiện sự kế thừa kiến trúc truyền thống của các dân tộc.",
+          "modern_relevance": "Ruộng bậc thang Sapa hiện nay không chỉ là nguồn cung cấp lương thực mà còn là điểm đến du lịch nổi tiếng, góp phần phát triển kinh tế địa phương. Việc bảo tồn và phát triển bền vững hệ thống ruộng bậc thang được chú trọng."
+        },
+        "imageUrl": "/api/culture/images/3e03af200c4e28bd1651de85a11a6767fec3381037eec5798014c4d9fb723c1c",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.03953642677046933,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Hình ảnh thể hiện một khung cảnh thiên nhiên tươi đẹp với những thửa ruộng bậc thang uốn lượn trên sườn đồi, xen kẽ là những ngôi nhà dân cư đơn sơ và cây cối xanh mướt. Nề",
+        "scores": {
+          "image_cosine": 0.14247727394104004,
+          "metadata_cosine": 0.9071896076202393,
+          "lexical": 25
+        },
+        "ranks": {
+          "image": 34,
+          "metadata": 14,
+          "lexical": 5
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "2bed79b12210002f9bce3660bed96a16d9524d45821850209277f5180f8d50ed",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Những thửa ruộng được tạo thành các đường nét uốn lượn mềm mại, trải dài trên sườn núi, tạo nên một cảnh quan tuyệt đẹp, đặc trưng của vùng cao phía Bắc Việt Nam.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà ở của người dân tộc",
+          "núi đồi"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Đặc trưng cho vùng Tây Bắc Việt Nam, nhất là Sapa, Mù Cang Chải (Yên Bái), và các tỉnh vùng cao khác.  Những ruộng bậc thang này gắn liền với đời sống của các dân tộc thiểu số như người HMông, Dao, Thái...",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, được truyền lại qua nhiều thế hệ.  Đây là minh chứng cho sự thích nghi tài tình của con người với địa hình đồi núi, thể hiện sự bền bỉ và sáng tạo trong lao động sản xuất của người dân Việt Nam.",
+          "modern_relevance": "Ruộng bậc thang Sapa trở thành điểm đến du lịch nổi tiếng, góp phần vào phát triển kinh tế địa phương.  Tuy nhiên, việc bảo tồn và phát triển bền vững các ruộng bậc thang này vẫn là vấn đề cần quan tâm."
+        },
+        "imageUrl": "/api/culture/images/2bed79b12210002f9bce3660bed96a16d9524d45821850209277f5180f8d50ed",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.037602300376023,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Những thửa ruộng được tạo thành các đường nét uốn lượn mềm mại, trải dài trên sườn núi, tạo nên một cảnh quan tuyệt đẹp, đặc trưng của vùng cao phía Bắc Việt Nam.",
+        "scores": {
+          "image_cosine": 0.1509009748697281,
+          "metadata_cosine": 0.8883762359619141,
+          "lexical": 25
+        },
+        "ranks": {
+          "image": 6,
+          "metadata": 77,
+          "lexical": 6
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "427ed0495482dda096e73218721000a00f558f9d60f0c3465384a3cf4c9f74f5",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi phía Bắc Việt Nam.  Ruộng bậc thang trải dài trên sườn đồi, tạo nên một khung cảnh thiên nhiên tuyệt đẹp và hùng vĩ.  Những ngôi nhà nhỏ nằm rải rác giữa các thửa ruộng, hòa quyện với cảnh sắc xung quanh.",
+        "tags": [
+          "ruộng bậc thang",
+          "núi",
+          "cây cối",
+          "nhà ở"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc nông nghiệp",
+          "regional_significance": "Phổ biến ở vùng núi phía Bắc Việt Nam, nhất là các tỉnh như Sapa, Mù Cang Chải, Hà Giang… Mỗi vùng có những đặc điểm ruộng bậc thang riêng về hình dạng, kích thước và kỹ thuật xây dựng.",
+          "historical_context": "Phương pháp canh tác ruộng bậc thang đã có từ lâu đời, được hình thành và phát triển qua nhiều thế hệ người dân tộc thiểu số sinh sống trên vùng núi. Nó là kết quả của sự sáng tạo và kiên trì của con người trong việc chinh phục thiên nhiên.",
+          "modern_relevance": "Ngày nay, ruộng bậc thang không chỉ là nơi sản xuất lương thực, mà còn là điểm du lịch hấp dẫn, góp phần phát triển kinh tế của địa phương.  Tuy nhiên, việc bảo tồn và phát triển bền vững đang là thách thức lớn."
+        },
+        "imageUrl": "/api/culture/images/427ed0495482dda096e73218721000a00f558f9d60f0c3465384a3cf4c9f74f5",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.03570223788440107,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi phía Bắc Việt Nam.  Ruộng bậc thang trải dài trên sườn đồi, tạo nên một khung cảnh thiên nhiên tuyệt đẹp và hùng vĩ.  Những ngôi nhà nhỏ nằm rải rác giữa các thửa ruộng, hòa quyện với cảnh ",
+        "scores": {
+          "image_cosine": 0.14377076923847198,
+          "metadata_cosine": 0.8905984163284302,
+          "lexical": 25
+        },
+        "ranks": {
+          "image": 25,
+          "metadata": 64,
+          "lexical": 3
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "6ce46fa6eb6c0fdfc7e27974b8abe6f81af99bd289f4ef665817b33b2fb145cc",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Bức tranh thể hiện một khung cảnh thiên nhiên hùng vĩ với những thửa ruộng bậc thang uốn lượn theo sườn núi, xen kẽ là những ngôi nhà của người dân tộc thiểu số, tạo nên một bức tranh hài hòa giữa con người và thiên nhiên.",
+        "tags": [
+          "ruộng bậc thang",
+          "núi",
+          "nhà dân tộc",
+          "cây cối",
+          "đường mòn"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh",
+          "regional_significance": "Đặc trưng của vùng núi Tây Bắc Việt Nam, nhất là Sapa, Lào Cai. Ruộng bậc thang là một phần không thể thiếu trong đời sống và văn hoá của nhiều dân tộc thiểu số như người HMông, Dao, Tày...",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã tồn tại từ rất lâu đời, được truyền lại qua nhiều thế hệ. Nó phản ánh sự thích ứng tài tình của con người với địa hình đồi núi, góp phần tạo nên cảnh quan thiên nhiên độc đáo.",
+          "modern_relevance": "Ruộng bậc thang Sapa hiện nay không chỉ là nơi sản xuất nông nghiệp mà còn là điểm đến du lịch nổi tiếng, thu hút khách trong và ngoài nước. Nó đóng góp quan trọng vào kinh tế địa phương và quảng bá hình ảnh Việt Nam."
+        },
+        "imageUrl": "/api/culture/images/6ce46fa6eb6c0fdfc7e27974b8abe6f81af99bd289f4ef665817b33b2fb145cc",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.0345979597959796,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Bức tranh thể hiện một khung cảnh thiên nhiên hùng vĩ với những thửa ruộng bậc thang uốn lượn theo sườn núi, xen kẽ là những ngôi nhà của người dân tộc thiểu số, tạo nên mộ",
+        "scores": {
+          "image_cosine": 0.14347514510154724,
+          "metadata_cosine": 0.9061232805252075,
+          "lexical": 22
+        },
+        "ranks": {
+          "image": 28,
+          "metadata": 15,
+          "lexical": 41
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "a73a059812110a307fd655a62c4d13ed8896c3d5eeb4c7daa20cb33def7a55a2",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp từ trên cao, cho thấy một khung cảnh ruộng bậc thang ở vùng núi Việt Nam. Ruộng bậc thang trải rộng trên các sườn đồi, tạo thành những đường cong mềm mại uốn lượn theo địa hình. Màu vàng của lúa chín hòa quyện với màu xanh của cây cối và mây mù tạo nên một bức tranh tuyệt đẹp.",
+        "tags": [
+          "ruộng bậc thang",
+          "núi non",
+          "mây mù",
+          "cây cối",
+          "nhà nhỏ"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc nông nghiệp",
+          "regional_significance": "Ruộng bậc thang phổ biến ở vùng núi phía Bắc Việt Nam, đặc biệt là các tỉnh như Sapa, Mù Cang Chải, Lai Châu… Mỗi vùng lại có những đặc điểm riêng về hình dạng, kích thước và kỹ thuật xây dựng.",
+          "historical_context": "Hệ thống ruộng bậc thang được hình thành từ rất lâu đời, do người dân tộc thiểu số sáng tạo ra để tận dụng tối đa diện tích đất đai dốc để trồng lúa. Đây là minh chứng cho sự thích ứng tài tình của con người với môi trường tự nhiên.",
+          "modern_relevance": "Ngày nay, ruộng bậc thang không chỉ là nguồn sống chính của người dân vùng cao mà còn trở thành điểm đến du lịch hấp dẫn, thu hút khách du lịch trong và ngoài nước."
+        },
+        "imageUrl": "/api/culture/images/a73a059812110a307fd655a62c4d13ed8896c3d5eeb4c7daa20cb33def7a55a2",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.03378166003185237,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao, cho thấy một khung cảnh ruộng bậc thang ở vùng núi Việt Nam. Ruộng bậc thang trải rộng trên các sườn đồi, tạo thành những đường cong mềm mại uốn lượn theo địa hình. Màu vàng của lúa chín hòa quyện với màu xanh của",
+        "scores": {
+          "image_cosine": 0.14181551337242126,
+          "metadata_cosine": 0.8919908404350281,
+          "lexical": 24
+        },
+        "ranks": {
+          "image": 37,
+          "metadata": 57,
+          "lexical": 7
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "6b2a06d85602c8966b331b8fd9abb0e1df1adcf517291e632313b4c3cee59cba",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Hình ảnh thể hiện một nhóm du khách đang đi bộ trên con đường mòn giữa những thửa ruộng bậc thang với những sắc màu rực rỡ của lúa chín vàng và xanh mướt.",
+        "tags": [
+          "ruộng bậc thang",
+          "du khách",
+          "núi đồi",
+          "đường mòn",
+          "lúa"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Đặc trưng của vùng Tây Bắc Việt Nam, đặc biệt là Sapa, Lào Cai.  Là điểm thu hút du lịch nổi tiếng.",
+          "historical_context": "Phương thức canh tác này đã có từ lâu đời, phản ánh sự thích nghi của cộng đồng với địa hình đồi núi.  Cùng với sự phát triển du lịch, nó trở thành một di sản văn hóa quý giá.",
+          "modern_relevance": "Thu hút du lịch, tạo việc làm, góp phần bảo tồn văn hóa và phát triển kinh tế địa phương.  Tuy nhiên, cũng cần cân bằng giữa bảo tồn và phát triển du lịch bền vững."
+        },
+        "imageUrl": "/api/culture/images/6b2a06d85602c8966b331b8fd9abb0e1df1adcf517291e632313b4c3cee59cba",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.033460992673361306,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Hình ảnh thể hiện một nhóm du khách đang đi bộ trên con đường mòn giữa những thửa ruộng bậc thang với những sắc màu rực rỡ của lúa chín vàng và xanh mướt.",
+        "scores": {
+          "image_cosine": 0.13801980018615723,
+          "metadata_cosine": 0.9410067796707153,
+          "lexical": 22
+        },
+        "ranks": {
+          "image": 71,
+          "metadata": 1,
+          "lexical": 46
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "8576d843e75943d880f812d125e816cdbe6ec7da9a6948db9e3d492d33439b0d",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi phía Bắc Việt Nam vào lúc hoàng hôn. Ánh nắng chiều nhuộm vàng những thửa ruộng bậc thang uốn lượn mềm mại trên sườn đồi, tạo nên một khung cảnh thiên nhiên hùng vĩ và thơ mộng.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà sàn",
+          "núi non",
+          "sông suối",
+          "ánh nắng chiều"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc nông nghiệp",
+          "regional_significance": "Ruộng bậc thang phổ biến ở các tỉnh miền núi phía Bắc như Sapa, Mù Cang Chải, Y Tý… mỗi vùng có đặc điểm riêng về hình thức và quy mô. Nhà sàn là kiến trúc truyền thống của nhiều dân tộc thiểu số ở vùng này.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, được người dân tộc thiểu số sáng tạo ra để thích nghi với địa hình đồi núi, thể hiện sự khéo léo và trí tuệ của con người trong việc khai phá và sử dụng đất đai.  Nhà sàn cũng có lịch sử lâu đời, gắn liền với đời sống sinh hoạt của người dân.",
+          "modern_relevance": "Ruộng bậc thang ngày nay không chỉ là nguồn sống chính của người dân mà còn trở thành điểm đến du lịch nổi tiếng, thu hút khách trong và ngoài nước. Việc bảo tồn và phát triển bền vững ruộng bậc thang là rất quan trọng."
+        },
+        "imageUrl": "/api/culture/images/8576d843e75943d880f812d125e816cdbe6ec7da9a6948db9e3d492d33439b0d",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.03212925820216586,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi phía Bắc Việt Nam vào lúc hoàng hôn. Ánh nắng chiều nhuộm vàng những thửa ruộng bậc thang uốn lượn mềm mại trên sườn đồi, tạo nên một khung cảnh thiên nhiên hùng vĩ và thơ mộng.",
+        "scores": {
+          "image_cosine": 0.13485075533390045,
+          "metadata_cosine": 0.9084011316299438,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 87,
+          "metadata": 13,
+          "lexical": 26
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "a7b3b64348de1bcf22425f0c8e0019f411702165b44a48ee6dad60f38bef18ac",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp từ trên cao xuống, thể hiện ruộng bậc thang ở Sapa, Lào Cai, Việt Nam. Ruộng bậc thang được tạo thành từ nhiều lớp ruộng nhỏ xếp chồng lên nhau theo hình bậc thang, uốn lượn theo địa hình đồi núi. Một phần ruộng đã chín vàng, một phần vẫn còn xanh mướt.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa",
+          "núi đồi",
+          "thảm thực vật"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh nông nghiệp",
+          "regional_significance": "Đặc trưng của vùng núi Tây Bắc Việt Nam, đặc biệt là Sapa, Mù Cang Chải, và các tỉnh lân cận.  Các dân tộc thiểu số như người HMông, Dao, Thái… là những người chủ yếu canh tác trên những cánh đồng bậc thang này.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, được truyền lại qua nhiều thế hệ, thể hiện sự thích nghi của con người với điều kiện tự nhiên khắc nghiệt của vùng núi.  Việc hình thành ruộng bậc thang không chỉ phản ánh kỹ thuật canh tác mà còn liên quan đến lịch sử cư trú và sự phát triển cộng đồng của các dân tộc bản địa.",
+          "modern_relevance": "Hiện nay, ruộng bậc thang không chỉ là nguồn sống chính của người dân mà còn là điểm đến du lịch nổi tiếng, góp phần vào phát triển kinh tế địa phương và bảo tồn bản sắc văn hóa."
+        },
+        "imageUrl": "/api/culture/images/a7b3b64348de1bcf22425f0c8e0019f411702165b44a48ee6dad60f38bef18ac",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.03137844611528822,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao xuống, thể hiện ruộng bậc thang ở Sapa, Lào Cai, Việt Nam. Ruộng bậc thang được tạo thành từ nhiều lớp ruộng nhỏ xếp chồng lên nhau theo hình bậc thang, uốn lượn theo địa hình đồi núi. Một phần ruộng đã chín vàng, ",
+        "scores": {
+          "image_cosine": 0.147654190659523,
+          "metadata_cosine": 0.888633668422699,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 15,
+          "metadata": 73,
+          "lexical": 35
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "13ed311607922495b729129f510ceb495fdfde118202e4515e2b07da7d2377fa",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam. Ruộng bậc thang trải dài trên sườn núi, tạo nên một cảnh quan ngoạn mục với màu vàng óng ánh của lúa chín xen kẽ với màu xanh của cây cối và sương mù bao phủ.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà dân tộc",
+          "núi rừng",
+          "sương mù"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh",
+          "regional_significance": "Ruộng bậc thang Sapa là biểu tượng của vùng Tây Bắc Việt Nam, đặc trưng cho văn hóa nông nghiệp của các dân tộc thiểu số như người HMông, Dao, Thái…",
+          "historical_context": "Phương thức canh tác ruộng bậc thang đã có từ lâu đời, được hình thành và phát triển qua nhiều thế hệ, phản ánh sự thích ứng tài tình của con người với địa hình đồi núi hiểm trở.",
+          "modern_relevance": "Ruộng bậc thang Sapa trở thành điểm đến du lịch nổi tiếng, góp phần phát triển kinh tế địa phương, đồng thời bảo tồn và quảng bá giá trị văn hóa độc đáo của Việt Nam."
+        },
+        "imageUrl": "/api/culture/images/13ed311607922495b729129f510ceb495fdfde118202e4515e2b07da7d2377fa",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.030055409260478387,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam. Ruộng bậc thang trải dài trên sườn núi, tạo nên một cảnh quan ngoạn mục với màu vàng óng ánh của lúa chín xen kẽ với màu xanh của cây cối và sương mù bao phủ.",
+        "scores": {
+          "image_cosine": 0.14250394701957703,
+          "metadata_cosine": 0.8873419761657715,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 33,
+          "metadata": 87,
+          "lexical": 20
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "11adad7f3ac208329b20258e9bd270884fee6f9fceeb2ac0e30d48aaf85a40cd",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp từ trên cao cho thấy một khu ruộng bậc thang ở vùng núi Việt Nam. Ruộng bậc thang được tạo thành từ nhiều lớp ruộng nhỏ xếp chồng lên nhau theo đường cong của sườn núi, tạo nên một cảnh quan ngoạn mục. Màu sắc của lúa thay đổi từ xanh tươi đến vàng óng, tùy thuộc vào giai đoạn sinh trưởng. Một ngôi nhà nhỏ đơn sơ nằm giữa những ruộng bậc thang, thể hiện cuộc sống gắn bó mật thiết của người dân với thiên nhiên.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa",
+          "nhà ở",
+          "núi"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang phổ biến ở các tỉnh miền núi phía Bắc Việt Nam như Sapa (Lào Cai), Mù Cang Chải (Yên Bái),... mỗi vùng có những đặc điểm riêng về hình dạng và quy mô.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, được truyền lại qua nhiều thế hệ.  Nó là minh chứng cho sự thích nghi tài tình của người dân với địa hình đồi núi hiểm trở.  Những ngôi nhà đơn sơ phản ánh lối sống giản dị của người dân vùng cao.",
+          "modern_relevance": "Ruộng bậc thang không chỉ là nguồn cung cấp lương thực quan trọng mà còn là điểm thu hút khách du lịch, góp phần phát triển kinh tế địa phương.  Việc bảo tồn và phát triển bền vững ruộng bậc thang đang được quan tâm."
+        },
+        "imageUrl": "/api/culture/images/11adad7f3ac208329b20258e9bd270884fee6f9fceeb2ac0e30d48aaf85a40cd",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.029116045245077504,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao cho thấy một khu ruộng bậc thang ở vùng núi Việt Nam. Ruộng bậc thang được tạo thành từ nhiều lớp ruộng nhỏ xếp chồng lên nhau theo đường cong của sườn núi, tạo nên một cảnh quan ngoạn mục. Màu sắc của lúa thay đổi",
+        "scores": {
+          "image_cosine": 0.14688467979431152,
+          "metadata_cosine": 0.8408150672912598,
+          "lexical": 26
+        },
+        "ranks": {
+          "image": 17,
+          "metadata": null,
+          "lexical": 2
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "6b495a69b08a40979a7618c8309ed39ed66e875dc676d5a92d2e80e3e2ef13e5",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi cao của Việt Nam, thể hiện quá trình canh tác lúa nước của người dân địa phương. Bức ảnh bao gồm các ruộng bậc thang với nhiều sắc độ xanh và nâu, xen kẽ với các ngôi nhà dân cư giản dị.",
+        "tags": [
+          "ruộng bậc thang",
+          "ngôi nhà truyền thống",
+          "người dân lao động",
+          "núi đồi"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang phổ biến ở các tỉnh miền núi phía Bắc như Sapa, Mù Cang Chải (Yên Bái), Hà Giang… Mỗi vùng có đặc điểm riêng về hình dạng và quy mô.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang có lịch sử lâu đời, được người dân tộc thiểu số sáng tạo ra để tận dụng tối đa diện tích đất canh tác trên địa hình đồi núi dốc. Được truyền lại qua nhiều thế hệ.",
+          "modern_relevance": "Ruộng bậc thang không chỉ là nguồn sống chính của người dân mà còn trở thành điểm đến du lịch nổi tiếng, góp phần phát triển kinh tế địa phương và bảo tồn văn hóa bản địa."
+        },
+        "imageUrl": "/api/culture/images/6b495a69b08a40979a7618c8309ed39ed66e875dc676d5a92d2e80e3e2ef13e5",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.028985507246376812,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi cao của Việt Nam, thể hiện quá trình canh tác lúa nước của người dân địa phương. Bức ảnh bao gồm các ruộng bậc thang với nhiều sắc độ xanh và nâu, xen kẽ với các ngôi nhà dân cư giản dị.",
+        "scores": {
+          "image_cosine": 0.12484325468540192,
+          "metadata_cosine": 0.911003589630127,
+          "lexical": 24
+        },
+        "ranks": {
+          "image": null,
+          "metadata": 9,
+          "lexical": 9
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "db9744a250261406176ac0b30f058a3fe691543510992e456301d129d02fd94a",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Ruộng bậc thang uốn lượn theo sườn đồi núi, tạo nên một khung cảnh ngoạn mục với sự kết hợp hài hòa giữa màu xanh của cây cối, màu vàng nâu của đất và màu xanh lục của những thửa ruộng lúa nước. Ánh sáng mặt trời chiếu xuyên qua mây tạo hiệu ứng tia sáng đẹp mắt.",
+        "tags": [
+          "ruộng bậc thang",
+          "núi đồi",
+          "cây cối",
+          "nhà cửa",
+          "người lao động (nhỏ, khó phân biệt rõ)"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang là cảnh quan đặc trưng của vùng núi Tây Bắc Việt Nam, đặc biệt nổi tiếng ở Sapa, Mù Cang Chải (Yên Bái),...  Đây là minh chứng cho sự thích ứng tài tình của con người với địa hình đồi núi.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, là thành quả của trí tuệ và kinh nghiệm canh tác của các dân tộc thiểu số.  Việc hình thành ruộng bậc thang gắn liền với quá trình khai hoang, mở đất, định cư của người dân trên vùng núi.",
+          "modern_relevance": "Ruộng bậc thang không chỉ là nguồn sống của người dân địa phương mà còn là điểm đến du lịch nổi tiếng, góp phần phát triển kinh tế địa phương. Việc bảo tồn và phát triển du lịch bền vững gắn liền với ruộng bậc thang đang được quan tâm."
+        },
+        "imageUrl": "/api/culture/images/db9744a250261406176ac0b30f058a3fe691543510992e456301d129d02fd94a",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.028873872694097413,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Ruộng bậc thang uốn lượn theo sườn đồi núi, tạo nên một khung cảnh ngoạn mục với sự kết hợp hài hòa giữa màu xanh của cây cối, màu vàng nâu của đất và màu xanh lục của nhữn",
+        "scores": {
+          "image_cosine": 0.13968579471111298,
+          "metadata_cosine": 0.8927428722381592,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 57,
+          "metadata": 50,
+          "lexical": 29
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "e5a54c7bdca993770f8a2d13fe6e705ec1ad7609724016fff63ddfc12fe16737",
+        "title": "Rice field Vietnam",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang lúa chín vàng ở vùng núi phía Bắc Việt Nam.  Màu sắc rực rỡ, bố cục hài hòa, thể hiện vẻ đẹp hùng vĩ và trù phú của cảnh quan nông nghiệp Việt Nam.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa chín",
+          "người nông dân",
+          "ô"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh",
+          "regional_significance": "Phổ biến ở vùng núi phía Bắc Việt Nam, đặc biệt là các tỉnh như Sapa (Lào Cai), Mù Cang Chải (Yên Bái), Hoàng Su Phì (Hà Giang). Mỗi vùng có những đặc điểm về hình dạng và kích thước ruộng bậc thang khác nhau.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, gắn liền với quá trình khai hoang, mở đất của các dân tộc thiểu số.  Nó phản ánh sự thông minh, cần cù và bền bỉ của người dân trong việc chinh phục thiên nhiên.",
+          "modern_relevance": "Ruộng bậc thang ngày nay không chỉ là nguồn cung cấp lương thực quan trọng mà còn là điểm đến du lịch hấp dẫn, góp phần phát triển kinh tế địa phương."
+        },
+        "imageUrl": "/api/culture/images/e5a54c7bdca993770f8a2d13fe6e705ec1ad7609724016fff63ddfc12fe16737",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02832415420928403,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang lúa chín vàng ở vùng núi phía Bắc Việt Nam.  Màu sắc rực rỡ, bố cục hài hòa, thể hiện vẻ đẹp hùng vĩ và trù phú của cảnh quan nông nghiệp Việt Nam.",
+        "scores": {
+          "image_cosine": 0.15579628944396973,
+          "metadata_cosine": 0.9033743739128113,
+          "lexical": 12
+        },
+        "ranks": {
+          "image": 2,
+          "metadata": 22,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "d8693c35c44e11763ae94e63c849e437cbf5ccf2769ed13c22d8e2ec28618d7e",
+        "title": "Rice field Vietnam",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi phía Bắc Việt Nam.  Những thửa ruộng được tạo hình thành các đường cong mềm mại uốn lượn theo địa hình đồi núi, tạo nên một khung cảnh ngoạn mục và độc đáo.",
+        "tags": [
+          "ruộng bậc thang",
+          "núi đồi",
+          "cây cối",
+          "ruộng lúa"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh nông nghiệp",
+          "regional_significance": "Ruộng bậc thang là đặc trưng của vùng núi phía Bắc Việt Nam, thể hiện sự thích ứng tài tình của con người với địa hình phức tạp.  Mỗi vùng miền lại có những đặc điểm riêng về hình dáng và quy mô của ruộng bậc thang.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, là kết quả của quá trình lao động sáng tạo, cần cù của người dân bản địa.  Nó phản ánh sự gắn bó mật thiết giữa con người và thiên nhiên.",
+          "modern_relevance": "Ngày nay, ruộng bậc thang không chỉ là nguồn sống quan trọng mà còn là điểm thu hút du lịch, góp phần phát triển kinh tế địa phương và bảo tồn bản sắc văn hóa cộng đồng."
+        },
+        "imageUrl": "/api/culture/images/d8693c35c44e11763ae94e63c849e437cbf5ccf2769ed13c22d8e2ec28618d7e",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.027236652236652236,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi phía Bắc Việt Nam.  Những thửa ruộng được tạo hình thành các đường cong mềm mại uốn lượn theo địa hình đồi núi, tạo nên một khung cảnh ngoạn mục và độc đáo.",
+        "scores": {
+          "image_cosine": 0.15307432413101196,
+          "metadata_cosine": 0.9017934799194336,
+          "lexical": 14
+        },
+        "ranks": {
+          "image": 3,
+          "metadata": 28,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "703727f42ceaa1c23c1c51234e5b4d8e8fab1d3cd98bffbf7f064336d4ca88c8",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp từ trên cao cho thấy một ngôi làng nhỏ nằm giữa những thửa ruộng bậc thang vàng óng ánh, đặc trưng của vùng núi phía Bắc Việt Nam. Ngôi làng bao gồm vài ngôi nhà truyền thống với mái tranh, tường đất, nằm nép mình giữa những ruộng lúa chín vàng rực rỡ.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà ở truyền thống",
+          "đường mòn",
+          "cây cối"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc và nông nghiệp",
+          "regional_significance": "Đặc trưng của vùng núi phía Bắc Việt Nam, phổ biến ở các tỉnh như Sapa, Mù Cang Chải, Hà Giang...",
+          "historical_context": "Phương thức canh tác ruộng bậc thang đã có từ lâu đời, phản ánh sự thích nghi của con người với địa hình đồi núi. Kiến trúc nhà ở thể hiện sự đơn giản, gần gũi với thiên nhiên của các dân tộc.",
+          "modern_relevance": "Ruộng bậc thang hiện nay không chỉ là nguồn cung cấp lương thực mà còn là điểm thu hút khách du lịch, góp phần phát triển kinh tế địa phương.  Việc bảo tồn kiến trúc nhà ở truyền thống cũng đang được quan tâm để giữ gìn bản sắc văn hóa."
+        },
+        "imageUrl": "/api/culture/images/703727f42ceaa1c23c1c51234e5b4d8e8fab1d3cd98bffbf7f064336d4ca88c8",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.026729425610566286,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao cho thấy một ngôi làng nhỏ nằm giữa những thửa ruộng bậc thang vàng óng ánh, đặc trưng của vùng núi phía Bắc Việt Nam. Ngôi làng bao gồm vài ngôi nhà truyền thống với mái tranh, tường đất, nằm nép mình giữa những r",
+        "scores": {
+          "image_cosine": 0.14120323956012726,
+          "metadata_cosine": 0.887008786201477,
+          "lexical": 22
+        },
+        "ranks": {
+          "image": 43,
+          "metadata": 89,
+          "lexical": 37
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "244f7529423458a20d9bf43995ac4a98ba0e304b24c347a4d92b7532d6b780c3",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp từ trên cao, cho thấy một khung cảnh ruộng bậc thang ở Sapa (Lào Cai, Việt Nam) vào mùa lúa chín. Ruộng bậc thang trải rộng trên sườn đồi, tạo nên một hình ảnh ngoạn mục với những đường cong mềm mại uốn lượn. Một con đường nhỏ uốn lượn theo các thửa ruộng, kết nối các khu vực canh tác. Màu sắc chủ đạo là vàng rực rỡ của lúa chín xen kẽ với màu xanh của cây cối và núi đồi.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa chín",
+          "con đường",
+          "núi đồi",
+          "nhà cửa"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh nông thôn, canh tác",
+          "regional_significance": "Đặc trưng của vùng núi Tây Bắc Việt Nam, đặc biệt là Sapa, Mù Cang Chải (Yên Bái)... Đây là hình ảnh mang tính biểu tượng của du lịch Việt Nam.",
+          "historical_context": "Kỹ thuật canh tác ruộng bậc thang đã tồn tại hàng trăm năm, thể hiện sự thích ứng của con người với địa hình đồi núi và sự cần cù, sáng tạo của người dân tộc thiểu số.",
+          "modern_relevance": "Ruộng bậc thang Sapa trở thành điểm đến du lịch nổi tiếng, thu hút khách du lịch trong và ngoài nước. Hình ảnh này góp phần quảng bá hình ảnh du lịch Việt Nam."
+        },
+        "imageUrl": "/api/culture/images/244f7529423458a20d9bf43995ac4a98ba0e304b24c347a4d92b7532d6b780c3",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02668112947658402,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao, cho thấy một khung cảnh ruộng bậc thang ở Sapa (Lào Cai, Việt Nam) vào mùa lúa chín. Ruộng bậc thang trải rộng trên sườn đồi, tạo nên một hình ảnh ngoạn mục với những đường cong mềm mại uốn lượn. Một con đường nhỏ",
+        "scores": {
+          "image_cosine": 0.13900892436504364,
+          "metadata_cosine": 0.8912624716758728,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 65,
+          "metadata": 61,
+          "lexical": 36
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "f4849a94af9bc4ac8991dd1d001ec00826e34d53e8a426fd21884b0f9e381006",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp từ trên cao cho thấy một thửa ruộng bậc thang ở Sapa, Lào Cai, Việt Nam vào mùa lúa chín.  Ruộng bậc thang trải rộng trên sườn đồi, tạo nên một cảnh quan ngoạn mục với màu sắc vàng óng ánh của lúa chín xen kẽ với màu xanh của cây cối và màu nâu của đất.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa chín",
+          "nhà dân tộc",
+          "cây cối",
+          "đồi núi"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang là đặc trưng của vùng núi Tây Bắc Việt Nam, đặc biệt là Sapa, Mù Cang Chải, Hoàng Su Phì.  Kỹ thuật này được người dân tộc thiểu số sáng tạo ra để tận dụng tối đa diện tích đất đồi dốc.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ rất lâu đời, truyền lại qua nhiều thế hệ.  Nó phản ánh sự thích ứng tài tình của con người với điều kiện tự nhiên khắc nghiệt.",
+          "modern_relevance": "Ruộng bậc thang Sapa trở thành điểm đến du lịch nổi tiếng, thu hút khách du lịch trong và ngoài nước.  Việc bảo tồn và phát triển du lịch bền vững trên nền tảng văn hóa này rất quan trọng."
+        },
+        "imageUrl": "/api/culture/images/f4849a94af9bc4ac8991dd1d001ec00826e34d53e8a426fd21884b0f9e381006",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02661220043572985,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao cho thấy một thửa ruộng bậc thang ở Sapa, Lào Cai, Việt Nam vào mùa lúa chín.  Ruộng bậc thang trải rộng trên sườn đồi, tạo nên một cảnh quan ngoạn mục với màu sắc vàng óng ánh của lúa chín xen kẽ với màu xanh của ",
+        "scores": {
+          "image_cosine": 0.14058345556259155,
+          "metadata_cosine": 0.8883914351463318,
+          "lexical": 22
+        },
+        "ranks": {
+          "image": 48,
+          "metadata": 76,
+          "lexical": 40
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "f348cf4b10f3215fd67419830fcaea84ae03e8fc55eadb13627830eb0b40a9b3",
+        "title": "Muong Hoa valley",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp từ trên cao cho thấy toàn cảnh thung lũng Mường Hoa ở Sapa, Lào Cai, Việt Nam.  Thung lũng được bao phủ bởi những ruộng bậc thang lúa vàng óng ánh, xen kẽ là những ngôi nhà nhỏ của người dân tộc thiểu số và những con đường mòn uốn lượn.",
+        "tags": [
+          "ruộng bậc thang",
+          "ngôi nhà",
+          "đường mòn",
+          "núi đồi",
+          "thung lũng"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh nông nghiệp",
+          "regional_significance": "Thung lũng Mường Hoa nổi tiếng với ruộng bậc thang là biểu tượng của Sapa, Lào Cai và cả Việt Nam. Đây là điểm đến du lịch nổi tiếng.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời của người dân tộc thiểu số ở vùng núi phía Bắc, là sự thích nghi tài tình với địa hình đồi núi. Những ngôi nhà phản ánh kiến trúc truyền thống của họ.",
+          "modern_relevance": "Hiện nay, ruộng bậc thang Mường Hoa là một điểm đến du lịch sinh thái hấp dẫn, góp phần vào phát triển kinh tế địa phương.  Tuy nhiên, việc bảo tồn và phát triển bền vững cần được quan tâm."
+        },
+        "imageUrl": "/api/culture/images/f348cf4b10f3215fd67419830fcaea84ae03e8fc55eadb13627830eb0b40a9b3",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02658450704225352,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao cho thấy toàn cảnh thung lũng Mường Hoa ở Sapa, Lào Cai, Việt Nam.  Thung lũng được bao phủ bởi những ruộng bậc thang lúa vàng óng ánh, xen kẽ là những ngôi nhà nhỏ của người dân tộc thiểu số và những con đường mòn",
+        "scores": {
+          "image_cosine": 0.14915066957473755,
+          "metadata_cosine": 0.9046900868415833,
+          "lexical": 12
+        },
+        "ranks": {
+          "image": 11,
+          "metadata": 20,
+          "lexical": null
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "59164f736c6055cde8dc1aa12d3d8fa54701987220027534d80fcb25de746edb",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi cao Việt Nam, thể hiện một hệ thống ruộng lúa được xây dựng khéo léo trên sườn đồi, với các thửa ruộng xếp tầng lớp lớp, tạo nên một cảnh quan ấn tượng.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa",
+          "nhà nhỏ",
+          "núi đồi",
+          "cây cối"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc nông nghiệp",
+          "regional_significance": "Phổ biến ở các tỉnh miền núi phía Bắc như Sapa (Lào Cai), Mù Cang Chải (Yên Bái), Bắc Hà (Lào Cai),...  Mỗi vùng có những đặc điểm riêng về hình dạng và kích thước của ruộng.",
+          "historical_context": "Kỹ thuật xây dựng ruộng bậc thang đã có từ lâu đời, được truyền lại qua nhiều thế hệ.  Đây là minh chứng cho trí tuệ và sự cần cù của người dân Việt trong việc khai thác tối đa nguồn tài nguyên đất đai.",
+          "modern_relevance": "Ngày nay, ruộng bậc thang không chỉ là nguồn cung cấp lương thực mà còn là điểm thu hút khách du lịch, góp phần vào phát triển kinh tế địa phương.  Việc bảo tồn và phát triển bền vững ruộng bậc thang cũng được chú trọng."
+        },
+        "imageUrl": "/api/culture/images/59164f736c6055cde8dc1aa12d3d8fa54701987220027534d80fcb25de746edb",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02652819465057002,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở vùng núi cao Việt Nam, thể hiện một hệ thống ruộng lúa được xây dựng khéo léo trên sườn đồi, với các thửa ruộng xếp tầng lớp lớp, tạo nên một cảnh quan ấn tượng.",
+        "scores": {
+          "image_cosine": 0.13989503681659698,
+          "metadata_cosine": 0.8882172703742981,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 55,
+          "metadata": 79,
+          "lexical": 34
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "acce621e684ed072b8881652e02d0e675b4217c85ac96e6f1537448a18168f89",
+        "title": "Ruộng bậc thang kiến trúc",
+        "category": "kien_truc",
+        "categoryLabel": "Kiến trúc",
+        "description": "Hình ảnh chụp từ trên cao cho thấy cảnh quan ruộng bậc thang ở vùng núi phía Bắc Việt Nam. Ruộng bậc thang được bao phủ bởi một lớp sương mù mỏng, tạo nên khung cảnh thơ mộng và huyền ảo. Những thửa ruộng với màu vàng óng ánh của lúa chín xen kẽ với màu xanh của cây cối và màu nâu của đất tạo nên một bức tranh tuyệt đẹp.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà ở của người dân tộc",
+          "núi đồi",
+          "sương mù"
+        ],
+        "context": {
+          "cultural_category": "kiến trúc nông nghiệp, văn hóa nông nghiệp",
+          "regional_significance": "Ruộng bậc thang phổ biến ở vùng núi phía Bắc Việt Nam, đặc biệt là các tỉnh như Sapa (Lào Cai), Mù Cang Chải (Yên Bái), Hà Giang...",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã được người dân tộc thiểu số ở Việt Nam phát triển từ hàng trăm năm nay, thể hiện sự hiểu biết sâu sắc về địa hình và khí hậu.",
+          "modern_relevance": "Hiện nay, ruộng bậc thang không chỉ là nơi sản xuất nông nghiệp mà còn là điểm đến du lịch nổi tiếng, góp phần phát triển kinh tế địa phương."
+        },
+        "imageUrl": "/api/culture/images/acce621e684ed072b8881652e02d0e675b4217c85ac96e6f1537448a18168f89",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02629443272196072,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao cho thấy cảnh quan ruộng bậc thang ở vùng núi phía Bắc Việt Nam. Ruộng bậc thang được bao phủ bởi một lớp sương mù mỏng, tạo nên khung cảnh thơ mộng và huyền ảo. Những thửa ruộng với màu vàng óng ánh của lúa chín x",
+        "scores": {
+          "image_cosine": 0.14166772365570068,
+          "metadata_cosine": 0.8843531608581543,
+          "lexical": 26
+        },
+        "ranks": {
+          "image": 41,
+          "metadata": null,
+          "lexical": 1
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "25008f680c6acba9484c0ad695c8c8c1f749bcaa9864aa3be92ec43ca62e3c5d",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Hình ảnh cho thấy một hệ thống ruộng bậc thang trải rộng trên sườn đồi, với màu sắc đa dạng từ xanh lục của lúa non đến vàng óng của lúa chín. Các ngôi nhà của người dân tộc thiểu số nằm xen kẽ giữa các thửa ruộng, tạo nên một bức tranh hài hòa giữa thiên nhiên và con người.",
+        "tags": [
+          "ruộng bậc thang",
+          "nhà dân tộc",
+          "đường giao thông",
+          "núi đồi",
+          "cây cối"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang là đặc trưng của vùng núi Tây Bắc Việt Nam, đặc biệt nổi tiếng ở Sapa, Mù Cang Chải (Yên Bái),...  Mỗi vùng miền có những đặc điểm khác nhau về hình dạng và quy mô.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang có lịch sử lâu đời, được người dân tộc thiểu số sáng tạo ra để khai thác tối đa diện tích đất canh tác trên địa hình đồi núi dốc.  Đây là kết quả của sự thích nghi với môi trường tự nhiên và phản ánh sự cần cù, sáng tạo của người dân.",
+          "modern_relevance": "Ruộng bậc thang hiện nay không chỉ là nơi sản xuất nông nghiệp mà còn là điểm du lịch thu hút khách trong và ngoài nước, đóng góp vào phát triển kinh tế - xã hội của địa phương.  Việc bảo tồn và phát triển bền vững ruộng bậc thang đang được quan tâm."
+        },
+        "imageUrl": "/api/culture/images/25008f680c6acba9484c0ad695c8c8c1f749bcaa9864aa3be92ec43ca62e3c5d",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.026008827238335436,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp toàn cảnh ruộng bậc thang ở Sapa, Lào Cai, Việt Nam.  Hình ảnh cho thấy một hệ thống ruộng bậc thang trải rộng trên sườn đồi, với màu sắc đa dạng từ xanh lục của lúa non đến vàng óng của lúa chín. Các ngôi nhà của người dân tộ",
+        "scores": {
+          "image_cosine": 0.15972262620925903,
+          "metadata_cosine": 0.8413451313972473,
+          "lexical": 22
+        },
+        "ranks": {
+          "image": 1,
+          "metadata": null,
+          "lexical": 44
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "ed8c014f9a3a7872644610da91b4879b5e4a1718ed3a4459e8e1177339e61654",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp từ trên cao, cho thấy một khu ruộng bậc thang ở Sapa, Việt Nam. Những thửa ruộng được tạo thành từ nhiều bậc thang xếp chồng lên nhau, uốn lượn theo địa hình đồi núi. Màu sắc chủ đạo là màu xanh của lúa và màu nâu của đất. Một nhóm người dân đang đi trên đường mòn giữa các thửa ruộng.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa",
+          "người dân",
+          "đường mòn",
+          "núi"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh",
+          "regional_significance": "Ruộng bậc thang là đặc trưng của vùng núi phía Bắc Việt Nam, đặc biệt phổ biến ở Sapa, Mù Cang Chải, Hoàng Su Phì...",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời, được người dân tộc thiểu số sáng tạo ra để tận dụng tối đa diện tích đất canh tác trên địa hình đồi núi dốc.  Đây là một minh chứng cho trí tuệ và sự thích nghi của con người với môi trường sống.",
+          "modern_relevance": "Hiện nay, ruộng bậc thang không chỉ là nguồn sống chính của người dân mà còn là điểm thu hút du lịch quan trọng, góp phần phát triển kinh tế địa phương.  Việc bảo tồn và phát triển bền vững ruộng bậc thang đang được chú trọng."
+        },
+        "imageUrl": "/api/culture/images/ed8c014f9a3a7872644610da91b4879b5e4a1718ed3a4459e8e1177339e61654",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.025503573749187783,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp từ trên cao, cho thấy một khu ruộng bậc thang ở Sapa, Việt Nam. Những thửa ruộng được tạo thành từ nhiều bậc thang xếp chồng lên nhau, uốn lượn theo địa hình đồi núi. Màu sắc chủ đạo là màu xanh của lúa và màu nâu của đất. Một",
+        "scores": {
+          "image_cosine": 0.14758136868476868,
+          "metadata_cosine": 0.8582847714424133,
+          "lexical": 23
+        },
+        "ranks": {
+          "image": 16,
+          "metadata": null,
+          "lexical": 21
+        },
+        "metadata_complete": true
+      },
+      {
+        "id": "a41b1a10bc1548ba211f17a4fd0416dd8aa89cbd0433626fac9189213e3c51c5",
+        "title": "Ruộng bậc thang Sa Pa",
+        "category": "phong_canh",
+        "categoryLabel": "Phong cảnh",
+        "description": "Hình ảnh chụp cảnh đồng ruộng bậc thang ở Sapa, Lào Cai, Việt Nam vào mùa lúa chín.  Những thửa ruộng bậc thang uốn lượn trên sườn đồi tạo nên một khung cảnh ngoạn mục, với màu vàng rực rỡ của lúa chín xen kẽ với màu xanh của cây cối và đất.  Một vài ngôi nhà nhỏ đơn sơ nằm rải rác trên các sườn đồi. Có ba người phụ nữ dân tộc đang thu hoạch lúa trên ruộng.",
+        "tags": [
+          "ruộng bậc thang",
+          "lúa chín",
+          "nhà sàn nhỏ",
+          "người phụ nữ dân tộc",
+          "thửa ruộng",
+          "núi đồi"
+        ],
+        "context": {
+          "cultural_category": "phong cảnh, nông nghiệp",
+          "regional_significance": "Ruộng bậc thang là đặc trưng của vùng núi Tây Bắc Việt Nam, đặc biệt là Sapa, Mù Cang Chải,  phản ánh sự thích nghi tài tình của con người với địa hình đồi núi.  Hình ảnh người phụ nữ dân tộc  thể hiện nét đẹp văn hóa của các dân tộc thiểu số.",
+          "historical_context": "Kỹ thuật làm ruộng bậc thang đã có từ lâu đời ở Việt Nam, được truyền lại qua nhiều thế hệ, phản ánh sự cần cù, sáng tạo của người nông dân trong việc khai thác tối đa đất đai.",
+          "modern_relevance": "Ruộng bậc thang Sapa ngày nay trở thành điểm đến du lịch nổi tiếng, thu hút khách du lịch trong và ngoài nước, góp phần phát triển kinh tế địa phương.  Tuy nhiên, việc bảo tồn và phát triển bền vững các cánh đồng này vẫn là một thách thức."
+        },
+        "imageUrl": "/api/culture/images/a41b1a10bc1548ba211f17a4fd0416dd8aa89cbd0433626fac9189213e3c51c5",
+        "sourceUrl": "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
+        "score": 0.02548926767676768,
+        "match_kind": null,
+        "match_reason": "Theo chú thích: Hình ảnh chụp cảnh đồng ruộng bậc thang ở Sapa, Lào Cai, Việt Nam vào mùa lúa chín.  Những thửa ruộng bậc thang uốn lượn trên sườn đồi tạo nên một khung cảnh ngoạn mục, với màu vàng rực rỡ của lúa chín xen kẽ với màu xanh của cây cối và đất",
+        "scores": {
+          "image_cosine": 0.13836929202079773,
+          "metadata_cosine": 0.8889102339744568,
+          "lexical": 22
+        },
+        "ranks": {
+          "image": 68,
+          "metadata": 72,
+          "lexical": 39
+        },
+        "metadata_complete": true
+      }
+    ],
+    "total": 24,
+    "page": 1,
+    "pages": 1,
+    "libraryTotal": 15411,
+    "counts": {
+      "le_hoi": 2356,
+      "phong_canh": 2908,
+      "trang_phuc": 2365,
+      "kien_truc": 2947,
+      "thu_cong_my_nghe": 1922,
+      "am_thuc": 2913
+    },
+    "mode": "contextual",
+    "result_scope": "top_k",
+    "retrieval_backend": "numpy-hybrid-rrf",
+    "score_type": "rrf",
+    "search_route": "hybrid",
+    "routing_reason": "direct_visual_request",
+    "routing_mode": "auto",
+    "routing_classifier": "intent-linear-v1",
+    "routing_score": -0.9065416117983065,
+    "llm_used": false,
+    "llm_call_count": 0,
+    "vector_cache_hit": false,
+    "model": "google/siglip2-base-patch16-224",
+    "model_revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+    "artifact_fingerprint": {
+      "vectors.npy": "6e66a91a8290df9c2f12207628b19e79fb0dfbf694614b8a71a3f8cb73c12126",
+      "assets.jsonl": "1558faac01d10ee6f630d8b4ab780e3c832926411d56a8cc79b1c9ac414c7359",
+      "metadata_vectors.npy": "8af431bc709fd78871e9a5b9607e28fed0e2b5127021007a562a34a6571ba8b1"
+    },
+    "interpretation": null,
+    "query_model": null,
+    "llm_provider": null,
+    "llm_reranked": false,
+    "plan_cache_hit": false,
+    "rerank_candidates": 0,
+    "rerank_evidence": null,
+    "evidence_type": "retrieved-image-annotations",
+    "relevance_gate": {
+      "mode": "shadow",
+      "status": "calibration_required",
+      "candidates": 24,
+      "would_reject": null,
+      "enforced": false
+    },
+    "abstained": false,
+    "abstention_reason": null,
+    "search_config": {
+      "image_weight": 1,
+      "metadata_weight": 1,
+      "lexical_weight": 1,
+      "rank_constant": 60,
+      "image_depth": 100,
+      "metadata_depth": 100,
+      "lexical_depth": 100,
+      "query_roles": true
+    },
+    "selection_scope": "retrieved_candidates",
+    "corpus_total": 15423,
+    "coverage_complete": true,
+    "timings": {
+      "routing_ms": 2.8280520000407705,
+      "planning_ms": 0,
+      "embedding_ms": 7178.095613000096,
+      "retrieval_ms": 3936.37354700013,
+      "reranking_ms": 0.0013409999155555852,
+      "total_ms": 11117.482263000056
+    }
+  }
+}

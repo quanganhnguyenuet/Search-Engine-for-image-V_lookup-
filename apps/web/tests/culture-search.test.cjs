@@ -27,7 +27,11 @@ test("local corpus search, ranking, filters, pagination and image lookup", async
   const accented = await searchCulture("áo dài", "", 1);
   const plain = await searchCulture("ao dai", "", 1);
   assert.ok(plain.total > 0);
-  assert.deepEqual(accented.items, plain.items);
+  // ASCII lookup can include additional readings. Accented queries must preserve
+  // their meaning, so identical ranking after accent folding is no longer required.
+  assert.ok(accented.items.length > 0);
+  assert.ok(accented.items.every((item) => normalize(item.title).startsWith("ao dai")));
+  assert.ok(plain.items.every((item) => normalize(item.title).startsWith("ao dai")));
   const category = await searchCulture("", "am_thuc", 1);
   assert.ok(category.items.every((item) => item.category === "am_thuc"));
   assert.equal(category.total, all.counts.am_thuc);

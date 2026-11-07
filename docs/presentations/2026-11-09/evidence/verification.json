@@ -1,0 +1,40 @@
+{
+  "checks": [
+    "8 slides",
+    "8 embedded speaker notes",
+    "480-second main timing / 300-second short timing",
+    "all PPTX shapes within slide",
+    "Vietnamese/symbols and metric example in PDF text",
+    "3 real UI captures with responses",
+    "configured secret values absent from text/XML",
+    "PDF pages visually reviewed"
+  ],
+  "rendering_note": "PDF uses shared layout primitives; native PowerPoint rendering has not been run on this host.",
+  "llm_demo": "Auto query returned openai_authentication_failed; third capture explicitly local-only.",
+  "artifacts": {
+    "VisualSeek-General-Idea.pptx": {
+      "bytes": 420598,
+      "sha256": "b89aa59b1445dabd5ec98edc626172dfad0981c38f803b8e400b98e5e3110341"
+    },
+    "VisualSeek-General-Idea.pdf": {
+      "bytes": 542004,
+      "sha256": "a3e6e399cafb54c1b54919b86c4e5df529e0a21e58d260fe578e581ae840f27f"
+    },
+    "Loi-thoai-va-Hoi-dap.pdf": {
+      "bytes": 76450,
+      "sha256": "aea889fae4e6e92f516ad1188e3ce20ef939b2fd959d6d55bf5cd6dd13c283e8"
+    },
+    "Loi-thoai-va-Hoi-dap.md": {
+      "bytes": 18999,
+      "sha256": "adc63387782cd7deb75e168d4c1e7d40b4ad28bf07f665f5b9f5a351dcbdc2c7"
+    },
+    "preview.png": {
+      "bytes": 638486,
+      "sha256": "a3c7e6c3ef45ea11d49dbd577bded1cbedd4a2add557e6e53270aed419f44904"
+    },
+    "README.md": {
+      "bytes": 2977,
+      "sha256": "093f499c98f80472b985c0a0ca450b6f9b78dcab828c2c1c340d7e10cef18a1d"
+    }
+  }
+}

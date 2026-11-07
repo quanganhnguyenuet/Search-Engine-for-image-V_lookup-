@@ -1,13 +1,25 @@
 # VisualSeek — Multimodal AI Image Search Engine
 
-Current focus: [contextual text-to-image search](docs/contextual-image-search.md),
-with automatic routing: exact names/tags use a local lookup, ordinary descriptions
-use local hybrid retrieval, and logical/multi-clause requests use an OpenAI planner.
-The web defaults to **Tìm theo yêu cầu**. Only the LLM path and RAG require a backend
-`OPENAI_API_KEY`; semantic and keyword baselines remain available for comparison.
+Current focus: [contextual text-to-image search](docs/contextual-image-search.md).
+Search defaults to local-only: exact names/tags use a local lookup and descriptions
+use local image/metadata hybrid retrieval. The web defaults to **Tìm theo yêu cầu**.
+OpenAI planning/reranking and RAG require explicit `SEARCH_LLM_ENABLED=true` plus a
+backend `OPENAI_API_KEY`; semantic and keyword baselines remain available for comparison.
+When enabled, `SEARCH_ROUTING_MODE=auto` keeps names/tags and ordinary descriptions
+local; a small learned intent classifier sends reasoning or uncertain requests to
+the LLM. Set `SEARCH_ROUTING_MODE=always` for full planning. See
+[semantic query planning](docs/semantic-query-planning.md) for constraints and clarification.
 See the [approved plan and scope update](docs/text-to-image-search-plan.md).
 For Qdrant credentials, see [Qdrant Cloud setup](docs/qdrant-cloud-setup.md).
 The current search backend remains NumPy; credentials alone do not enable Qdrant retrieval.
+
+Image/metadata fusion now includes indexed lexical scoring, configurable weighted
+RRF, separate query roles, wider annotation/vision reranking, and human-calibrated
+relevance tooling. See [rollout and evaluation commands](docs/search-fusion-setup.md).
+
+Vietnamese labels now preserve diacritics and word boundaries, request clarification
+for ambiguous unaccented names, and exclude reviewed source-folder contamination.
+See [label repairs and regression queries](docs/vietnamese-label-repair.md).
 
 VisualSeek is a monorepo for a multimodal image-search system. The **VietNam Culture**
 frontend searches a local cultural corpus through natural-language requests, semantic
@@ -16,6 +28,11 @@ interprets user intent before CPU hybrid retrieval. OCR and production storage a
 remain future work.
 
 ## Embedding on Kaggle and RAG
+
+Notebook cho **Kaggle T4 ×2**, đúng allowlist dataset local và upload embedding lên
+`Quanganh6905/Embedding_for_searchengine`:
+[visualseek-kaggle-t4x2-huggingface.ipynb](notebooks/visualseek-kaggle-t4x2-huggingface.ipynb).
+Xem [hướng dẫn chuẩn bị và chạy](docs/kaggle-t4x2-huggingface.md).
 
 See [Kaggle embedding and local RAG](docs/kaggle-embedding-rag.md) for runnable notebook
 cells, model setup, portable vector artifacts, and the semantic/RAG API. The browser

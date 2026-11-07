@@ -1,75 +1,54 @@
 # Tìm ảnh theo mô tả, tags/description và LLM
 
+Đã bổ sung inverted lexical index, weighted RRF, query roles, shortlist rerank rộng
+hơn và relevance gate theo nhãn người chấm. Xem
+[cấu hình và quy trình đánh giá mới](search-fusion-setup.md); các ví dụ bên dưới có
+thể ghi lại cấu hình baseline trước rollout.
+
 Rà soát relevance ngày 05/11/2026: xem [audit logic search và intent](search-logic-audit.md).
 Full coverage xác nhận mọi asset đã có vector; chưa đồng nghĩa đáp ứng đủ các
 thuộc tính, phủ định hoặc nhiều intent của truy vấn.
 
 ## Luồng đã triển khai
 
+Khi `SEARCH_LLM_ENABLED=true` và `SEARCH_ROUTING_MODE=auto`, tên/tag và mô tả thường
+chạy local, chỉ reasoning hoặc intent chưa chắc chắn được gửi LLM. Router là bộ
+phân loại nhỏ học từ ví dụ, không gọi OpenAI để chọn đường. `always` vẫn có thể dùng
+để đưa mọi query qua planner. Xem [semantic query planning](semantic-query-planning.md)
+cho schema, clarification, cấu hình và các query kiểm tra.
+
 ```text
-Yêu cầu tiếng Việt
-  -> định tuyến bằng luật local, không gọi LLM để phân loại
-     -> khớp toàn bộ tên/tags: tra inverted index -> ảnh
-     -> mô tả thông thường: SigLIP2 local -> hybrid RRF -> ảnh
-     -> phủ định/nhiều mệnh đề/vai trò: LLM planning -> hybrid RRF -> ảnh
-        -> tùy chọn LLM rerank tối đa 8 ứng viên
+Yêu cầu tiếng Việt + bộ lọc chủ đề
+  -> tên/tag rõ hoặc nhập nhằng theo index: lookup/hỏi lại local
+  -> mô tả trực tiếp: hybrid ảnh + description + lexical local
+  -> reasoning hoặc intent chưa chắc chắn: LLM lập kế hoạch ngữ nghĩa
+     -> nhập nhằng: hỏi lại trước khi tìm
+     -> rõ nghĩa: encode mô tả tích cực bằng SigLIP2 local
+        -> hybrid ảnh/metadata/lexical + bộ lọc loại trừ
+        -> tùy chọn LLM kiểm tra điều kiện và xếp lại shortlist
+        -> ảnh có sẵn trong index
 ```
 
-Query đơn giản như `bánh chưng`, `banh chung`, `Tôi muốn tìm ảnh bánh chưng` không
-cần OpenAI key. Nếu khớp tên hoặc tags đã index, request không encode lại text và
-không load SigLIP2. Nhánh này chỉ trả asset khớp nguyên cụm đã normalize, giữ filter
-category và không bù ảnh chủ đề khác. Thứ tự ưu tiên single intent hiện là:
+Plan tách điều kiện bắt buộc, ưu tiên, loại trừ và truy vấn tích cực. Chỉ encode
+đối tượng muốn tìm, tránh câu gốc chứa đối tượng bị loại trừ kéo kết quả về đối tượng
+đó. Bước rerank nhận nguyên request và mọi điều kiện trong plan, có thể trả ít hơn
+`top_k` hoặc không có ảnh nếu thiếu bằng chứng. Không sinh ID ảnh hoặc đổi bộ lọc
+category. Query và plan được cache theo cả query lẫn category; lỗi model trả lỗi rõ
+ràng, không fallback ngầm sang local.
 
-1. Tên ảnh khớp toàn bộ query.
-2. Tên biến thể bắt đầu bằng nguyên cụm query, ví dụ `bánh chưng gù`, `bánh chưng Tết`.
-3. Cụm query xuất hiện ở phần khác của tên, ví dụ `lễ hội bánh chưng`.
-4. Tag khớp toàn bộ query, sau đó biến thể tag bắt đầu bằng cụm query.
+Khi `SEARCH_LLM_ENABLED=false` (mặc định thư viện), hoặc request đặt `use_llm=false`,
+query đi qua lookup tên/tag và hybrid local. Tên không dấu có nhiều cách đọc được
+đề xuất cách hiểu có dấu theo corpus. Lookup tên giữ dấu, ưu tiên tên chính xác,
+biến thể tên rồi tag; không cần OpenAI key. `/search/semantic` và keyword search vẫn
+là baseline riêng, không tự gọi LLM. `/search/rag` là tác vụ tạo câu trả lời từ bằng
+chứng riêng và yêu cầu bật LLM.
 
-Trong cùng nhóm, ưu tiên ít từ mở rộng hơn và dùng sự hiện diện/vị trí cụm từ trong
-description để phân biệt. Không hardcode category ẩm thực cho query bánh chưng.
-Các nhãn được index theo cụm/từ có ranh giới, không khớp một phần ký tự hoặc tự bỏ
-thuộc tính người dùng yêu cầu. Query có dấu giữ khác biệt `phở` và `phố`; vẫn chấp
-nhận nhãn nguồn không dấu. Query không dấu có thể còn nhập nhằng ngữ nghĩa.
-
-Ranking được cache tối đa 128 query trên từng phiên index; giữ thứ tự ổn định theo
-asset ID khi các bằng chứng ngang nhau. Nhánh mở rộng biến thể không áp dụng cho
-query mà router nhận là nhiều mệnh đề/logic; override dùng LLM vẫn được giữ.
-Score tiếp tục là `lexical_exact` để giữ contract, không phải RRF hoặc xác suất.
-
-Nếu không có entity khớp tên/tags, câu mô tả thông thường đi thẳng vào hybrid local.
-Vector của tối đa 128 text được cache riêng, không trộn với cache encoder text ngắn.
-Luật router nhận diện phủ định, phép nối `và/hoặc`, nhiều mệnh đề, so sánh hoặc vai
-trò hướng dẫn. Độ dài riêng lẻ không bị coi là bằng chứng multi intent. Đây là
-heuristic để giảm latency, chưa phải bộ hiểu/kiểm chứng intent hoàn chỉnh; các vấn
-đề relevance và điều kiện trong audit vẫn cần xử lý riêng.
-
-Query cần LLM giữ câu gốc trong retrieval. LLM không được tạo ID ảnh, tự đổi category filter
-hoặc gửi truy vấn đến nguồn ảnh bên ngoài. JSON được kiểm tra kiểu, độ dài, lặp từ,
-ID ứng viên và ID trùng. Query plan được cache trong RAM tối đa 128 yêu cầu; không
-ghi nguyên query vào log. Model/LLM lỗi trả lỗi rõ ràng, không fallback ngầm.
-
-`SEARCH_LLM_RERANK=false` là mặc định: LLM hiểu yêu cầu, hybrid retrieval xếp ảnh,
-`match_reason` trích từ description. Khi bật rerank, GPT-4o mini chọn lại tối đa tám
-ảnh và viết lý do dựa trên annotation. Có thể trả ít ảnh hơn `top_k` hoặc không có
-ảnh. Rerank thêm một API call, token và latency nên không bật mặc định.
-
-Rerank chỉ được xét ở nhánh đã chọn dùng LLM, không kích hoạt cho query tên/tags
-hoặc mô tả thường. `/search/rag` là tác vụ riêng: retrieve bằng chứng rồi sinh câu
-trả lời. Tìm ảnh chỉ trả ảnh không bắt buộc generation; query planning trước
-retrieval cũng không phải thành phần bắt buộc của RAG.
-[Paper RAG](https://arxiv.org/abs/2005.11401).
-
-LLM dùng Chat Completions với Structured Outputs (`json_schema`, `strict=true`),
-kiểm tra refusal, finish reason và JSON trước khi validate dữ liệu. Key chỉ đọc ở
-backend qua `OPENAI_API_KEY`; không đặt vào biến `NEXT_PUBLIC_*`. Query được gửi
-đến OpenAI; khi bật rerank/RAG, gửi thêm tags/description của các ảnh ứng viên.
-Ảnh gốc và corpus embeddings vẫn xử lý local. Không cần embedding lại corpus khi
-đổi từ Ollama sang OpenAI. Request đặt `store=false`.
-
-LLM **chưa xem pixel ảnh**; ngữ cảnh và lý do có thể sai nếu annotation sai. Phủ định,
-quan hệ phức tạp và chi tiết thị giác chưa có bảo đảm đáp ứng tuyệt đối, đặc biệt
-khi tắt rerank. Không dùng cosine/RRF như xác suất đúng và chưa có bộ phân loại
-ngoài miền. Đây là tìm ảnh có sẵn, không phải sinh ảnh mới.
+Structured Outputs kiểm tra schema, refusal, finish reason và ứng viên hợp lệ;
+không chứng minh suy luận đúng. Key chỉ ở backend, query và chú thích ứng viên được
+gửi tới provider khi bật LLM. Mặc định rerank chỉ dựa annotation; vision rerank là
+lựa chọn rõ ràng trong [hướng dẫn fusion](search-fusion-setup.md). Chất lượng tên/tag
+và description ảnh hưởng trực tiếp đến kết quả. Cần chấm relevance trên model thật
+để đánh giá suy luận, không dùng cosine/RRF như xác suất đúng.
 
 ## Artifact embedding
 
@@ -120,6 +99,7 @@ OPENAI_API_KEY=YOUR_OPENAI_API_KEY
 OPENAI_BASE_URL=https://api.openai.com/v1
 SEARCH_LLM_MODEL=gpt-4o-mini
 SEARCH_LLM_TIMEOUT_SECONDS=90
+SEARCH_LLM_ENABLED=true
 SEARCH_LLM_RERANK=false
 RAG_MODEL=gpt-4o-mini
 ```

@@ -78,19 +78,34 @@ def search_status(service: ServiceDependency):
         "query_model_last_success": service.query_model_ready,
         "readiness_note": "LLM status records last uncached plan, not a live availability probe",
         "indexed": len(index.assets),
+        "searchable": index.searchable_count,
+        "excluded_from_search": len(index.assets) - index.searchable_count,
+        'label_revision': index.manifest.get('label_revision'),
         "export_complete": index.manifest.get("complete", False),
         "scope": index.manifest.get("scope", {}),
         "model": index.manifest["model_id"],
         "backend": "numpy-exact",
         "metadata_ready": index.metadata_vectors is not None,
         "contextual_backend": "numpy-hybrid-rrf",
-        "query_routing": "auto",
+        'query_routing': (service.settings.search_routing_mode
+                          if service.settings.search_llm_enabled else 'local'),
+        'routing_classifier_ready': service.intent_router is not None,
+        'routing_classifier': service.intent_router.version if service.intent_router else None,
+        'llm_enabled': service.settings.search_llm_enabled,
         "query_model": service.settings.search_llm_model,
         "reasoning_effort": (service.settings.openai_reasoning_effort
                              if service.settings.search_llm_model == "gpt-5.6-luna" else None),
         "llm_provider": "openai",
         "openai_key_configured": bool(service.settings.openai_api_key.get_secret_value().strip()),
         "artifact_fingerprint": index.manifest["files"],
+        "search_config": {**service.fusion_config().as_dict(),
+                          'query_roles': service.settings.search_query_roles,
+                          'rerank_enabled': service.settings.search_llm_rerank,
+                          'rerank_candidates': service.settings.search_rerank_candidates,
+                          'rerank_evidence': service.settings.search_rerank_evidence},
+        "pipeline_signature": service.search_signature(),
+        "relevance_mode": service.settings.search_relevance_mode,
+        "relevance_policy_configured": bool(service.settings.search_relevance_policy),
         **service.coverage(),
     }
 
@@ -101,12 +116,16 @@ class WarmupRequest(BaseModel):
 
 @router.post("/warmup")
 def warmup(body: WarmupRequest, service: ServiceDependency):
+    if body.include_llm:
+        service.require_llm()
+    if service.settings.search_llm_enabled and service.settings.search_routing_mode == 'auto':
+        service.get_intent_router()
     index = service.get_index()
     if index.metadata_vectors is None:
         raise ApplicationError("Index chưa có metadata embeddings.",
                                code="metadata_index_unavailable", status_code=503)
     service.get_encoder().encode_documents(["ảnh văn hóa Việt Nam"])
-    service.get_retriever()
+    service.get_retriever().prepare()
     service.encoder_ready = True
     if body.include_llm:
         # Probe the model even if the same warm-up request was cached previously.

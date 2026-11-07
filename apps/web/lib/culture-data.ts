@@ -1,17 +1,14 @@
 import { readFile, realpath, stat } from "node:fs/promises";
 import path from "node:path";
 import { categories, type CultureAsset, type SearchResponse } from "./culture-types";
+import { ambiguousForms, compileText, compiledPhrasePosition, hasToken, type LookupText } from "./vietnamese-text";
+export { normalize } from "./vietnamese-text";
 
-type Entry = { asset: CultureAsset; file: string; title: string; tags: string; text: string };
+type Entry = { asset: CultureAsset; file: string; title: LookupText; tags: LookupText; text: LookupText };
 type RawAsset = {
   asset_id: string; image_path: string; category: string; keyword?: string;
-  description?: string; tags?: string[]; cultural_context?: Record<string, unknown>;
+  search_excluded?: boolean; description?: string; tags?: string[]; cultural_context?: Record<string, unknown>;
 };
-
-export function normalize(text: string) {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d")
-    .replace(/Đ/g, "D").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-}
 
 // The corpus is mounted at runtime, never traced into the application bundle.
 const dataRoot = path.resolve(/* turbopackIgnore: true */ process.env.CULTURE_DATA_DIR ?? path.join(process.cwd(), "../../data"));
@@ -33,6 +30,7 @@ async function loadEntries(): Promise<Entry[]> {
   const signature = available.map((item) => item.signature).join("|");
   if (cached?.signature === signature) return cached.entries;
   const entries = new Map<string, Entry>();
+  const excluded = new Set<string>();
   for (const { directory } of available) {
     const lines = (await readFile(path.join(directory, "assets.jsonl"), "utf8")).split(/\r?\n/).filter(Boolean);
     const report = JSON.parse(await readFile(path.join(directory, "report.json"), "utf8"));
@@ -40,7 +38,8 @@ async function loadEntries(): Promise<Entry[]> {
       .filter((root): root is string => typeof root === "string");
     for (const line of lines) {
       const raw: RawAsset = JSON.parse(line);
-      if (!/^[a-f0-9]{64}$/.test(raw.asset_id) || entries.has(raw.asset_id)) continue;
+      if (raw.search_excluded) { excluded.add(raw.asset_id); continue; }
+      if (excluded.has(raw.asset_id) || !/^[a-f0-9]{64}$/.test(raw.asset_id) || entries.has(raw.asset_id)) continue;
       let file: string | undefined;
       for (const root of roots) {
         try {
@@ -66,8 +65,8 @@ async function loadEntries(): Promise<Entry[]> {
         imageUrl: `/api/culture/images/${raw.asset_id}`,
         sourceUrl: "https://www.kaggle.com/datasets/blackcubo/vietnamese-culture-vqa-dataset",
       };
-      entries.set(asset.id, { asset, file, title: normalize(title), tags: normalize(asset.tags.join(" ")),
-        text: normalize([asset.description, label, ...Object.values(context)].join(" ")) });
+      entries.set(asset.id, { asset, file, title: compileText(title), tags: compileText(asset.tags.join(" ")),
+        text: compileText([asset.description, label, ...Object.values(context)].join(" ")) });
     }
   }
   const buckets = categories.map(({ id }) => [...entries.values()].filter(({ asset }) => asset.category === id));
@@ -86,14 +85,21 @@ async function getEntries() {
 
 export async function searchCulture(query: string, category: string, page: number): Promise<SearchResponse> {
   const entries = await getEntries();
-  const phrase = normalize(query);
-  const tokens = [...new Set(phrase.split(" ").filter(Boolean))];
+  const phrase = compileText(query);
+  const tokens = [...new Map(phrase.tokens.map((token) => [token.marked, token])).values()];
+  const strict = !phrase.ascii;
+  const titleChoices = ambiguousForms(entries.filter((entry) => !category || entry.asset.category === category).map((entry) => entry.title), phrase);
+  if (titleChoices.length) {
+    const counts = Object.fromEntries(categories.map(({ id }) => [id, entries.filter((entry) => entry.asset.category === id).length]));
+    return { items: [], total: 0, page: 1, pages: 1, libraryTotal: entries.length, counts,
+      clarification_required: true, suggested_queries: titleChoices };
+  }
   const matches = entries.map((entry, index) => {
-    const all = `${entry.title} ${entry.tags} ${entry.text}`;
-    if (!tokens.every((token) => all.includes(token))) return null;
-    const score = tokens.reduce((sum, token) => sum + (entry.title.includes(token) ? 12 : 0)
-      + (entry.tags.includes(token) ? 5 : 0) + (entry.text.includes(token) ? 1 : 0), 0)
-      + (phrase && entry.title.includes(phrase) ? 30 : 0);
+    const fields = [entry.title, entry.tags, entry.text];
+    if (!tokens.every((token) => fields.some((field) => hasToken(field, token, strict)))) return null;
+    const score = tokens.reduce((sum, token) => sum + (hasToken(entry.title, token, strict) ? 12 : 0)
+      + (hasToken(entry.tags, token, strict) ? 5 : 0) + (hasToken(entry.text, token, strict) ? 1 : 0), 0)
+      + (phrase.tokens.length && compiledPhrasePosition(entry.title, phrase) >= 0 ? 30 : 0);
     return { entry, index, score };
   }).filter((item) => item !== null).sort((a, b) => b.score - a.score || a.index - b.index);
   const counts = Object.fromEntries(categories.map(({ id }) => [id, matches.filter(({ entry }) => entry.asset.category === id).length]));

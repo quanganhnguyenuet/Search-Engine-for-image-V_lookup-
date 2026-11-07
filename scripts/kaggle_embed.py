@@ -25,6 +25,7 @@ from visualseek_preprocessing.culture_dataset import (
     reconcile_records,
     select_records,
 )
+from visualseek_preprocessing.labels import repair_labels
 from visualseek_retrieval.artifact import ArtifactIndex, sha256_file, write_json
 
 
@@ -69,7 +70,7 @@ def corpus_rows(root: Path, manifest: Path | None, limit: int) -> tuple[Path, li
         file = (root / name).resolve()
         if not file.is_relative_to(root) or not file.is_file():
             raise ValueError(f"Missing/unsafe corpus file: {name}")
-        row = dict(record) if "asset_id" in record else make_asset(record, root)
+        row = repair_labels(record) if "asset_id" in record else make_asset(record, root)
         if row["asset_id"] != sha256_file(file):
             raise ValueError(f"Asset checksum does not match the local image: {name}")
         # Do not export VQA questions/answers; these are not retrieval inputs or RAG evidence.
