@@ -16,6 +16,7 @@ from visualseek_retrieval.artifact import ArtifactIndex, sha256_file, write_json
 from visualseek_retrieval.hybrid import HybridRetriever
 
 PLAN = {"intent": "Tìm áo dài đỏ, không có nón", "visual_query": "red ao dai",
+        "scope": "in_scope", "scope_reason": "Trang phục Việt Nam",
         "metadata_query": "áo dài đỏ", "keywords": ["áo dài", "đỏ"],
         "exclusions": ["nón"]}
 

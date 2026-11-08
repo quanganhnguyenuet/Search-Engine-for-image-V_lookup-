@@ -165,7 +165,7 @@ def test_rag_grounding_and_citations(service):
         "visualseek_api.application.openai_json.httpx.Client",
         side_effect=lambda **kwargs: original_client(transport=httpx.MockTransport(respond)),
     ):
-        result = service.rag("Câu hỏi", None)
+        result = service.rag("Ruộng bậc thang có đặc điểm gì?", None)
     assert result["citations"][0]["asset_id"] == "2" * 64
     assert result["generator_model"] == "gpt-4o-mini"
     assert "SECRET_VQA_LABEL" not in json.dumps(captured)
@@ -191,14 +191,14 @@ def test_rag_rejects_invalid_citations(service, answer):
         ),
     ):
         with pytest.raises(ApplicationError) as error:
-            service.rag("Câu hỏi", None)
+            service.rag("Ruộng bậc thang có đặc điểm gì?", None)
     assert error.value.code == "invalid_generation"
 
 
 def test_rag_abstains_without_evidence_and_without_generator(service):
     service.settings.rag_min_score = 1.1
     with patch("visualseek_api.application.openai_json.httpx.Client") as client:
-        result = service.rag("Câu hỏi", None)
+        result = service.rag("Ruộng bậc thang có đặc điểm gì?", None)
     client.assert_not_called()
     assert result["abstained"] is True
     assert result["citations"] == []
@@ -213,7 +213,7 @@ def test_generator_unavailable_is_not_fake_answer(service):
         ),
     ):
         with pytest.raises(ApplicationError) as error:
-            service.rag("Câu hỏi", None)
+            service.rag("Ruộng bậc thang có đặc điểm gì?", None)
     assert error.value.code == "generator_unavailable"
 
 

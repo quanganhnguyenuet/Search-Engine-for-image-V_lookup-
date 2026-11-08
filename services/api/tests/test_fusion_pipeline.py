@@ -154,6 +154,8 @@ def test_reranking_sees_32_candidates_and_can_return_24(index):
 def test_excluded_phrases_do_not_boost_positive_lexical_keywords():
     plan = {
         "intent": "áo dài không nón",
+        "scope": "in_scope",
+        "scope_reason": "Trang phục Việt Nam",
         "visual_query": "person wearing ao dai",
         "metadata_query": "người mặc áo dài",
         "keywords": ["áo dài", "không đội nón", "nón"],

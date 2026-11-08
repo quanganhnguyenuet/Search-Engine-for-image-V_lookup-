@@ -10,6 +10,9 @@ local; a small learned intent classifier sends reasoning or uncertain requests t
 the LLM. Set `SEARCH_ROUTING_MODE=always` for full planning. See
 [semantic query planning](docs/semantic-query-planning.md) for constraints and clarification.
 See the [approved plan and scope update](docs/text-to-image-search-plan.md).
+Text search now rejects configured out-of-domain subjects before embedding and
+asks for clarification on unknown requests. LLM clarification preserves the original
+request across replies. See [search scope and clarification](docs/search-scope-and-clarification.md).
 For Qdrant credentials, see [Qdrant Cloud setup](docs/qdrant-cloud-setup.md).
 The current search backend remains NumPy; credentials alone do not enable Qdrant retrieval.
 

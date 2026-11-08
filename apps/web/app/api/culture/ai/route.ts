@@ -22,7 +22,8 @@ export async function POST(request: Request) {
       method: "POST", headers: { "Content-Type": "application/json" }, cache: "no-store",
       body: JSON.stringify({ query: body.query || undefined, image_base64: body.image_base64,
         category: body.category || undefined, top_k: body.mode === "rag" ? 5 : 24,
-        ...(body.mode === "contextual" ? { use_llm: body.use_llm } : {}) }),
+        ...(body.mode === "contextual" ? { use_llm: body.use_llm,
+          clarification_context: body.clarification_context } : {}) }),
       signal: AbortSignal.any([request.signal, AbortSignal.timeout(body.mode === "semantic" ? 10_000 : 210_000)]),
     });
     const data = await response.json();

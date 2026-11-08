@@ -5,7 +5,9 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field, StrictBool, model_validator
 
+from visualseek_api.application.query_understanding import ClarificationTurn
 from visualseek_api.application.search import SearchService
+from visualseek_api.application.search_scope import SCOPE_DESCRIPTION, SCOPE_EXAMPLES
 from visualseek_api.core.config import get_settings
 from visualseek_api.core.errors import ApplicationError
 
@@ -56,6 +58,7 @@ class TextSearchRequest(BaseModel):
     category: Category | None = None
     top_k: int = Field(default=24, ge=1, le=50)
     use_llm: StrictBool | None = None
+    clarification_context: list[ClarificationTurn] = Field(default_factory=list, max_length=4)
 
     @model_validator(mode="after")
     def meaningful_query(self):
@@ -87,6 +90,8 @@ def search_status(service: ServiceDependency):
         "backend": "numpy-exact",
         "metadata_ready": index.metadata_vectors is not None,
         "contextual_backend": "numpy-hybrid-rrf",
+        'search_scope': {'description': SCOPE_DESCRIPTION, 'categories': list(SCOPE_EXAMPLES),
+                         'unknown_action': 'clarify', 'outside_action': 'reject'},
         'query_routing': (service.settings.search_routing_mode
                           if service.settings.search_llm_enabled else 'local'),
         'routing_classifier_ready': service.intent_router is not None,

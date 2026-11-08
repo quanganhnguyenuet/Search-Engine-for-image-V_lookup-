@@ -13,10 +13,17 @@ from pathlib import Path
 
 import numpy as np
 from PIL import UnidentifiedImageError
+from pydantic import ValidationError
 
 from visualseek_api.application.openai_json import OpenAIJson
 from visualseek_api.application.query_routing import IntentRouter, search_term
-from visualseek_api.application.query_understanding import QueryUnderstanding
+from visualseek_api.application.query_understanding import ClarificationContext, QueryUnderstanding
+from visualseek_api.application.search_scope import (
+    SCOPE_DESCRIPTION,
+    ScopeDecision,
+    assess_scope,
+    scope_suggestions,
+)
 from visualseek_api.core.config import Settings
 from visualseek_api.core.errors import ApplicationError
 from visualseek_embedding.siglip2 import Siglip2Encoder, load_image
@@ -60,7 +67,8 @@ class SearchService:
         self.generator = OpenAIJson(settings)
         self.hybrid = None
         self.intent_router = None
-        self.plan_cache: OrderedDict[tuple[str, str | None], object] = OrderedDict()
+        self.plan_cache: OrderedDict[tuple, object] = OrderedDict()
+        self.scope_titles = None
         self.encoder_ready = False
         self.query_model_ready = False
         self.coverage_signature = None
@@ -69,9 +77,11 @@ class SearchService:
         self.relevance_policy_checked = False
         self.relevance_policy_error = False
 
-    def query_plan(self, query: str, category: str | None = None):
+    def query_plan(self, query: str, category: str | None = None,
+                   clarification_context: list[dict] | None = None):
         self.require_llm()
-        key = (query, category)
+        context = tuple((turn['query'], turn['question']) for turn in clarification_context or [])
+        key = (query, category, context)
         with self.cache_lock:
             if key in self.plan_cache:
                 self.plan_cache.move_to_end(key)
@@ -89,8 +99,9 @@ class SearchService:
                 characters += len(title)
             ambiguous = self.get_retriever().entities.ambiguities(
                 search_term(query, preserve_accents=True), category=category)
+            extra = {'clarification_context': clarification_context} if context else {}
             plan = self.understanding.plan(query, category=category, catalog_titles=catalog,
-                                           ambiguous_names=ambiguous)
+                                           ambiguous_names=ambiguous, **extra)
         except ApplicationError:
             self.query_model_ready = False
             raise
@@ -100,6 +111,64 @@ class SearchService:
             if len(self.plan_cache) > 128:
                 self.plan_cache.popitem(last=False)
         return plan, False
+
+    def check_scope(self, query: str, *, known_entity: bool = False) -> ScopeDecision:
+        if self.scope_titles is None:
+            self.scope_titles = tuple(sorted({str(row.get('keyword', '')).replace('_', ' ')
+                for row in self.get_index().assets if not row.get('search_excluded')} - {''}))
+        return assess_scope(query, known_entity=known_entity, catalog_titles=self.scope_titles)
+
+    @staticmethod
+    def next_clarification_context(query, question, context):
+        # Never silently discard earlier constraints. At the bound, ask for a new
+        # complete request and restart rather than retaining a partial conversation.
+        if len(context) >= 4:
+            return [], 'Bạn hãy nhập lại mô tả đầy đủ, gồm đối tượng và các điều kiện muốn tìm.'
+        return [*context, {'query': query, 'question': question}], question
+
+    def scope_stop(self, scope: ScopeDecision, *, query: str, category: str | None,
+                   mode='contextual', plan=None, plan_cached=False,
+                   context: list[dict] | None = None, planning_ms=0.0, started=None) -> dict:
+        index = self.get_index()
+        rejected = scope.status == 'out_of_scope'
+        question = None if rejected else (
+            'Bạn muốn tìm ảnh về đối tượng nào trong thư viện văn hóa Việt Nam? '
+            'Hãy nêu tên, chủ đề hoặc mô tả cụ thể hơn.')
+        history = []
+        if question:
+            history, question = self.next_clarification_context(query, question, context or [])
+            if context and scope.reason == 'clarification_answer_needs_planning':
+                history = []
+                question = ('Bạn hãy nhập lại mô tả đầy đủ, gồm đối tượng và các điều kiện '
+                            'muốn tìm, để tiếp tục tìm trong thư viện.')
+        message = (SCOPE_DESCRIPTION + ' Yêu cầu này nằm ngoài phạm vi hỗ trợ.' if rejected
+                   else 'Chưa xác định được đối tượng thuộc phạm vi thư viện. ' + SCOPE_DESCRIPTION)
+        calls = plan._generation_calls if plan and not plan_cached else 0
+        elapsed = (time.perf_counter() - started) * 1000 if started is not None else planning_ms
+        return {
+            'query_id': str(uuid.uuid4()), 'items': [], 'total': 0, 'page': 1, 'pages': 1,
+            'libraryTotal': index.searchable_count, 'counts': index.counts,
+            'mode': mode, 'result_scope': 'top_k', 'retrieval_backend': 'none',
+            'score_type': 'none', 'search_route': 'scope', 'routing_reason': scope.reason,
+            'routing_mode': self.settings.search_routing_mode,
+            'search_scope': scope.as_dict(), 'scope_rejected': rejected, 'scope_message': message,
+            'clarification_required': not rejected, 'clarification_question': question,
+            'clarification_context': history,
+            'suggested_queries': (plan.suggested_queries if plan and plan.suggested_queries
+                                  else scope_suggestions(category)),
+            'interpretation': plan.model_dump() if plan else None,
+            'abstained': True,
+            'abstention_reason': 'out_of_scope' if rejected else 'scope_clarification',
+            'llm_used': plan is not None, 'llm_call_count': calls, 'llm_reranked': False,
+            'plan_cache_hit': plan_cached, 'vector_cache_hit': False,
+            'query_model': self.settings.search_llm_model if plan else None,
+            'model': index.manifest['model_id'], 'model_revision': index.manifest['model_revision'],
+            'selection_scope': 'none', 'relevance_gate': {'status': 'not_run_scope'},
+            **self.coverage(),
+            'timings': {'routing_ms': max(0.0, elapsed - planning_ms),
+                        'planning_ms': planning_ms, 'embedding_ms': 0.0,
+                        'retrieval_ms': 0.0, 'reranking_ms': 0.0, 'total_ms': elapsed},
+        }
 
     def require_llm(self) -> None:
         if not self.settings.search_llm_enabled:
@@ -257,11 +326,17 @@ class SearchService:
         return np.stack([values[text] for text in texts]), not missing
 
     def text_search(self, *, query: str, category: str | None = None,
-                    top_k: int = 24, use_llm: bool | None = None) -> dict:
+                    top_k: int = 24, use_llm: bool | None = None,
+                    clarification_context: list[dict] | None = None) -> dict:
         query = unicodedata.normalize("NFC", query.strip())
         if not query or len(query) > 1000 or not 1 <= top_k <= 50:
             raise ApplicationError("Mô tả phải có 1–1000 ký tự, top_k từ 1–50.",
                                    code="invalid_query", status_code=422)
+        try:
+            context = ClarificationContext(turns=clarification_context or []).model_dump()['turns']
+        except ValidationError as exc:
+            raise ApplicationError('Ngữ cảnh làm rõ không hợp lệ.',
+                                   code='invalid_clarification_context', status_code=422) from exc
         if not self.settings.search_llm_enabled:
             if use_llm is True:
                 self.require_llm()
@@ -276,12 +351,20 @@ class SearchService:
         local_choices = retriever.entities.ambiguities(term, category=category) if try_local else []
         exact = (retriever.exact_search(term, category=category, limit=top_k)
                  if try_local and not local_choices else None)
+        scope = (ScopeDecision('unclear', 'clarification_answer_needs_planning') if context
+                 else self.check_scope(
+                     query, known_entity=bool(local_choices) or exact is not None))
+        if scope.status == 'out_of_scope' or (scope.status == 'unclear' and use_llm is False):
+            return self.scope_stop(scope, query=query, category=category, context=context,
+                                   started=started)
         intent = None
         if use_llm is False:
             should_plan, route_reason = False, 'llm_disabled'
         elif use_llm is True or self.settings.search_routing_mode == 'always':
             should_plan = True
             route_reason = 'llm_forced' if use_llm is True else 'llm_semantic_planning'
+        elif scope.status == 'unclear':
+            should_plan, route_reason = True, 'scope_requires_planning'
         elif local_choices or exact is not None:
             should_plan, route_reason = False, 'local_entity_lookup'
         else:
@@ -294,12 +377,27 @@ class SearchService:
                 "Index chưa có embedding tags/description. Chạy enrich_embeddings.py trước.",
                 code="metadata_index_unavailable", status_code=503,
             )
-        plan, plan_cached = self.query_plan(query, category) if should_plan else (None, False)
+        plan, plan_cached = (self.query_plan(query, category, context)
+                             if should_plan else (None, False))
         planning_ms = (time.perf_counter() - before) * 1000 if should_plan else 0.0
+        if plan:
+            scope = ScopeDecision(plan.scope, plan.scope_reason or 'planned_scope', 'llm_plan')
+            if plan.scope == 'out_of_scope':
+                return self.scope_stop(scope, query=query, category=category, plan=plan,
+                                       plan_cached=plan_cached, planning_ms=planning_ms,
+                                       started=started)
         before = time.perf_counter()
         clarifications = plan.suggested_queries if plan else local_choices
         clarification_question = (plan.clarification_question if plan else None)
         needs_clarification = bool(clarifications or clarification_question)
+        next_context = []
+        if needs_clarification:
+            next_context, clarification_question = self.next_clarification_context(
+                query, clarification_question or 'Bạn muốn tìm đối tượng nào?', context)
+            if plan is None and local_choices:
+                # This path only receives a single ambiguous entity term, so its
+                # self-contained name choices can continue locally without an LLM.
+                next_context = []
         if should_plan:
             exact = None
         vector_cached = False
@@ -359,6 +457,8 @@ class SearchService:
             'clarification_required': needs_clarification,
             'clarification_question': clarification_question,
             'suggested_queries': clarifications,
+            'clarification_context': next_context,
+            'search_scope': scope.as_dict(), 'scope_rejected': False, 'scope_message': None,
             "items": [{**display_asset(hit["asset"], hit["score"]),
                        "match_kind": hit.get("match_kind"),
                        "match_reason": hit.get("match_reason") or (
@@ -431,6 +531,10 @@ class SearchService:
             finally:
                 image.close()
         else:
+            scope = self.check_scope(query or '')
+            if scope.status != 'in_scope':
+                return self.scope_stop(scope, query=query or '', category=category,
+                                       mode='semantic', started=started)
             vector = self.text_vector(query or "")
         embedding_ms = (time.perf_counter() - started) * 1000
         started = time.perf_counter()
@@ -454,6 +558,9 @@ class SearchService:
     def rag(self, query: str, category: str | None, top_k: int = 5) -> dict:
         self.require_llm()
         response = self.search(query=query, category=category, top_k=top_k)
+        if response.get('scope_rejected') or response.get('clarification_required'):
+            return {**response, 'mode': 'rag', 'answer': response['scope_message'],
+                    'citations': [], 'generator_model': None}
         sources = [
             item
             for item in response["items"]

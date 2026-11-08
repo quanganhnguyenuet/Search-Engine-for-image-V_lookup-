@@ -16,6 +16,8 @@ export type CultureAsset = {
   match_kind?: string | null;
 };
 
+export type ClarificationTurn = { query: string; question: string };
+
 export type SearchResponse = {
   items: CultureAsset[]; total: number; page: number; pages: number;
   libraryTotal: number; counts: Record<string, number>;
@@ -23,12 +25,17 @@ export type SearchResponse = {
   corpus_total?: number | null;
   coverage_complete?: boolean;
   interpretation?: { intent: string; visual_query: string; metadata_query: string;
+    scope?: "in_scope" | "out_of_scope" | "unclear"; scope_reason?: string;
     keywords: string[]; exclusions: string[];
     requirements?: { id: `R${number}`; text: string }[];
     preferences?: { id: `P${number}`; text: string }[];
     clarification_question?: string | null; suggested_queries?: string[] } | null;
   query_model?: string | null;
-  search_route?: "lexical" | "hybrid" | "llm_hybrid";
+  search_route?: "lexical" | "hybrid" | "llm_hybrid" | "scope";
+  search_scope?: { status: "in_scope" | "out_of_scope" | "unclear";
+    reason: string; source: string; description: string; categories: string[] };
+  scope_rejected?: boolean;
+  scope_message?: string | null;
   llm_used?: boolean;
   llm_call_count?: number;
   vector_cache_hit?: boolean;
@@ -38,6 +45,7 @@ export type SearchResponse = {
   abstention_reason?: string | null;
   clarification_required?: boolean;
   clarification_question?: string | null;
+  clarification_context?: ClarificationTurn[];
   suggested_queries?: string[];
   evidence_type?: string;
   citations?: { id: string; asset_id: string; title: string }[];

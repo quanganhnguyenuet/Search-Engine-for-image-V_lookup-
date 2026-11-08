@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
-    "test:search": "node --test tests/culture-search.test.cjs",
+    "test:search": "node --test tests/*.test.cjs",
     "test:http": "node tests/http-smoke.mjs",
     "test:ai": "node tests/ai-http-smoke.mjs",
     "test:contextual": "node tests/contextual-http-smoke.mjs"

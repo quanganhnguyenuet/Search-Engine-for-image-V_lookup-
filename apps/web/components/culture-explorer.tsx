@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
-import { categories, type CultureAsset, type SearchResponse } from "@/lib/culture-types";
+import { categories, type ClarificationTurn, type CultureAsset, type SearchResponse } from "@/lib/culture-types";
 
 type SearchMode = "contextual" | "semantic" | "rag" | "keyword";
 
@@ -56,6 +56,9 @@ export default function CultureExplorer() {
   const [selected, setSelected] = useState<CultureAsset | null>(null);
   const [mode, setMode] = useState<SearchMode>("contextual");
   const [imageQuery, setImageQuery] = useState<{ name: string; base64: string } | null>(null);
+  const [clarificationContext, setClarificationContext] = useState<ClarificationTurn[]>([]);
+  const [clarificationAnswer, setClarificationAnswer] = useState("");
+  const [forcePlanning, setForcePlanning] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLElement>(null);
@@ -68,6 +71,9 @@ export default function CultureExplorer() {
     const requestedMode = params.get("mode");
     setMode(requestedMode === "keyword" || requestedMode === "rag" || requestedMode === "semantic" ? requestedMode : "contextual");
     setImageQuery(null);
+    const savedContext = window.history.state?.clarificationContext;
+    setClarificationContext(Array.isArray(savedContext) ? savedContext : []);
+    setClarificationAnswer("");
     setDraft(term); setQuery(term);
     setCategory(categories.some(({ id }) => id === selectedCategory) ? selectedCategory : "");
     setPage(Number.isSafeInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1);
@@ -87,7 +93,9 @@ export default function CultureExplorer() {
     const request = useAI ? fetch("/api/culture/ai", {
       method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
       body: JSON.stringify({ mode, query: imageQuery ? undefined : query,
-        image_base64: imageQuery?.base64, category }),
+        image_base64: imageQuery?.base64, category,
+        ...(mode === "contextual" ? { clarification_context: clarificationContext,
+          use_llm: forcePlanning ? true : undefined } : {}) }),
     }) : fetch(`/api/culture?${params}`, { signal: controller.signal });
     request
       .then(async (response) => {
@@ -99,34 +107,41 @@ export default function CultureExplorer() {
       .catch((reason) => { if (!controller.signal.aborted) setError(reason.message); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
-  }, [query, category, page, retry, mode, imageQuery]);
+  }, [query, category, page, retry, mode, imageQuery, clarificationContext, forcePlanning]);
 
-  function navigate(term: string, nextCategory = category, nextPage = 1, nextMode = mode) {
+  function navigate(term: string, nextCategory = category, nextPage = 1, nextMode = mode,
+                    context: ClarificationTurn[] = []) {
     const cleaned = term.normalize("NFC").trim();
     if (cleaned.length > (nextMode === "contextual" ? 1000 : 200)) {
       setError("Mô tả quá dài. Hãy rút gọn trước khi tìm kiếm."); return;
     }
     setDraft(cleaned); setQuery(cleaned); setCategory(nextCategory); setPage(nextPage);
     setMode(nextMode); setImageQuery(null);
+    setClarificationContext(context); setClarificationAnswer("");
     const params = new URLSearchParams();
     if (cleaned) params.set("q", cleaned);
     if (nextCategory) params.set("category", nextCategory);
     if (nextPage > 1) params.set("page", String(nextPage));
     if (nextMode !== "contextual") params.set("mode", nextMode);
-    window.history.pushState(null, "", params.size ? `?${params}` : "/");
+    window.history.pushState({ clarificationContext: context }, "", params.size ? `?${params}` : "/");
     resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function submit(event: FormEvent) { event.preventDefault(); navigate(draft); }
+  function answerClarification(event: FormEvent) {
+    event.preventDefault();
+    if (!clarificationAnswer.trim()) return;
+    navigate(clarificationAnswer, category, 1, "contextual", data?.clarification_context ?? []);
+  }
   function changePage(next: number) {
-    navigate(query, category, next);
+    navigate(query, category, next, mode, clarificationContext);
   }
 
   function filterCategory(next: string) {
     if (imageQuery) {
       setCategory(next); setPage(1);
       resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else navigate(query, next);
+    } else navigate(query, next, 1, mode, clarificationContext);
   }
 
   function uploadImage(file: File | undefined) {
@@ -169,6 +184,7 @@ export default function CultureExplorer() {
           {draft && <button className="clear-search" type="button" onClick={() => { setDraft(""); searchRef.current?.focus(); }} aria-label="Xóa từ khóa">×</button>}
           <button className="search-submit" type="submit">Tìm kiếm <span aria-hidden="true">↗</span></button>
         </form>
+        {mode === "contextual" && <label className="ai-planning-option"><input type="checkbox" checked={forcePlanning} onChange={(event) => setForcePlanning(event.target.checked)} /> Nhờ AI phân tích yêu cầu và hỏi lại khi cần</label>}
         {mode === "semantic" && <div className="image-query-controls"><input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" aria-label="Chọn ảnh để tìm ảnh tương tự" onChange={(event) => uploadImage(event.target.files?.[0])} /><button onClick={() => fileRef.current?.click()}>▧ Tìm bằng ảnh</button>{imageQuery && <span>{imageQuery.name} <button onClick={() => navigate("", "")} aria-label="Xóa ảnh tìm kiếm">×</button></span>}</div>}
         <div className="suggestions"><span>Thử khám phá</span>{["người mặc áo dài đỏ", "ruộng bậc thang xanh", "phố cổ Hội An", "nghệ nhân làm gốm"].map((term) => <button key={term} onClick={() => navigate(term, "")}>{term}<span aria-hidden="true">↗</span></button>)}</div>
         <div className="hero-foot"><span>{mode === "keyword" ? "Tìm từ khóa có dấu hoặc không dấu" : mode === "contextual" ? "Tìm nhanh bằng tên, tags hoặc mô tả ảnh" : "Tìm bằng mô tả tự nhiên hoặc một ảnh tương tự"}</span><span>VĂN HÓA KẾT NỐI CHÚNG TA <span aria-hidden="true">↓</span></span></div>
@@ -183,10 +199,11 @@ export default function CultureExplorer() {
         <div className="results-toolbar"><p role="status" aria-live="polite">{loading ? "Đang tìm những khung hình dành cho bạn…" : error ? "Tạm thời chưa tải được dữ liệu" : `${data?.total.toLocaleString("vi-VN") ?? 0} hình ảnh${category ? ` · ${categories.find(({ id }) => id === category)?.label}` : " trong bộ sưu tập"}`}</p>{(query || category) ? <button onClick={() => navigate("", "")}>Xóa bộ lọc ×</button> : <span>Chạm vào ảnh để khám phá câu chuyện <span aria-hidden="true">↗</span></span>}</div>
 
         {!loading && !error && data?.answer && <section className="rag-answer" aria-label="Câu trả lời RAG"><p className="eyebrow">{data.abstained ? "CHƯA ĐỦ BẰNG CHỨNG" : "CÂU TRẢ LỜI TỪ THƯ VIỆN"}</p><p className="answer-text">{data.answer}</p><div className="rag-citations">{data.citations?.map((citation) => <button key={citation.id} onClick={() => { const asset = data.items.find((item) => item.id === citation.asset_id); if (asset) setSelected(asset); }}>[{citation.id}] {citation.title} ↗</button>)}</div><small>Tổng hợp từ chú thích dataset, chưa phải xác minh lịch sử độc lập.{data.generator_model ? ` · ${data.generator_model}` : ""}</small></section>}
-        {!loading && !error && data?.result_scope === "top_k" && <p className="semantic-note">Hiển thị {data.items.length} ảnh gần nhất trong {data.libraryTotal.toLocaleString("vi-VN")} ảnh đã index. Số ảnh theo chủ đề là thống kê của index.{data.timings ? ` · Embedding ${Math.round(data.timings.embedding_ms)} ms · Retrieval ${Math.round(data.timings.retrieval_ms)} ms` : ""}</p>}
+        {!loading && !error && !!data?.items.length && data.result_scope === "top_k" && <p className="semantic-note">Hiển thị {data.items.length} ảnh gần nhất trong {data.libraryTotal.toLocaleString("vi-VN")} ảnh đã index. Số ảnh theo chủ đề là thống kê của index.{data.timings ? ` · Embedding ${Math.round(data.timings.embedding_ms)} ms · Retrieval ${Math.round(data.timings.retrieval_ms)} ms` : ""}</p>}
         {!loading && !error && data?.coverage_complete === false && <p className="semantic-note" role="status">Index hiện mới có {data.libraryTotal.toLocaleString("vi-VN")}{data.corpus_total ? ` / ${data.corpus_total.toLocaleString("vi-VN")}` : ""} ảnh. Kết quả chỉ lấy từ phần đã index.</p>}
-        {!loading && !error && data?.clarification_required && <section className="rag-answer" aria-label="Làm rõ yêu cầu tìm ảnh"><p>{data.clarification_question || "Tên không dấu này có nhiều nghĩa. Bạn muốn tìm:"}</p><div className="rag-citations">{data.suggested_queries?.map((suggestion) => <button key={suggestion} onClick={() => navigate(suggestion, category, 1, mode)}>{suggestion}</button>)}</div></section>}
-        {!loading && !error && data?.interpretation && !data.clarification_required && <section className="rag-answer" aria-label="Cách hiểu yêu cầu">
+        {!loading && !error && data?.scope_rejected && <section className="rag-answer" role="status" aria-label="Yêu cầu ngoài phạm vi"><p className="eyebrow">YÊU CẦU NGOÀI PHẠM VI</p><p>{data.scope_message}</p><p>Bạn có thể khám phá các chủ đề sau:</p><div className="rag-citations">{data.suggested_queries?.map((suggestion) => <button key={suggestion} onClick={() => navigate(suggestion, category, 1, mode)}>{suggestion}</button>)}</div></section>}
+        {!loading && !error && data?.clarification_required && <section className="rag-answer" aria-label="Làm rõ yêu cầu tìm ảnh"><p className="eyebrow">CẦN LÀM RÕ YÊU CẦU</p>{!!data.clarification_context?.length && <p>Yêu cầu ban đầu: {data.clarification_context[0].query}</p>}<p>{data.clarification_question || "Tên không dấu này có nhiều nghĩa. Bạn muốn tìm:"}</p><div className="rag-citations">{data.suggested_queries?.map((suggestion) => <button key={suggestion} onClick={() => navigate(suggestion, category, 1, "contextual", data.clarification_context ?? [])}>{suggestion}</button>)}</div><form className="clarification-form" onSubmit={answerClarification}><label htmlFor="clarification-answer">Hoặc trả lời theo ý bạn</label><input id="clarification-answer" value={clarificationAnswer} maxLength={1000} onChange={(event) => setClarificationAnswer(event.target.value)} placeholder="Ví dụ: phố cổ vào ban đêm" required /><button type="submit" disabled={!clarificationAnswer.trim()}>Tiếp tục tìm kiếm</button></form></section>}
+        {!loading && !error && data?.interpretation && !data.clarification_required && !data.scope_rejected && <section className="rag-answer" aria-label="Cách hiểu yêu cầu">
           <p className="eyebrow">YÊU CẦU ĐƯỢC HIỂU LÀ</p>
           <p>{data.interpretation.intent}</p>
           {!!data.interpretation.requirements?.length && <p><strong>Điều kiện bắt buộc:</strong> {data.interpretation.requirements.map((condition) => condition.text).join("; ")}</p>}
@@ -195,7 +212,7 @@ export default function CultureExplorer() {
           <small>{data.evidence_type === "retrieved-image-pixels" ? "Model đã đối chiếu ảnh với yêu cầu; hãy mở ảnh để xem rõ chi tiết." : "Ảnh được gợi ý theo chú thích trong thư viện; chưa xác minh trực tiếp từng chi tiết trong ảnh."}</small>
         </section>}
 
-        {error ? <div className="empty-state"><span aria-hidden="true">↻</span><h3>Thư viện đang tạm nghỉ một chút</h3><p>{error}</p><button onClick={() => setRetry((value) => value + 1)}>Thử lại</button></div> : loading ? <div className="photo-grid" aria-busy="true" aria-label="Đang tải ảnh">{Array.from({ length: 12 }, (_, index) => <div key={index} className="skeleton-card"><div /><span /><span /></div>)}</div> : !data?.items.length ? <div className="empty-state"><SearchIcon /><h3>{data?.clarification_required ? "Làm rõ yêu cầu để tiếp tục" : data?.libraryTotal ? "Chưa tìm thấy khung hình phù hợp" : "Thư viện đang chờ những khung hình đầu tiên"}</h3><p>{data?.libraryTotal ? (data.abstained ? "Chưa có ảnh đủ bằng chứng phù hợp. Thử điều chỉnh mô tả hoặc chọn chủ đề khác." : "Thử một từ khóa ngắn hơn, không dấu hoặc chọn chủ đề khác.") : "Chuẩn bị dataset ảnh local rồi làm mới trang để bắt đầu khám phá."}</p><button onClick={() => navigate("", "")}>Khám phá tất cả</button></div> : <>
+        {error ? <div className="empty-state"><span aria-hidden="true">↻</span><h3>Thư viện đang tạm nghỉ một chút</h3><p>{error}</p><button onClick={() => setRetry((value) => value + 1)}>Thử lại</button></div> : loading ? <div className="photo-grid" aria-busy="true" aria-label="Đang tải ảnh">{Array.from({ length: 12 }, (_, index) => <div key={index} className="skeleton-card"><div /><span /><span /></div>)}</div> : !data?.items.length ? <div className="empty-state"><SearchIcon /><h3>{data?.scope_rejected ? "Yêu cầu nằm ngoài phạm vi thư viện" : data?.clarification_required ? "Làm rõ yêu cầu để tiếp tục" : data?.libraryTotal ? "Chưa tìm thấy khung hình phù hợp" : "Thư viện đang chờ những khung hình đầu tiên"}</h3><p>{data?.libraryTotal ? (data.scope_rejected ? "Chọn một gợi ý phía trên hoặc nhập yêu cầu về văn hóa Việt Nam." : data.clarification_required ? "Trả lời câu hỏi phía trên hoặc chọn một gợi ý để tiếp tục." : data.abstained ? "Chưa có ảnh đủ bằng chứng phù hợp. Thử điều chỉnh mô tả hoặc chọn chủ đề khác." : "Thử một từ khóa ngắn hơn, không dấu hoặc chọn chủ đề khác.") : "Chuẩn bị dataset ảnh local rồi làm mới trang để bắt đầu khám phá."}</p><button onClick={() => navigate("", "")}>Khám phá tất cả</button></div> : <>
           <div className="photo-grid">{data.items.map((asset, index) => <article className="photo-card" key={asset.id}><button className="photo-open" onClick={() => setSelected(asset)} aria-label={`Xem ${asset.title}`}><div className="photo-frame"><AssetImage asset={asset} eager={index < 4} /><span className="photo-category">{asset.categoryLabel}</span><span className="photo-arrow" aria-hidden="true">↗</span></div><div className="photo-caption"><h3>{asset.title}</h3><p>{asset.tags.slice(0, 2).join(" · ") || asset.categoryLabel}</p></div></button></article>)}</div>
           {data.pages > 1 && <nav className="pagination" aria-label="Phân trang kết quả"><button disabled={data.page === 1} onClick={() => changePage(data.page - 1)}>← <span>Trang trước</span></button><span>Trang <strong>{data.page}</strong> / {data.pages}</span><button disabled={data.page === data.pages} onClick={() => changePage(data.page + 1)}><span>Trang sau</span> →</button></nav>}
         </>}
