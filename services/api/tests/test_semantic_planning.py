@@ -38,13 +38,16 @@ def test_unclear_request_asks_question_before_encoding_or_retrieving(service):
 
 def test_constraints_reach_selector_and_empty_selection_is_respected(service):
     interpretation = {**PLAN,
-        'requirements': ['Mặc áo dài đỏ hoặc xanh', 'Hai người trong cùng một ảnh'],
-        'preferences': ['Ưu tiên toàn cảnh']}
+        'requirements': [{'id': 'R1', 'text': 'Mặc áo dài đỏ hoặc xanh'},
+                         {'id': 'R2', 'text': 'Hai người trong cùng một ảnh'}],
+        'preferences': [{'id': 'P1', 'text': 'Ưu tiên toàn cảnh'}]}
     response, captured = call_model([interpretation, {'suggestions': []}],
         lambda: service.text_search(query='hai người mặc áo dài đỏ hoặc xanh ưu tiên toàn cảnh'))
     selection = json.loads(captured[1]['messages'][1]['content'])
     assert selection['interpretation']['requirements'] == interpretation['requirements']
     assert selection['interpretation']['preferences'] == interpretation['preferences']
+    assert response['interpretation']['requirements'] == interpretation['requirements']
+    assert response['interpretation']['preferences'] == interpretation['preferences']
     assert len(captured) == 2 and response['items'] == [] and response['abstained']
 
 
@@ -71,7 +74,17 @@ def test_plans_are_cached_per_query_and_category(service):
 
 
 @pytest.mark.parametrize('changes', [
-    {'requirements': ['']}, {'requirements': ['a' * 241]}, {'preferences': [' ']},
+    {'requirements': [{'id': 'R1', 'text': ''}]},
+    {'requirements': [{'id': 'R1', 'text': 'a' * 241}]},
+    {'preferences': [{'id': 'P1', 'text': ' '}]},
+    {'requirements': ['Mặc áo dài đỏ']},
+    {'requirements': [{'id': 'R1', 'text': 'Áo dài', 'extra': True}]},
+    {'requirements': [{'id': 'R2', 'text': 'Áo dài'}]},
+    {'requirements': [{'id': 'R1', 'text': 'Áo dài'}, {'id': 'R1', 'text': 'Hai người'}]},
+    {'requirements': [{'id': 'P1', 'text': 'Áo dài'}]},
+    {'preferences': [{'id': 'P2', 'text': 'Toàn cảnh'}]},
+    {'preferences': [{'id': 'R1', 'text': 'Toàn cảnh'}]},
+    {'preferences': [{'id': 'P1'}]},
     {'clarification_question': None, 'suggested_queries': ['Tìm phở']},
     {'visual_query': ''},
 ])
@@ -90,6 +103,11 @@ def test_category_is_context_for_model_and_schema_describes_conditions():
     schema = captured[0]['response_format']['json_schema']['schema']
     assert {'requirements', 'preferences', 'clarification_question', 'suggested_queries'} <= set(
         schema['required'])
+    for field, definition in [('requirements', 'Requirement'), ('preferences', 'Preference')]:
+        assert schema['properties'][field]['items']['$ref'] == f'#/$defs/{definition}'
+        condition = schema['$defs'][definition]
+        assert set(condition['required']) == {'id', 'text'}
+        assert condition['additionalProperties'] is False
 
 
 def test_excluded_target_in_embedding_query_is_corrected_once(service):
@@ -130,9 +148,44 @@ def test_clarification_can_leave_embedding_queries_empty(service):
 
 def test_schema_mistake_gets_one_repair_attempt(service):
     service.settings.search_llm_rerank = False
-    response, captured = call_model([{**PLAN, 'requirements': ['']}, PLAN],
-                                    lambda: service.text_search(query='áo dài đỏ'))
+    response, captured = call_model([
+        {**PLAN, 'requirements': [{'id': 'R2', 'text': 'Mặc áo dài đỏ'}]},
+        {**PLAN, 'requirements': [{'id': 'R1', 'text': 'Mặc áo dài đỏ'}]},
+    ], lambda: service.text_search(query='áo dài đỏ'))
     assert len(captured) == response['llm_call_count'] == 2
+    assert response['interpretation']['requirements'] == [
+        {'id': 'R1', 'text': 'Mặc áo dài đỏ'}]
+
+
+def test_condition_ids_survive_cached_plan_without_additional_planning(service):
+    service.settings.search_llm_rerank = False
+    interpretation = {**PLAN,
+        'requirements': [{'id': 'R1', 'text': 'Mặc áo dài đỏ hoặc xanh'},
+                         {'id': 'R2', 'text': 'Có hai người'}],
+        'preferences': [{'id': 'P1', 'text': 'Ảnh toàn cảnh'}]}
+
+    def search_twice():
+        return (service.text_search(query='hai người mặc áo dài'),
+                service.text_search(query='hai người mặc áo dài'))
+
+    (first, second), captured = call_model([interpretation], search_twice)
+    assert len(captured) == 1 and second['plan_cache_hit']
+    assert first['interpretation'] == second['interpretation']
+    assert second['interpretation']['requirements'] == interpretation['requirements']
+    assert second['interpretation']['preferences'] == interpretation['preferences']
+
+
+def test_condition_text_is_trimmed_and_list_bounds_are_enforced():
+    plan = QueryUnderstanding._parse_plan({**PLAN,
+        'requirements': [{'id': f'R{i}', 'text': ' Điều kiện '} for i in range(1, 9)],
+        'preferences': [{'id': f'P{i}', 'text': ' Ưu tiên '} for i in range(1, 5)]})
+    assert plan.requirements[0].text == 'Điều kiện'
+    assert plan.preferences[0].text == 'Ưu tiên'
+    for field, prefix, size in [('requirements', 'R', 9), ('preferences', 'P', 5)]:
+        with pytest.raises(ApplicationError) as error:
+            QueryUnderstanding._parse_plan({**PLAN,
+                field: [{'id': f'{prefix}{i}', 'text': 'Điều kiện'} for i in range(1, size + 1)]})
+        assert error.value.code == 'invalid_query_plan'
 
 
 def test_planner_receives_corpus_titles_for_grounding_aliases(service):

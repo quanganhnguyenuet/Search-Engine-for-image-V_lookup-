@@ -77,6 +77,41 @@ Nếu `SEARCH_LLM_ENABLED=false` hoặc request đặt `use_llm=false`, hệ th�
 lookup tên/tag và hybrid local, không gọi planner/rerank. `use_llm=true` không
 vượt qua được cấu hình tắt LLM ở backend. Lỗi model trả lỗi rõ ràng.
 
+## Điều kiện có ID trong query plan
+
+`interpretation.requirements` và `interpretation.preferences` trả danh sách object
+`{id, text}` thay cho danh sách chuỗi. Ví dụ với yêu cầu “Hai người làm gốm trên
+bàn xoay, một người hướng dẫn, ưu tiên toàn cảnh”:
+
+```json
+{
+  "requirements": [
+    {"id": "R1", "text": "Có hai người trong cùng một ảnh"},
+    {"id": "R2", "text": "Hai người đang làm gốm trên bàn xoay"},
+    {"id": "R3", "text": "Một người hướng dẫn người còn lại"}
+  ],
+  "preferences": [
+    {"id": "P1", "text": "Ảnh toàn cảnh"}
+  ]
+}
+```
+
+Mỗi plan có tối đa 8 requirements (`R1` đến `R8`) và 4 preferences (`P1` đến
+`P4`); từng danh sách bắt đầu từ 1 và không trùng hoặc nhảy số. ID có phạm vi
+trong một plan, giữ nguyên qua cache, response API và payload rerank; không phải
+định danh toàn cục giữa các query khác nhau. `text` được trim, có 1–240 ký tự.
+Danh sách rỗng được phép. Cấu trúc chuỗi cũ bị từ chối; nếu model trả sai, backend
+yêu cầu sửa một lần theo cơ chế hiện có.
+
+Planner tách điều kiện có thể đối chiếu độc lập, giữ màu gắn với đúng đối tượng,
+số lượng và quan hệ theo yêu cầu gốc. Một lựa chọn “đỏ hoặc xanh” vẫn nằm trong
+cùng một điều kiện; “ưu tiên toàn cảnh” thuộc preferences. Không tự đổi “hai người”
+thành “đúng hai người” khi ngữ cảnh chưa yêu cầu giới hạn đó.
+
+Frontend hiển thị `condition.text`. Reranker nhận đầy đủ `{id, text}`. Đây là bước
+chuẩn hóa kế hoạch để có thể gắn bằng chứng theo điều kiện ở bước tiếp theo;
+chưa bổ sung verifier, trạng thái đáp ứng hoặc bảo đảm từng ảnh thỏa yêu cầu.
+
 ## Kiểm tra
 
 Các câu không cần từ khóa kích hoạt:

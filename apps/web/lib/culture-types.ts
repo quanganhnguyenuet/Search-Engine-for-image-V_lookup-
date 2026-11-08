@@ -23,7 +23,9 @@ export type SearchResponse = {
   corpus_total?: number | null;
   coverage_complete?: boolean;
   interpretation?: { intent: string; visual_query: string; metadata_query: string;
-    keywords: string[]; exclusions: string[]; requirements?: string[]; preferences?: string[];
+    keywords: string[]; exclusions: string[];
+    requirements?: { id: `R${number}`; text: string }[];
+    preferences?: { id: `P${number}`; text: string }[];
     clarification_question?: string | null; suggested_queries?: string[] } | null;
   query_model?: string | null;
   search_route?: "lexical" | "hybrid" | "llm_hybrid";
