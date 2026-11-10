@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass
 import numpy as np
 
 from visualseek_retrieval.artifact import ArtifactIndex
+from visualseek_retrieval.corpus import CorpusTerms
 from visualseek_retrieval.entities import EntityIndex
 from visualseek_retrieval.text import accent_key, normalize, surface
 
@@ -44,6 +45,8 @@ class HybridRetriever:
         self._accent_postings = None
         self._legacy_postings = None
         self._prepare_lock = threading.Lock()
+        self._corpus_lock = threading.Lock()
+        self._corpus = None
         self.entities = EntityIndex(index.assets)
         self.title_terms = self.entities.titles
         self.title_postings = self.entities.title_postings
@@ -63,6 +66,14 @@ class HybridRetriever:
                 ],
                 dtype=np.int64,
             )
+
+    @property
+    def corpus(self) -> CorpusTerms:
+        if self._corpus is None:
+            with self._corpus_lock:
+                if self._corpus is None:
+                    self._corpus = CorpusTerms(self.index.assets)
+        return self._corpus
 
     @property
     def fields(self):
@@ -193,6 +204,7 @@ class HybridRetriever:
         limit: int,
         config: FusionConfig | None = None,
         exclusions: list[str] | None = None,
+        required_terms: list[str] | None = None,
     ) -> list[dict]:
         if limit < 1:
             raise ValueError("limit must be positive")
@@ -216,8 +228,16 @@ class HybridRetriever:
                 ranks[order] = np.arange(1, len(order) + 1)
                 fused[order] += weight / (config.rank_constant + ranks[order])
             channel_ranks[channel] = ranks
-        candidates = np.flatnonzero(fused > 0)
-        order = candidates[np.argsort(-fused[candidates], kind="stable")[:limit]]
+        coverage = np.zeros(len(selected), dtype=np.int32)
+        if required_terms:
+            lookup = {int(position): i for i, position in enumerate(selected)}
+            for term in required_terms:
+                for position in self.corpus.positions(term):
+                    if position in lookup:
+                        coverage[lookup[position]] += 1
+        candidates = np.flatnonzero((fused > 0) | (coverage > 0))
+        order = candidates[np.lexsort((candidates, -fused[candidates],
+                                      -coverage[candidates]))[:limit]]
         hits = []
         for i in order:
             position = int(selected[i])
@@ -230,7 +250,11 @@ class HybridRetriever:
                         "image_cosine": float(scores["image"][position]),
                         "metadata_cosine": float(scores["metadata"][position]),
                         "lexical": float(scores["lexical"][position]),
+                        **({"required_terms_matched": int(coverage[i]),
+                            "required_terms_count": len(required_terms)} if required_terms else {}),
                     },
+                    **({"match_reason": f"Chú thích hỗ trợ {coverage[i]}/{len(required_terms)} "
+                        "đối tượng được yêu cầu."} if required_terms else {}),
                     "ranks": {key: int(value[i]) or None for key, value in channel_ranks.items()},
                     "metadata_complete": bool(row.get("description", "").strip()),
                 }
@@ -247,10 +271,12 @@ class HybridRetriever:
         image_vectors: np.ndarray | None = None,
         metadata_vectors: np.ndarray | None = None,
         exclusions: list[str] | None = None,
+        required_terms: list[str] | None = None,
     ) -> list[dict]:
         if category is not None and category not in self.positions:
             return []
         scores = self.channel_scores(
             vectors, terms, image_vectors=image_vectors, metadata_vectors=metadata_vectors
         )
-        return self.rank(scores, category=category, limit=limit, exclusions=exclusions)
+        return self.rank(scores, category=category, limit=limit, exclusions=exclusions,
+                         required_terms=required_terms)

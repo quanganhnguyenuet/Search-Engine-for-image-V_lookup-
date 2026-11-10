@@ -28,6 +28,7 @@ ServiceDependency = Annotated[SearchService, Depends(get_search_service)]
 class SemanticRequest(BaseModel):
     query: str | None = Field(default=None, min_length=1, max_length=1000)
     image_base64: str | None = Field(default=None, min_length=1, max_length=14_000_000)
+    asset_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     category: Category | None = None
     top_k: int = Field(default=10, ge=1, le=50)
 
@@ -35,8 +36,8 @@ class SemanticRequest(BaseModel):
     def one_modality(self):
         if self.query is not None:
             self.query = self.query.strip()
-        if bool(self.query) == bool(self.image_base64):
-            raise ValueError("Provide exactly one nonempty query or image")
+        if sum(bool(value) for value in (self.query, self.image_base64, self.asset_id)) != 1:
+            raise ValueError("Provide exactly one nonempty query, image or asset_id")
         return self
 
 
@@ -78,6 +79,12 @@ def search_status(service: ServiceDependency):
         "index_ready": True,
         "model_loaded": service.encoder is not None,
         "encoder_ready": service.encoder_ready,
+        "query_embedding_cache": {
+            "storage": "process-memory", "persists_on_restart": False,
+            "max_entries_per_cache": 128,
+            "semantic_entries": len(service.text_cache),
+            "contextual_entries": len(service.document_cache),
+        },
         "query_model_last_success": service.query_model_ready,
         "readiness_note": "LLM status records last uncached plan, not a live availability probe",
         "indexed": len(index.assets),
@@ -131,6 +138,7 @@ def warmup(body: WarmupRequest, service: ServiceDependency):
                                code="metadata_index_unavailable", status_code=503)
     service.get_encoder().encode_documents(["ảnh văn hóa Việt Nam"])
     service.get_retriever().prepare()
+    _ = service.get_retriever().corpus
     service.encoder_ready = True
     if body.include_llm:
         # Probe the model even if the same warm-up request was cached previously.

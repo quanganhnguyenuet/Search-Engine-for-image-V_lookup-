@@ -2,6 +2,7 @@
 
 import base64
 import binascii
+import hashlib
 import json
 import re
 import threading
@@ -113,10 +114,11 @@ class SearchService:
         return plan, False
 
     def check_scope(self, query: str, *, known_entity: bool = False) -> ScopeDecision:
-        if self.scope_titles is None:
-            self.scope_titles = tuple(sorted({str(row.get('keyword', '')).replace('_', ' ')
-                for row in self.get_index().assets if not row.get('search_excluded')} - {''}))
-        return assess_scope(query, known_entity=known_entity, catalog_titles=self.scope_titles)
+        decision = assess_scope(query, known_entity=known_entity)
+        if decision.status == 'unclear' and decision.reason == 'unrecognized_subject':
+            if self.get_retriever().corpus.mentions(query):
+                return ScopeDecision('in_scope', 'indexed_subject', 'corpus_title_tags')
+        return decision
 
     @staticmethod
     def next_clarification_context(query, question, context):
@@ -219,11 +221,14 @@ class SearchService:
         return self.encoder
 
     def text_vector(self, query: str) -> np.ndarray:
+        return self.text_vector_with_cache(query)[0]
+
+    def text_vector_with_cache(self, query: str) -> tuple[np.ndarray, bool]:
         # Preserve Vietnamese accents, case and word order; this is not lexical normalization.
         with self.cache_lock:
             if query in self.text_cache:
                 self.text_cache.move_to_end(query)
-                return self.text_cache[query]
+                return self.text_cache[query], True
         try:
             vector = self.get_encoder().encode_texts([query])[0]
         except ValueError as exc:
@@ -235,7 +240,8 @@ class SearchService:
             self.text_cache[query] = vector
             if len(self.text_cache) > 128:
                 self.text_cache.popitem(last=False)
-        return vector
+        self.encoder_ready = True
+        return vector, False
 
     def coverage(self) -> dict:
         index = self.get_index()
@@ -346,6 +352,7 @@ class SearchService:
         retriever = self.get_retriever()
         before = time.perf_counter()
         term = search_term(query, preserve_accents=True)
+        required_terms = []
         try_local = use_llm is False or (
             use_llm is None and self.settings.search_routing_mode == 'auto')
         local_choices = retriever.entities.ambiguities(term, category=category) if try_local else []
@@ -423,6 +430,7 @@ class SearchService:
                     code="metadata_index_unavailable", status_code=503,
                 )
             route = "llm_hybrid" if should_plan else "hybrid"
+            required_terms = retriever.corpus.conjunction(term) if plan is None else []
             # Planned retrieval embeds the positive targets, never the original
             # sentence containing forbidden objects. Constraints go to filters/rerank.
             texts = list(dict.fromkeys(
@@ -444,7 +452,8 @@ class SearchService:
             hits = retriever.search(vectors, plan.keywords if plan else [query],
                                     category=category, limit=candidate_limit,
                                     image_vectors=image_vectors, metadata_vectors=metadata_vectors,
-                                    exclusions=plan.exclusions if plan else None)
+                                    exclusions=plan.exclusions if plan else None,
+                                    required_terms=required_terms if plan is None else None)
             hits, gate_info = self.gate(hits, query_profile='planned' if plan else 'local')
             retrieval_ms = (time.perf_counter() - before) * 1000
             before = time.perf_counter()
@@ -474,6 +483,9 @@ class SearchService:
             "retrieval_backend": "lexical-exact" if route == "lexical" else "numpy-hybrid-rrf",
             "score_type": "lexical_exact" if route == "lexical" else "rrf",
             "search_route": route, "routing_reason": route_reason,
+            "required_terms": required_terms if plan is None else [],
+            "ranking_policy": ('grounded-conjunction-then-rrf' if required_terms and plan is None
+                               else 'standard'),
             'routing_mode': self.settings.search_routing_mode,
             'routing_classifier': self.intent_router.version if intent else None,
             'routing_score': intent.score if intent else None,
@@ -511,12 +523,26 @@ class SearchService:
         *,
         query: str | None = None,
         image_base64: str | None = None,
+        asset_id: str | None = None,
         category: str | None = None,
         top_k: int = 10,
     ) -> dict:
-        index = self.get_index()
         started = time.perf_counter()
-        if image_base64:
+        index = self.get_index()
+        index_ms = (time.perf_counter() - started) * 1000
+        before = time.perf_counter()
+        excluded = set()
+        vector_cached = False
+        scope_ms = 0.0
+        if asset_id:
+            position = index.positions.get(asset_id)
+            if position is None or index.assets[position].get('search_excluded'):
+                raise ApplicationError(
+                    "Không tìm thấy ảnh trong index.", code="asset_not_found", status_code=404
+                )
+            vector = index.vectors[position]
+            excluded.add(asset_id)
+        elif image_base64:
             try:
                 content = base64.b64decode(image_base64, validate=True)
                 if len(content) > 10 * 1024 * 1024:
@@ -528,18 +554,24 @@ class SearchService:
                 ) from exc
             try:
                 vector = self.get_encoder().encode_images([image])[0]
+                self.encoder_ready = True
+                excluded.add(hashlib.sha256(content).hexdigest())
             finally:
                 image.close()
         else:
+            scope_started = time.perf_counter()
             scope = self.check_scope(query or '')
+            scope_ms = (time.perf_counter() - scope_started) * 1000
             if scope.status != 'in_scope':
                 return self.scope_stop(scope, query=query or '', category=category,
                                        mode='semantic', started=started)
-            vector = self.text_vector(query or "")
-        embedding_ms = (time.perf_counter() - started) * 1000
-        started = time.perf_counter()
-        hits = index.search(vector, limit=top_k, category=category)
-        retrieval_ms = (time.perf_counter() - started) * 1000
+            before = time.perf_counter()
+            vector, vector_cached = self.text_vector_with_cache(query or "")
+        embedding_ms = (time.perf_counter() - before) * 1000 if not asset_id else 0.0
+        vector_lookup_ms = (time.perf_counter() - before) * 1000 if asset_id else 0.0
+        before = time.perf_counter()
+        hits = index.search(vector, limit=top_k, category=category, exclude_asset_ids=excluded)
+        retrieval_ms = (time.perf_counter() - before) * 1000
         return {
             "items": [display_asset(hit["asset"], hit["score"]) for hit in hits],
             "total": len(hits),
@@ -548,11 +580,20 @@ class SearchService:
             "libraryTotal": index.searchable_count,
             "counts": index.counts,
             "mode": "semantic",
+            "query_modality": "image" if image_base64 or asset_id else "text",
+            "vector_source": ("stored-image" if asset_id else
+                              "encoded-image" if image_base64 else "encoded-text"),
+            "vector_cache_hit": vector_cached,
+            "self_match_excluded": bool(excluded),
             "result_scope": "top_k",
             "retrieval_backend": "numpy-exact",
             "model": index.manifest["model_id"],
             "model_revision": index.manifest["model_revision"],
-            "timings": {"embedding_ms": embedding_ms, "retrieval_ms": retrieval_ms},
+            "artifact_fingerprint": index.manifest["files"],
+            "score_type": "cosine",
+            "timings": {"index_ms": index_ms, "scope_ms": scope_ms, "embedding_ms": embedding_ms,
+                        "vector_lookup_ms": vector_lookup_ms, "retrieval_ms": retrieval_ms,
+                        "total_ms": (time.perf_counter() - started) * 1000},
         }
 
     def rag(self, query: str, category: str | None, top_k: int = 5) -> dict:

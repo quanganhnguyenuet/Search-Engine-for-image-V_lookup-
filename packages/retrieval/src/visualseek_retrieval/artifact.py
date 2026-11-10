@@ -49,6 +49,7 @@ class ArtifactIndex:
         ids = [row["asset_id"] for row in self.assets]
         if len(ids) != len(set(ids)) or any(not re.fullmatch(r"[a-f0-9]{64}", id_) for id_ in ids):
             raise ValueError("Asset IDs must be unique SHA-256 identifiers")
+        self.positions = {asset_id: i for i, asset_id in enumerate(ids)}
         self.vectors = np.load(directory / "vectors.npy", mmap_mode="r", allow_pickle=False)
         if (
             self.vectors.dtype != np.float32
@@ -67,6 +68,12 @@ class ArtifactIndex:
         self.counts = dict(Counter(row['category'] for row in self.assets
                                    if not row.get('search_excluded')))
         self.dimension = manifest["dimension"]
+        self.searchable_mask = np.asarray(
+            [not row.get('search_excluded') for row in self.assets], dtype=bool)
+        self.category_masks = {
+            category: np.asarray([row['category'] == category for row in self.assets], dtype=bool)
+            for category in self.counts
+        }
         self.metadata_vectors = None
         if manifest["schema_version"] == 2:
             if manifest.get("metadata_version") != "title-tags-description-chunk-mean-l2-v2":
@@ -82,7 +89,8 @@ class ArtifactIndex:
             self.metadata_vectors = values
 
     def search(
-        self, vector: np.ndarray, limit: int = 10, category: str | None = None
+        self, vector: np.ndarray, limit: int = 10, category: str | None = None,
+        *, exclude_asset_ids: set[str] | None = None,
     ) -> list[dict]:
         query = np.asarray(vector, dtype=np.float32).reshape(-1)
         if query.shape != (self.dimension,) or not np.isfinite(query).all():
@@ -92,13 +100,18 @@ class ArtifactIndex:
             raise ValueError("Zero query vector")
         if limit < 1 or limit > 100:
             raise ValueError("limit must be between 1 and 100")
-        selected = np.array(
-            [i for i, row in enumerate(self.assets) if not row.get('search_excluded')
-             and (not category or row["category"] == category)],
-            dtype=np.int64,
-        )
-        if not len(selected):
+        allowed = self.searchable_mask.copy()
+        if category:
+            allowed &= self.category_masks.get(category, np.zeros(len(self.assets), dtype=bool))
+        for asset_id in exclude_asset_ids or ():
+            position = self.positions.get(asset_id)
+            if position is not None:
+                allowed[position] = False
+        count = int(allowed.sum())
+        if not count:
             return []
-        scores = self.vectors[selected] @ (query / norm)
-        order = np.argsort(-scores, kind="stable")[:limit]
-        return [{"asset": self.assets[int(selected[i])], "score": float(scores[i])} for i in order]
+        # Avoid copying the full image matrix through advanced indexing per query.
+        scores = self.vectors @ (query / norm)
+        scores[~allowed] = -np.inf
+        order = np.argsort(-scores, kind="stable")[:min(limit, count)]
+        return [{"asset": self.assets[int(i)], "score": float(scores[i])} for i in order]

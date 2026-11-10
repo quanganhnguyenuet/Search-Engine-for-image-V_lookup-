@@ -11,6 +11,8 @@ from visualseek_retrieval.hybrid import normalize
 from visualseek_retrieval.text import surface
 
 PREFIXES = (
+    "toi muon tim anh co ca", "toi muon tim anh co", "toi muon xem hinh co",
+    "tim nhung buc anh co ca", "tim nhung buc anh co", "tim anh co ca", "tim anh co",
     "toi muon tim hinh anh ve", "toi muon tim hinh anh", "toi muon tim anh",
     "cho toi xem hinh anh", "cho toi xem anh", "cho toi hinh anh", "cho toi anh",
     "tim hinh anh ve", "tim hinh anh", "tim anh ve", "tim anh", "hinh anh ve",
@@ -24,7 +26,12 @@ def search_term(query: str, *, preserve_accents: bool = False) -> str:
     while True:
         for prefix in PREFIXES:
             parts = prefix.split()
-            if len(words) > len(parts) and [normalize(w) for w in words[:len(parts)]] == parts:
+            if (len(words) > len(parts)
+                    and [normalize(w) for w in words[:len(parts)]] == parts
+                    and all(target != 'co' or word in {'co', 'có'}
+                            for word, target in zip(words, parts, strict=False))
+                    and all(target != 'ca' or word == 'cả'
+                            for word, target in zip(words, parts, strict=False))):
                 words = words[len(parts):]
                 break
         else:

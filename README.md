@@ -1,5 +1,27 @@
 # VisualSeek — Multimodal AI Image Search Engine
 
+The [baseline report](docs/visualseek-baseline-report.md) locks separate text→image
+and image→image protocols, architecture, search routing, measured results and three
+application directions. The updated [presentation package](docs/presentations/2026-11-09-baseline/README.md)
+includes editable PowerPoint, PDF slides, report PDF and Vietnamese speaker notes.
+The [reviewed presentation](docs/presentations/2026-11-09-reviewed/README.md) follows
+the user-edited Canva PDF, with a new search-engine problem statement and clearer
+routing, benchmark protocol and text/image latency labels.
+
+Image-to-image supports both uploaded images and reusing stored image vectors by
+`asset_id`, with self-match exclusion. See [image baseline and P95 / Recall@K
+benchmark](docs/image-to-image-baseline.md) for commands, metric definitions and measurements.
+The [100-image held-out semantic benchmark](docs/image-semantic-holdout.md) tests
+same objects and visual attributes, with separate query/gallery artifacts and an
+audit of missing color labels versus actual search results.
+See [metrics separated by image-to-image and text-to-image](docs/search-metrics-by-modality.md)
+for HTTP P95 by route/cache and the ground-truth status of each task.
+The [500-query text-to-image ground truth and evaluation](docs/text-to-image-ground-truth-500.md)
+includes portable silver labels, exact metric definitions, API and embedding-only recall,
+and cache/route diagnostics.
+See the [latest scope/retrieval improvement and latency report](docs/scope-retrieval-improvement.md)
+for before/after results on the frozen query sets, including local Recall@10 of 42.98%.
+
 Current focus: [contextual text-to-image search](docs/contextual-image-search.md).
 Search defaults to local-only: exact names/tags use a local lookup and descriptions
 use local image/metadata hybrid retrieval. The web defaults to **Tìm theo yêu cầu**.

@@ -14,7 +14,7 @@ from visualseek_retrieval.hybrid import FusionConfig
 
 def pipeline_context(index: ArtifactIndex, config: FusionConfig, query_roles: bool) -> dict:
     return {
-        "version": "image-metadata-fusion-v4-semantic-plan",
+        "version": "image-metadata-fusion-v5-corpus-grounding",
         "model_id": index.manifest["model_id"],
         "model_revision": index.manifest["model_revision"],
         "files": index.manifest["files"],
