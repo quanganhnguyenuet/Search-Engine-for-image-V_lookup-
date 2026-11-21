@@ -6,11 +6,7 @@
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
-    "typecheck": "tsc --noEmit",
-    "test:search": "node --test tests/*.test.cjs",
-    "test:http": "node tests/http-smoke.mjs",
-    "test:ai": "node tests/ai-http-smoke.mjs",
-    "test:contextual": "node tests/contextual-http-smoke.mjs"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.1.2",
@@ -31,4 +27,3 @@
     "typescript": "5.8.2"
   }
 }
-

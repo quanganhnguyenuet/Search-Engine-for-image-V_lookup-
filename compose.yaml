@@ -7,15 +7,12 @@ services:
       target: development
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
-      CULTURE_DATA_DIR: /data
-      CULTURE_IMAGE_ROOT: /data/raw/vietnamese-culture-vqa
       SEARCH_API_URL: http://api:8000
     ports:
       - "3000:3000"
     volumes:
       - ./apps/web:/app
       - web_node_modules:/app/node_modules
-      - ./data:/data:ro
     depends_on:
       api:
         condition: service_healthy
@@ -32,24 +29,6 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://visualseek:visualseek@postgres:5432/visualseek}
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
-      EMBEDDING_ARTIFACT_DIR: ${DOCKER_EMBEDDING_ARTIFACT_DIR:-/data/embeddings/culture-contextual-demo-v1}
-      EMBEDDING_CACHE_DIR: /data/models/huggingface
-      EMBEDDING_DEVICE: cpu
-      CORPUS_MANIFEST_PATH: /data/processed/culture-search/assets.jsonl
-      SEARCH_IMAGE_ROOT: /data/raw/vietnamese-culture-vqa
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
-      OPENAI_REASONING_EFFORT: ${OPENAI_REASONING_EFFORT:-low}
-      SEARCH_LLM_MODEL: ${SEARCH_LLM_MODEL:-gpt-4o-mini}
-      SEARCH_LLM_TIMEOUT_SECONDS: ${SEARCH_LLM_TIMEOUT_SECONDS:-90}
-      SEARCH_LLM_ENABLED: ${SEARCH_LLM_ENABLED:-false}
-      SEARCH_ROUTING_MODE: ${SEARCH_ROUTING_MODE:-auto}
-      SEARCH_LLM_RERANK: ${SEARCH_LLM_RERANK:-false}
-      RAG_MODEL: ${RAG_MODEL:-gpt-4o-mini}
-      R2_ENDPOINT_URL: ${R2_ENDPOINT_URL:-http://object-storage:9000}
-      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-visualseek}
-      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-visualseek-local-secret}
-      R2_BUCKET_NAME: ${R2_BUCKET_NAME:-visualseek-images}
     ports:
       - "8000:8000"
     volumes:
@@ -59,8 +38,6 @@ services:
       postgres:
         condition: service_healthy
       qdrant:
-        condition: service_started
-      object-storage:
         condition: service_started
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
@@ -93,21 +70,8 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
-  object-storage:
-    image: minio/minio:RELEASE.2025-02-28T09-55-16Z
-    command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-visualseek}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-visualseek-local-secret}
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - object_storage_data:/data
-
 volumes:
   web_node_modules:
   postgres_data:
   qdrant_data:
-  object_storage_data:
 

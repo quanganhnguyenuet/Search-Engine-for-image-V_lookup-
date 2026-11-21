@@ -25,7 +25,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 def create_app() -> FastAPI:
     application = FastAPI(
         title="VisualSeek API",
-        description="VietNam Culture image retrieval with SigLIP2 and grounded RAG.",
+        description="V-Lookup product image search.",
         version=__version__,
         lifespan=lifespan,
     )

@@ -1,9 +1,9 @@
 [project]
 name = "visualseek-workspace"
 version = "0.1.0"
-description = "Python workspace for VisualSeek services and AI component contracts."
+description = "Python workspace for the V-Lookup product image search engine."
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = ["visualseek-api"]
 
 [dependency-groups]
 dev = [
@@ -15,17 +15,17 @@ dev = [
 [tool.uv]
 package = false
 
+[tool.uv.sources]
+visualseek-api = { workspace = true }
+
 [tool.uv.workspace]
 members = [
   "services/api",
-  "packages/preprocessing",
-  "packages/embedding",
   "packages/retrieval",
-  "packages/evaluation",
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["services/api/tests", "scripts/tests", "packages/preprocessing/tests"]
+testpaths = ["services/api/tests"]
 addopts = "-q"
 
 [tool.ruff]

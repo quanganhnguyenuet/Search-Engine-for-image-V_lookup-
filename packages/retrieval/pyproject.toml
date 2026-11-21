@@ -1,9 +1,9 @@
 [project]
 name = "visualseek-retrieval"
 version = "0.1.0"
-description = "Contracts for VisualSeek vector retrieval components."
+description = "Retrieval components for V-Lookup."
 requires-python = ">=3.12,<3.13"
-dependencies = ["numpy>=1.26,<3"]
+dependencies = []
 
 [build-system]
 requires = ["hatchling"]

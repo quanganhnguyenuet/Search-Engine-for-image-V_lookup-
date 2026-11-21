@@ -1,4 +1,5 @@
-from visualseek_retrieval.contracts import SearchQuery, SearchResult, VectorRetriever
+"""Vietnamese text normalization shared by indexing and query processing."""
 
-__all__ = ["SearchQuery", "SearchResult", "VectorRetriever"]
+from visualseek_retrieval.text import accent_key, normalize, phrase_position, surface
 
+__all__ = ["accent_key", "normalize", "phrase_position", "surface"]
