@@ -5,9 +5,10 @@ requests require semantic planning or clarification; they never fall through to 
 """
 
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Literal
 
-from visualseek_retrieval.text import normalize, phrase_position
+from visualseek_retrieval.text import normalize
 
 SCOPE_DESCRIPTION = (
     'Thư viện chỉ tìm ảnh văn hóa và cảnh quan Việt Nam: ẩm thực, kiến trúc, '
@@ -48,6 +49,10 @@ UNSUPPORTED_SUBJECTS = (
     'điện thoại', 'máy tính', 'laptop', 'iphone', 'smartphone', 'computer',
     'xe đua', 'race car', 'bitcoin', 'chứng khoán', 'stock market',
     'chẩn đoán', 'kê đơn', 'diagnosis', 'viết code', 'python code',
+    'trạm vũ trụ', 'trên mặt trăng', 'sao kim', 'sao thổ', 'robot',
+    'nam cực', 'bắc cực', 'dãy alps', 'san francisco', 'golden gate', 'cổng vàng',
+    'bóng bầu dục', 'silicon valley', 'bắc âu', 'grand canyon', 'iceland', 'cực quang',
+    'ảnh hoàn toàn trống', 'ảnh trắng trơn',
 )
 
 
@@ -68,22 +73,32 @@ def scope_suggestions(category: str | None = None) -> list[str]:
     return list(SCOPE_EXAMPLES.values())[:4]
 
 
+@lru_cache(maxsize=16)
+def _terms(terms: tuple[str, ...]) -> frozenset[str]:
+    return frozenset(normalize(term) for term in terms if term)
+
+
 def assess_scope(query: str, *, known_entity: bool = False,
                  catalog_titles: tuple[str, ...] = ()) -> ScopeDecision:
-    text = normalize(query)
-    outside = [position for term in UNSUPPORTED_SUBJECTS
-               if (position := phrase_position(text, normalize(term))) is not None]
+    words = normalize(query).split()
+    supported = _terms(SUPPORTED_SUBJECTS) | _terms(catalog_titles)
+    unsupported = _terms(UNSUPPORTED_SUBJECTS)
+    lengths = {len(term.split()) for term in supported | unsupported}
+    spans = {}
+    for width in lengths:
+        for start in range(len(words) - width + 1):
+            spans.setdefault(" ".join(words[start:start + width]), start)
+    outside = [spans[term] for term in unsupported if term in spans]
     if outside:
         # Negations/OR can change the scope of the mention. Ask the planner rather
         # than rejecting, e.g. "áo dài, không có tàu vũ trụ" by isolated keywords.
         # Only inspect words before the first outside mention: the syllable "trụ"
         # inside "tàu vũ trụ" must never be read as the operator "trừ".
-        prefix = text.split()[max(0, min(outside) - 5):min(outside)]
+        prefix = words[max(0, min(outside) - 5):min(outside)]
         logical = {'khong', 'tru', 'bo', 'loai', 'without', 'not', 'excluding'}
-        if logical.intersection(prefix) or {'hoac', 'or'}.intersection(text.split()):
+        if logical.intersection(prefix) or {'hoac', 'or'}.intersection(words):
             return ScopeDecision('unclear', 'scope_needs_interpretation')
         return ScopeDecision('out_of_scope', 'outside_supported_subjects')
-    if known_entity or any(phrase_position(text, normalize(term)) is not None
-                           for term in (*SUPPORTED_SUBJECTS, *catalog_titles) if term):
+    if known_entity or supported.intersection(spans):
         return ScopeDecision('in_scope', 'supported_subject')
     return ScopeDecision('unclear', 'unrecognized_subject')

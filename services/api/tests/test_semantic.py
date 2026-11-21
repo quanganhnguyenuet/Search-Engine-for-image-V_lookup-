@@ -1,4 +1,5 @@
 import base64
+import hashlib
 import io
 import json
 import struct
@@ -118,11 +119,25 @@ def test_missing_index_is_actionable_and_does_not_load_model(tmp_path):
 
 def test_text_query_preserves_accents_and_caches_encoder(service):
     first = service.search(query="Áo dài Việt Nam", top_k=1)
-    service.search(query="Áo dài Việt Nam", top_k=1)
+    second = service.search(query="Áo dài Việt Nam", top_k=1)
     assert first["items"][0]["id"] == "2" * 64
     assert service.encoder.texts == ["Áo dài Việt Nam"]
     assert first["result_scope"] == "top_k"
     assert first["libraryTotal"] == 3
+    assert first['vector_cache_hit'] is False
+    assert second['vector_cache_hit'] is True
+
+
+def test_semantic_embedding_cache_is_bounded_and_does_not_survive_a_new_service(service):
+    for number in range(128):
+        service.text_vector(f"query {number}")
+    assert service.text_vector_with_cache("query 0")[1] is True
+    service.text_vector("query 128")
+    assert len(service.text_cache) == 128
+    assert "query 0" in service.text_cache and "query 1" not in service.text_cache
+    assert service.text_vector_with_cache("query 1")[1] is False
+    restarted = SearchService(service.settings, encoder_factory=TestEncoder)
+    assert restarted.text_vector_with_cache("query 0")[1] is False
 
 
 def test_image_query_uses_visual_encoder(service):
@@ -140,6 +155,39 @@ def test_image_query_uses_visual_encoder(service):
     with pytest.raises(ApplicationError) as error:
         service.search(image_base64=base64.b64encode(oversized).decode())
     assert error.value.code == "invalid_image"
+
+
+def test_stored_image_reuses_vector_excludes_self_and_never_loads_encoder(service):
+    result = service.search(asset_id="2" * 64, top_k=3)
+    assert {row["id"] for row in result["items"]} == {"1" * 64, "3" * 64}
+    assert result["vector_source"] == "stored-image"
+    assert result["query_modality"] == "image"
+    assert result["timings"]["embedding_ms"] == 0
+    assert result["timings"]["total_ms"] >= result["timings"]["retrieval_ms"]
+    assert service.encoder is None
+    result = service.search(asset_id="2" * 64, category="am_thuc")
+    assert [row["id"] for row in result["items"]] == ["1" * 64]
+    for asset_id in ("f" * 64, "3" * 64):
+        service.get_index().assets[2]["search_excluded"] = True
+        with pytest.raises(ApplicationError) as error:
+            service.search(asset_id=asset_id)
+        assert error.value.code == "asset_not_found"
+
+
+def test_uploaded_corpus_image_excludes_its_sha256_match(service):
+    data = io.BytesIO()
+    Image.new("RGB", (4, 4), "red").save(data, format="PNG")
+    content = data.getvalue()
+    digest = hashlib.sha256(content).hexdigest()
+    # The image encoder's nearest point is also the uploaded corpus image.
+    index = service.get_index()
+    index.assets[2]["asset_id"] = digest
+    index.positions[digest] = 2
+    result = service.search(image_base64=base64.b64encode(content).decode())
+    assert digest not in {item["id"] for item in result["items"]}
+    assert len(result["items"]) == 2
+    assert result["vector_source"] == "encoded-image"
+    assert service.encoder_ready is True
 
 
 def generation(answer):
@@ -223,12 +271,20 @@ def test_api_validation_and_response(service):
     with TestClient(app) as client:
         assert client.get("/api/v1/search/status").json()["indexed"] == 3
         assert client.post("/api/v1/search/semantic", json={"query": "áo dài"}).status_code == 200
+        result = client.post("/api/v1/search/semantic", json={"asset_id": "2" * 64})
+        assert result.status_code == 200
+        assert "2" * 64 not in {row["id"] for row in result.json()["items"]}
+        assert client.post("/api/v1/search/semantic", json={
+            "asset_id": "f" * 64}).status_code == 404
         for body in (
             {},
             {"query": " "},
             {"query": "áo dài", "image_base64": "abc"},
             {"query": "áo dài", "category": "invalid"},
             {"query": "a", "top_k": 101},
+            {"asset_id": "invalid"},
+            {"asset_id": "2" * 64, "image_base64": "abc"},
+            {"asset_id": "2" * 64, "query": "áo dài"},
         ):
             assert client.post("/api/v1/search/semantic", json=body).status_code == 422
         assert client.post("/api/v1/search/rag", json={"query": " "}).status_code == 422

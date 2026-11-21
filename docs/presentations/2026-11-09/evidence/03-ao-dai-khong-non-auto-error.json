@@ -1,7 +1,0 @@
-{
-  "status": 503,
-  "body": {
-    "error": "OpenAI không chấp nhận API key hoặc quyền truy cập model. Kiểm tra OPENAI_API_KEY và SEARCH_LLM_MODEL.",
-    "code": "openai_authentication_failed"
-  }
-}
