@@ -37,11 +37,13 @@ Nguồn: các dòng `approve = yes` trong `candidate_images_part_01_sorted_appro
 
 | Tài nguyên | Đã có | Vị trí |
 |---|---|---|
-| File ảnh yes | 30.904 / 32.337 (95.6%) | `LabelPortable/CodexReview/assets/`, map URL → file qua `review.sqlite3` (`items.data.image_url` → `items.evidence.asset_path`) |
-| OCR (RapidOCR) | 24.155 / 30.904 ảnh yes (78%) | `CodexReview/agy/*/ocr/*.json` |
-| Page context | 55.122 trang: title, h1, description, `products` (JSON-LD) | `CodexReview/pages/*.json`; khoảng một nửa (mẫu 3.000 trang) có trường brand |
+| File ảnh yes | 30.875 / 32.337 dòng (95,5%), gộp thành **30.695 ảnh khác nội dung** (8,4 GB) | `LabelPortable/CodexReview/assets/`, map URL → file qua `review.sqlite3` (`items.data.image_url` → `items.evidence.asset_path`) |
+| OCR (RapidOCR) | 23.952 ảnh có file OCR (78%), nhưng chỉ **13.596 (44%) đọc ra chữ**; nhiễu, có `score` | `CodexReview/agy/*/ocr/*.json` |
+| Page context | 55.122 trang: title, h1, description, `products` (JSON-LD); 24.304 / 30.875 dòng gắn được trang | `CodexReview/pages/*.json`; chỉ khoảng **17%** dòng có brand trong JSON-LD, và giá trị có khi là tên loại hàng chứ không phải hãng |
 
-Lưu ý: tên file trong `assets/` **không** phải sha256 nội dung. Manifest phải tính `asset_id = sha256(bytes)` từ chính file ảnh.
+Đo bằng `build_corpus_manifest.py` (P0) trên cả hai part, ngày 2026-11-21. Số 32.337 / 2.356 khớp CSV. Có 1.462 dòng chưa có ảnh (1.411 chưa tải được, 51 không có trong `review.sqlite3`) và 52 entity chưa có ảnh nào; xem `data/processed/products-v1/missing.jsonl`.
+
+Lưu ý: tên file trong `assets/` **không** phải sha256 nội dung. Manifest tính `asset_id = sha256(bytes)` từ chính file ảnh (khớp 100% với `evidence.image_sha256` trong `review.sqlite3`). Cùng một ảnh có thể thuộc nhiều entity (165 trường hợp) nên `entity_ids` là danh sách.
 
 ### Nguồn text cho từng ảnh
 
@@ -50,8 +52,8 @@ Vì không có cột mô tả, text dùng để index được ghép từ bốn 
 | Nguồn | Mức | Độ phủ | Ghi chú |
 |---|---|---|---|
 | Tên entity + alias + sự kiện graph đã duyệt | Entity | 100% | Lõi của entity card |
-| Page context (title, h1, JSON-LD) | Ảnh (theo trang nguồn) | Phần lớn | Miễn phí, có brand ở khoảng một nửa |
-| OCR | Ảnh | 78% | Tên hãng, mã mẫu, hàm lượng thuốc in trên bao bì |
+| Page context (title, h1, JSON-LD) | Ảnh (theo trang nguồn) | ~79% dòng gắn được trang | Miễn phí; brand chỉ ~17% và nhiễu, graph (P2) quyết định có dùng hay không |
+| OCR | Ảnh | 44% có chữ (lọc theo `score`) | Tên hãng, mã mẫu, hàm lượng thuốc in trên bao bì; nhiễu nên phải lọc |
 | VLM caption | Ảnh | 100% (sau P3) | Thuộc tính thị giác: loại vật, màu, chất liệu, bối cảnh |
 
 ## 3. Bài học từ baseline cũ (đã gỡ khỏi repo)
@@ -213,10 +215,10 @@ Multi-hop:    Rel = ảnh của tập entity đích, KHÔNG gồm anchor
 Thời gian là ước tính cho một người làm cùng agent; đo lại sau P0.
 
 ### P0. Chốt corpus (1–2 ngày, 0 API)
-- `scripts/build_corpus_manifest.py`: lọc yes, map URL → file qua `review.sqlite3`, tính sha256 từ bytes, gộp `entity_ids[]`, gắn OCR + page context đã cache.
-- Ảnh còn thiếu (1.433): `retry_failed.sh` / `page_context.fetch_image`. OCR còn thiếu (~6.7k): RapidOCR local.
-- Output: `data/processed/products-v1/assets.jsonl` + `manifest.json` có fingerprint.
-- **Gate:** số ảnh/entity khớp CSV; danh sách ảnh thiếu ghi rõ.
+- ✅ `scripts/build_corpus_manifest.py` (đã xong): lọc yes, map URL → file qua `review.sqlite3`, tính sha256 từ bytes, gộp ảnh trùng nội dung (`entity_ids[]`), gắn OCR + page context đã cache. Chỉ đọc Handoff, không copy ảnh; manifest ghi `image_root` + đường dẫn tương đối.
+- Ảnh còn thiếu (1.411 chưa tải + 51 dòng ngoài `review.sqlite3`): `retry_failed.sh` / `page_context.fetch_image`. OCR còn thiếu (khoảng 6.8k ảnh chưa có file OCR): RapidOCR local. Sau mỗi bước chạy lại script để cập nhật manifest.
+- Output: `data/processed/products-v1/{assets,entities,missing}.jsonl` + `manifest.json` (đếm, checksum, fingerprint CSV nguồn). `data/` không nằm trong git, nên máy khác phải dựng lại bằng script này từ Handoff.
+- **Gate:** số dòng/entity khớp CSV, mọi dòng yes thuộc đúng một trong hai: nguồn của asset hoặc `missing.jsonl` (đạt: 32.337 dòng, 2.356 entity). Còn lại: quyết định giữ hay loại 52 entity chưa có ảnh sau khi tải lại.
 
 ### P1. Bộ eval (3–4 ngày, song song với P2)
 - `scripts/build_eval_set.py`: template → paraphrase bằng agy (50 câu/call, ~15 call) → người duyệt bằng giao diện kiểu `codex_review.html`.
