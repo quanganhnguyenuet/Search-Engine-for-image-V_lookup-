@@ -1,11 +1,13 @@
 # Plan triển khai V‑Lookup cho domain sản phẩm (products-v1)
 
-Phiên bản 2026-11-21 (bản 2). Bản này chốt thêm bốn quyết định:
+Phiên bản 2026-11-21 (bản 3). Bản này chốt thêm bốn quyết định:
 
 1. Repo chuyển **100%** sang domain sản phẩm. Baseline văn hóa (code, ảnh, embedding, bộ eval) đã gỡ khỏi repo; code cũ chỉ còn trong lịch sử git (nhánh `feat/text-search-baseline`).
 2. **Không gọi LLM lúc truy vấn.** Logic câu hỏi (multi-intent, multi-hop) lấy từ knowledge graph. LLM chỉ dùng offline để dựng graph và sinh câu eval.
 3. Dataset candidate **không có cột mô tả**, nên phải sinh mô tả (VLM caption, cộng OCR và page context) trước khi embedding.
 4. **Không dùng vector ảnh** trong đợt này. Text search chạy hoàn toàn trên text. Image → image làm ở đợt sau.
+
+Bản 3 đưa vào các phát hiện từ POC 500 dòng của [docs/product-entity-search-redesign-2026-11-21.md](docs/product-entity-search-redesign-2026-11-21.md) (mục 3.4), không đổi bốn quyết định trên.
 
 ## 1. Mục tiêu
 
@@ -32,6 +34,8 @@ Nguồn: các dòng `approve = yes` trong `candidate_images_part_01_sorted_appro
 - 8 cột gốc: Entity_ID, Tên entity, URL ảnh, rộng, cao, URL trang nguồn, Tiêu đề nguồn, Tên miền. **Không có mô tả, category, hãng hay thuộc tính.**
 - 454 tên có phần trong ngoặc (alias/hoạt chất), 658 tên có mã/số. 166 URL ảnh thuộc nhiều entity, nên ảnh là đa nhãn.
 - Nhãn yes là nhãn người duyệt ở mức entity, nên ground truth cho truy vấn theo entity/hãng/loại suy ra tự động được.
+- Nhãn yes **vẫn nhiễu**: POC xem khoảng 250 ảnh thấy ~10% (ước lượng thô, chưa phải nhãn) là ảnh sai entity do trùng tên ("Lọc gió Vaico" ra lọc muội khí thải) hoặc ảnh ngữ cảnh không thấy sản phẩm (đèn Schréder ra ảnh sân vận động). Ground truth tự động vì thế có trần dưới 100%.
+- part_01 còn 62.652 dòng `no` (dùng làm hard negative cho đánh giá, mục 5) và 8.872 dòng trống (bỏ, không vào index, không làm nhãn).
 
 ### Tài nguyên có sẵn từ pipeline gán nhãn (không tốn quota)
 
@@ -90,6 +94,19 @@ Baseline văn hóa (15.4k ảnh, SigLIP2) có ba lớp rẽ nhánh: scope guard 
 | `compose.yaml` | web, api, Postgres (cho graph), Qdrant `v1.13.4` (phải nâng ở P4) |
 | `scripts/qdrant_setup.py` | Chưa commit; viết cho artifact cũ (bắt buộc vector ảnh), phải viết lại ở P4 |
 
+### 3.4 Quan hệ với tài liệu redesign (POC 500 dòng)
+
+[docs/product-entity-search-redesign-2026-11-21.md](docs/product-entity-search-redesign-2026-11-21.md) được viết từ một POC trên máy cá nhân (500 dòng đầu, vector SigLIP2). Nó là tài liệu tham khảo; plan này là bản chốt. Khác biệt:
+
+| Mục | Doc redesign | Plan này |
+|---|---|---|
+| Vector ảnh trong index | Có (`image` SigLIP2 từ P1) | Không, để đợt sau |
+| LLM lúc truy vấn | Planner LLM (có short-circuit) và verify bằng VLM | Không; graph + rule từ gợi quan hệ |
+| Nơi lưu graph | `nodes.jsonl` / `edges.jsonl` | Postgres, nạp vào bộ nhớ khi chạy |
+| Nguồn ảnh | Tải lại từ URL (~11% lỗi) | Thư mục Handoff (95% có sẵn), chỉ tải bù phần thiếu |
+
+Đã đưa vào plan từ doc đó: nhãn yes nhiễu ~10% (mục 2, rủi ro), `no` làm hard negative, chia dev/test theo entity, loại ảnh gần trùng bằng perceptual hash, và hai trường `image_role` / `shows_entity` trong caption (mục 4.2). Collection POC `product_images_poc` trên Qdrant Cloud không tương thích schema này (xem P4).
+
 ## 4. Kiến trúc mục tiêu
 
 ### 4.1 Knowledge graph
@@ -121,6 +138,12 @@ Brand  -COUNTRY->        Country
 |---|---|---|
 | `visual_caption` | **Không** đưa tên entity; chỉ tả cái thấy: loại vật, màu, chất liệu, chữ/nhãn, số lượng, bối cảnh | Phục vụ câu "mô tả không nêu tên"; tránh VLM tả theo kiến thức về sản phẩm |
 | `identified_caption` | Có tên entity + tiêu đề trang | Câu có tên, alias, biến thể |
+
+`identified_caption` kèm hai trường phân loại (offline, cho cả 30.9k ảnh):
+- `image_role ∈ {product_shot, in_use, context_scene, document, other}`;
+- `shows_entity ∈ {yes, no, unsure}`: VLM được đưa tên entity làm giả thuyết và cho biết ảnh có thấy đúng sản phẩm đó không.
+
+Cả hai lưu vào payload. Dùng để xếp `product_shot` lên trước và hạ điểm `context_scene` hoặc `shows_entity=no` (lọc mềm, không loại cứng); là giải pháp cho ~10% nhãn nhiễu. Độ chính xác của `shows_entity` đo bằng hard negative (mục 5), không tin mặc định.
 
 **Text index cho mỗi ảnh** (`doc_text`) = entity card (tên, alias, sự kiện graph đã duyệt) + page title/h1 + OCR + `visual_caption` + `identified_caption`, mỗi phần có nhãn nguồn. Cache theo `hash(input + phiên bản prompt/model)`.
 
@@ -187,6 +210,8 @@ Mỗi điểm yếu đều có chỉ số đo riêng ở mục 5.
 | Không có đáp án | 50 | Đo khả năng từ chối |
 
 - Câu sinh từ template trên graph, người viết lại cho tự nhiên, cộng một phần người tự viết.
+- **Chia dev/test theo entity**, không theo ảnh, để một entity không nằm ở cả hai phía.
+- **Hard negative:** với các entity trong dev, lấy một mẫu ảnh `no` của chính entity đó (nhiều ảnh `no` có thể đã có file trong `CodexReview/assets`) đưa vào một collection eval riêng, không vào index chính.
 - **Không sinh câu từ caption, OCR hay page text đã index** (rò rỉ đáp án). Người viết câu "mô tả không nêu tên" nhìn ảnh, không đọc caption.
 - Phần "mô tả không nêu tên" là bắt buộc, để không lặp lại lỗi vòng tròn của benchmark cũ.
 
@@ -205,6 +230,7 @@ Multi-hop:    Rel = ảnh của tập entity đích, KHÔNG gồm anchor
                    AnchorLeak@10 = tỉ lệ ảnh anchor lọt vào top-10
 ```
 
+- Hard negative: `NegLeak@10` = tỉ lệ ảnh `no` của chính entity lọt top-10 khi truy vấn theo tên entity (collection eval riêng). Cũng dùng để đo độ chính xác của `shows_entity`.
 - Chẩn đoán multi-hop theo tầng: anchor linking Acc@1; set precision/recall của tập entity đích; recall khi đưa sẵn tập đích chuẩn (oracle).
 - Chất lượng caption: tỉ lệ thuộc tính sai trên mẫu 200 ảnh do người chấm, báo riêng cho `visual_caption` và `identified_caption`.
 - Kèm HitRate@10, nDCG@10, P95 latency.
@@ -217,6 +243,7 @@ Thời gian là ước tính cho một người làm cùng agent; đo lại sau 
 ### P0. Chốt corpus (1–2 ngày, 0 API)
 - ✅ `scripts/build_corpus_manifest.py` (đã xong): lọc yes, map URL → file qua `review.sqlite3`, tính sha256 từ bytes, gộp ảnh trùng nội dung (`entity_ids[]`), gắn OCR + page context đã cache. Chỉ đọc Handoff, không copy ảnh; manifest ghi `image_root` + đường dẫn tương đối.
 - Ảnh còn thiếu (1.411 chưa tải + 51 dòng ngoài `review.sqlite3`): `retry_failed.sh` / `page_context.fetch_image`. OCR còn thiếu (khoảng 6.8k ảnh chưa có file OCR): RapidOCR local. Sau mỗi bước chạy lại script để cập nhật manifest.
+- Còn lại: loại ảnh gần trùng bằng perceptual hash (hiện chỉ gộp trùng tuyệt đối theo sha256); gắn `phash` vào asset.
 - Output: `data/processed/products-v1/{assets,entities,missing}.jsonl` + `manifest.json` (đếm, checksum, fingerprint CSV nguồn). `data/` không nằm trong git, nên máy khác phải dựng lại bằng script này từ Handoff.
 - **Gate:** số dòng/entity khớp CSV, mọi dòng yes thuộc đúng một trong hai: nguồn của asset hoặc `missing.jsonl` (đạt: 32.337 dòng, 2.356 entity). Còn lại: quyết định giữ hay loại 52 entity chưa có ảnh sau khi tải lại.
 
@@ -234,7 +261,7 @@ Thời gian là ước tính cho một người làm cùng agent; đo lại sau 
 - **Gate:** độ chính xác cạnh trên mẫu ngẫu nhiên ≥ 95% (hoặc ngưỡng chốt).
 
 ### P3. Mô tả ảnh và text embedding (3–5 ngày, máy GPU)
-- `scripts/caption_images.py`: VLM mở (dòng Qwen3-VL instruct), sinh `visual_caption` và `identified_caption` (mục 4.2). Đo tốc độ trên 200 ảnh trước khi chạy 30.9k, cache theo hash.
+- `scripts/caption_images.py`: VLM mở (dòng Qwen3-VL instruct), sinh `visual_caption` và `identified_caption` kèm `image_role` / `shows_entity` (mục 4.2). Đo tốc độ trên 200 ảnh trước khi chạy 30.9k, cache theo hash.
 - **Gate caption:** người chấm 200 ảnh; tỉ lệ thuộc tính sai dưới ngưỡng chốt trước khi chạy toàn bộ.
 - `scripts/build_doc_texts.py`: ghép entity card + page context + OCR + caption thành `doc_text`, có nhãn nguồn.
 - `scripts/embed_texts.py`: embed `doc_text` và tên/alias entity bằng các text encoder ứng viên, chạy trên máy GPU / Kaggle T4×2. Pin model revision, prefix query/passage, chính sách độ dài.
@@ -244,6 +271,7 @@ Thời gian là ước tính cho một người làm cùng agent; đo lại sau 
 - Nâng Qdrant trong `compose.yaml` lên một bản ≥ 1.15, pin chính xác; pin `qdrant-client` tương thích.
 - Viết lại `scripts/qdrant_setup.py` cho artifact mới: `doc` dense + `sparse` IDF, collection `entities`, payload index; ingest idempotent, ID ổn định từ `asset_id`.
 - `packages/retrieval/src/visualseek_retrieval/qdrant_store.py`: `query(prefetch, fusion, formula, group_by)`, client long-lived, timeout rõ ràng.
+- Collection POC `product_images_poc` trên Qdrant Cloud (vector `image` SigLIP2, ID điểm theo sha1 của URL) không dùng lại được: tạo collection mới (tên có tiền tố `products_v1_`), ID điểm = `uuid5(asset_id)`; xóa collection POC sau khi parity xong.
 - **Gate:** parity — Qdrant `exact=true` khớp một oracle cosine NumPy nhỏ (viết trong test) trên cùng bộ query.
 
 ### P5. Search một đường (4–6 ngày)
@@ -303,6 +331,7 @@ Giả định tài nguyên: agy (Gemini flash), Codex, OpenAI API, Kaggle T4×2,
 | Caption 30.9k ảnh tốn thời gian GPU | Đo tốc độ trên 200 ảnh trước; cache; chạy theo lát |
 | Text encoder chưa có số đo tiếng Việt cho domain này | B2 là phép thử thật; chọn theo dev |
 | License model (VLM, text encoder, reranker) | Kiểm license trước P3 |
+| Nhãn `yes` nhiễu ~10% (ước lượng thô): ground truth tự động có trần dưới 100% | `shows_entity` / `image_role`; báo cáo trần; NegLeak@10; không coi mọi ảnh yes là đúng khi chấm |
 | Chất lượng graph quyết định trần multi-hop | Duyệt 100% cạnh chính; ground truth chỉ dùng cạnh đã duyệt |
 | Từ gợi quan hệ / từ loại trừ chỉ là rule nhỏ (thay LLM) | Đo AnchorLeak@10, anchor linking Acc@1; mở rộng danh sách từ dev, không từ test |
 | Expansion làm tụt single | Ngưỡng trọng số quan hệ; gate "single không tụt > 1 điểm" |
@@ -310,6 +339,7 @@ Giả định tài nguyên: agy (Gemini flash), Codex, OpenAI API, Kaggle T4×2,
 
 ## 9. Tham khảo
 
+- [docs/product-entity-search-redesign-2026-11-21.md](docs/product-entity-search-redesign-2026-11-21.md): POC 500 dòng, đề xuất thay thế (xem mục 3.4)
 - [Qwen3-VL-Embedding and Qwen3-VL-Reranker (arXiv 2601.04720)](https://arxiv.org/abs/2601.04720v1)
 - [jina-embeddings-v4 (arXiv 2506.18902)](https://arxiv.org/abs/2506.18902)
 - [HippoRAG 2 (arXiv 2502.14802)](https://arxiv.org/html/2502.14802) · [HippoRAG (arXiv 2405.14831)](https://arxiv.org/html/2405.14831v3) · [RAGU, so sánh độc lập (arXiv 2607.11683)](https://arxiv.org/pdf/2607.11683)
