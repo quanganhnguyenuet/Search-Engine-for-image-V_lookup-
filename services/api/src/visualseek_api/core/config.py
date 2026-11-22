@@ -20,6 +20,14 @@ class Settings(BaseSettings):
     qdrant_url: str = "http://localhost:6333"
     qdrant_api_key: str = ""
 
+    # products-v1 text search; off by default so tests do not load the encoder.
+    search_enabled: bool = False
+    search_artifact_dir: str = "data/processed/products-v1/search"
+    search_collection: str = "products_v1_images"
+    search_embed_device: str = "cuda"
+    products_image_root: str = ""
+    cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
+
 
 @lru_cache
 def get_settings() -> Settings:
