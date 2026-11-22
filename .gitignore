@@ -20,3 +20,12 @@ coverage/
 # Local datasets, downloaded images, and generated search manifests
 /data/
 
+
+# P0 transfer bundle (Handoff images and metadata zips); never commit
+/products-v1-p0-bundle/
+
+# Playwright MCP screenshots and snapshots
+/.playwright-mcp/
+
+# Backup of .env before the 2026-11-22 cleanup (contains secrets)
+/.env.bak
