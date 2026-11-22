@@ -1,0 +1,73 @@
+{
+  "version": "products-v1-corpus-2",
+  "counts": {
+    "yes_rows": 32337,
+    "duplicate_yes_rows_dropped": 0,
+    "entities": 2356,
+    "entities_with_assets": 2304,
+    "assets_before_near_duplicate_merge": 30695,
+    "near_duplicates_merged": 497,
+    "assets": 30198,
+    "asset_source_rows": 30875,
+    "assets_shared_by_multiple_entities": 164,
+    "missing_rows": 1462,
+    "missing_by_reason": {
+      "not_in_review_db": 51,
+      "no_asset_path": 1411
+    },
+    "entities_without_assets": 52,
+    "assets_with_ocr_text": 17373,
+    "assets_with_ocr_file": 30198,
+    "assets_with_backfilled_ocr": 6638,
+    "source_rows_with_page_context": 24304,
+    "formats": {
+      "jpeg": 25281,
+      "png": 3733,
+      "webp": 1183,
+      "gif": 1
+    },
+    "total_bytes": 8303808178,
+    "assets_per_entity": {
+      "min": 1,
+      "median": 12,
+      "max": 53
+    }
+  },
+  "checks": {
+    "every_yes_row_is_asset_source_or_missing": true,
+    "entity_count_matches_csv": true,
+    "asset_ids_are_sha256": true,
+    "merged_assets_accounted": true,
+    "no_sha256_disagreement_with_review_db": true
+  },
+  "files": {
+    "assets.jsonl": "b985d085ba98d697ad73a9ff7c3da169ccbcc7e81409ee0dd85425d85cf9008d",
+    "entities.jsonl": "757d74e609cf7332fa7d094c31696b5aa0b1f635c9109895dbedbbc7d1691977",
+    "missing.jsonl": "ff9debb9b948d4a6a4c5b4e72f27fb831cf1c95bdf2099c50c0593a3d7978c17"
+  },
+  "sources": [
+    {
+      "file": "candidate_images_part_01_sorted_approved.csv",
+      "bytes": 36020648,
+      "sha256": "ed02823fcd0760cdc5270a499337c8beaa2314c160ed88866271d4b5e2913ca9",
+      "yes_rows": 28519
+    },
+    {
+      "file": "candidate_images_part_04.csv",
+      "bytes": 36192126,
+      "sha256": "79e6b3b5043e4af0c63b2056099f2e84c11ba92f510314d5bd3c3d94cfe6d0a8",
+      "yes_rows": 3818
+    }
+  ],
+  "inputs": {
+    "near_duplicates": {
+      "file": "near_duplicates.json",
+      "sha256": "67b62df7e0804f7be68419d997f2612af901204ca352724456e65ff60d5e8340"
+    },
+    "ocr_backfill": {
+      "files": 6638,
+      "sha256": "4797f5058c59dc4de9a875ebd56eca9cf6f0a3599a6779d989458ea1b9eba8de"
+    }
+  },
+  "corpus_fingerprint": "861911cb10dd5651e2b2297585230bf8dfe72a2265820011914791f4777e3455"
+}

@@ -12,7 +12,7 @@ Bản 3 đưa vào các phát hiện từ POC 500 dòng của [docs/product-enti
 Bản 4 chốt thêm (2026-11-22):
 
 5. **Graph lưu trong Neo4j** (thay Postgres). Neo4j là nơi lưu chính và nơi duyệt cạnh; lúc truy vấn API không gọi Neo4j mà dùng snapshot nạp vào RAM (mục 4.1).
-6. **Không tải bù ảnh lỗi.** 1.411 dòng tải lỗi do CDN chặn bot/captcha, 51 dòng ngoài `review.sqlite3`; bỏ cả 1.462 dòng. 52 entity không còn ảnh nào bị loại khỏi index và eval. Corpus chốt: **30.695 ảnh, 2.304 entity**.
+6. **Không tải bù ảnh lỗi.** 1.411 dòng tải lỗi do CDN chặn bot/captcha, 51 dòng ngoài `review.sqlite3`; bỏ cả 1.462 dòng. 52 entity không còn ảnh nào bị loại khỏi index và eval. Sau khi gộp ảnh gần trùng (P0), corpus chốt: **30.198 ảnh, 2.304 entity**, fingerprint trong `locks/products-v1-corpus.json`.
 7. **Ngân sách latency: P95 ≤ 300 ms** end-to-end, concurrency 1 (định nghĩa ở mục 5.3).
 8. **Dev/test chia 40/60 theo entity.**
 9. **Nhóm ưu tiên:** trang sức và quần áo cao cấp, điện thoại, đồ công nghệ, phụ tùng phương tiện giao thông. Corpus vẫn giữ mọi entity; các nhóm này được lấy mẫu dày hơn trong eval và báo cáo riêng (mục 5.1).
@@ -50,8 +50,8 @@ Nguồn: các dòng `approve = yes` trong `candidate_images_part_01_sorted_appro
 
 | Tài nguyên | Đã có | Vị trí |
 |---|---|---|
-| File ảnh yes | 30.875 / 32.337 dòng (95,5%), gộp thành **30.695 ảnh khác nội dung** (8,4 GB). Phần thiếu không tải bù (quyết định 6) | `LabelPortable/CodexReview/assets/`, map URL → file qua `review.sqlite3` (`items.data.image_url` → `items.evidence.asset_path`) |
-| OCR (RapidOCR) | 23.952 ảnh có file OCR (78%), nhưng chỉ **13.596 (44%) đọc ra chữ**; nhiễu, có `score` | `CodexReview/agy/*/ocr/*.json` |
+| File ảnh yes | 30.875 / 32.337 dòng (95,5%), gộp thành **30.695 ảnh khác nội dung** (8,4 GB), rồi **30.198 ảnh** sau khi gộp ảnh gần trùng. Phần thiếu không tải bù (quyết định 6) | `LabelPortable/CodexReview/assets/`, map URL → file qua `review.sqlite3` (`items.data.image_url` → `items.evidence.asset_path`) |
+| OCR (RapidOCR) | Pipeline có 23.952 ảnh có file OCR (78%), 13.596 (44%) đọc ra chữ. Sau OCR bù ở P0: **100% có file, 17.373 / 30.198 (58%) đọc ra chữ**; nhiễu, có `score` | `CodexReview/agy/*/ocr/*.json` + `data/processed/products-v1/ocr/` |
 | Page context | 55.122 trang: title, h1, description, `products` (JSON-LD); 24.304 / 30.875 dòng gắn được trang | `CodexReview/pages/*.json`; chỉ khoảng **17%** dòng có brand trong JSON-LD, và giá trị có khi là tên loại hàng chứ không phải hãng |
 
 Đo bằng `build_corpus_manifest.py` (P0) trên cả hai part, ngày 2026-11-21. Số 32.337 / 2.356 khớp CSV. Có 1.462 dòng không có ảnh: 1.411 tải lỗi vì CDN chặn bot/captcha (nhiều nhất `bizweb.dktcdn.net`, `cdn.tgdd.vn`, `*.hstatic.net`, `cdn.pnj.io`, `m.media-amazon.com`) và 51 dòng không có trong `review.sqlite3`. Hệ quả là 52 entity không còn ảnh nào (ví dụ "Bánh chocopie", "Asus ROG Phone 7", "PNJ nhẫn cưới"). Các dòng và entity này vẫn được ghi trong `data/processed/products-v1/missing.jsonl` và `entities.jsonl` (`assets = 0`), nhưng không vào index và không làm ground truth.
@@ -68,7 +68,7 @@ Vì không có cột mô tả, text dùng để index được ghép từ bốn 
 |---|---|---|---|
 | Tên entity + alias + sự kiện graph đã duyệt | Entity | 100% | Lõi của entity card |
 | Page context (title, h1, JSON-LD) | Ảnh (theo trang nguồn) | ~79% dòng gắn được trang | Miễn phí; brand chỉ ~17% và nhiễu, graph (P2) quyết định có dùng hay không |
-| OCR | Ảnh | 44% có chữ (lọc theo `score`) | Tên hãng, mã mẫu, hàm lượng thuốc in trên bao bì; nhiễu nên phải lọc |
+| OCR | Ảnh | 58% có chữ (lọc theo `score`) | Tên hãng, mã mẫu, hàm lượng thuốc in trên bao bì; nhiễu nên phải lọc |
 | VLM caption | Ảnh | 100% (sau P3) | Thuộc tính thị giác: loại vật, màu, chất liệu, bối cảnh |
 
 ## 3. Bài học từ baseline cũ (đã gỡ khỏi repo)
@@ -159,7 +159,7 @@ Brand  -COUNTRY->        Country
 | `visual_caption` | **Không** đưa tên entity; chỉ tả cái thấy: loại vật, màu, chất liệu, chữ/nhãn, số lượng, bối cảnh | Phục vụ câu "mô tả không nêu tên"; tránh VLM tả theo kiến thức về sản phẩm |
 | `identified_caption` | Có tên entity + tiêu đề trang | Câu có tên, alias, biến thể |
 
-`identified_caption` kèm hai trường phân loại (offline, cho cả 30.9k ảnh):
+`identified_caption` kèm hai trường phân loại (offline, cho cả 30.2k ảnh):
 - `image_role ∈ {product_shot, in_use, context_scene, document, other}`;
 - `shows_entity ∈ {yes, no, unsure}`: VLM được đưa tên entity làm giả thuyết và cho biết ảnh có thấy đúng sản phẩm đó không.
 
@@ -194,7 +194,7 @@ Không có vector ảnh trong đợt này. Khi làm image → image, thêm named
 
 Payload có index: `entity_ids`, `brand_id`, `type_id`, `category_id`, `domain`. Ngoài ra payload còn `image_role`, `shows_entity` và `graph_fingerprint`.
 
-Dung lượng free tier (1 GB RAM): 30.7k ảnh × 1 vector × 1024 chiều ≈ 126 MB float32, khoảng 32 MB nếu int8. Hai collection cũ đang chiếm thêm khoảng 86 MB vector cộng HNSW. Quantization chỉ bật khi đo thấy cần. Cluster free bị suspend sau 1 tuần không dùng, nên Qdrant luôn là index tái tạo được từ manifest.
+Dung lượng free tier (1 GB RAM): 30.2k ảnh × 1 vector × 1024 chiều ≈ 124 MB float32, khoảng 32 MB nếu int8. Hai collection cũ đang chiếm thêm khoảng 86 MB vector cộng HNSW. Quantization chỉ bật khi đo thấy cần. Cluster free bị suspend sau 1 tuần không dùng, nên Qdrant luôn là index tái tạo được từ manifest.
 
 ### 4.4 Search: một đường cho mọi câu, không LLM
 
@@ -259,7 +259,7 @@ Số câu dưới đây là tổng; dev/test chia 40/60 theo entity (ví dụ 15
 - Phần "mô tả không nêu tên" là bắt buộc, để không lặp lại lỗi vòng tròn của benchmark cũ.
 
 **Ground truth:**
-- Rel chỉ gồm `asset_id` có trong corpus đóng băng (quyết định 6). Ảnh gần trùng đã gộp theo phash trước khi đóng băng.
+- Rel chỉ gồm `asset_id` có trong corpus đóng băng (quyết định 6). Ảnh gần trùng của cùng entity đã gộp trước khi đóng băng (P0).
 - **Rel của test được người duyệt lại:** ảnh `yes` không thấy đúng sản phẩm thì bị loại khỏi Rel (ước tính ~1–2k ảnh, dùng giao diện kiểu `codex_review.html`). Dev dùng nhãn `yes` gốc và báo cáo trần.
 - **Hard negative:** với các entity trong dev, lấy một mẫu ảnh `no` của chính entity đó (nhiều ảnh `no` có thể đã có file trong `CodexReview/assets`) đưa vào một collection eval riêng, không vào index chính.
 
@@ -343,16 +343,29 @@ Reranker (B5) chỉ được giữ nếu lượt chạy có reranker vẫn đạ
 
 Thời gian là ước tính cho một người làm cùng agent; đo lại sau P0.
 
-### P0. Chốt corpus (1–2 ngày, 0 API)
-- ✅ `scripts/build_corpus_manifest.py` (đã xong): lọc yes, map URL → file qua `review.sqlite3`, tính sha256 từ bytes, gộp ảnh trùng nội dung (`entity_ids[]`), gắn OCR + page context đã cache. Chỉ đọc Handoff, không copy ảnh; manifest ghi `image_root` + đường dẫn tương đối.
+### P0. Chốt corpus — ✅ xong 2026-11-22
+- ✅ `scripts/build_corpus_manifest.py`: lọc yes, map URL → file qua `review.sqlite3`, tính sha256 từ bytes, gộp ảnh trùng nội dung (`entity_ids[]`), gắn OCR + page context đã cache. Chỉ đọc Handoff, không copy ảnh; manifest ghi `image_root` + đường dẫn tương đối. Mỗi source ghi `content_id` (sha256 của file gốc).
 - ✅ Ảnh thiếu: **không tải bù** (quyết định 6). 52 entity không có ảnh bị loại khỏi index và eval.
-- Còn lại:
-  - **Loại ảnh gần trùng bằng perceptual hash.** Hiện chỉ gộp trùng tuyệt đối theo sha256. Gắn `phash` vào asset; các cặp gần trùng gộp về một asset (giữ bản lớn nhất, hợp `entity_ids` và `sources`), ghi lại cặp đã gộp. Việc này **phải xong trước khi đóng băng ground truth**, vì nó đổi `asset_id` và `|Rel|`.
-  - **OCR bù** cho khoảng 6.8k ảnh chưa có file OCR, bằng RapidOCR local. Không chặn P1; phải xong trước P3.
-- Output: `data/processed/products-v1/{assets,entities,missing}.jsonl` + `manifest.json` (đếm, checksum, fingerprint CSV nguồn). `data/` không nằm trong git, nên máy khác phải dựng lại bằng script này từ Handoff.
-- **Gate:**
-  - ✅ Số dòng và số entity khớp CSV; mọi dòng yes thuộc đúng một trong hai: nguồn của asset hoặc `missing.jsonl` (32.337 dòng, 2.356 entity).
-  - Còn lại: phash xong, rồi **đóng băng corpus** (fingerprint `assets.jsonl`). Mọi bước sau tham chiếu fingerprint này.
+- ✅ **Gộp ảnh gần trùng** bằng `scripts/find_near_duplicates.py`. Mục tiêu là "cùng một bức ảnh" (khác kích thước, độ nén, nền), không phải "ảnh sản phẩm giống nhau".
+  - **Tiêu chí:** cùng tập `entity_ids`; pHash Hamming ≤ 6; tỉ lệ khung lệch ≤ 3%; MAE 16×16 ≤ 8; **p99 độ lệch từng pixel ở 64×64 ≤ 16**. Nhóm theo kiểu sao: mỗi thành viên được so trực tiếp với ảnh đại diện lớn nhất, không bắc cầu.
+  - **Vì sao chặt:** soát bằng mắt hơn 200 cặp quanh mọi ngưỡng. Ảnh nền trắng của biến thể màu, góc chụp khác hoặc hộp thuốc khác tên thường có pHash trùng hoặc rất gần, MAE thấp: ví Samsonite xám/xanh, Entecavir/Acyclovir, Lostad T25/T50. Hai lọ thuốc dùng chung mẫu ảnh stock ("Perindopril 4mg"/"Klonopin 2mg") vượt qua mọi phép so pixel. Vì vậy **không gộp khác entity**: gộp nhầm trong cùng entity chỉ mất một ảnh, còn gộp khác entity làm sai nhãn. Trùng tuyệt đối khác entity vẫn gộp theo sha256.
+  - **Kết quả:** 497 ảnh gộp vào 478 ảnh đại diện (nhóm lớn nhất 4). Mẫu ngẫu nhiên 18 cặp: 18/18 là cùng một bức ảnh. `phash` gắn vào mọi asset; thành viên đã gộp nằm trong `merged` của ảnh đại diện, kèm `hamming`, `mae`.
+- ✅ **OCR bù** bằng `scripts/backfill_ocr.py` (RapidOCR 1.4.4, cùng tham số với pipeline gán nhãn: cạnh dài 960 px, không dùng angle classifier): 6.638 ảnh, 0 lỗi, 4.012 ảnh có chữ. Kết quả nằm ở `data/processed/products-v1/ocr/<asset_id>.json`.
+- ✅ **Đóng băng corpus:** [locks/products-v1-corpus.json](locks/products-v1-corpus.json) (tracked trong git) ghi counts, checks, checksum từng file output, fingerprint CSV nguồn, sha256 của file near-dup và thư mục OCR bù. `corpus_fingerprint = 861911cb10dd5651e2b2297585230bf8dfe72a2265820011914791f4777e3455`. Mọi bước sau tham chiếu fingerprint này.
+
+| | Trước P0 hoàn tất | Corpus đóng băng |
+|---|---|---|
+| Ảnh (asset) | 30.695 | **30.198** |
+| Entity có ảnh | 2.304 | 2.304 |
+| Ảnh có file OCR | 23.952 (78%) | 30.198 (100%) |
+| Ảnh OCR ra chữ | 13.596 (44%) | 17.373 (58%) |
+| Ảnh thuộc nhiều entity | 165 | 164 |
+
+- **Output:** `data/processed/products-v1/` gồm `{assets,entities,missing}.jsonl`, `manifest.json`, `near_duplicates.json`, `ocr/`, `cache/image_features.npz`. `data/` không nằm trong git.
+- **Dựng lại ở máy khác:** cần Handoff, hai CSV, `near_duplicates.json` và thư mục `ocr/`. Hai thứ sau nên được chép kèm, vì chạy lại OCR với phiên bản onnxruntime khác có thể ra chữ khác, làm lệch lock. Lệnh:
+  `python scripts/build_corpus_manifest.py --handoff-root … --csv … --csv … --near-duplicates …/near_duplicates.json --ocr-dir …/ocr --check-lock locks/products-v1-corpus.json`
+  Lệnh này thất bại nếu bất kỳ file output nào khác lock.
+- **Gate:** ✅ số dòng và số entity khớp CSV (32.337 dòng, 2.356 entity); mọi dòng yes thuộc đúng một trong hai: nguồn của asset hoặc `missing.jsonl`; mọi ảnh đã gộp được tính đúng; sha256 khớp `review.sqlite3`; corpus đã khóa.
 
 ### P1. Bộ eval (3–4 ngày, chia hai đợt quanh P2)
 - `scripts/build_eval_set.py`: template → paraphrase 1 → 1 bằng agy (50 câu/call, ~15 call) → người duyệt bằng giao diện kiểu `codex_review.html`. Script kiểm mọi luật query của mục 5.1 và dừng nếu vi phạm.
@@ -382,7 +395,7 @@ Thời gian là ước tính cho một người làm cùng agent; đo lại sau 
 - **Gate:** độ chính xác cạnh trên mẫu ngẫu nhiên ≥ 300 cạnh, **cận dưới CI 95% ≥ 0,95**.
 
 ### P3. Mô tả ảnh và text embedding (3–5 ngày, máy GPU)
-- `scripts/caption_images.py`: VLM mở (dòng Qwen3-VL instruct), sinh `visual_caption` và `identified_caption` kèm `image_role` / `shows_entity` (mục 4.2). Đo tốc độ trên 200 ảnh trước khi chạy 30.9k, cache theo hash.
+- `scripts/caption_images.py`: VLM mở (dòng Qwen3-VL instruct), sinh `visual_caption` và `identified_caption` kèm `image_role` / `shows_entity` (mục 4.2). Đo tốc độ trên 200 ảnh trước khi chạy 30.2k, cache theo hash.
 - **Gate caption:** người chấm 200 ảnh; tỉ lệ thuộc tính sai dưới ngưỡng chốt trước khi chạy toàn bộ.
 - `scripts/build_doc_texts.py`: ghép entity card + page context + OCR + caption thành `doc_text`, có nhãn nguồn.
 - `scripts/embed_texts.py`: embed `doc_text` và tên/alias entity bằng các text encoder ứng viên, chạy trên máy GPU / Kaggle T4×2. Pin model revision, prefix query/passage, chính sách độ dài. Đo luôn thời gian embed **một câu query trên CPU** cho từng encoder, vì ngân sách stage này là ≤ 60 ms (mục 5.3).
@@ -453,7 +466,7 @@ Giả định tài nguyên: agy (Gemini flash), Codex, OpenAI API, Kaggle T4×2,
 | Graph | agy | ~95 call (+ thử 200 entity) |
 | Paraphrase eval | agy | ~15 call |
 | Kiểm cạnh tranh chấp | Codex | vài chục call |
-| VLM caption 30.9k ảnh | GPU local / Kaggle | 0 API |
+| VLM caption 30.2k ảnh | GPU local / Kaggle | 0 API |
 | Text embedding, OCR bổ sung, rerank | GPU local / Kaggle | 0 API |
 | Truy vấn (eval và dùng thật) | — | 0 LLM |
 
@@ -463,7 +476,7 @@ Giả định tài nguyên: agy (Gemini flash), Codex, OpenAI API, Kaggle T4×2,
 |---|---|
 | VLM bịa thuộc tính khi biết tên sản phẩm | Tách `visual_caption` (không tên) và `identified_caption`; gate chấm 200 ảnh ở P3 |
 | Thuộc tính thị giác caption bỏ sót thì không tìm được (không có vector ảnh) | Đo riêng nhóm "mô tả không nêu tên"; nếu thấp, thử thêm `img` ở đợt sau |
-| Caption 30.9k ảnh tốn thời gian GPU | Đo tốc độ trên 200 ảnh trước; cache; chạy theo lát |
+| Caption 30.2k ảnh tốn thời gian GPU | Đo tốc độ trên 200 ảnh trước; cache; chạy theo lát |
 | Text encoder chưa có số đo tiếng Việt cho domain này | B2 là phép thử thật; chọn theo dev |
 | License model (VLM, text encoder, reranker) | Kiểm license trước P3 |
 | Nhãn `yes` nhiễu ~10% (ước lượng thô): ground truth tự động có trần dưới 100% | Rel của test được người duyệt lại (mục 5.1); dev dùng nhãn gốc và báo cáo trần; `shows_entity` / `image_role`; NegLeak@10 |

@@ -86,7 +86,7 @@ def run(handoff, tmp_path):
 
 def test_assets_merge_identical_content_across_entities(handoff, tmp_path):
     manifest, out = run(handoff, tmp_path)
-    assets = [json.loads(line) for line in (out / "assets.jsonl").read_text().splitlines()]
+    assets = [json.loads(line) for line in (out / "assets.jsonl").read_text("utf-8").splitlines()]
 
     shared = next(a for a in assets if a["asset_id"] == hashlib.sha256(JPEG).hexdigest())
     assert shared["entity_ids"] == ["e1", "e2"]
@@ -99,7 +99,7 @@ def test_assets_merge_identical_content_across_entities(handoff, tmp_path):
 
 def test_missing_rows_carry_a_reason_and_the_gate_still_passes(handoff, tmp_path):
     manifest, out = run(handoff, tmp_path)
-    missing = [json.loads(line) for line in (out / "missing.jsonl").read_text().splitlines()]
+    missing = [json.loads(line) for line in (out / "missing.jsonl").read_text("utf-8").splitlines()]
 
     assert {m["image_url"]: m["reason"] for m in missing} == {
         "https://x/d.jpg": "no_asset_path",
@@ -109,14 +109,14 @@ def test_missing_rows_carry_a_reason_and_the_gate_still_passes(handoff, tmp_path
     }
     assert manifest["counts"]["entities_without_assets"] == 1
     assert all(manifest["checks"].values())
-    entity = next(json.loads(line) for line in (out / "entities.jsonl").read_text().splitlines()
-                  if json.loads(line)["entity_id"] == "e3")
+    lines = (out / "entities.jsonl").read_text("utf-8").splitlines()
+    entity = next(json.loads(line) for line in lines if json.loads(line)["entity_id"] == "e3")
     assert (entity["yes_rows"], entity["usable_rows"], entity["missing_rows"]) == (4, 0, 4)
 
 
 def test_ocr_and_page_context_are_attached(handoff, tmp_path):
     _, out = run(handoff, tmp_path)
-    assets = {a["asset_id"]: a for a in map(json.loads, (out / "assets.jsonl").read_text()
+    assets = {a["asset_id"]: a for a in map(json.loads, (out / "assets.jsonl").read_text("utf-8")
                                             .splitlines())}
     shared = assets[hashlib.sha256(JPEG).hexdigest()]
     other = assets[hashlib.sha256(JPEG_OTHER).hexdigest()]
@@ -137,6 +137,11 @@ def test_output_is_deterministic_and_does_not_touch_the_handoff(handoff, tmp_pat
     second = corpus.build(root, [table], tmp_path / "b", workers=4)
 
     assert first["files"] == second["files"]
+    # Checksums in the manifest must describe the bytes on disk, LF only, on every OS.
+    for name, digest in first["files"].items():
+        data = (tmp_path / "a" / name).read_bytes()
+        assert b"\r" not in data
+        assert hashlib.sha256(data).hexdigest() == digest
     assert before == sorted((p, p.stat().st_mtime_ns) for p in root.rglob("*") if p.is_file())
 
 
@@ -146,3 +151,73 @@ def test_conflicting_entity_names_abort(handoff, tmp_path):
         csv.writer(stream).writerow(row("e1", "Tên khác", "https://x/z.jpg"))
     with pytest.raises(SystemExit, match="conflicting names"):
         corpus.build(root, [table], tmp_path / "out", workers=1)
+
+
+def write_groups(path, groups, phash=None):
+    path.write_text(json.dumps({"version": "test", "phash": phash or {}, "groups": groups}),
+                    encoding="utf-8")
+    return path
+
+
+def test_near_duplicates_fold_into_the_representative(handoff, tmp_path):
+    root, table = handoff
+    shared, other = hashlib.sha256(JPEG).hexdigest(), hashlib.sha256(JPEG_OTHER).hexdigest()
+    groups = write_groups(tmp_path / "nd.json", [
+        {"representative": other, "members": [{"asset_id": shared, "hamming": 2, "mae": 1.5}]}],
+        phash={shared: "00ff", other: "00fe"})
+    manifest = corpus.build(root, [table], tmp_path / "out", workers=1, near_duplicates=groups)
+    assets = [json.loads(line) for line in (tmp_path / "out" / "assets.jsonl")
+              .read_text("utf-8").splitlines()]
+
+    assert [a["asset_id"] for a in assets] == [other]
+    kept = assets[0]
+    assert kept["entity_ids"] == ["e1", "e2"]
+    assert kept["phash"] == "00fe"
+    assert sorted(s["content_id"] for s in kept["sources"]) == sorted([shared, shared, other])
+    assert kept["merged"][0]["asset_id"] == shared and kept["merged"][0]["hamming"] == 2
+    assert kept["ocr"] == [{"text": "Logitech", "score": 0.9}]  # member OCR with text wins
+    counts = manifest["counts"]
+    assert (counts["assets_before_near_duplicate_merge"], counts["assets"]) == (2, 1)
+    assert all(manifest["checks"].values())  # every yes row is still accounted for
+
+
+def test_near_duplicates_from_another_corpus_abort(handoff, tmp_path):
+    root, table = handoff
+    groups = write_groups(tmp_path / "nd.json", [
+        {"representative": "f" * 64, "members": [{"asset_id": "e" * 64, "hamming": 0, "mae": 0}]}])
+    with pytest.raises(SystemExit, match="does not match this corpus"):
+        corpus.build(root, [table], tmp_path / "out", workers=1, near_duplicates=groups)
+
+
+def test_backfilled_ocr_fills_only_assets_never_ocrd(handoff, tmp_path):
+    root, table = handoff
+    review = root / "CodexReview"
+    (review / "agy" / "run1" / "ocr" / "i1.json").unlink()
+    (review / "agy" / "run1" / "ocr" / "i2.json").write_text("not json")  # unreadable cache
+    shared, other = hashlib.sha256(JPEG).hexdigest(), hashlib.sha256(JPEG_OTHER).hexdigest()
+    ocr_dir = tmp_path / "ocr"
+    ocr_dir.mkdir()
+    for asset_id, text in ((shared, "MX"), (other, "ignored")):
+        (ocr_dir / f"{asset_id}.json").write_text(json.dumps(
+            {"at": "2026-11-22", "ocr": [{"box": [0, 0, 1, 1], "text": text, "score": 0.8}]}))
+    manifest = corpus.build(root, [table], tmp_path / "out", workers=1, ocr_dir=ocr_dir)
+    assets = {a["asset_id"]: a for a in map(json.loads, (tmp_path / "out" / "assets.jsonl")
+                                            .read_text("utf-8").splitlines())}
+
+    assert assets[shared]["ocr"] == [{"text": "MX", "score": 0.8}]
+    assert assets[other]["ocr"] == []  # the pipeline's own OCR result is kept
+    assert manifest["counts"]["assets_with_backfilled_ocr"] == 1
+    assert manifest["inputs"]["ocr_backfill"]["files"] == 2
+
+
+def test_lock_matches_a_rebuild_and_catches_changes(handoff, tmp_path):
+    root, table = handoff
+    first = corpus.lock_of(corpus.build(root, [table], tmp_path / "a", workers=1))
+    second = corpus.lock_of(corpus.build(root, [table], tmp_path / "b", workers=3))
+    assert first == second
+    assert "generated_at" not in first and "image_root" not in first
+
+    with table.open("a", encoding="utf-8", newline="") as stream:
+        csv.writer(stream).writerow(row("e2", "Chuột B", "https://x/c.jpg"))
+    changed = corpus.lock_of(corpus.build(root, [table], tmp_path / "c", workers=1))
+    assert changed["corpus_fingerprint"] != first["corpus_fingerprint"]

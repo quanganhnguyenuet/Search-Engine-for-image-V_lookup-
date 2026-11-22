@@ -10,17 +10,28 @@ An asset is one unique image content (`asset_id` = sha256 of the file bytes, rec
 One asset can depict several entities, so `entity_ids` is a list and every originating CSV row is
 kept in `sources`. Rows that cannot become an asset are listed in `missing.jsonl` with a reason.
 
+Optional inputs, applied when given:
+  --near-duplicates  groups from `find_near_duplicates.py`; each representative absorbs the
+                     entity ids, sources and OCR of its members, which are listed under `merged`
+  --ocr-dir          `<asset_id>.json` files from `backfill_ocr.py`, used when the labelling
+                     pipeline never OCR'd any file of the asset
+
 Output (default `data/processed/products-v1/`):
   assets.jsonl    one asset per line, sorted by asset_id
   entities.jsonl  one entity per line, with row/image counts
   missing.jsonl   yes rows without a usable image, with the reason
   manifest.json   counts, per-file checksums, source fingerprints and the P0 gate checks
 
+`--write-lock` stores the fingerprint of a frozen corpus (tracked in git); `--check-lock` rebuilds
+and fails unless every output file matches it.
+
 Standard library only:
   uv run python scripts/build_corpus_manifest.py \
       --handoff-root ~/Downloads/Handoff_2026-11-17/LabelPortable \
       --csv ~/Downloads/Handoff_2026-11-17/candidate_images_part_01_sorted_approved.csv \
-      --csv ~/Downloads/Handoff_2026-11-17/candidate_images_part_04.csv
+      --csv ~/Downloads/Handoff_2026-11-17/candidate_images_part_04.csv \
+      --near-duplicates data/processed/products-v1/near_duplicates.json \
+      --ocr-dir data/processed/products-v1/ocr --check-lock locks/products-v1-corpus.json
 """
 
 import argparse
@@ -35,7 +46,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from pathlib import Path
 
-VERSION = "products-v1-corpus-1"
+VERSION = "products-v1-corpus-2"
 ROOT = Path(__file__).resolve().parents[1]
 CSV_COLUMNS = {
     "entity_id": "Entity_ID",
@@ -214,12 +225,67 @@ def inspect_file(path: Path) -> tuple[str | None, str | None, int]:
 def write_jsonl(path: Path, records: list[dict]) -> str:
     text = "".join(dump(record) + "\n" for record in records)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(text, encoding="utf-8")
+    temporary.write_bytes(text.encode("utf-8"))  # bytes keep LF on Windows, so checksums match
     temporary.replace(path)
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: int) -> dict:
+def merge_near_duplicates(assets: list[dict], path: Path) -> tuple[list[dict], dict[str, str]]:
+    """Fold each near-duplicate group into its representative; return (assets, phash by id)."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    by_id = {asset["asset_id"]: asset for asset in assets}
+    merged_away: set[str] = set()
+    for group in data["groups"]:
+        representative = by_id.get(group["representative"])
+        members = [(by_id.get(m["asset_id"]), m) for m in group["members"]]
+        if representative is None or any(asset is None for asset, _ in members):
+            raise SystemExit(f"{path.name} does not match this corpus (unknown asset id); "
+                             "rerun find_near_duplicates.py")
+        for member, info in members:
+            if member["asset_id"] in merged_away or member is representative:
+                raise SystemExit(f"{path.name}: asset {member['asset_id']} merged twice")
+            merged_away.add(member["asset_id"])
+            representative["entity_ids"] = sorted(
+                set(representative["entity_ids"]) | set(member["entity_ids"]))
+            representative["sources"].extend(member["sources"])
+            # Prefer OCR that found text; otherwise any OCR result over none.
+            if member["ocr"] and not representative["ocr"]:
+                representative["ocr"] = member["ocr"]
+            elif member["ocr"] is not None and representative["ocr"] is None:
+                representative["ocr"] = member["ocr"]
+            representative["merged"].append({
+                "asset_id": member["asset_id"], "image_path": member["image_path"],
+                "format": member["format"], "bytes": member["bytes"],
+                "entity_ids": member["entity_ids"], "hamming": info["hamming"],
+                "mae": info["mae"]})
+        representative["sources"].sort(key=lambda s: (s["entity_id"], s["image_url"]))
+        representative["merged"].sort(key=lambda m: m["asset_id"])
+    return [a for a in assets if a["asset_id"] not in merged_away], data.get("phash", {})
+
+
+def backfilled_ocr(ocr_dir: Path, asset_id: str) -> list[dict] | None:
+    path = ocr_dir / f"{asset_id}.json"
+    return load_ocr([path]) if path.exists() else None
+
+
+def tree_digest(directory: Path) -> dict:
+    files = sorted(directory.glob("*.json"))
+    digest = hashlib.sha256()
+    for path in files:
+        digest.update(f"{path.name}\0{sha256_file(path)}\n".encode())
+    return {"files": len(files), "sha256": digest.hexdigest()}
+
+
+def lock_of(manifest: dict) -> dict:
+    """The machine-independent part of a manifest: what a frozen corpus must reproduce."""
+    body = {key: manifest[key] for key in ("version", "counts", "checks", "files", "sources",
+                                           "inputs")}
+    body["corpus_fingerprint"] = hashlib.sha256(dump(manifest["files"]).encode()).hexdigest()
+    return body
+
+
+def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: int,
+          near_duplicates: Path | None = None, ocr_dir: Path | None = None) -> dict:
     review_dir = handoff_root / "CodexReview"
     review = ReviewIndex(review_dir / "review.sqlite3")
     pages = PageContext(review_dir / "pages")
@@ -269,7 +335,7 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
         hash_mismatch += bool(expected) and sha != expected
         asset = assets.setdefault(sha, {
             "asset_id": sha, "format": kind, "bytes": size, "entity_ids": set(),
-            "sources": [], "_items": {}})
+            "sources": [], "merged": [], "_items": {}})
         asset["entity_ids"].add(row["entity_id"])
         asset["_items"][item_id] = asset_path
         asset["sources"].append({
@@ -277,6 +343,7 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
             "page_url": row["page_url"], "page_title": row["page_title"],
             "domain": row["domain"], "width": row["width"], "height": row["height"],
             "source_csv": row["source_csv"], "item_id": item_id, "match": match,
+            "content_id": sha,
             "page": pages.summary(row["page_url"], row["image_url"]),
         })
 
@@ -295,6 +362,17 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
                 ocr = texts
         asset["ocr"] = ocr  # None: never OCR'd; []: OCR'd, no text found
         asset_records.append(asset)
+
+    hashed_assets = len(asset_records)
+    phashes: dict[str, str] = {}
+    if near_duplicates is not None:
+        asset_records, phashes = merge_near_duplicates(asset_records, near_duplicates)
+    backfilled = 0
+    for asset in asset_records:
+        asset["phash"] = phashes.get(asset["asset_id"])
+        if asset["ocr"] is None and ocr_dir is not None:
+            asset["ocr"] = backfilled_ocr(ocr_dir, asset["asset_id"])
+            backfilled += asset["ocr"] is not None
 
     per_entity = defaultdict(lambda: {"yes_rows": 0, "usable_rows": 0, "missing_rows": 0})
     for row in rows:
@@ -318,6 +396,8 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
         and len(rows) == usable_rows + len(missing),
         "entity_count_matches_csv": len(entity_records) == len(names),
         "asset_ids_are_sha256": all(len(a["asset_id"]) == 64 for a in asset_records),
+        "merged_assets_accounted": hashed_assets == len(asset_records) + sum(
+            len(a["merged"]) for a in asset_records),
         "no_sha256_disagreement_with_review_db": hash_mismatch == 0,
     }
 
@@ -335,6 +415,9 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
             "yes_rows": len(rows),
             "duplicate_yes_rows_dropped": duplicate_rows,
             "entities": len(entity_records),
+            "entities_with_assets": len(entity_records) - len(without_images),
+            "assets_before_near_duplicate_merge": hashed_assets,
+            "near_duplicates_merged": hashed_assets - len(asset_records),
             "assets": len(asset_records),
             "asset_source_rows": usable_rows,
             "assets_shared_by_multiple_entities": sum(len(a["entity_ids"]) > 1
@@ -344,6 +427,7 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
             "entities_without_assets": len(without_images),
             "assets_with_ocr_text": sum(bool(a["ocr"]) for a in asset_records),
             "assets_with_ocr_file": sum(a["ocr"] is not None for a in asset_records),
+            "assets_with_backfilled_ocr": backfilled,
             "source_rows_with_page_context": sum(
                 s["page"] is not None for a in asset_records for s in a["sources"]),
             "formats": dict(Counter(a["format"] for a in asset_records)),
@@ -353,11 +437,16 @@ def build(handoff_root: Path, csv_paths: list[Path], output: Path, *, workers: i
         "checks": checks,
         "files": checksums,
         "sources": sources,
+        "inputs": {
+            "near_duplicates": None if near_duplicates is None else {
+                "file": near_duplicates.name, "sha256": sha256_file(near_duplicates)},
+            "ocr_backfill": None if ocr_dir is None else tree_digest(ocr_dir),
+        },
         "review_db": {"items": review.items},
     }
     temporary = output / "manifest.json.tmp"
-    temporary.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-                         encoding="utf-8")
+    temporary.write_bytes(
+        (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     temporary.replace(output / "manifest.json")
     return manifest
 
@@ -375,15 +464,34 @@ def main() -> int:
                         help="candidate CSV; repeat for each part")
     parser.add_argument("--output", type=Path, default=ROOT / "data/processed/products-v1")
     parser.add_argument("--workers", type=int, default=min(16, (os.cpu_count() or 4) * 2))
+    parser.add_argument("--near-duplicates", type=Path, help="find_near_duplicates.py output")
+    parser.add_argument("--ocr-dir", type=Path, help="backfill_ocr.py output directory")
+    lock = parser.add_mutually_exclusive_group()
+    lock.add_argument("--write-lock", type=Path, help="freeze: write the corpus fingerprint")
+    lock.add_argument("--check-lock", type=Path, help="fail unless the outputs match this lock")
     args = parser.parse_args()
     manifest = build(args.handoff_root.resolve(), [p.resolve() for p in args.csvs],
-                     args.output, workers=args.workers)
+                     args.output, workers=args.workers, near_duplicates=args.near_duplicates,
+                     ocr_dir=args.ocr_dir)
     print(json.dumps({"counts": manifest["counts"], "checks": manifest["checks"]},
                      ensure_ascii=False, indent=2))
     if not all(manifest["checks"].values()):
         print("P0 gate FAILED", file=sys.stderr)
         return 1
     print(f"Wrote {args.output}")
+    body = lock_of(manifest)
+    if args.write_lock:
+        args.write_lock.parent.mkdir(parents=True, exist_ok=True)
+        args.write_lock.write_bytes(
+            (json.dumps(body, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
+        print(f"Locked corpus {body['corpus_fingerprint']} -> {args.write_lock}")
+    if args.check_lock:
+        expected = json.loads(args.check_lock.read_text(encoding="utf-8"))
+        differs = sorted(key for key in expected if expected[key] != body.get(key))
+        if differs:
+            print(f"Corpus does not match {args.check_lock}: {differs}", file=sys.stderr)
+            return 1
+        print(f"Corpus matches lock {body['corpus_fingerprint']}")
     return 0
 
 
