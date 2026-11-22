@@ -3,7 +3,14 @@ name = "visualseek-retrieval"
 version = "0.1.0"
 description = "Retrieval components for V-Lookup."
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = [
+  "numpy>=2.0,<3",
+  "qdrant-client==1.20.0",
+]
+
+[project.optional-dependencies]
+# Query/index encoder (bge-m3). Heavy: pulls torch; install with the CUDA build you need.
+encoder = ["sentence-transformers>=5.1,<6"]
 
 [build-system]
 requires = ["hatchling"]

@@ -1,0 +1,134 @@
+"""S1 entity spotting: link query spans to catalogue entities/brands, no NER model.
+
+Dictionary: every alias of graph.json (entity names, names without notes, unique model codes,
+model tails, brand names) keyed by its accent-folded token sequence. Matching is greedy
+longest-span, left to right, over the query's folded tokens (an Aho-Corasick-equivalent
+token trie lookup). When both the query span and the alias carry Vietnamese marks, the
+marks must agree, so "bánh chay" does not link to "bánh chày".
+Dense: cosine between the query vector and one card vector per entity, used when the
+dictionary finds nothing.
+"""
+
+from __future__ import annotations
+
+from collections import defaultdict
+from dataclasses import dataclass, field
+
+import numpy as np
+
+from visualseek_retrieval.text import normalize, surface, token_matches
+
+MAX_SPAN = 12
+
+
+@dataclass(frozen=True)
+class Entry:
+    kind: str  # "entity" | "brand"
+    id: str
+    words: tuple[str, ...]  # alias surface words (accented when the source is)
+
+
+@dataclass
+class Match:
+    kind: str
+    ids: list[str]
+    start: int
+    end: int
+    text: str
+
+
+@dataclass
+class Spotting:
+    entities: list[str] = field(default_factory=list)
+    brands: list[str] = field(default_factory=list)
+    matches: list[Match] = field(default_factory=list)
+    ambiguous: list[Match] = field(default_factory=list)
+    dense_top: list[tuple[str, float]] = field(default_factory=list)
+
+
+def _words(text: str) -> list[str]:
+    return [word for word in surface(text).split() if normalize(word)]
+
+
+class EntitySpotter:
+    def __init__(self, graph: dict, entity_dense: np.ndarray) -> None:
+        self.entity_ids = [entity["id"] for entity in graph["entities"]]
+        self.entity_dense = entity_dense
+        self.table: dict[tuple[str, ...], list[Entry]] = defaultdict(list)
+        surfaces: dict[str, dict[str, list[str]]] = {}
+        for entity in graph["entities"]:
+            # Prefer an accented spelling of the alias when the name provides one.
+            spelled = {normalize(text): _words(text) for text in (entity["name"], entity["core"])}
+            surfaces[entity["id"]] = spelled
+            for alias in entity["aliases"]:
+                words = spelled.get(alias) or alias.split()
+                self._add(Entry("entity", entity["id"], tuple(words)))
+        for brand in graph["brands"]:
+            for alias in {*brand["aliases"], normalize(brand["name"])}:
+                words = (
+                    _words(brand["name"]) if normalize(brand["name"]) == alias else alias.split()
+                )
+                self._add(Entry("brand", brand["id"], tuple(words)))
+
+    def _add(self, entry: Entry) -> None:
+        key = tuple(normalize(" ".join(entry.words)).split())
+        if key and entry not in self.table[key]:
+            self.table[key].append(entry)
+
+    def _lookup(self, query_words: list[str]) -> list[Match]:
+        folded = [normalize(word) for word in query_words]
+        # A word can fold to several tokens only in odd cases; keep one folded form per word.
+        folded = [token.split()[0] for token in folded]
+        matches: list[Match] = []
+        start = 0
+        while start < len(folded):
+            found = None
+            for end in range(min(len(folded), start + MAX_SPAN), start, -1):
+                entries = self.table.get(tuple(folded[start:end]))
+                if not entries:
+                    continue
+                span = query_words[start:end]
+                kept = [entry for entry in entries if _accents_agree(span, entry.words)]
+                if kept:
+                    found = (end, kept)
+                    break
+            if found is None:
+                start += 1
+                continue
+            end, kept = found
+            kinds = {entry.kind for entry in kept}
+            kind = "entity" if "entity" in kinds else "brand"
+            ids = sorted({entry.id for entry in kept if entry.kind == kind})
+            matches.append(Match(kind, ids, start, end, " ".join(query_words[start:end])))
+            start = end
+        return matches
+
+    def spot(self, query: str, query_vector: np.ndarray | None, top_k: int = 5) -> Spotting:
+        result = Spotting()
+        for match in self._lookup(_words(query)):
+            if match.kind == "entity" and len(match.ids) > 1:
+                result.ambiguous.append(match)
+                continue
+            result.matches.append(match)
+            target = result.entities if match.kind == "entity" else result.brands
+            for item in match.ids:
+                if item not in target:
+                    target.append(item)
+        if query_vector is not None:
+            scores = self.entity_dense @ query_vector
+            top = np.argsort(-scores)[:top_k]
+            result.dense_top = [(self.entity_ids[i], float(scores[i])) for i in top]
+        return result
+
+
+def _accents_agree(query_words: list[str], alias_words: tuple[str, ...]) -> bool:
+    if len(query_words) != len(alias_words):
+        # Folding merged or split a token; fall back to the folded comparison already made.
+        return True
+    strict = any(word != normalize(word) for word in query_words) and any(
+        word != normalize(word) for word in alias_words
+    )
+    return all(
+        token_matches(alias, word, strict=strict)
+        for alias, word in zip(alias_words, query_words, strict=True)
+    )
