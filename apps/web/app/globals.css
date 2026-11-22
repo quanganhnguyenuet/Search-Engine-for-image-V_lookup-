@@ -6,12 +6,40 @@
   :root {
     --background: 40 33% 98%;
     --foreground: 222 47% 11%;
+    --surface: 0 0% 100%;
     --border: 215 20% 88%;
     --primary: 222 47% 11%;
     --primary-foreground: 210 40% 98%;
     --muted: 210 30% 95%;
-    --muted-foreground: 215 16% 42%;
+    --muted-foreground: 215 16% 38%;
+    --brand: 174 72% 24%;
+    --brand-foreground: 0 0% 100%;
+    --brand-soft: 172 45% 92%;
+    --warn: 35 92% 33%;
+    --warn-soft: 45 90% 92%;
+    --danger: 0 70% 42%;
+    --danger-soft: 0 80% 95%;
     --radius: 0.75rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 222 30% 8%;
+      --foreground: 40 20% 94%;
+      --surface: 222 24% 12%;
+      --border: 220 14% 24%;
+      --primary: 40 20% 94%;
+      --primary-foreground: 222 30% 8%;
+      --muted: 222 18% 16%;
+      --muted-foreground: 218 12% 70%;
+      --brand: 172 55% 52%;
+      --brand-foreground: 222 30% 8%;
+      --brand-soft: 174 40% 16%;
+      --warn: 42 90% 62%;
+      --warn-soft: 38 50% 16%;
+      --danger: 0 80% 68%;
+      --danger-soft: 0 40% 16%;
+    }
   }
 
   * {
@@ -20,5 +48,14 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
