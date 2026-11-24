@@ -92,24 +92,36 @@ def find(query: str) -> list[Cue]:
     return sorted(found, key=lambda cue: cue.start)
 
 
-def segments(query: str) -> list[str]:
-    """The query split at intent separators and list punctuation (empty parts dropped)."""
+def _words_before(text: str, end: int) -> int:
+    """Query words (as ``spotting.query_words`` counts them) before a character offset."""
+    return sum(1 for word in text[:end].split() if word != _MARK and normalize(word))
+
+
+def segments(query: str, protected: list[tuple[int, int]] | tuple = ()) -> list[str]:
+    """The query split at intent separators and list punctuation (empty parts dropped).
+
+    ``protected`` are word spans ``[start, end)`` of the query (``spotting.query_words``) that
+    name one thing: a catalogue entity or brand the spotter found in the whole query. A
+    separator inside such a span is part of the name and does not cut it: "lock&lock",
+    "Indapamid 2,5mg", "R&M Spacemaster".
+    """
     # Punctuation is dropped by the normalisers, so mark it with a placeholder word first.
     marked = PUNCTUATION.sub(f" {_MARK} ", unicodedata.normalize("NFC", query))
     text, _ = _text(marked)
-    cuts = [c for c in find(text) if c.kind in SEPARATORS]
+    cuts = [(c.start, c.end) for c in find(text) if c.kind in SEPARATORS]
+    cuts += [m.span() for m in re.finditer(rf"(?<!\w){_MARK}(?!\w)", text)]
+    kept = [
+        (start, end)
+        for start, end in sorted(cuts)
+        if not any(s < _words_before(text, start) < e for s, e in protected)
+    ]
     parts, last = [], 0
-    for cue in cuts:
-        parts.append(text[last : cue.start])
-        last = cue.end
+    for start, end in kept:
+        parts.append(text[last:start])
+        last = end
     parts.append(text[last:])
-    out = []
-    for part in parts:
-        for piece in part.split(_MARK):
-            piece = " ".join(piece.split())
-            if piece:
-                out.append(piece)
-    return out
+    # A mark inside a protected span was not cut: it is only a placeholder, not a word.
+    return [piece for part in parts if (piece := " ".join(part.replace(_MARK, " ").split()))]
 
 
 def has_negation(query: str) -> Cue | None:

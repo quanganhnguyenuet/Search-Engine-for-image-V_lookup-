@@ -30,6 +30,25 @@ def test_segments_split_at_and_or_and_list_punctuation():
     assert segments("giày thể thao cũng như túi xách") == ["giày thể thao", "túi xách"]
 
 
+def test_separators_inside_a_named_span_are_part_of_the_name():
+    # Word spans of the entities the spotter found in the whole query (query_words indexes).
+    assert segments("bình nước lock&lock inox 600ml") == ["bình nước lock", "lock inox 600ml"]
+    assert segments("bình nước lock&lock inox 600ml", [(0, 6)]) == [
+        "bình nước lock lock inox 600ml"
+    ]
+    query = "Indapamid DWP 2,5mg, Kệ vòng hoa viếng và Graber Solar Shades"
+    spans = [(0, 4), (4, 8), (9, 12)]
+    assert segments(query, spans) == [
+        "indapamid dwp 2 5mg",
+        "kệ vòng hoa viếng",
+        "graber solar shades",
+    ]
+    # A cut right at the edge of a span still separates two things, and so does a connector
+    # word that is not inside one ("và" here sits between the spans).
+    assert segments("kindle paperwhite, tai nghe", [(0, 2)]) == ["kindle paperwhite", "tai nghe"]
+    assert segments("a & b và c", [(0, 2)]) == ["a b", "c"]
+
+
 def test_with_is_an_attribute_not_a_second_object():
     assert segments("bàn phím với đèn led") == ["bàn phím với đèn led"]
 

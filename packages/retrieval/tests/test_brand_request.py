@@ -150,6 +150,23 @@ ITEMS = [
         "Nhẫn kim cương",
         "fashion.jewelry",
     ),
+    # Names with "&" and "," in them: the spotter reads them whole, the separators are theirs.
+    product(
+        "lock",
+        "Bình nước Lock&Lock Inox 600ml",
+        None,
+        ["binh nuoc lock lock inox 600ml"],
+        "Bình nước",
+        "household.kitchenware",
+    ),
+    product(
+        "indapamid",
+        "Indapamid DWP 2,5mg",
+        None,
+        ["indapamid dwp 2 5mg"],
+        "Thuốc huyết áp",
+        "drug.oral",
+    ),
 ]
 GRAPH = {
     "fingerprint": "test",
@@ -329,3 +346,16 @@ def test_a_brandless_entity_in_an_exclusion_is_read_as_the_brand_type():
     assert "nhan2" in p.anchors  # PNJ's diamond ring
     assert "nhan2" not in p.hops
     assert "nhan1" in p.hops
+
+
+def test_an_entity_name_with_a_separator_is_not_cut_into_generic_intents():
+    p = plan("bình nước lock&lock inox 600ml")
+    assert p.seeds == ["lock"]
+    assert p.generic_hits == [] and p.intents == 1
+    # The comma inside "2,5mg" is not a list comma; the one after it is.
+    p = plan("Indapamid DWP 2,5mg, Bugi Bosch Super Plus")
+    assert sorted(p.seeds) == ["bugi", "indapamid"]
+    assert p.generic_hits == [] and p.intents == 2
+    # A real "&" between two things still separates them.
+    p = plan("Bugi Bosch Super Plus & dây chuyền vàng", type_expand=False)
+    assert p.generic_hits == ["chuyen"] and p.intents == 2

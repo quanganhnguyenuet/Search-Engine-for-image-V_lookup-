@@ -395,12 +395,16 @@ class SearchPipeline:
           (otherwise it is a separate intent of its own, returned in ``unlinked``).
         """
         clauses = []
-        pieces = connectors.segments(query)
+        # What S1 finds in the whole query is never cut: "bình nước lock&lock inox 600ml" is one
+        # product, not "lock" and "lock inox 600ml".
+        sp = self.spotter.spot(query, None)
+        pieces = connectors.segments(
+            query, [(m.start, m.end) for m in [*sp.matches, *sp.ambiguous]]
+        )
         if len(pieces) == 1 and has_named:
             # "chuột Logitech MX Master 3 với bàn phím": "với" after a spotted entity can
             # introduce a second generic object when the tail is not a visual attribute.
             words = query_words(query)
-            sp = self.spotter.spot(query, None)
             if any(m.kind == "entity" for m in sp.matches):
                 last_end = max(m.end for m in sp.matches if m.kind == "entity")
                 for idx in range(last_end, len(words) - 1):
@@ -758,7 +762,10 @@ class SearchPipeline:
             # The gate found the query far from every entity card; a cue must not override it
             # ("lời bài hát Nối vòng tay lớn" contains the jewelry cue "vòng tay").
             return
-        parts = connectors.segments(query) if self.settings.segment_categories else [query]
+        protected = [(m.start, m.end) for m in [*spotting.matches, *spotting.ambiguous]]
+        parts = (
+            connectors.segments(query, protected) if self.settings.segment_categories else [query]
+        )
         if len(parts) >= 2 and self.encoder is not None:
             # Each part gets its own cue and its own nearest cards: voting over the whole
             # query lets one object outvote the others ("tai nghe và chuột máy tính").
