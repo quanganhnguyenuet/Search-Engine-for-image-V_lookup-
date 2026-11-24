@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chấm hops-v1</title>
+<title>Chấm hops</title>
 <style>
   :root {
     --bg: #f7f7f5; --surface: #ffffff; --text: #1c1d1f; --muted: #5d6168; --border: #dcdde0;
@@ -65,7 +65,7 @@
 <body>
 <div class="layout">
   <nav aria-label="Danh sách câu">
-    <h1>hops-v1</h1>
+    <h1 id="set-name">hops</h1>
     <p id="progress"></p>
     <ol id="list"></ol>
   </nav>
@@ -86,6 +86,8 @@ const CONFIG = { current: "hiện tại", no_graph_prefetch: "tắt dense tập 
 async function load() {
   const data = await (await fetch("/api/state")).json();
   state.queries = data.queries;
+  $("set-name").textContent = data.set;
+  document.title = `Chấm ${data.set}`;
   const first = state.queries.findIndex((q) => !q.judgment);
   show(first < 0 ? 0 : first);
 }
@@ -200,7 +202,12 @@ $("save").onclick = async () => {
   if (missing) { $("status").textContent = `Còn ${missing} sản phẩm chưa chấm.`; return; }
   const body = { qid: q.qid, grades: state.grades, flag: $("bad").checked ? "bad_query" : null, note: $("note").value };
   const res = await fetch("/api/judgments", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  if (!res.ok) { $("status").textContent = `Lỗi: ${(await res.json()).detail}`; return; }
+  if (!res.ok) {
+    const message = `Chưa lưu được: ${JSON.stringify((await res.json()).detail)}`;
+    $("status").textContent = message;
+    alert(message);
+    return;
+  }
   q.judgment = body;
   const next = state.queries.findIndex((x, i) => i > state.index && !x.judgment);
   const any = state.queries.findIndex((x) => !x.judgment);

@@ -4,6 +4,9 @@ Runs every query through several pipeline configurations in this process and kee
 configuration's top 10, so the judgments can later score all of them (scripts/evaluate_hops.py):
 
   current            the API defaults
+  no_type_filter     without the requested-product-type filter of brand queries (P1)
+  type_expand        the type filter extending hits to their categories
+  fill_any           filling the top 10 with any image, not only the targets' categories
   no_graph_prefetch  without the dense channel restricted to the graph targets
   no_graph_boost     without the seed/hop/anchor score adjustment
   content_only       neither, and no category boost or category grouping
@@ -11,12 +14,13 @@ configuration's top 10, so the judgments can later score all of them (scripts/ev
 The pool groups the union of those images by canonical entity: a person grades a product
 once (with a few of its images), not every image.
 
-  python scripts/build_eval_hops.py
-  python scripts/hops_judge_server.py        # http://127.0.0.1:8013
+  python scripts/build_eval_hops.py [--set hops-v2-holdout]
+  python scripts/hops_judge_server.py [--set hops-v2-holdout]       # http://127.0.0.1:8013
 """
 
 from __future__ import annotations
 
+import argparse
 import dataclasses
 import json
 import os
@@ -33,12 +37,14 @@ from visualseek_retrieval.encoder import TextEncoder  # noqa: E402
 from visualseek_retrieval.pipeline import Settings  # noqa: E402
 from visualseek_retrieval.qdrant_store import connect  # noqa: E402
 
-QUERIES = ROOT / "eval/hops-v1/queries.jsonl"
-OUT = ROOT / "data/processed/products-v1/eval/hops-v1/pool.jsonl"
+DEFAULT_SET = "hops-v1"
 K = 10
 NO_BOOST = {"w_seed": 0.0, "w_dense_seed": 0.0, "w_hop": 0.0, "w_anchor": 0.0}
 CONFIGS = {
     "current": {},
+    "no_type_filter": {"type_filter": False},
+    "type_expand": {"type_expand": True},
+    "fill_any": {"fill_related_only": False},
     "no_graph_prefetch": {"graph_prefetch": False},
     "no_graph_boost": NO_BOOST,
     "content_only": {
@@ -52,8 +58,13 @@ CONFIGS = {
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--set", default=DEFAULT_SET, help="query set under eval/")
+    args = parser.parse_args()
+    source = ROOT / "eval" / args.set / "queries.jsonl"
+    out = ROOT / "data/processed/products-v1/eval" / args.set / "pool.jsonl"
     load_env()
-    queries = [json.loads(line) for line in QUERIES.read_text(encoding="utf-8").splitlines()]
+    queries = [json.loads(line) for line in source.read_text(encoding="utf-8").splitlines() if line]
     encoder = TextEncoder(device="cpu")
     client = connect(os.environ["QDRANT_URL"], os.environ.get("QDRANT_API_KEY"), timeout=60)
     pipelines = {
@@ -105,10 +116,10 @@ def main() -> None:
             ]
         rows.append({"qid": query["qid"], "runs": runs, "traces": traces, "entities": entities})
         print(query["qid"], len(entities), "entities", flush=True)
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), "utf-8")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), "utf-8")
     total = sum(len(r["entities"]) for r in rows)
-    print(f"{len(rows)} queries, {total} entity cards to grade -> {OUT}")
+    print(f"{len(rows)} queries, {total} entity cards to grade -> {out}")
 
 
 if __name__ == "__main__":

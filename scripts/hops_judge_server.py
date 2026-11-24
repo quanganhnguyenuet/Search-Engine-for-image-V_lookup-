@@ -2,9 +2,9 @@
 
 multi_hop queries: 0 wrong, 1 partly (e.g. right brand, wrong product type asked for),
 2 right. multi_intent queries: which part of the query ("vế") the product answers, or wrong.
-Every save appends to eval/hops-v1/judgments.jsonl; the last line per query wins.
+Every save appends to eval/<set>/judgments.jsonl; the last line per query wins.
 
-    python scripts/hops_judge_server.py --judge <name>      # http://127.0.0.1:8013
+    python scripts/hops_judge_server.py --judge <name> [--set hops-v2-holdout]   # :8013
 """
 
 from __future__ import annotations
@@ -21,9 +21,7 @@ from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS = ROOT / "data/processed/products-v1"
-QUERIES = ROOT / "eval/hops-v1/queries.jsonl"
-POOL = CORPUS / "eval/hops-v1/pool.jsonl"
-JUDGMENTS = ROOT / "eval/hops-v1/judgments.jsonl"
+DEFAULT_SET = "hops-v1"
 PAGE = Path(__file__).resolve().parent / "hops_judge" / "index.html"
 ASSET_ID = re.compile(r"^[0-9a-f]{64}$")
 
@@ -54,8 +52,11 @@ def validate(judgment: Judgment, query: dict | None, pool: dict | None) -> str |
     if query is None or pool is None:
         return f"unknown query {judgment.qid}"
     ids = {e["entity_id"] for e in pool["entities"]}
-    if set(judgment.grades) != ids:
-        return "every product of the query must be graded once"
+    # Every product of the current pool needs a grade. Grades of products an earlier pool
+    # showed are kept: a rebuilt pool (new configurations) must not block saving or drop them.
+    missing = ids - set(judgment.grades)
+    if missing:
+        return f"{len(missing)} product(s) of the query are not graded"
     parts = len(query["intents"] or [])
     for entity_id, grade in judgment.grades.items():
         if query["kind"] == "multi_intent" and grade.grade == 2:
@@ -66,14 +67,15 @@ def validate(judgment: Judgment, query: dict | None, pool: dict | None) -> str |
     return None
 
 
-def create_app(judge: str):
+def create_app(judge: str, name: str = DEFAULT_SET):
     from fastapi import FastAPI, HTTPException
     from fastapi.responses import FileResponse, HTMLResponse
 
-    queries = {q["qid"]: q for q in read_jsonl(QUERIES)}
-    pool = {p["qid"]: p for p in read_jsonl(POOL)}
+    judgments = ROOT / "eval" / name / "judgments.jsonl"
+    queries = {q["qid"]: q for q in read_jsonl(ROOT / "eval" / name / "queries.jsonl")}
+    pool = {p["qid"]: p for p in read_jsonl(CORPUS / "eval" / name / "pool.jsonl")}
     if not pool:
-        raise SystemExit("pool is missing: run scripts/build_eval_hops.py")
+        raise SystemExit(f"pool is missing: run scripts/build_eval_hops.py --set {name}")
     paths = {
         asset["asset_id"]: asset["image_path"]
         for row in pool.values()
@@ -82,7 +84,7 @@ def create_app(judge: str):
     }
     image_root = Path(json.loads((CORPUS / "manifest.json").read_text("utf-8"))["image_root"])
     lock = threading.Lock()
-    app = FastAPI(title="hops-v1 judging")
+    app = FastAPI(title=f"{name} judging")
 
     @app.get("/", response_class=HTMLResponse)
     def page() -> str:
@@ -90,9 +92,10 @@ def create_app(judge: str):
 
     @app.get("/api/state")
     def state() -> dict:
-        decided = latest(read_jsonl(JUDGMENTS))
+        decided = latest(read_jsonl(judgments))
         return {
             "judge": judge,
+            "set": name,
             "queries": [
                 {**queries[qid], **pool[qid], "judgment": decided.get(qid)}
                 for qid in queries
@@ -117,8 +120,8 @@ def create_app(judge: str):
         at = datetime.now(UTC).isoformat(timespec="seconds")
         row = {**judgment.model_dump(), "judge": judge, "at": at}
         with lock:
-            JUDGMENTS.parent.mkdir(parents=True, exist_ok=True)
-            with JUDGMENTS.open("a", encoding="utf-8", newline="\n") as handle:
+            judgments.parent.mkdir(parents=True, exist_ok=True)
+            with judgments.open("a", encoding="utf-8", newline="\n") as handle:
                 handle.write(json.dumps(row, ensure_ascii=False) + "\n")
         return {"ok": True, "at": at}
 
@@ -129,10 +132,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8013)
     parser.add_argument("--judge", default="human-1")
+    parser.add_argument("--set", default=DEFAULT_SET, help="query set under eval/")
     args = parser.parse_args()
     import uvicorn
 
-    uvicorn.run(create_app(args.judge), host="127.0.0.1", port=args.port)
+    uvicorn.run(create_app(args.judge, args.set), host="127.0.0.1", port=args.port)
 
 
 if __name__ == "__main__":

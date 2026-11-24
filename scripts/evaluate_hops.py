@@ -5,14 +5,17 @@ image takes the best grade of its products. Paired differences against ``current
 a bootstrap 95 % interval.
 
   multi_hop     P@10 (grade 2), nDCG@10 (gain 2^grade - 1)
+  both          wrong@10: share of the top 10 slots showing a wrong (grade 0) image; an
+                empty slot is not wrong, so returning fewer images is not punished here
   multi_intent  P@10 (any part answered), all_parts@10 (every part has an image),
                 balanced@10 (each part's share of the top 10, capped at 10 // parts)
 
-  python scripts/evaluate_hops.py
+  python scripts/evaluate_hops.py [--set hops-v2-holdout]
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 from collections import defaultdict
@@ -21,9 +24,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-QUERIES = ROOT / "eval/hops-v1/queries.jsonl"
-POOL = ROOT / "data/processed/products-v1/eval/hops-v1/pool.jsonl"
-JUDGMENTS = ROOT / "eval/hops-v1/judgments.jsonl"
+DEFAULT_SET = "hops-v1"
 K = 10
 SEED = 7
 
@@ -50,16 +51,18 @@ def image_grades(pool_row: dict, grades: dict) -> dict[str, tuple[int, set[int]]
 def score(query: dict, ranked: list[str], graded: dict) -> dict:
     top = [graded.get(a, (0, set())) for a in ranked[:K]]
     precision = sum(g == 2 for g, _ in top) / K
+    wrong = sum(g == 0 for g, _ in top) / K
     if query["kind"] == "multi_hop":
         dcg = sum((2**g - 1) / math.log2(i + 2) for i, (g, _) in enumerate(top))
         ideal = sorted((g for g, _ in graded.values()), reverse=True)[:K]
         idcg = sum((2**g - 1) / math.log2(i + 2) for i, g in enumerate(ideal))
-        return {"p10": precision, "ndcg10": dcg / idcg if idcg else 0.0}
+        return {"p10": precision, "ndcg10": dcg / idcg if idcg else 0.0, "wrong10": wrong}
     parts = len(query["intents"])
     share = max(1, K // parts)
     counts = [sum(k in p for _, p in top) for k in range(parts)]
     return {
         "p10": precision,
+        "wrong10": wrong,
         "all_parts10": float(all(counts)),
         "balanced10": float(np.mean([min(c, share) / share for c in counts])),
     }
@@ -75,9 +78,13 @@ def bootstrap(deltas: list[float]) -> list[float]:
 
 
 def main() -> None:
-    queries = {q["qid"]: q for q in read_jsonl(QUERIES)}
-    pool = {p["qid"]: p for p in read_jsonl(POOL)}
-    judged = {row["qid"]: row for row in read_jsonl(JUDGMENTS)}
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--set", default=DEFAULT_SET, help="query set under eval/")
+    args = parser.parse_args()
+    queries = {q["qid"]: q for q in read_jsonl(ROOT / "eval" / args.set / "queries.jsonl")}
+    pool_path = ROOT / "data/processed/products-v1/eval" / args.set / "pool.jsonl"
+    pool = {p["qid"]: p for p in read_jsonl(pool_path)}
+    judged = {row["qid"]: row for row in read_jsonl(ROOT / "eval" / args.set / "judgments.jsonl")}
     usable = [q for q in judged if judged[q].get("flag") != "bad_query" and q in pool]
     print(f"judged {len(judged)}/{len(queries)} queries, scored {len(usable)} (bad_query skipped)")
     if not usable:

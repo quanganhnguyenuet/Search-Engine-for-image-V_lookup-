@@ -1,0 +1,40 @@
+{"qid": "v01", "kind": "multi_hop", "query": "hãng sản xuất lốp Continental PremiumContact 6 còn làm lốp gì khác", "intents": null, "tests": "hop + type limit, new brand"}
+{"qid": "v02", "kind": "multi_hop", "query": "Liqui Moly có những loại nhớt nào dành cho xe máy", "intents": null, "tests": "brand + type + vehicle qualifier"}
+{"qid": "v03", "kind": "multi_hop", "query": "The North Face ngoài balo ra còn bán gì", "intents": null, "tests": "brand + category exclusion"}
+{"qid": "v04", "kind": "multi_hop", "query": "sản phẩm khác của thương hiệu làm lốp Vittoria Corsa", "intents": null, "tests": "'thương hiệu làm X'"}
+{"qid": "v05", "kind": "multi_hop", "query": "chicco co nhung do gi cho be", "intents": null, "tests": "no diacritics, lowercase brand"}
+{"qid": "v06", "kind": "multi_hop", "query": "IKEA bán những loại ghế nào", "intents": null, "tests": "brand + type request, no seed product"}
+{"qid": "v07", "kind": "multi_hop", "query": "phụ tùng Peugeot, không tính xe nguyên chiếc", "intents": null, "tests": "'không tính' exclusion"}
+{"qid": "v08", "kind": "multi_hop", "query": "cùng nhà sản xuất với bàn ủi Tefal Pro Style có chảo nào không", "intents": null, "tests": "'cùng nhà sản xuất' + question form"}
+{"qid": "v09", "kind": "multi_hop", "query": "Specialized còn phụ kiện xe đạp nào ngoài bình nước Purist", "intents": null, "tests": "brand + exclusion + type"}
+{"qid": "v10", "kind": "multi_hop", "query": "các phụ tùng xe máy của Yamaha", "intents": null, "tests": "multi-domain brand + type limit"}
+{"qid": "v11", "kind": "multi_hop", "query": "đồ bảo hộ lao động của 3M", "intents": null, "tests": "brand + category phrase not in product_type"}
+{"qid": "v12", "kind": "multi_hop", "query": "Liebherr còn mẫu xe xúc lật nào khác ngoài L508", "intents": null, "tests": "bare model code exclusion"}
+{"qid": "v13", "kind": "multi_hop", "query": "hãng làm balo Bellroy có ví nào không", "intents": null, "tests": "hop + type, question form"}
+{"qid": "v14", "kind": "multi_hop", "query": "Denso có gì cho ô tô ngoại trừ gạt mưa", "intents": null, "tests": "'ngoại trừ' exclusion"}
+{"qid": "v15", "kind": "multi_hop", "query": "các phụ kiện xe đạp cùng hãng với túi Topeak TrunkBag", "intents": null, "tests": "'cùng hãng với' + short name"}
+{"qid": "v16", "kind": "multi_hop", "query": "thiết bị vệ sinh khác của TOTO ngoài bồn cầu", "intents": null, "tests": "brand + type exclusion"}
+{"qid": "v17", "kind": "multi_hop", "query": "SRAM có gì cho hệ thống phanh xe đạp", "intents": null, "tests": "type request by function word"}
+{"qid": "v18", "kind": "multi_hop", "query": "DJI có những sản phẩm gì ngoài flycam Mavic 3", "intents": null, "tests": "brand + exclusion across domains"}
+{"qid": "v19", "kind": "multi_hop", "query": "máy rửa bát Electrolux khác ngoài ESF5206LOW", "intents": null, "tests": "same type, exclude by code"}
+{"qid": "v20", "kind": "multi_hop", "query": "hang Kyoritsu con dung cu do dien nao khac ngoai ampe kim", "intents": null, "tests": "no diacritics + exclusion"}
+{"qid": "n01", "kind": "multi_intent", "query": "nhiệt kế Beurer kèm chảo chống dính Tefal", "intents": ["nhiệt kế Beurer", "chảo Tefal"], "tests": "'kèm'"}
+{"qid": "n02", "kind": "multi_intent", "query": "tivi LG cùng máy rửa bát Electrolux", "intents": ["tivi LG", "máy rửa bát Electrolux"], "tests": "'cùng' as connector"}
+{"qid": "n03", "kind": "multi_intent", "query": "gạt mưa Valeo hay gạt mưa Denso", "intents": ["gạt mưa Valeo", "gạt mưa Denso"], "tests": "'hay', same type two brands"}
+{"qid": "n04", "kind": "multi_intent", "query": "cám tôm CP với cả hạt giống", "intents": ["thức ăn thủy sản CP", "hạt giống (bất kỳ)"], "tests": "'với cả', named + generic"}
+{"qid": "n05", "kind": "multi_intent", "query": "bộ ly pha lê Bohemia + cà phê hạt", "intents": ["ly pha lê Bohemia", "cà phê hạt (bất kỳ)"], "tests": "'+' connector"}
+{"qid": "n06", "kind": "multi_intent", "query": "vành DT Swiss và lốp xe đạp Vittoria", "intents": ["vành DT Swiss", "lốp Vittoria"], "tests": "brand + type twice"}
+{"qid": "n07", "kind": "multi_intent", "query": "gương chiếu hậu Mazda CX-5 và két nước Valeo", "intents": ["gương Mazda CX-5", "két nước Valeo"], "tests": "two named parts"}
+{"qid": "n08", "kind": "multi_intent", "query": "xe tải Isuzu cũng như xe xúc lật Liebherr", "intents": ["xe tải Isuzu", "xe xúc lật Liebherr"], "tests": "'cũng như'"}
+{"qid": "n09", "kind": "multi_intent", "query": "board game và đàn organ điện tử", "intents": ["board game", "đàn organ điện tử"], "tests": "two categories"}
+{"qid": "n10", "kind": "multi_intent", "query": "kính mát và lăn khử mùi", "intents": ["kính mát", "lăn khử mùi"], "tests": "two generic types"}
+{"qid": "n11", "kind": "multi_intent", "query": "Osmo Action 3, thêm cả laptop gaming", "intents": ["DJI Osmo Action 3", "laptop gaming"], "tests": "'thêm cả', named without brand"}
+{"qid": "n12", "kind": "multi_intent", "query": "cho xem cũi Chicco và ghế ăn dặm", "intents": ["cũi Chicco", "ghế ăn dặm (bất kỳ)"], "tests": "imperative prefix, named + generic"}
+{"qid": "n13", "kind": "multi_intent", "query": "rèm cửa IKEA lẫn đèn chùm pha lê", "intents": ["rèm IKEA", "đèn chùm pha lê (bất kỳ)"], "tests": "'lẫn'"}
+{"qid": "n14", "kind": "multi_intent", "query": "nhớt Liqui Moly, nước làm mát Denso và lốp Continental", "intents": ["nhớt Liqui Moly", "nước làm mát Denso", "lốp Continental"], "tests": "three intents, brand + type"}
+{"qid": "n15", "kind": "multi_intent", "query": "trà thảo mộc hoặc nước giải khát", "intents": ["trà thảo mộc", "nước giải khát"], "tests": "'hoặc', two categories"}
+{"qid": "n16", "kind": "multi_intent", "query": "máy bơm ly tâm và ổn áp", "intents": ["máy bơm ly tâm", "ổn áp"], "tests": "two industrial types"}
+{"qid": "n17", "kind": "multi_intent", "query": "que test nhanh, nhiệt kế điện tử", "intents": ["que test nhanh", "nhiệt kế điện tử"], "tests": "comma only"}
+{"qid": "n18", "kind": "multi_intent", "query": "balo The North Face hoặc balo Bellroy", "intents": ["balo The North Face", "balo Bellroy"], "tests": "same type two brands"}
+{"qid": "n19", "kind": "multi_intent", "query": "gà rán KFC và nước giải khát", "intents": ["gà rán KFC", "nước giải khát (bất kỳ)"], "tests": "food brand + generic"}
+{"qid": "n20", "kind": "multi_intent", "query": "may lanh Mitsubishi va tu lanh LG", "intents": ["máy lạnh Mitsubishi", "tủ lạnh LG"], "tests": "no diacritics, multi-domain brands"}

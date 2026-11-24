@@ -38,6 +38,6 @@ def test_validate_requires_every_product_and_a_part_for_relevant_intents():
     full = {"a": Grade(grade=2, intent=1), "b": Grade(grade=0)}
     assert validate(Judgment(qid="m01", grades=full), query, POOL) is None
     missing = Judgment(qid="m01", grades={"a": Grade(grade=0)})
-    assert "every product" in validate(missing, query, POOL)
+    assert "1 product(s) of the query are not graded" in validate(missing, query, POOL)
     no_part = Judgment(qid="m01", grades={"a": Grade(grade=2), "b": Grade(grade=0)})
     assert "part" in validate(no_part, query, POOL)
