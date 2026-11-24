@@ -1,0 +1,1216 @@
+{"kind": "short", "query": "09G TF60SN", "expected": ["035f3e6d-73cc-444e-87bf-c779927aa720"], "split": "test", "qid": "short-0000"}
+{"kind": "short", "query": "105 FD-1056", "expected": ["0142e74e-810b-4317-a88a-2c2d24850c96"], "split": "dev", "qid": "short-0001"}
+{"kind": "short", "query": "105 FD-5700", "expected": ["042695d1-af6f-471c-b387-a0922d07ec29"], "split": "test", "qid": "short-0002"}
+{"kind": "short", "query": "3068B Plus", "expected": ["0db44ee0-78a0-48fa-824f-da4e9bee972e"], "split": "test", "qid": "short-0003"}
+{"kind": "short", "query": "341 USB-C Hub", "expected": ["024d9837-00c0-4c6d-8bde-6d2ec66428e0"], "split": "test", "qid": "short-0004"}
+{"kind": "short", "query": "3R15", "expected": ["037b5c7d-d0d7-496e-8180-c1a01460794c"], "split": "dev", "qid": "short-0005"}
+{"kind": "short", "query": "3R78 khớp gối", "expected": ["008dd378-d063-46d6-bc39-7e1440f09ae3"], "split": "dev", "qid": "short-0006"}
+{"kind": "short", "query": "5130 XpressMusic", "expected": ["03baf85e-aacf-4877-b596-34b1af22632e"], "split": "test", "qid": "short-0007"}
+{"kind": "short", "query": "5CX", "expected": ["0127c4ee-2bd6-4a4d-b0a3-ba90838e06da"], "split": "test", "qid": "short-0008"}
+{"kind": "short", "query": "5R110W TorqShift", "expected": ["0147642b-66d0-4f28-9cc7-09b02d96f60d"], "split": "test", "qid": "short-0009"}
+{"kind": "short", "query": "65mm f/2 DG DN Contemporary", "expected": ["0448720f-84ef-49b6-be04-ead52b717af9"], "split": "test", "qid": "short-0010"}
+{"kind": "short", "query": "6R140 TorqShift", "expected": ["039dfd4d-5d0a-441d-bb4e-38c26de7f983"], "split": "dev", "qid": "short-0011"}
+{"kind": "short", "query": "800A", "expected": ["036ec801-0534-4284-b06c-c9942c7e7c45"], "split": "dev", "qid": "short-0012"}
+{"kind": "short", "query": "972M", "expected": ["01b5492a-11f6-4f86-9be6-c703ea0e89d3"], "split": "dev", "qid": "short-0013"}
+{"kind": "short", "query": "A-S801", "expected": ["01654a1e-0f3f-4af5-b99d-51ffb4040e9d"], "split": "test", "qid": "short-0014"}
+{"kind": "short", "query": "A16", "expected": ["046e52c4-d476-4b9c-98e2-7d5dad4f15ee"], "split": "test", "qid": "short-0015"}
+{"kind": "short", "query": "A318", "expected": ["03730170-d626-4b66-98b3-6a9918b15733"], "split": "dev", "qid": "short-0016"}
+{"kind": "short", "query": "A7 III", "expected": ["01cda730-0953-4eec-8145-cbf24a39a803"], "split": "dev", "qid": "short-0017"}
+{"kind": "short", "query": "A8", "expected": ["000a0cf4-a834-4209-87dc-f4b877045be1"], "split": "test", "qid": "short-0018"}
+{"kind": "short", "query": "ABS sensor", "expected": ["0338f555-ed7b-46ee-adb4-7f4d32abf39d"], "split": "test", "qid": "short-0019"}
+{"kind": "short", "query": "Acigmentin", "expected": ["0150e2e3-f744-40e0-bca3-803feb39dd3e"], "split": "test", "qid": "short-0020"}
+{"kind": "short", "query": "Acyclovir", "expected": ["0db3d7cf-6a45-4a46-8327-7f47100dec1f"], "split": "test", "qid": "short-0021"}
+{"kind": "short", "query": "Advanced Sữa rửa mặt", "expected": ["033ddbd3-350a-412e-acec-d68f456ce50b"], "split": "dev", "qid": "short-0022"}
+{"kind": "short", "query": "Advantage", "expected": ["011f569d-fff8-4246-b409-1735aa539803"], "split": "test", "qid": "short-0023"}
+{"kind": "short", "query": "Aero Comp", "expected": ["042a38fa-c8c6-444c-9595-f860e1d437d5"], "split": "test", "qid": "short-0024"}
+{"kind": "short", "query": "Aero Space", "expected": ["03c8c060-b808-4686-b2ce-7c26c492a358"], "split": "test", "qid": "short-0025"}
+{"kind": "short", "query": "Aeronova Team", "expected": ["00743947-14e0-4174-a374-c1e05e6b785b"], "split": "test", "qid": "short-0026"}
+{"kind": "short", "query": "Aerostep", "expected": ["00780c6a-2216-43e4-a22c-74f5741406ce"], "split": "dev", "qid": "short-0027"}
+{"kind": "short", "query": "Agras T40", "expected": ["01256033-c6c2-42be-81b2-b7ad0ae1a1ac"], "split": "dev", "qid": "short-0028"}
+{"kind": "short", "query": "AHA 30% + BHA 2% Peeling Solution", "expected": ["03509e9e-8fa1-4734-8df5-dd841fe651ce"], "split": "test", "qid": "short-0029"}
+{"kind": "short", "query": "AirTag", "expected": ["0db2fff0-c9fc-4319-b636-d7ad4c0032d9"], "split": "test", "qid": "short-0030"}
+{"kind": "short", "query": "AirWerks S200SX", "expected": ["0428abe8-3c06-4c06-856b-b3dc8691eb15"], "split": "dev", "qid": "short-0031"}
+{"kind": "short", "query": "Alienware", "expected": ["0386dc28-027e-4368-b6f2-3d02b8b163fc"], "split": "dev", "qid": "short-0032"}
+{"kind": "short", "query": "Alimemazine", "expected": ["008b2090-f50a-4757-a77d-90c848b3c53c"], "split": "dev", "qid": "short-0033"}
+{"kind": "short", "query": "Alivio FD-M4000", "expected": ["00fe8e2a-4021-4a09-b83a-bfbc30e8a0b2"], "split": "dev", "qid": "short-0034"}
+{"kind": "short", "query": "Allegro Limousine", "expected": ["03b1954d-7a09-4d3e-b031-dc2fae61a0b8"], "split": "test", "qid": "short-0035"}
+{"kind": "short", "query": "Almera đời", "expected": ["0df3898f-7632-4c17-b2f3-9d8ae49928f7"], "split": "dev", "qid": "short-0036"}
+{"kind": "short", "query": "AM6B Plus", "expected": ["00a9c591-f23c-499d-9e39-1248a395544d"], "split": "test", "qid": "short-0037"}
+{"kind": "short", "query": "Amiodarone Tablets BP", "expected": ["0283cb07-45c2-4fc1-a782-027fff3e5395"], "split": "dev", "qid": "short-0038"}
+{"kind": "short", "query": "Ampicilin", "expected": ["03884ee5-ba42-4f3e-98fe-0f4bc80fa8ac"], "split": "dev", "qid": "short-0039"}
+{"kind": "short", "query": "ANAFI", "expected": ["0360fc37-af28-4ac3-824a-f8beebbd61c9"], "split": "dev", "qid": "short-0040"}
+{"kind": "short", "query": "Áo gió chống thấm", "expected": ["047a11cb-f6cd-4f5f-b4ce-42d0a1ca630e"], "split": "dev", "qid": "short-0041"}
+{"kind": "short", "query": "Áo khoác", "expected": ["0dd8580a-be4a-4b4b-9af0-ae1361c254be"], "split": "test", "qid": "short-0042"}
+{"kind": "short", "query": "Áo phản quang", "expected": ["01c7832c-3a70-4459-9a8e-098ad3e04a18"], "split": "test", "qid": "short-0043"}
+{"kind": "short", "query": "ARC", "expected": ["01d27a49-7e5e-4cd8-bb60-5665197b3598"], "split": "dev", "qid": "short-0044"}
+{"kind": "short", "query": "Aris Pro", "expected": ["034f61ff-1647-4411-8278-9547e2c38655"], "split": "dev", "qid": "short-0045"}
+{"kind": "short", "query": "Asha", "expected": ["021dae0e-a547-42d8-ac0f-d83a45aca7e9"], "split": "test", "qid": "short-0046"}
+{"kind": "short", "query": "Aspire 5 Spin", "expected": ["0de75864-6cd9-41c3-9ce2-a4185d3571e3"], "split": "dev", "qid": "short-0047"}
+{"kind": "short", "query": "Aspirin pH8", "expected": ["02e731ba-254d-4c5d-b522-a23033f40308"], "split": "dev", "qid": "short-0048"}
+{"kind": "short", "query": "Atelec", "expected": ["0087de6f-fd44-45cf-97f4-e85858a0e111"], "split": "test", "qid": "short-0049"}
+{"kind": "short", "query": "ATF", "expected": ["009f2a4b-697a-4804-a793-6013179d5f53"], "split": "dev", "qid": "short-0050"}
+{"kind": "short", "query": "ATF AFW+", "expected": ["00d0aa78-00b6-4bbe-a9ae-135d19e3ece2"], "split": "dev", "qid": "short-0051"}
+{"kind": "short", "query": "Atorva", "expected": ["02dfa020-9193-472a-aeff-93e668ff07c2"], "split": "dev", "qid": "short-0052"}
+{"kind": "short", "query": "Aucardil", "expected": ["0471c56a-cbd6-4049-ac2d-889df3fc7bbb"], "split": "test", "qid": "short-0053"}
+{"kind": "short", "query": "Augbactam", "expected": ["0316013a-48c6-4c20-8477-9c089aa9947c", "0439cd35-b62c-4c31-a68e-7e0ef644076b"], "split": "test", "qid": "short-0054"}
+{"kind": "short", "query": "Aura AG", "expected": ["03eba571-2cf4-4998-9e28-acd6272ed271"], "split": "dev", "qid": "short-0055"}
+{"kind": "short", "query": "AX Compact Enclosure", "expected": ["0125740f-a283-4097-b7a8-3e8815033cc5"], "split": "dev", "qid": "short-0056"}
+{"kind": "short", "query": "B.zero1 Wedding Band", "expected": ["0dc6efd8-2742-437c-be92-1f015d56acc1"], "split": "test", "qid": "short-0057"}
+{"kind": "short", "query": "B40", "expected": ["0228bfcc-de04-4ae5-8894-290ac2d059d8"], "split": "dev", "qid": "short-0058"}
+{"kind": "short", "query": "Bạc đạn", "expected": ["00abf21d-ee7f-46d8-8867-3ac9ab84f098", "0379e904-2ae2-44b1-9770-0a199854206c"], "split": "dev", "qid": "short-0059"}
+{"kind": "short", "query": "Baga mui OEM", "expected": ["02967237-1b71-4c6e-947b-ee658e3421d1"], "split": "test", "qid": "short-0060"}
+{"kind": "short", "query": "Baja Rey", "expected": ["02922cff-bd6d-41c6-a52b-f797dffb251d"], "split": "dev", "qid": "short-0061"}
+{"kind": "short", "query": "Balo", "expected": ["00bdfdfb-38f8-4743-8670-95b35608da54", "014b3bfc-1511-4bef-8349-13cb212b2558"], "split": "test", "qid": "short-0062"}
+{"kind": "short", "query": "Bao cao su Sagami Original", "expected": ["025f1326-faad-4252-acf5-4878adf61872"], "split": "test", "qid": "short-0063"}
+{"kind": "short", "query": "Beneath series", "expected": ["00a0dede-49fa-4812-a65c-84a3b3b913a9"], "split": "test", "qid": "short-0064"}
+{"kind": "short", "query": "BeneFusion nDS", "expected": ["00a715c8-4fa2-4840-831f-1d38d3752bfa"], "split": "dev", "qid": "short-0065"}
+{"kind": "short", "query": "Bếp", "expected": ["03b1e503-66fe-465a-98ba-a4b47f41118d"], "split": "test", "qid": "short-0066"}
+{"kind": "short", "query": "Best One", "expected": ["01ef1715-409e-45b8-9375-0877d5b156de"], "split": "dev", "qid": "short-0067"}
+{"kind": "short", "query": "Bidisamin", "expected": ["0dffec04-888b-4dca-b84a-99022bb30355"], "split": "test", "qid": "short-0068"}
+{"kind": "short", "query": "Bike Lock", "expected": ["010e2022-54f4-41e7-be68-0329b93e1efc"], "split": "dev", "qid": "short-0069"}
+{"kind": "short", "query": "Bình nước Lock&Lock Inox", "expected": ["0349e3d5-8bf6-4047-890e-3d917ab9c021"], "split": "test", "qid": "short-0070"}
+{"kind": "short", "query": "Bình nước Nalgene Wide Mouth", "expected": ["01b07dea-8dd3-4376-9858-029c333d2e40"], "split": "dev", "qid": "short-0071"}
+{"kind": "short", "query": "Bitolysis", "expected": ["0415b2f6-bdc4-4fe3-b89e-695e6e8d631a"], "split": "test", "qid": "short-0072"}
+{"kind": "short", "query": "BivoUri", "expected": ["0116b8d2-3e9a-492e-9fc9-f12bf881b57e"], "split": "test", "qid": "short-0073"}
+{"kind": "short", "query": "Bluetooth Mouse", "expected": ["001ac505-a4f9-4550-92d1-9522a219c1ae"], "split": "test", "qid": "short-0074"}
+{"kind": "short", "query": "Bò", "expected": ["03848482-d697-433f-a349-1a19e34ca9c3"], "split": "test", "qid": "short-0075"}
+{"kind": "short", "query": "Bộ inverter", "expected": ["03aad909-61ed-46bb-b484-81728e4af7d5"], "split": "dev", "qid": "short-0076"}
+{"kind": "short", "query": "Bộ salon gỗ", "expected": ["0228ed2a-2e40-4063-9773-0092343e0f47"], "split": "dev", "qid": "short-0077"}
+{"kind": "short", "query": "Bố thắng", "expected": ["0de7ad53-61c4-4dc2-ab79-60c67a6002a4"], "split": "test", "qid": "short-0078"}
+{"kind": "short", "query": "Bơm trợ lực lái", "expected": ["01ffffd3-351f-44d9-82a7-6bac369c96a2"], "split": "test", "qid": "short-0079"}
+{"kind": "short", "query": "Bồn nhựa", "expected": ["0e07c402-1a7d-4035-aa8b-e56f63cdc059"], "split": "test", "qid": "short-0080"}
+{"kind": "short", "query": "Bóng tuýp LED T5 integrated", "expected": ["00745d1b-babc-4efe-a7fe-b3bff7321d0a"], "split": "dev", "qid": "short-0081"}
+{"kind": "short", "query": "Boom", "expected": ["0332c02f-b752-4cb0-9c9f-7701e0615985"], "split": "dev", "qid": "short-0082"}
+{"kind": "short", "query": "Boost Kickstand Case", "expected": ["0dfe5ba0-fc68-4ea5-b90e-fe642ac12764"], "split": "test", "qid": "short-0083"}
+{"kind": "short", "query": "Borealis", "expected": ["03adb938-d24c-4479-a96f-5aee0bcd44ff"], "split": "test", "qid": "short-0084"}
+{"kind": "short", "query": "BR-MT200", "expected": ["01717e5a-cbfa-4788-81ce-1337d47f17b6"], "split": "dev", "qid": "short-0085"}
+{"kind": "short", "query": "BR-R550", "expected": ["0068c03f-0404-4a86-873a-3ee4e633b398"], "split": "dev", "qid": "short-0086"}
+{"kind": "short", "query": "BR-V", "expected": ["0091910f-dd36-4306-ac6f-933b7cd7c52c"], "split": "dev", "qid": "short-0087"}
+{"kind": "short", "query": "Brine Shrimp Plus", "expected": ["0370fa21-f4c0-4eae-9357-62e15de547e7"], "split": "dev", "qid": "short-0088"}
+{"kind": "short", "query": "Brintellix", "expected": ["03785d80-7df3-4d63-8a4a-ce3fb8328685"], "split": "dev", "qid": "short-0089"}
+{"kind": "short", "query": "Bugaboo Bee", "expected": ["03f0390e-dc6e-4ee5-ab41-94a9a5820e2e"], "split": "dev", "qid": "short-0090"}
+{"kind": "short", "query": "Bún cá rô đồng Bắc", "expected": ["022763a3-9952-4f12-a283-4a95ced07404"], "split": "test", "qid": "short-0091"}
+{"kind": "short", "query": "Bút chì màu", "expected": ["02c14d4f-ed40-4afd-ac16-06085006faf7"], "split": "test", "qid": "short-0092"}
+{"kind": "short", "query": "Bút máy Jinhao", "expected": ["01b344cc-de5b-4ef9-81f0-d9693a82e0ac"], "split": "dev", "qid": "short-0093"}
+{"kind": "short", "query": "Bút thử điện", "expected": ["048bea9f-2eed-41cc-8c05-9523c387b95c"], "split": "dev", "qid": "short-0094"}
+{"kind": "short", "query": "C-MAC Video Laryngoscope", "expected": ["00253e6f-226f-4cc9-aabb-b041a4788ce8"], "split": "test", "qid": "short-0095"}
+{"kind": "short", "query": "Ca-lăng", "expected": ["01dfdedc-90d0-43a3-a0fb-38b11e581457", "0220fe04-7198-44ec-aa81-db3acce7412c", "0dfe62e7-3663-4183-87bf-8a443070bb36"], "split": "test", "qid": "short-0096"}
+{"kind": "short", "query": "Cà Phê Đắk Lắk Body Scrub", "expected": ["0e24d726-7ee6-4bea-8591-f6ff0e4b927b"], "split": "dev", "qid": "short-0097"}
+{"kind": "short", "query": "Calci D", "expected": ["02edab54-4067-4134-85f5-190724409c7d"], "split": "dev", "qid": "short-0098"}
+{"kind": "short", "query": "Calci folinat", "expected": ["0183420f-af14-4e48-b0cf-1f1c9d4f1cc8"], "split": "dev", "qid": "short-0099"}
+{"kind": "short", "query": "Calcitriol", "expected": ["029e2416-4e43-4ee4-be62-e0f7bd6b3253"], "split": "test", "qid": "short-0100"}
+{"kind": "short", "query": "Calming Diffuser", "expected": ["03ef6b50-0f7f-4322-9a69-f7bc336b641e"], "split": "dev", "qid": "short-0101"}
+{"kind": "short", "query": "Cam Link 4K", "expected": ["03e75563-1283-498f-b7ba-1f42690ad450"], "split": "test", "qid": "short-0102"}
+{"kind": "short", "query": "Cân thông minh Xiaomi Mi Body Composition Scale", "expected": ["03d2b617-aab5-450c-ae73-33d3b6d2bf5a"], "split": "dev", "qid": "short-0103"}
+{"kind": "short", "query": "Cáp điện thoại", "expected": ["020367f5-4a00-4635-91a9-2edd5b506a76"], "split": "dev", "qid": "short-0104"}
+{"kind": "short", "query": "carbon wheelset", "expected": ["004a4ef3-5c28-4ceb-9c34-eb002e7e9a67"], "split": "test", "qid": "short-0105"}
+{"kind": "short", "query": "Carry Pro", "expected": ["03cb3727-ade5-45b1-a17c-05721fe8480f"], "split": "dev", "qid": "short-0106"}
+{"kind": "short", "query": "Cầu chì pin EV", "expected": ["011b66ca-5b03-486b-b54d-84b76b90b105"], "split": "test", "qid": "short-0107"}
+{"kind": "short", "query": "Cefixime", "expected": ["01d49ce7-fbcf-4a06-9c08-025a402cdb49"], "split": "test", "qid": "short-0108"}
+{"kind": "short", "query": "Cefotaxime MJ*", "expected": ["0ddf584f-56f8-4d24-bab6-d30927975da5"], "split": "dev", "qid": "short-0109"}
+{"kind": "short", "query": "Cefpomax", "expected": ["003a81af-6c44-4d9e-8009-3db6aa7fe62a"], "split": "test", "qid": "short-0110"}
+{"kind": "short", "query": "Cefprozil", "expected": ["02e4a7e3-306e-420b-957c-cbf1d211e0e5"], "split": "dev", "qid": "short-0111"}
+{"kind": "short", "query": "Cefuroxime Axetil tablets USP", "expected": ["0076c22d-aa8a-4b3e-839d-e4eed4983270"], "split": "dev", "qid": "short-0112"}
+{"kind": "short", "query": "Centerline", "expected": ["000c8819-9c87-4108-a003-6f54a644f920"], "split": "test", "qid": "short-0113"}
+{"kind": "short", "query": "Cetecoleflox", "expected": ["0460fad5-04b7-4358-905b-44cd97fde4c3"], "split": "dev", "qid": "short-0114"}
+{"kind": "short", "query": "Cetirizin", "expected": ["03216384-7ed3-41a5-ba09-1dcf5f5ee03a"], "split": "dev", "qid": "short-0115"}
+{"kind": "short", "query": "Chân váy", "expected": ["03637607-e9b5-4309-84d7-eb9c557f9254"], "split": "test", "qid": "short-0116"}
+{"kind": "short", "query": "Chloramax", "expected": ["01a284a8-4696-44eb-970f-cfd28f2a87f8"], "split": "test", "qid": "short-0117"}
+{"kind": "short", "query": "Chloramphenicol", "expected": ["02a45fa1-a970-40b1-b2b3-8ea26dbe3b08"], "split": "dev", "qid": "short-0118"}
+{"kind": "short", "query": "chương Đại hội Thể thao Người khuyết tật", "expected": ["0491fbf6-1eb5-4f15-ab7c-f76aaecf8343"], "split": "dev", "qid": "short-0119"}
+{"kind": "short", "query": "Chuột Logitech MX Master", "expected": ["0deb67c6-6be5-4541-b4ac-d1d6e47e8612"], "split": "dev", "qid": "short-0120"}
+{"kind": "short", "query": "Cintiq cho thiết kế", "expected": ["02524d0b-c4f7-4366-9033-12aa96fe30ee"], "split": "dev", "qid": "short-0121"}
+{"kind": "short", "query": "Citalopram Stada", "expected": ["003980de-a0a9-4d9c-8a57-a836b5e178f1"], "split": "dev", "qid": "short-0122"}
+{"kind": "short", "query": "Clamogentin", "expected": ["0307fad8-2571-4c90-adec-2a5f838187e6"], "split": "dev", "qid": "short-0123"}
+{"kind": "short", "query": "Claris FC-R2000", "expected": ["0080e813-c459-4b04-9095-4f7bc9d66494"], "split": "test", "qid": "short-0124"}
+{"kind": "short", "query": "Cleansing Lotion", "expected": ["0dde5d1f-893a-4fe3-bd15-d071808d07d5"], "split": "test", "qid": "short-0125"}
+{"kind": "short", "query": "Cobas b221", "expected": ["01805437-f490-49d1-ba28-ba4b7b5b985a"], "split": "dev", "qid": "short-0126"}
+{"kind": "short", "query": "Cobas e411", "expected": ["0dc6d504-a7a1-490f-9661-7722374da02d"], "split": "dev", "qid": "short-0127"}
+{"kind": "short", "query": "Coco Crush Quilted Ring", "expected": ["02887e90-ad98-45bc-bd92-e9db8c5d5db2"], "split": "dev", "qid": "short-0128"}
+{"kind": "short", "query": "ColdGear", "expected": ["02251785-6e44-4ae9-a4d6-11e37152cce2"], "split": "dev", "qid": "short-0129"}
+{"kind": "short", "query": "Colflox", "expected": ["035b59c2-97e6-4c04-b970-9bbab5943741"], "split": "test", "qid": "short-0130"}
+{"kind": "short", "query": "Colocol", "expected": ["0dfd982d-943f-4d2a-8da3-5201d785e1d7"], "split": "test", "qid": "short-0131"}
+{"kind": "short", "query": "Cơm Gà / Twister", "expected": ["041d6f3e-49cb-4401-b447-decb9ea5bbdf"], "split": "test", "qid": "short-0132"}
+{"kind": "short", "query": "Comète Necklace", "expected": ["0dab841b-915e-4da2-af84-8f3052fca2dc"], "split": "dev", "qid": "short-0133"}
+{"kind": "short", "query": "Competition", "expected": ["00b3a2c0-f629-465b-bff0-1dbabea646f1"], "split": "dev", "qid": "short-0134"}
+{"kind": "short", "query": "Cồn iod", "expected": ["03e435f2-4462-49b5-bd88-147857746899"], "split": "test", "qid": "short-0135"}
+{"kind": "short", "query": "Công tắc ba", "expected": ["02dda54a-dd38-41d6-81b7-504e4ebd4744"], "split": "test", "qid": "short-0136"}
+{"kind": "short", "query": "ConvertMe Swing-2-Seat", "expected": ["0265eeb4-3876-4241-a946-d5aa108e6b88"], "split": "dev", "qid": "short-0137"}
+{"kind": "short", "query": "Coolant", "expected": ["0013af8e-60c5-48bb-b165-885aab2eef1d", "01b6b66d-8eb9-469f-97dd-54047d0079a2"], "split": "test", "qid": "short-0138"}
+{"kind": "short", "query": "Cooler Quad Chair", "expected": ["040ec7ba-7329-430e-a263-f314e00580ea"], "split": "test", "qid": "short-0139"}
+{"kind": "short", "query": "Cotrimxazon", "expected": ["01323028-5b16-4084-9dee-5244b0cd1517"], "split": "dev", "qid": "short-0140"}
+{"kind": "short", "query": "Crocin", "expected": ["0217c956-818c-4045-9371-8f98ba6753ff"], "split": "dev", "qid": "short-0141"}
+{"kind": "short", "query": "Cross Necklace", "expected": ["01fed9c8-7eaf-4061-9040-93c336d2c342"], "split": "dev", "qid": "short-0142"}
+{"kind": "short", "query": "Crown3", "expected": ["02deca32-6251-490f-adc8-9a2b71433500"], "split": "dev", "qid": "short-0143"}
+{"kind": "short", "query": "Crux", "expected": ["00fd3b61-a66c-4641-93c5-20f0877a9af4"], "split": "dev", "qid": "short-0144"}
+{"kind": "short", "query": "CT-X700", "expected": ["033461d3-91c5-41ed-abc7-e4f2d55baf39"], "split": "dev", "qid": "short-0145"}
+{"kind": "short", "query": "Củ sạc", "expected": ["001ed29f-7371-4a0e-afe3-974f1aa0f8fc"], "split": "dev", "qid": "short-0146"}
+{"kind": "short", "query": "Cụm đèn pha LED Yamaha NVX", "expected": ["02aa44f4-587a-405f-93da-d9f5cebbfce6"], "split": "dev", "qid": "short-0147"}
+{"kind": "short", "query": "Cút nối nhanh Wago", "expected": ["0169472a-266b-4b0a-a5c5-db4cecba3e0f"], "split": "test", "qid": "short-0148"}
+{"kind": "short", "query": "Cycloson", "expected": ["04144bc3-dbf8-499c-8402-1966811ad906"], "split": "test", "qid": "short-0149"}
+{"kind": "short", "query": "Cyclosporine", "expected": ["03bcaceb-9b50-4c32-ab6e-c0ae1c62f75a"], "split": "test", "qid": "short-0150"}
+{"kind": "short", "query": "D37", "expected": ["04496ee7-68b4-47b8-803c-c24e054b19f3"], "split": "test", "qid": "short-0151"}
+{"kind": "short", "query": "D4H", "expected": ["03f6c860-21c1-4690-a173-5b7fe3ed07cd"], "split": "dev", "qid": "short-0152"}
+{"kind": "short", "query": "D53", "expected": ["02326130-8ca6-4a56-9c54-cfda335b761c"], "split": "test", "qid": "short-0153"}
+{"kind": "short", "query": "Dải LED âm trần hắt", "expected": ["00a26b85-88e4-4450-af58-547624fd8981"], "split": "test", "qid": "short-0154"}
+{"kind": "short", "query": "Dầu gội", "expected": ["046d0dd5-9607-488f-9fab-0aa07a8970e8"], "split": "test", "qid": "short-0155"}
+{"kind": "short", "query": "Dây cước Yonex Exbolt", "expected": ["03ee6930-6c3b-460f-b2f9-0ea0b4211601"], "split": "test", "qid": "short-0156"}
+{"kind": "short", "query": "Dây dầu phanh", "expected": ["0444a32f-e9ef-46a7-8082-038fbec74c24"], "split": "dev", "qid": "short-0157"}
+{"kind": "short", "query": "Dây ga", "expected": ["0045456d-db15-4373-ab7b-d1c806e23239"], "split": "dev", "qid": "short-0158"}
+{"kind": "short", "query": "Dây truyền dịch", "expected": ["0e1f6e9b-9b9f-4622-8e8b-0c1d7df15147"], "split": "dev", "qid": "short-0159"}
+{"kind": "short", "query": "Decal Oracal", "expected": ["00d8b705-5547-4142-b381-ad5da73d6977"], "split": "test", "qid": "short-0160"}
+{"kind": "short", "query": "Deep Wash", "expected": ["0109df9a-791f-4f78-a559-6901e6c2348b"], "split": "dev", "qid": "short-0161"}
+{"kind": "short", "query": "Defender", "expected": ["02176d65-15ff-4fa8-902d-fd68398c5ec8"], "split": "dev", "qid": "short-0162"}
+{"kind": "short", "query": "Delvac Coolant", "expected": ["0dbdcfb1-9bba-4d37-9c6c-778db149ba47"], "split": "test", "qid": "short-0163"}
+{"kind": "short", "query": "Đèn Bioptron Pro", "expected": ["0db8181e-f9f3-4839-b867-e7293ec0a596"], "split": "test", "qid": "short-0164"}
+{"kind": "short", "query": "Đèn chùm pha lê", "expected": ["0e292bc8-4f88-4b9c-8a3a-1d2fe2440b53"], "split": "test", "qid": "short-0165"}
+{"kind": "short", "query": "Đèn pha sân thể thao", "expected": ["029d18c3-37c8-4d33-8df4-a4a9b92daeae"], "split": "dev", "qid": "short-0166"}
+{"kind": "short", "query": "Đèn xe đạp Olight RN", "expected": ["029e6509-2dff-4f22-8152-6a72a0b1431b"], "split": "test", "qid": "short-0167"}
+{"kind": "short", "query": "Denk", "expected": ["00b0696f-ea56-4113-baf3-642e48a7b39e"], "split": "test", "qid": "short-0168"}
+{"kind": "short", "query": "Deore XT FC-M8000", "expected": ["01a3cfd4-3df1-4ec8-a19d-5f39d21bb5db"], "split": "dev", "qid": "short-0169"}
+{"kind": "short", "query": "Detroit Jacket", "expected": ["02af2fef-8d7f-4b53-8676-b018e247f716"], "split": "test", "qid": "short-0170"}
+{"kind": "short", "query": "DILM12 Contactor", "expected": ["0e09400a-39c2-4cd4-ba50-f4f90936c4df"], "split": "dev", "qid": "short-0171"}
+{"kind": "short", "query": "Dinitrosorbid", "expected": ["01c9fa26-3e24-4f87-bb7b-dc49e22ca2a3"], "split": "dev", "qid": "short-0172"}
+{"kind": "short", "query": "Diphenhydramin", "expected": ["0db8b1f6-7eab-49f6-b812-dff81be29355"], "split": "test", "qid": "short-0173"}
+{"kind": "short", "query": "Dissector", "expected": ["01381b22-6c44-4540-9b40-9b0eb1e5d889"], "split": "dev", "qid": "short-0174"}
+{"kind": "short", "query": "Đồng Hồ Treo Tường", "expected": ["02d69354-59fd-46d2-b2f1-abe4e6d40d20"], "split": "test", "qid": "short-0175"}
+{"kind": "short", "query": "Đồng hồ vạn năng", "expected": ["0115d98d-93ce-4ae9-b9cb-15e55f704c67"], "split": "dev", "qid": "short-0176"}
+{"kind": "short", "query": "Đồng hồ xe đạp Bryton Rider", "expected": ["02af0532-479a-4007-a0e7-3dcd48ca9d31"], "split": "test", "qid": "short-0177"}
+{"kind": "short", "query": "Doraval", "expected": ["02f91015-7be3-4fd5-88ff-2f017f544471"], "split": "dev", "qid": "short-0178"}
+{"kind": "short", "query": "Doro C300", "expected": ["02282212-8810-4ed6-b010-af4b4a835c62"], "split": "test", "qid": "short-0179"}
+{"kind": "short", "query": "Doxycyclin", "expected": ["00a400f8-7e67-4340-bf9a-1533e9a052d4"], "split": "dev", "qid": "short-0180"}
+{"kind": "short", "query": "Dragonfly G4", "expected": ["0e12e8cd-b030-4ea7-ba2d-c92078c22c61"], "split": "dev", "qid": "short-0181"}
+{"kind": "short", "query": "Drive", "expected": ["030f2fcb-cfb7-4014-80f2-9ea701989efc"], "split": "dev", "qid": "short-0182"}
+{"kind": "short", "query": "Đu đủ Hồng Phi", "expected": ["02d0760c-6c7a-4462-a8b1-6e8218bf5ae2"], "split": "dev", "qid": "short-0183"}
+{"kind": "short", "query": "Duffle", "expected": ["019ad9f4-4815-419e-85c5-1b320d58b5b6"], "split": "dev", "qid": "short-0184"}
+{"kind": "short", "query": "đựng mẫu xét nghiệm", "expected": ["0df86ce4-943c-4a16-83f1-7994f250c34b"], "split": "dev", "qid": "short-0185"}
+{"kind": "short", "query": "E5", "expected": ["023e1ca6-dadc-416e-8f5d-4163589c8c41"], "split": "dev", "qid": "short-0186"}
+{"kind": "short", "query": "Eagle Creek Global Companion", "expected": ["01a5d3b1-c144-44cb-9960-51a06ec2ea19"], "split": "dev", "qid": "short-0187"}
+{"kind": "short", "query": "Easy Learning Set", "expected": ["011c415b-efaf-4f78-ba9d-799e2110e53d"], "split": "test", "qid": "short-0188"}
+{"kind": "short", "query": "ECO", "expected": ["00a14d44-f165-40ea-b7c0-1b4527827b03"], "split": "dev", "qid": "short-0189"}
+{"kind": "short", "query": "Ecodiver Duffle", "expected": ["019a7d28-504c-44e0-8a7a-33e2c38bb37b"], "split": "dev", "qid": "short-0190"}
+{"kind": "short", "query": "Effer Paralmax", "expected": ["03755dfe-f3c4-45b9-9406-d2934cb1c152"], "split": "dev", "qid": "short-0191"}
+{"kind": "short", "query": "Elavil", "expected": ["00b1803b-4e73-44ac-ac31-45ccb054fd91"], "split": "test", "qid": "short-0192"}
+{"kind": "short", "query": "Electric", "expected": ["018b0a03-d812-4b37-98db-84996769d75f"], "split": "test", "qid": "short-0193"}
+{"kind": "short", "query": "Electric GMC-22 Contactor", "expected": ["01db6228-4373-4723-9ce0-7cba44d3c5d5"], "split": "dev", "qid": "short-0194"}
+{"kind": "short", "query": "Eleven Putter", "expected": ["012c1d6b-b8e1-43d5-9efb-9d0e523abeed"], "split": "dev", "qid": "short-0195"}
+{"kind": "short", "query": "eMTB", "expected": ["0148654b-8b7b-4b5e-9186-1affa40de491"], "split": "test", "qid": "short-0196"}
+{"kind": "short", "query": "Entecavir Stada", "expected": ["041cde56-6ca0-4a6f-8690-f5c8dcb4de4d"], "split": "dev", "qid": "short-0197"}
+{"kind": "short", "query": "EOS C70", "expected": ["00a9417d-b9ca-458e-8c1b-b9b0afcc314b"], "split": "test", "qid": "short-0198"}
+{"kind": "short", "query": "Erythromycin", "expected": ["023c12f0-bb23-4e53-bdc6-358eb8350954"], "split": "dev", "qid": "short-0199"}
+{"kind": "short", "query": "Etorisun", "expected": ["02f845e7-017d-4257-9f68-606b1a9e5124"], "split": "dev", "qid": "short-0200"}
+{"kind": "short", "query": "EX800ST", "expected": ["011a891e-ff68-4adc-806c-e615df81005a"], "split": "dev", "qid": "short-0201"}
+{"kind": "short", "query": "F3", "expected": ["02ce9edc-963a-494f-885c-05bfde15143e"], "split": "dev", "qid": "short-0202"}
+{"kind": "short", "query": "Famotidin Stada", "expected": ["03500114-f9f7-4989-94aa-d07426eada58"], "split": "test", "qid": "short-0203"}
+{"kind": "short", "query": "Feline Dental Treat", "expected": ["0113425a-f612-4b12-a33b-85dcb532f148"], "split": "dev", "qid": "short-0204"}
+{"kind": "short", "query": "Fexofenadin", "expected": ["025811c0-cb3d-4981-8b4b-c0a8d5a51a94"], "split": "test", "qid": "short-0205"}
+{"kind": "short", "query": "Fire TV Cube", "expected": ["0432d749-6896-4afc-878d-bb0c8e44de6c"], "split": "test", "qid": "short-0206"}
+{"kind": "short", "query": "Fire TV Stick 4K Max", "expected": ["02b71332-fbd7-4da9-a01b-7af4dce5fcb3"], "split": "dev", "qid": "short-0207"}
+{"kind": "short", "query": "Fit Me Matte + Poreless", "expected": ["0295d98b-73e7-482b-9eb6-d8f5a25c886c"], "split": "dev", "qid": "short-0208"}
+{"kind": "short", "query": "Flora Necklace", "expected": ["0452d7a2-271c-49ba-bc9d-9264be5bf297"], "split": "test", "qid": "short-0209"}
+{"kind": "short", "query": "Flourish", "expected": ["03817b14-5d96-4595-899f-5720b84814b0"], "split": "test", "qid": "short-0210"}
+{"kind": "short", "query": "Fluconazole", "expected": ["0207c625-acce-41c5-94a3-6f6625232aec"], "split": "test", "qid": "short-0211"}
+{"kind": "short", "query": "Flyer", "expected": ["03957d42-901f-4eba-937d-f82841be8c70"], "split": "test", "qid": "short-0212"}
+{"kind": "short", "query": "Fokker", "expected": ["0026196f-8581-400f-9e87-3333ceadfaa7"], "split": "test", "qid": "short-0213"}
+{"kind": "short", "query": "Folic Acid", "expected": ["00fc00c9-6423-40c1-b6c2-d4ff27cfa533"], "split": "test", "qid": "short-0214"}
+{"kind": "short", "query": "Frecoxia", "expected": ["00922ca6-9f66-4b63-9eae-7858c1ff9334"], "split": "test", "qid": "short-0215"}
+{"kind": "short", "query": "Fresh Element", "expected": ["045ab190-32d9-494b-b9ba-02cfa02317d8"], "split": "dev", "qid": "short-0216"}
+{"kind": "short", "query": "FT", "expected": ["02cc9c6e-65c3-4693-8011-4f2313115c44", "02e1954e-a47f-4543-bf76-aa88d31902a7", "0e16de7d-6b0c-4d8c-98db-9bf6dfd3890c"], "split": "test", "qid": "short-0217"}
+{"kind": "short", "query": "FT10", "expected": ["0221ec79-c910-4f0e-8d9e-cf3449bbdf4d"], "split": "test", "qid": "short-0218"}
+{"kind": "short", "query": "Fucavina", "expected": ["0078fc69-e829-4779-890d-2880fa1d6126"], "split": "test", "qid": "short-0219"}
+{"kind": "short", "query": "Furadan", "expected": ["02984d2f-953c-4870-9fda-bb44ad42902e"], "split": "test", "qid": "short-0220"}
+{"kind": "short", "query": "FVM", "expected": ["01284b1c-88df-4d98-9419-40f372640c3f"], "split": "test", "qid": "short-0221"}
+{"kind": "short", "query": "G-Spec Trail", "expected": ["00152e73-97ed-4cb7-ae63-a7d111438570"], "split": "dev", "qid": "short-0222"}
+{"kind": "short", "query": "G15", "expected": ["01ed5a47-49ce-40da-a8f8-fd6ef89d2095"], "split": "dev", "qid": "short-0223"}
+{"kind": "short", "query": "G440 Driver", "expected": ["0466680d-d76f-4337-83ec-54c8e53f9d17"], "split": "dev", "qid": "short-0224"}
+{"kind": "short", "query": "G8 OLED", "expected": ["03838236-0516-4420-a560-76d058fd1944"], "split": "dev", "qid": "short-0225"}
+{"kind": "short", "query": "G903 Lightspeed", "expected": ["029eae76-22da-49c6-bfe4-5de31a281e12"], "split": "dev", "qid": "short-0226"}
+{"kind": "short", "query": "Gà không xương", "expected": ["03a4f1c2-dda7-4c48-8f12-da254e24679e"], "split": "dev", "qid": "short-0227"}
+{"kind": "short", "query": "Gạch porcelain khổ lớn", "expected": ["03dd373b-c1c6-40a7-9df0-a97efbabc06b"], "split": "dev", "qid": "short-0228"}
+{"kind": "short", "query": "Galaxy", "expected": ["00fafc05-50f8-4732-ab15-7d5c9def6823"], "split": "dev", "qid": "short-0229"}
+{"kind": "short", "query": "GE Signa", "expected": ["03748541-c15a-4dd2-8dd3-a6aea1e0ba76"], "split": "test", "qid": "short-0230"}
+{"kind": "short", "query": "Gear Oil 80W-90", "expected": ["0225309f-1891-4982-8b64-6791bd56f12b"], "split": "dev", "qid": "short-0231"}
+{"kind": "short", "query": "Gears Gears Gears", "expected": ["010fb7f1-4cf7-403e-b926-4b03eb6c0645"], "split": "test", "qid": "short-0232"}
+{"kind": "short", "query": "Gentamicin", "expected": ["03752993-cb34-4582-8fcb-06a89f638d2a"], "split": "test", "qid": "short-0233"}
+{"kind": "short", "query": "Genuine", "expected": ["004534bf-b68b-4175-9a49-aa8f86e22d60", "01906b13-4f58-45b7-a565-9a205e0f34aa", "021f85ff-ab67-4414-b54f-4b0322782562", "02fd80fe-fb29-46e0-b804-1f76e3fdd289"], "split": "dev", "qid": "short-0234"}
+{"kind": "short", "query": "Geolandar A/T-S G012", "expected": ["0ddc904b-5e0d-4884-b9f0-f6cc375cc808"], "split": "test", "qid": "short-0235"}
+{"kind": "short", "query": "Giá đỡ điện thoại ô tô", "expected": ["002e08a8-d4c4-485f-b1e0-429fb7bc9d7c"], "split": "test", "qid": "short-0236"}
+{"kind": "short", "query": "Giấy bạc VNCH 50 đồng", "expected": ["0df4a748-5e2f-410a-8331-6ba203afb221"], "split": "dev", "qid": "short-0237"}
+{"kind": "short", "query": "Giày Nike Mercurial Vapor", "expected": ["0154d0ff-6fb1-4eba-a69d-efb5aac529b3"], "split": "test", "qid": "short-0238"}
+{"kind": "short", "query": "Giường thú cưng", "expected": ["0161fa00-b504-44c1-9666-66b6b9c0a3a9"], "split": "dev", "qid": "short-0239"}
+{"kind": "short", "query": "Glibenclamide BP", "expected": ["00b601d0-5f9a-4519-9714-bd3bf51f2316"], "split": "dev", "qid": "short-0240"}
+{"kind": "short", "query": "Good Grips Chef Knife", "expected": ["0df3e423-38b7-4d36-b4d9-541dc0a34aad"], "split": "test", "qid": "short-0241"}
+{"kind": "short", "query": "Gossamer", "expected": ["006101f1-c5cd-4383-ba86-c843213ec154"], "split": "test", "qid": "short-0242"}
+{"kind": "short", "query": "Grain Free", "expected": ["0474c685-6fe2-4721-af0a-61a137e53afd"], "split": "dev", "qid": "short-0243"}
+{"kind": "short", "query": "Gram +View", "expected": ["017ff7e8-cfda-4fe7-b7da-81974a273eb8"], "split": "test", "qid": "short-0244"}
+{"kind": "short", "query": "Grandtrek PT3", "expected": ["00e45919-3104-4e2a-b61e-57b637d52ac3"], "split": "dev", "qid": "short-0245"}
+{"kind": "short", "query": "Granit X-Plus", "expected": ["039cd0a6-ee6a-497e-a5f5-561493e804fb"], "split": "test", "qid": "short-0246"}
+{"kind": "short", "query": "GravelKing", "expected": ["00ce241a-4a8a-410f-be38-99e5ddfabb6d"], "split": "test", "qid": "short-0247"}
+{"kind": "short", "query": "GravelKing Mud", "expected": ["01346b3f-3f18-4512-918b-e8d94ef3ac18"], "split": "dev", "qid": "short-0248"}
+{"kind": "short", "query": "GravelKing R", "expected": ["01fda84c-41ca-41c9-a982-5f14e7878e28"], "split": "test", "qid": "short-0249"}
+{"kind": "short", "query": "GRC", "expected": ["0e08e631-1955-44c0-8bbf-864ea536f573"], "split": "dev", "qid": "short-0250"}
+{"kind": "short", "query": "Grip", "expected": ["00eb9142-9fc3-4637-a425-e99ca215bc92"], "split": "dev", "qid": "short-0251"}
+{"kind": "short", "query": "GTX", "expected": ["00e5d95d-89db-4471-9175-c2be268af083"], "split": "dev", "qid": "short-0252"}
+{"kind": "short", "query": "Gương chiếu hậu", "expected": ["01f906c7-0d69-4fb4-819a-8e4abe1a837e"], "split": "dev", "qid": "short-0253"}
+{"kind": "short", "query": "Gương chiếu hậu Mazda CX-5 thế hệ", "expected": ["0468c168-45c5-46cd-b237-8c88fb308241"], "split": "dev", "qid": "short-0254"}
+{"kind": "short", "query": "GW2790", "expected": ["0df5ccf5-1445-4293-82ca-ff6800230b31"], "split": "test", "qid": "short-0255"}
+{"kind": "short", "query": "GWS", "expected": ["0356efa7-07f1-4a6c-826d-f75c373975a4"], "split": "dev", "qid": "short-0256"}
+{"kind": "short", "query": "H155", "expected": ["0dffb956-7f45-4134-a40c-756d33f08f63"], "split": "dev", "qid": "short-0257"}
+{"kind": "short", "query": "Hacimux", "expected": ["00b4535f-6e64-4787-a1a3-22573483e525"], "split": "dev", "qid": "short-0258"}
+{"kind": "short", "query": "Haloperidol DWP", "expected": ["01b9d841-49ec-45b6-a62d-df3ca04bf722"], "split": "dev", "qid": "short-0259"}
+{"kind": "short", "query": "Hans Dampf", "expected": ["041a6335-0550-4531-aec9-2f3c69a855c7"], "split": "test", "qid": "short-0260"}
+{"kind": "short", "query": "Harotin", "expected": ["04759db7-c267-4e2e-ad00-b5281e1b825f"], "split": "dev", "qid": "short-0261"}
+{"kind": "short", "query": "HD", "expected": ["0374152e-ccfb-4cac-963d-0826bb1df1db"], "split": "test", "qid": "short-0262"}
+{"kind": "short", "query": "HD270", "expected": ["025cdbfb-43cc-48ee-b9c5-3b4e6155f206"], "split": "test", "qid": "short-0263"}
+{"kind": "short", "query": "HEMNES Tủ Giày", "expected": ["0105adb4-f58c-4f8e-a20a-17eaf30f05e2"], "split": "test", "qid": "short-0264"}
+{"kind": "short", "query": "Hide & Seek", "expected": ["0e27aa7d-55f1-489c-b783-49feffad69a7"], "split": "dev", "qid": "short-0265"}
+{"kind": "short", "query": "hiệu Tổng Liên đoàn Lao động Việt Nam", "expected": ["0e078905-8241-4ceb-a235-d0c1272039a7"], "split": "test", "qid": "short-0266"}
+{"kind": "short", "query": "Hộp carton FEFCO", "expected": ["0471f73e-31cb-4e0a-8c05-d4b295cce593"], "split": "dev", "qid": "short-0267"}
+{"kind": "short", "query": "Hộp che công tắc đi nổi", "expected": ["0020bf96-3361-44d1-8078-be076116dd0e"], "split": "test", "qid": "short-0268"}
+{"kind": "short", "query": "Hộp mực", "expected": ["00c10364-295e-436e-9402-7e8f0f9b9c03"], "split": "test", "qid": "short-0269"}
+{"kind": "short", "query": "Hộp số sàn", "expected": ["037181f4-a69c-4000-bfa8-e5775cd53cb1"], "split": "test", "qid": "short-0270"}
+{"kind": "short", "query": "Hose", "expected": ["0e03ed84-a9fb-477b-8519-7e8bc6133c34"], "split": "dev", "qid": "short-0271"}
+{"kind": "short", "query": "Hot-Wire MAF Sensor", "expected": ["00fdb9f9-4887-44c0-ab69-34c646ad9a79"], "split": "test", "qid": "short-0272"}
+{"kind": "short", "query": "HyBase", "expected": ["03eb8799-fa60-4607-afa8-0a0d404f6aac"], "split": "test", "qid": "short-0273"}
+{"kind": "short", "query": "Hydraulic Hose", "expected": ["00f74543-8cf8-4e70-96f3-e2c22b59b87c"], "split": "dev", "qid": "short-0274"}
+{"kind": "short", "query": "Incontro d'Amore", "expected": ["03a591f7-6ccd-4aac-ad6d-da67a05c35b3"], "split": "dev", "qid": "short-0275"}
+{"kind": "short", "query": "Indapamid DWP", "expected": ["0411cd44-4caf-4b72-84e6-4835ab586601"], "split": "dev", "qid": "short-0276"}
+{"kind": "short", "query": "Infinity Sports Bra", "expected": ["03394b29-91f5-438b-9e15-8df54603da79"], "split": "dev", "qid": "short-0277"}
+{"kind": "short", "query": "iPad gen", "expected": ["04581e74-56c6-4a84-9737-62b9137d4279"], "split": "dev", "qid": "short-0278"}
+{"kind": "short", "query": "Irbesartan STELLA", "expected": ["024a98a6-f6bc-4c1c-aae8-b5f83e33b7a7"], "split": "dev", "qid": "short-0279"}
+{"kind": "short", "query": "IRCOVAS", "expected": ["00d5936a-ce21-423b-bf58-652ae9eb7362"], "split": "dev", "qid": "short-0280"}
+{"kind": "short", "query": "Jebo", "expected": ["00fc2912-4cf4-45b8-bbd1-7d2fb58ac79e"], "split": "dev", "qid": "short-0281"}
+{"kind": "short", "query": "Jive", "expected": ["0347cd61-1b4d-4fad-877f-efd1552b1afd"], "split": "dev", "qid": "short-0282"}
+{"kind": "short", "query": "John Deere", "expected": ["01037c11-25eb-4158-a799-6fd098d3d101", "03272789-afad-41e8-8b87-461e5a4bda2d"], "split": "test", "qid": "short-0283"}
+{"kind": "short", "query": "Joy", "expected": ["01f4376a-ed9f-44bc-bc80-47153cf92168"], "split": "dev", "qid": "short-0284"}
+{"kind": "short", "query": "JS220", "expected": ["00548295-22ec-4d3c-b226-bcfec84d5a50"], "split": "test", "qid": "short-0285"}
+{"kind": "short", "query": "K-Force Seatpost", "expected": ["008a6bf8-48f9-432d-8064-9380d5071117"], "split": "dev", "qid": "short-0286"}
+{"kind": "short", "query": "Katmai", "expected": ["01bb1fcb-9b7d-41fe-a68b-56b9e9c585da"], "split": "test", "qid": "short-0287"}
+{"kind": "short", "query": "Kem đánh răng", "expected": ["0dd64ffa-9b10-4204-ae9f-9e436bb25def"], "split": "test", "qid": "short-0288"}
+{"kind": "short", "query": "Kem dưỡng Vichy Mineral", "expected": ["022da54b-45f8-478d-96af-131c7ed247f9"], "split": "dev", "qid": "short-0289"}
+{"kind": "short", "query": "Keo dán gạch", "expected": ["023c294b-4ead-4596-a942-2295f948f1d0"], "split": "test", "qid": "short-0290"}
+{"kind": "short", "query": "Keracolor", "expected": ["005a2dc2-8905-48ed-91d2-a12da2aa0196"], "split": "test", "qid": "short-0291"}
+{"kind": "short", "query": "Két làm mát dầu", "expected": ["00832285-3bfd-4462-a5ea-ef20139bd10d"], "split": "dev", "qid": "short-0292"}
+{"kind": "short", "query": "Két nước", "expected": ["04557445-61fe-4f22-b8ff-f55f03c06e70"], "split": "test", "qid": "short-0293"}
+{"kind": "short", "query": "Khăn", "expected": ["03d7bd16-43a9-42fd-b940-78e8c76d1535"], "split": "test", "qid": "short-0294"}
+{"kind": "short", "query": "Khăn giấy", "expected": ["01fd265b-cc9f-4522-811c-a1c0803f932c"], "split": "test", "qid": "short-0295"}
+{"kind": "short", "query": "Khóa chữ U", "expected": ["03934204-bddb-4358-8e09-b7434107e04d"], "split": "dev", "qid": "short-0296"}
+{"kind": "short", "query": "Khoai tây đông lạnh", "expected": ["04613480-03db-4338-9efc-b1ff87bee5df"], "split": "test", "qid": "short-0297"}
+{"kind": "short", "query": "Khuyên tai vàng Óc", "expected": ["018cc53d-7ade-417e-8fbe-44478a0e009a"], "split": "dev", "qid": "short-0298"}
+{"kind": "short", "query": "Kinergy EX", "expected": ["03198a28-b4a9-4f04-bfbf-7a4a0de43c56"], "split": "dev", "qid": "short-0299"}
+{"kind": "short", "query": "Kính bơi Aqua Sphere Mako", "expected": ["03ab18b2-ab1a-4abd-b8b5-a637f2ab0930"], "split": "dev", "qid": "short-0300"}
+{"kind": "short", "query": "Kính bơi TYR Special Ops", "expected": ["0336a7c6-cd5a-4963-b376-4e2dd5e13d80"], "split": "dev", "qid": "short-0301"}
+{"kind": "short", "query": "Kính cửa Việt Phủ Quang", "expected": ["0362a857-1da3-4cd1-8ea5-f027baeb993e"], "split": "test", "qid": "short-0302"}
+{"kind": "short", "query": "Knock Sensor", "expected": ["00c79983-ca53-4976-89f9-d6b3d9e20563"], "split": "dev", "qid": "short-0303"}
+{"kind": "short", "query": "Kraken", "expected": ["040d2b97-8902-4574-bce9-40070b7bd6e9"], "split": "dev", "qid": "short-0304"}
+{"kind": "short", "query": "L508", "expected": ["03be2058-de6b-47bf-bd34-a50ff91926e9"], "split": "test", "qid": "short-0305"}
+{"kind": "short", "query": "L580", "expected": ["0245d1bc-6297-4d1f-98d7-91873f0eb5f8"], "split": "dev", "qid": "short-0306"}
+{"kind": "short", "query": "L586", "expected": ["03159afa-11d1-40ae-89c6-7a68f3547482"], "split": "test", "qid": "short-0307"}
+{"kind": "short", "query": "La kinh phân kim", "expected": ["03b02fff-5b6f-49db-b8fd-70363a97f832"], "split": "test", "qid": "short-0308"}
+{"kind": "short", "query": "Lamivudine", "expected": ["010f51ac-5f28-4f70-88c6-8eff3c6c9d60"], "split": "dev", "qid": "short-0309"}
+{"kind": "short", "query": "LANDSKRONA Footstool", "expected": ["0e26689f-aff4-434d-a151-af70ec993d39"], "split": "test", "qid": "short-0310"}
+{"kind": "short", "query": "Large", "expected": ["00c0ccd3-5c14-47fe-8b86-c27009c27048"], "split": "test", "qid": "short-0311"}
+{"kind": "short", "query": "LaserJet Pro M203dn", "expected": ["00f5a7b8-ebfd-4eb4-b6bd-9b492b21529f"], "split": "dev", "qid": "short-0312"}
+{"kind": "short", "query": "Lau bóng inox", "expected": ["00087c5f-6b52-425a-a3d7-2a9f24364e83"], "split": "test", "qid": "short-0313"}
+{"kind": "short", "query": "LED All-in-One LAEC Series", "expected": ["03775290-7f4a-46aa-be26-46df9b36ae64"], "split": "test", "qid": "short-0314"}
+{"kind": "short", "query": "Lenalid", "expected": ["00e44a17-dcca-4e11-b5a2-a545338d885e"], "split": "test", "qid": "short-0315"}
+{"kind": "short", "query": "Lexapro", "expected": ["0e016ed4-57f1-4072-99dd-c76a4c51ad25"], "split": "dev", "qid": "short-0316"}
+{"kind": "short", "query": "Lite-Box", "expected": ["04084cec-6aa3-47f9-855b-77a4dd2bacd8"], "split": "dev", "qid": "short-0317"}
+{"kind": "short", "query": "Lite-Shock", "expected": ["0e235c14-1cb4-40e0-8b33-af5adcd4fb98"], "split": "dev", "qid": "short-0318"}
+{"kind": "short", "query": "Live", "expected": ["021d7786-4b30-4f93-af48-97efeb142e0a"], "split": "test", "qid": "short-0319"}
+{"kind": "short", "query": "LM", "expected": ["0039e6f2-ddfa-4e27-a9e7-572641ee8c74"], "split": "dev", "qid": "short-0320"}
+{"kind": "short", "query": "Lò xo xupap", "expected": ["01fbb449-285d-4cd3-be42-a781de6a2949"], "split": "dev", "qid": "short-0321"}
+{"kind": "short", "query": "Loa ô tô Hertz Cento CK", "expected": ["03688f5d-b078-4795-aadb-ec604646eac5"], "split": "test", "qid": "short-0322"}
+{"kind": "short", "query": "Loa ô tô Hertz Dieci DSK", "expected": ["001af48c-b33d-43d3-a572-e85356f569c6"], "split": "dev", "qid": "short-0323"}
+{"kind": "short", "query": "Lọc gió cabin", "expected": ["009d2855-d937-43ad-9339-56fa1d8bdfb3"], "split": "test", "qid": "short-0324"}
+{"kind": "short", "query": "Lọc thủy lực", "expected": ["0472fdb2-0eac-4af7-825c-bb9b2062cb8e"], "split": "dev", "qid": "short-0325"}
+{"kind": "short", "query": "Lợn", "expected": ["012cef04-7ebd-4011-93be-31c55d7edc5b"], "split": "dev", "qid": "short-0326"}
+{"kind": "short", "query": "Lon Tiger Crystal lạnh đá", "expected": ["02dbf10f-3827-4b16-bdcc-0bc4e6164f14"], "split": "test", "qid": "short-0327"}
+{"kind": "short", "query": "Loperamide HCl Capsules USP", "expected": ["0426e282-39c1-4cae-95ec-1ec7e9b0d505"], "split": "dev", "qid": "short-0328"}
+{"kind": "short", "query": "Losarlife", "expected": ["0e04b0be-ef25-4d0d-8099-43a1208eac1c"], "split": "test", "qid": "short-0329"}
+{"kind": "short", "query": "LPJ Fuse", "expected": ["0288aee0-ff47-44e7-a0ee-23be2ff566b9"], "split": "dev", "qid": "short-0330"}
+{"kind": "short", "query": "LS10", "expected": ["039e9c8a-3ad5-42c1-b4b7-bd6cad613c07"], "split": "dev", "qid": "short-0331"}
+{"kind": "short", "query": "Lục vị ẩm", "expected": ["02ee0859-9834-4d25-8b43-2e5355027438", "04750c31-a4ee-4d69-88bf-5e5f83ccd5f1"], "split": "dev", "qid": "short-0332"}
+{"kind": "short", "query": "Lumix G 25mm f/1.7", "expected": ["03e03ce3-d422-4f0c-95d0-5907fbe0ab37"], "split": "test", "qid": "short-0333"}
+{"kind": "short", "query": "Lưới cầu lông", "expected": ["00aefe65-4951-4982-abfe-0a20ce57b383"], "split": "test", "qid": "short-0334"}
+{"kind": "short", "query": "Lupron", "expected": ["0e1130c6-068a-422c-8fe2-293f6cb72dee"], "split": "dev", "qid": "short-0335"}
+{"kind": "short", "query": "LW26 Cam Switch", "expected": ["03dd91dc-a38b-4c28-8385-8c7dc5d42234"], "split": "test", "qid": "short-0336"}
+{"kind": "short", "query": "M57", "expected": ["00be97ba-a6e2-4f4f-8465-b599e89d6a05"], "split": "dev", "qid": "short-0337"}
+{"kind": "short", "query": "Má phanh", "expected": ["03cf298d-3bba-420a-a035-93a50ed57e45"], "split": "test", "qid": "short-0338"}
+{"kind": "short", "query": "MA-Z4S Victra", "expected": ["028dea1f-ba23-47fa-99ed-52eb1340b350"], "split": "test", "qid": "short-0339"}
+{"kind": "short", "query": "MacBook Pro", "expected": ["046f2a27-657a-4169-8f4f-1596a3336656"], "split": "dev", "qid": "short-0340"}
+{"kind": "short", "query": "Magic Mary", "expected": ["00c29902-46e1-41a2-9522-f85d8f6f9217"], "split": "dev", "qid": "short-0341"}
+{"kind": "short", "query": "Magnetom Terra", "expected": ["0dd315c5-7676-41ed-83cb-478f972fdb83"], "split": "dev", "qid": "short-0342"}
+{"kind": "short", "query": "MAJVIVA Curtains", "expected": ["03d24697-d3ea-4a39-8829-2540990cb6a2"], "split": "test", "qid": "short-0343"}
+{"kind": "short", "query": "Manual EP 80W-90", "expected": ["019307cc-114c-45cf-bc07-5b2c8ce71663"], "split": "dev", "qid": "short-0344"}
+{"kind": "short", "query": "Marathon Mondial", "expected": ["01ce8adc-0631-4316-8fd2-1e738c3b7f93"], "split": "test", "qid": "short-0345"}
+{"kind": "short", "query": "Mặt che mù", "expected": ["0e20c46f-7708-4d0a-bc0f-6cc25ebbe145"], "split": "dev", "qid": "short-0346"}
+{"kind": "short", "query": "Match Stix Contour Skinstick", "expected": ["0dcde1c2-c988-4860-bb96-c25de24afca9"], "split": "dev", "qid": "short-0347"}
+{"kind": "short", "query": "Maven Silver", "expected": ["03d76ecd-16c6-4c3a-9621-c3f85df6886d"], "split": "dev", "qid": "short-0348"}
+{"kind": "short", "query": "Mavic", "expected": ["00e59997-bd37-4d61-92ba-d7eab2d088f9"], "split": "test", "qid": "short-0349"}
+{"kind": "short", "query": "Maxxcross IT", "expected": ["0df7316e-f232-4e4b-8a8b-d535e1b1fd79"], "split": "dev", "qid": "short-0350"}
+{"kind": "short", "query": "Máy bay C-130 thu được", "expected": ["00425311-f6b6-4ca1-a8e2-6196ab77b866"], "split": "test", "qid": "short-0351"}
+{"kind": "short", "query": "Máy cưa lọng", "expected": ["02193389-e0c4-45c0-8507-f51fe99d051a"], "split": "dev", "qid": "short-0352"}
+{"kind": "short", "query": "Máy đề", "expected": ["03cfef83-3cc6-4583-975c-3e0df7542c3a"], "split": "dev", "qid": "short-0353"}
+{"kind": "short", "query": "Máy đo loãng xương", "expected": ["013a92f0-82f5-484c-be4c-dc8a28271f24"], "split": "dev", "qid": "short-0354"}
+{"kind": "short", "query": "Máy Hút Bụi Samsung Jet", "expected": ["02c6feff-f4ed-4f9a-85ce-88bb3eff809d"], "split": "test", "qid": "short-0355"}
+{"kind": "short", "query": "Máy in HP DeskJet", "expected": ["005ca938-b80c-415b-b4e1-3bd2d78d6702"], "split": "test", "qid": "short-0356"}
+{"kind": "short", "query": "Máy massage mắt Breo iSee", "expected": ["013a416d-b8cc-485f-bc81-be6c4afe75ca"], "split": "test", "qid": "short-0357"}
+{"kind": "short", "query": "MediTouch", "expected": ["00a6a16e-01d6-4ba7-92f8-ac96d65e2bba"], "split": "test", "qid": "short-0358"}
+{"kind": "short", "query": "Mefenamic acid", "expected": ["0460f777-0240-4036-83ef-2a7edc21e82a"], "split": "dev", "qid": "short-0359"}
+{"kind": "short", "query": "Megalast Liquid Eyeliner", "expected": ["01afde4c-f70e-4e60-9c82-ac1a24582c2c"], "split": "dev", "qid": "short-0360"}
+{"kind": "short", "query": "Megion", "expected": ["03baeac9-9130-4b36-bd04-01c24742dad4"], "split": "dev", "qid": "short-0361"}
+{"kind": "short", "query": "MELAG Cliniclave", "expected": ["01c8249f-28e0-42a3-8919-0c1e69723385"], "split": "dev", "qid": "short-0362"}
+{"kind": "short", "query": "Meyerzadin", "expected": ["03171e8a-2fdc-4b3a-bd11-f1bd10d46767"], "split": "test", "qid": "short-0363"}
+{"kind": "short", "query": "Mix Fold", "expected": ["04827129-52ab-4052-b4a5-3ec1e5419ee0"], "split": "dev", "qid": "short-0364"}
+{"kind": "short", "query": "Mobin sườn", "expected": ["01bed6a4-1168-4ed2-a50a-3bacf9e14acb", "03316c50-73fd-4d17-b093-8ba54946c050"], "split": "dev", "qid": "short-0365"}
+{"kind": "short", "query": "Modern AM AIO", "expected": ["0361f5b4-5486-4ba6-85f1-3b7b94b7394c"], "split": "dev", "qid": "short-0366"}
+{"kind": "short", "query": "Modula Cage EX", "expected": ["04035deb-f7eb-4b3d-aa7b-b9f90e9c10d6"], "split": "test", "qid": "short-0367"}
+{"kind": "short", "query": "MoGo 2 Pro", "expected": ["043a887a-3b4d-4832-93e3-ed596304c4ae"], "split": "dev", "qid": "short-0368"}
+{"kind": "short", "query": "Moisture Surge", "expected": ["0dfcdb87-bcba-46b0-a6e7-b6f5abd27435"], "split": "dev", "qid": "short-0369"}
+{"kind": "short", "query": "Montigate", "expected": ["005d315c-d195-49b9-8961-2e13d8f31ca7"], "split": "test", "qid": "short-0370"}
+{"kind": "short", "query": "Mountaintop", "expected": ["02094c55-f40b-469b-ba0c-b9b6ab09d9e0"], "split": "test", "qid": "short-0371"}
+{"kind": "short", "query": "Move n Grow Activity Walker", "expected": ["0de3ca0b-df35-49db-8c91-6ca7721b5f3b"], "split": "test", "qid": "short-0372"}
+{"kind": "short", "query": "Moxilen", "expected": ["0e0149b9-aaa6-4fb1-b963-99f4d8037c70"], "split": "dev", "qid": "short-0373"}
+{"kind": "short", "query": "Mũ bảo hộ", "expected": ["01c51d1a-dc27-42ab-bc1b-3432a5ff3036"], "split": "dev", "qid": "short-0374"}
+{"kind": "short", "query": "Mũi tên đồng Gò", "expected": ["00d19fae-fa5a-4516-b0b1-85b4cda8c620"], "split": "dev", "qid": "short-0375"}
+{"kind": "short", "query": "Myonal", "expected": ["02d880e0-1108-4192-bd8e-83380f9328f6"], "split": "dev", "qid": "short-0376"}
+{"kind": "short", "query": "Naked Eyeshadow Palette", "expected": ["0186e47e-e9b5-49b4-b14d-fc9b92ba7e1d"], "split": "test", "qid": "short-0377"}
+{"kind": "short", "query": "Naxos", "expected": ["013256ec-c90e-489b-942d-915bc0bc7b5f"], "split": "dev", "qid": "short-0378"}
+{"kind": "short", "query": "NESNA Stool", "expected": ["00bd7dfb-2684-4b43-8486-ac73d479565d"], "split": "dev", "qid": "short-0379"}
+{"kind": "short", "query": "Newport H2", "expected": ["0e10dd00-0eb4-4e70-bac5-0b450f99d46f"], "split": "dev", "qid": "short-0380"}
+{"kind": "short", "query": "Next2Me Air", "expected": ["01e8b47e-d8c6-4a82-9f63-0d4af3c08bca"], "split": "test", "qid": "short-0381"}
+{"kind": "short", "query": "NH100", "expected": ["0e28d54d-58ae-4ac6-b614-80f58de6f313"], "split": "test", "qid": "short-0382"}
+{"kind": "short", "query": "NH18Y020-Z", "expected": ["02e73194-3c61-437a-9180-08ee9cc06712"], "split": "test", "qid": "short-0383"}
+{"kind": "short", "query": "Nhẫn kim cương", "expected": ["00e0b074-1e9c-40f4-a63b-c4ed75cd3efe"], "split": "test", "qid": "short-0384"}
+{"kind": "short", "query": "NM", "expected": ["012f167e-c229-462c-a6f2-362203bff8f7"], "split": "test", "qid": "short-0385"}
+{"kind": "short", "query": "Nord N10", "expected": ["03a1c9ed-154f-4130-a853-5ff120b5f853"], "split": "dev", "qid": "short-0386"}
+{"kind": "short", "query": "Norfloxacin", "expected": ["0476bf1a-ab49-4ece-a5cd-4de73d94daa1"], "split": "test", "qid": "short-0387"}
+{"kind": "short", "query": "Norix", "expected": ["000e0ad5-4724-4ddd-a428-0fb062c21ddd"], "split": "test", "qid": "short-0388"}
+{"kind": "short", "query": "NT00 Fuse", "expected": ["0030108c-9597-4eba-b38b-43da60070f7a"], "split": "dev", "qid": "short-0389"}
+{"kind": "short", "query": "Nucoxia", "expected": ["01ead36c-1da1-4186-a817-dc8463a7fb05"], "split": "test", "qid": "short-0390"}
+{"kind": "short", "query": "Nước lau bóng inox", "expected": ["0213c21d-a663-4c1f-921b-fe547c791f7a"], "split": "test", "qid": "short-0391"}
+{"kind": "short", "query": "Nước tẩy bồn cầu", "expected": ["024130a8-dbf2-4a43-bd4f-43dba869e1ae"], "split": "test", "qid": "short-0392"}
+{"kind": "short", "query": "Nước yến Khánh Hòa", "expected": ["0109bfef-d4aa-4928-b8d4-da5f3ca69f58"], "split": "dev", "qid": "short-0393"}
+{"kind": "short", "query": "Nút tai", "expected": ["029915d1-bf24-4331-9e61-db5a7fc2338d"], "split": "dev", "qid": "short-0394"}
+{"kind": "short", "query": "Ổ cắm kéo dài", "expected": ["024d27a9-374c-4b8d-9e3c-1ecac348b622"], "split": "dev", "qid": "short-0395"}
+{"kind": "short", "query": "Octolite", "expected": ["010a1baa-949b-4ecc-9f4b-39c6188c065a"], "split": "dev", "qid": "short-0396"}
+{"kind": "short", "query": "Omen", "expected": ["02142160-e5c0-413d-876f-fa1a77651c3e"], "split": "dev", "qid": "short-0397"}
+{"kind": "short", "query": "Omni RideCase Mount", "expected": ["04357697-ff81-402d-afd7-0aefefca97aa"], "split": "dev", "qid": "short-0398"}
+{"kind": "short", "query": "Ondansetron", "expected": ["03db1dc6-c62d-497c-8f28-e5e9c3caeb85"], "split": "dev", "qid": "short-0399"}
+{"kind": "short", "query": "Optic", "expected": ["037f340f-fa60-4b2f-bac1-ed25caf8875f"], "split": "dev", "qid": "short-0400"}
+{"kind": "short", "query": "Osimertinib", "expected": ["01528fea-87de-4aab-85ec-9b3c27758abc"], "split": "test", "qid": "short-0401"}
+{"kind": "short", "query": "Osmo Action", "expected": ["02f50118-ea35-40f5-97ba-4a3e744ee7e4"], "split": "test", "qid": "short-0402"}
+{"kind": "short", "query": "Oxelo Play", "expected": ["02c3e522-4e29-4b28-8b8c-a79b0cc972de"], "split": "dev", "qid": "short-0403"}
+{"kind": "short", "query": "P2500W", "expected": ["01db4195-006a-49d7-9a99-a3fe2e394c1a"], "split": "dev", "qid": "short-0404"}
+{"kind": "short", "query": "P30", "expected": ["03e7b0d1-b289-49af-bdb0-935c819a5c06"], "split": "dev", "qid": "short-0405"}
+{"kind": "short", "query": "P735", "expected": ["02a06973-3e2f-4080-854d-ee516141d19d"], "split": "test", "qid": "short-0406"}
+{"kind": "short", "query": "PA-506N", "expected": ["00dc77e9-3ace-4b7c-8408-f62646e17b2f"], "split": "test", "qid": "short-0407"}
+{"kind": "short", "query": "Pad 3 Pro", "expected": ["022fb8cb-58a7-4f82-9caa-d1f27c83b468"], "split": "dev", "qid": "short-0408"}
+{"kind": "short", "query": "Pajero Sport", "expected": ["03a0d02f-93a2-46e6-8278-741870796f76"], "split": "test", "qid": "short-0409"}
+{"kind": "short", "query": "Para - OPC", "expected": ["017b00d2-feab-4900-85bb-9d34097bf8d7"], "split": "dev", "qid": "short-0410"}
+{"kind": "short", "query": "Paracetamol TW3", "expected": ["0479121d-2e7d-47c3-b08d-67ff74c24183"], "split": "dev", "qid": "short-0411"}
+{"kind": "short", "query": "Paracold", "expected": ["01f573c6-c5ab-4f23-af0d-1e94181ee5fe"], "split": "test", "qid": "short-0412"}
+{"kind": "short", "query": "Passive Entry", "expected": ["01cc5c7d-cc03-416f-85d4-14912814ee25"], "split": "dev", "qid": "short-0413"}
+{"kind": "short", "query": "PC2000", "expected": ["01e93819-cac1-4847-aa70-6611db7c7dbd"], "split": "dev", "qid": "short-0414"}
+{"kind": "short", "query": "PCX Electric", "expected": ["0399d254-58e5-4298-a7e2-58bb10777378"], "split": "test", "qid": "short-0415"}
+{"kind": "short", "query": "PD-M324", "expected": ["035b26a8-4017-4c33-811e-a74b346d0e47"], "split": "test", "qid": "short-0416"}
+{"kind": "short", "query": "PD-M8120", "expected": ["038220d6-443d-42e9-8d82-31e7e865b83f"], "split": "test", "qid": "short-0417"}
+{"kind": "short", "query": "Penfill 100 IU/ml", "expected": ["0e0b607f-5a14-438b-9d94-a1abf4d196de"], "split": "test", "qid": "short-0418"}
+{"kind": "short", "query": "Perindopril", "expected": ["0e070a59-c689-48ad-8a6f-c1f3b68a4ada"], "split": "test", "qid": "short-0419"}
+{"kind": "short", "query": "PG-1230 Eagle", "expected": ["01405e69-0406-43ac-954d-ec45d7954605"], "split": "dev", "qid": "short-0420"}
+{"kind": "short", "query": "Phễu hút sữa", "expected": ["005113c6-bb10-44f5-854a-9043adeda8ae"], "split": "dev", "qid": "short-0421"}
+{"kind": "short", "query": "Phin lọc", "expected": ["044f2cad-da3d-4d85-beaa-0fe526379e7d"], "split": "dev", "qid": "short-0422"}
+{"kind": "short", "query": "Pin", "expected": ["0303a7e1-5056-4bc9-a458-188e59b376d1"], "split": "test", "qid": "short-0423"}
+{"kind": "short", "query": "Pin Bosch eBike PowerTube", "expected": ["03e142df-92c6-4223-9ed8-b2d67698d555"], "split": "dev", "qid": "short-0424"}
+{"kind": "short", "query": "Pirovacin", "expected": ["0dd45d3e-eb39-4e6a-89f7-8a1a82d47a28"], "split": "dev", "qid": "short-0425"}
+{"kind": "short", "query": "Piroxicam capsules USP", "expected": ["0db57146-f34a-4acb-9da5-e92b3c13a722"], "split": "test", "qid": "short-0426"}
+{"kind": "short", "query": "Pista", "expected": ["03a645fc-c473-4114-9622-740160b898c2"], "split": "test", "qid": "short-0427"}
+{"kind": "short", "query": "Piston Honda Air Blade", "expected": ["0288ffc9-d4b5-4221-a683-d24c97127bfd"], "split": "test", "qid": "short-0428"}
+{"kind": "short", "query": "Plaster-RD", "expected": ["0dfe92cf-b7b4-40d9-a186-a39b5eb1fad4"], "split": "test", "qid": "short-0429"}
+{"kind": "short", "query": "Pocketable Parka", "expected": ["02984fb7-9b16-4941-ac33-e44d9761f3a6"], "split": "test", "qid": "short-0430"}
+{"kind": "short", "query": "Polly Highchair Sea Dreams", "expected": ["0221931e-4bfa-4e38-ab4b-bd9af24eabf9"], "split": "test", "qid": "short-0431"}
+{"kind": "short", "query": "Porter", "expected": ["0045235d-a6ce-486e-8594-8e1e294dab43"], "split": "test", "qid": "short-0432"}
+{"kind": "short", "query": "Pouch", "expected": ["022bfec8-5e56-44d8-920f-c1c8c3307ce6"], "split": "test", "qid": "short-0433"}
+{"kind": "short", "query": "Povidone Iodine", "expected": ["00585923-e1b1-4c50-a79e-8733149a1393"], "split": "test", "qid": "short-0434"}
+{"kind": "short", "query": "PowerShot SX740 HS", "expected": ["026a7370-e3be-4660-8136-bb8c6fe95463"], "split": "test", "qid": "short-0435"}
+{"kind": "short", "query": "Prednison", "expected": ["006ebf32-2171-4a90-b3c9-c5dda30220ab"], "split": "test", "qid": "short-0436"}
+{"kind": "short", "query": "Premium", "expected": ["0446b408-d4da-4a70-8049-cc2c8266c7f5"], "split": "test", "qid": "short-0437"}
+{"kind": "short", "query": "Premium Lamb & Rice", "expected": ["02ba304e-4844-4035-8918-3a2254e4a4d4"], "split": "test", "qid": "short-0438"}
+{"kind": "short", "query": "PremiumContact", "expected": ["0271b58a-6251-451c-b7bb-b73612603074"], "split": "test", "qid": "short-0439"}
+{"kind": "short", "query": "Pro-DLX", "expected": ["0405b9ec-d9cf-4f7e-9807-70020b69c65d"], "split": "dev", "qid": "short-0440"}
+{"kind": "short", "query": "ProArt PA278QV", "expected": ["0dc35644-3cb9-4f19-9532-1211d07c4dc1"], "split": "test", "qid": "short-0441"}
+{"kind": "short", "query": "Promethazin siro", "expected": ["026d2de5-7a1c-41fb-8b39-c861bf49d719"], "split": "dev", "qid": "short-0442"}
+{"kind": "short", "query": "Pulse", "expected": ["00708941-f1cb-4e70-919d-21427e3235a6"], "split": "dev", "qid": "short-0443"}
+{"kind": "short", "query": "Purist", "expected": ["028da5c0-be7d-4e12-950a-f51b00b684bf"], "split": "dev", "qid": "short-0444"}
+{"kind": "short", "query": "Pusheen Plush", "expected": ["006b0569-a3e4-4cb3-b0e6-706bba55782b"], "split": "dev", "qid": "short-0445"}
+{"kind": "short", "query": "PyfacIor", "expected": ["022cda2d-1e6e-4563-a67d-03332878b222"], "split": "test", "qid": "short-0446"}
+{"kind": "short", "query": "Q3", "expected": ["03f2d583-bd6a-4ed6-b405-44f12842df36"], "split": "test", "qid": "short-0447"}
+{"kind": "short", "query": "QNED MiniLED", "expected": ["002ae8a4-4b39-407b-befd-32aa7bdd0fd0"], "split": "dev", "qid": "short-0448"}
+{"kind": "short", "query": "Quick Kids", "expected": ["00869d32-8895-460c-8f66-ebb665e56c34"], "split": "dev", "qid": "short-0449"}
+{"kind": "short", "query": "QuickTrack Bottle Cage", "expected": ["00d9114b-e26a-4575-b75f-2b20d63140f0"], "split": "test", "qid": "short-0450"}
+{"kind": "short", "query": "Raceca", "expected": ["00d42dd1-9f97-4ab3-88a4-6016224c39a9"], "split": "test", "qid": "short-0451"}
+{"kind": "short", "query": "Racing Zero", "expected": ["022b8bd0-e34a-4c86-a123-ca07ec672af4"], "split": "test", "qid": "short-0452"}
+{"kind": "short", "query": "Range Handlebar", "expected": ["02bb0aa3-f0e2-4750-8b56-9817a0f2fd21"], "split": "dev", "qid": "short-0453"}
+{"kind": "short", "query": "Rapid Rob", "expected": ["008126d7-e0af-435c-a730-78683da37880"], "split": "test", "qid": "short-0454"}
+{"kind": "short", "query": "Rapide CL", "expected": ["0e02c16d-cd4a-4e8c-806a-a6c067ef440d"], "split": "dev", "qid": "short-0455"}
+{"kind": "short", "query": "Receptor", "expected": ["020bf2bf-3bc8-4177-8fbe-3a28f7f20f19"], "split": "test", "qid": "short-0456"}
+{"kind": "short", "query": "Recon", "expected": ["03e5a969-8c30-47f4-86f9-6392e06b4d72"], "split": "dev", "qid": "short-0457"}
+{"kind": "short", "query": "Redmi Note", "expected": ["0327cefc-61f5-4279-8dd8-91e485825aed", "0e0006bf-c5ca-4647-b990-d1fbfc2eb81d"], "split": "test", "qid": "short-0458"}
+{"kind": "short", "query": "Remeron", "expected": ["0298d6f8-7f6a-42e4-9fc1-25551a68576b"], "split": "dev", "qid": "short-0459"}
+{"kind": "short", "query": "ReptoMin Energy Sticks", "expected": ["0191ebe1-7ede-42ad-8570-fcf4e2fb85f3"], "split": "dev", "qid": "short-0460"}
+{"kind": "short", "query": "ResMed AirSense", "expected": ["010193cd-0903-47ce-a071-0540e421c044"], "split": "test", "qid": "short-0461"}
+{"kind": "short", "query": "Revo LTD", "expected": ["046d4fcb-77bc-4ab5-afe3-b7a6dabaaaf2"], "split": "test", "qid": "short-0462"}
+{"kind": "short", "query": "Revolution", "expected": ["04417da0-c1c0-4466-8f62-1145f218d82d"], "split": "test", "qid": "short-0463"}
+{"kind": "short", "query": "RF 24mm f/1.8 Macro IS STM", "expected": ["0de32b11-c9be-4add-9fb0-028ad08d3613"], "split": "dev", "qid": "short-0464"}
+{"kind": "short", "query": "Ricoh Aficio MP", "expected": ["00531eb1-ab1e-4b82-aba5-9e9bbdfcf462"], "split": "dev", "qid": "short-0465"}
+{"kind": "short", "query": "Ring", "expected": ["004ec668-547d-47e0-ad2c-17f10f0ad405"], "split": "test", "qid": "short-0466"}
+{"kind": "short", "query": "Ringerfundin B", "expected": ["02840e20-6b01-4838-b50f-185824751227"], "split": "dev", "qid": "short-0467"}
+{"kind": "short", "query": "Rival Charger MXX-1200", "expected": ["04290485-3603-434e-aa4f-226bf8c0d645"], "split": "test", "qid": "short-0468"}
+{"kind": "short", "query": "Rival Perses MXIX-5000", "expected": ["031bbaa2-ce0a-457f-85a8-f2abd166efeb"], "split": "test", "qid": "short-0469"}
+{"kind": "short", "query": "Road Runner Leash", "expected": ["029dd4b6-b65f-4448-9a0d-2c71991bdefb"], "split": "dev", "qid": "short-0470"}
+{"kind": "short", "query": "Rocalcic", "expected": ["01b79cc0-40d1-496f-9376-89cdec035c8b"], "split": "test", "qid": "short-0471"}
+{"kind": "short", "query": "Rock", "expected": ["0047fde1-97f1-47de-9f0a-13f5f85c123e"], "split": "test", "qid": "short-0472"}
+{"kind": "short", "query": "ROG Phone", "expected": ["00c89cff-1738-498c-b695-835853fd0216"], "split": "test", "qid": "short-0473"}
+{"kind": "short", "query": "Rosuvastatin Stada", "expected": ["03c387e3-a619-4d44-821a-c9115329137f"], "split": "test", "qid": "short-0474"}
+{"kind": "short", "query": "Roticox 30 mg film-coated", "expected": ["016fcdc2-51af-4f11-ad25-e223b26105ac"], "split": "dev", "qid": "short-0475"}
+{"kind": "short", "query": "rượu giao bôi", "expected": ["0051d31e-4ae2-42c9-968c-78eef142d6bd"], "split": "test", "qid": "short-0476"}
+{"kind": "short", "query": "Rượu thóc Lào", "expected": ["029b7f59-320c-431b-9319-ee35e319571b"], "split": "test", "qid": "short-0477"}
+{"kind": "short", "query": "S917", "expected": ["0daf98da-4f5a-4b59-8965-4576be03c10b"], "split": "test", "qid": "short-0478"}
+{"kind": "short", "query": "Sạc dự phòng Anker PowerCore", "expected": ["0e092747-1ad5-44c7-a77d-70703b4f55b5"], "split": "dev", "qid": "short-0479"}
+{"kind": "short", "query": "Sandoz Montelukast CHT", "expected": ["02519be2-da1f-4274-b9e5-ea6033413871"], "split": "dev", "qid": "short-0480"}
+{"kind": "short", "query": "SARITHA Sheer Curtains", "expected": ["007aedb0-04b0-4d85-9cda-e6abe476adbc"], "split": "test", "qid": "short-0481"}
+{"kind": "short", "query": "SaVi Telmisartan", "expected": ["03afd87f-44f9-462a-9bc9-8f4af771de53"], "split": "test", "qid": "short-0482"}
+{"kind": "short", "query": "SaViFexo", "expected": ["03e755e3-c873-4f98-810c-abf0f9efe7c2"], "split": "dev", "qid": "short-0483"}
+{"kind": "short", "query": "Schweizer SGS", "expected": ["0222d233-f0d3-4cc4-be6a-7841e80c580f"], "split": "test", "qid": "short-0484"}
+{"kind": "short", "query": "Scooter", "expected": ["00ed195f-81dc-4625-b398-8dd089f3f80f"], "split": "dev", "qid": "short-0485"}
+{"kind": "short", "query": "Scootsmart", "expected": ["015582e5-6f02-4bca-849e-feca6c2ffd27"], "split": "test", "qid": "short-0486"}
+{"kind": "short", "query": "Screen Wash", "expected": ["04096c46-c109-4696-9125-f46c87101cba"], "split": "test", "qid": "short-0487"}
+{"kind": "short", "query": "SD22S", "expected": ["0252f095-162f-46ed-900a-8d96400c2858"], "split": "dev", "qid": "short-0488"}
+{"kind": "short", "query": "Secnidazol", "expected": ["019426ef-f379-488d-8a9c-b59b7851344b"], "split": "dev", "qid": "short-0489"}
+{"kind": "short", "query": "Seduxen", "expected": ["047a6a2a-b58a-4da0-a0a5-c6bd9d50f33b"], "split": "test", "qid": "short-0490"}
+{"kind": "short", "query": "SGK Hóa học", "expected": ["03d852b1-620b-42fc-8184-0710a2119d69"], "split": "test", "qid": "short-0491"}
+{"kind": "short", "query": "SGK Tiếng Anh", "expected": ["0264aac3-2718-4c3b-941f-0ba9ff44ff20"], "split": "dev", "qid": "short-0492"}
+{"kind": "short", "query": "SGK Tin học", "expected": ["0220f736-2279-476e-b5e7-6131557da493"], "split": "test", "qid": "short-0493"}
+{"kind": "short", "query": "SGK Toán", "expected": ["02a6ff4b-7aff-4798-b9c6-0f2045114ffc", "0e0cadf7-3af7-4900-ac35-3e031cde4e2c"], "split": "dev", "qid": "short-0494"}
+{"kind": "short", "query": "Shield TV", "expected": ["0396c645-bb2b-4a56-91e4-0cf4c8361524"], "split": "test", "qid": "short-0495"}
+{"kind": "short", "query": "Skincare", "expected": ["01ed41a9-2f63-46d8-ad30-3cadf8c863df"], "split": "test", "qid": "short-0496"}
+{"kind": "short", "query": "SLX FD-M675", "expected": ["043dc82d-4802-4ff1-8ea3-ab05243bb13f"], "split": "dev", "qid": "short-0497"}
+{"kind": "short", "query": "Smart Signage QMR Series", "expected": ["024c263b-8319-4992-85f2-a355d9d81cbc"], "split": "test", "qid": "short-0498"}
+{"kind": "short", "query": "Smooth Fenders", "expected": ["0108a4e6-4cb5-4058-a758-a895b5f5faf4"], "split": "test", "qid": "short-0499"}
+{"kind": "short", "query": "Sole-O Grip", "expected": ["0dd99da6-5ef0-46fb-b7cc-b3b2e8a9b000"], "split": "test", "qid": "short-0500"}
+{"kind": "short", "query": "Sonata", "expected": ["01bfaf8b-9cca-4186-a0c8-2d8a7bd3e9a2"], "split": "dev", "qid": "short-0501"}
+{"kind": "short", "query": "Soundcore Boom", "expected": ["02603787-96f0-41f1-9654-504572bf3ea5"], "split": "test", "qid": "short-0502"}
+{"kind": "short", "query": "Soundcore Life Q30", "expected": ["039ba071-e3f1-4eb0-bfea-ee76d18753a7"], "split": "test", "qid": "short-0503"}
+{"kind": "short", "query": "Sozfax", "expected": ["01598eef-4d39-4d7e-9371-59d1b6dc09b0"], "split": "test", "qid": "short-0504"}
+{"kind": "short", "query": "Sp Ofloxacin", "expected": ["0dd8c1ff-bca4-4f34-a7b8-08c303c040de"], "split": "test", "qid": "short-0505"}
+{"kind": "short", "query": "Spiramycin", "expected": ["00738433-7d3e-4bf3-8cd7-b4ed06377d88", "036048bd-e9f7-4419-a182-0b107aab6058"], "split": "dev", "qid": "short-0506"}
+{"kind": "short", "query": "Sportec M9 RR", "expected": ["0deec578-a7da-480b-b058-782bda39d7c0"], "split": "dev", "qid": "short-0507"}
+{"kind": "short", "query": "SR26", "expected": ["01b23110-21e0-4ce5-bc71-c7eee66d80e4"], "split": "dev", "qid": "short-0508"}
+{"kind": "short", "query": "Star", "expected": ["00e74690-c08e-49d6-80bd-3ae9bd7d0d5c"], "split": "test", "qid": "short-0509"}
+{"kind": "short", "query": "STAR8000", "expected": ["034e6241-1e36-445f-8f57-93c27db73221"], "split": "test", "qid": "short-0510"}
+{"kind": "short", "query": "Stihl SG", "expected": ["011aa87d-ec5a-4312-85fa-70d2875b104e"], "split": "test", "qid": "short-0511"}
+{"kind": "short", "query": "STJÄRNBRÄCKA Duvet", "expected": ["00d292d8-3de1-4142-bcf2-504bcb035be0"], "split": "test", "qid": "short-0512"}
+{"kind": "short", "query": "Sữa Cô gái Hà Lan Active", "expected": ["01c6c4d1-7330-4294-bd4b-60f45b7474c8"], "split": "dev", "qid": "short-0513"}
+{"kind": "short", "query": "Sữa Morinaga Hagukumi số", "expected": ["02462c64-ce00-4570-9e85-db5a2e61809b"], "split": "dev", "qid": "short-0514"}
+{"kind": "short", "query": "Sumatriptan", "expected": ["0157f013-0bdd-4418-9046-1a66161e73d5"], "split": "test", "qid": "short-0515"}
+{"kind": "short", "query": "Súng cối 2B14 Podnos", "expected": ["0db54768-93c4-4265-8513-ba473cfb2662"], "split": "test", "qid": "short-0516"}
+{"kind": "short", "query": "Súng ngắn Glock", "expected": ["0151d486-e700-4dec-a1fd-e8358234b409"], "split": "dev", "qid": "short-0517"}
+{"kind": "short", "query": "Súng trường Type", "expected": ["0df90041-9979-4068-8002-01c9afa75aa0"], "split": "dev", "qid": "short-0518"}
+{"kind": "short", "query": "Sunglasses", "expected": ["03baff6d-89a9-4aa8-a11f-1deaf1c81236"], "split": "test", "qid": "short-0519"}
+{"kind": "short", "query": "súp thưởng", "expected": ["0dd57fb9-b602-4874-a932-fb9ffd1bf389"], "split": "dev", "qid": "short-0520"}
+{"kind": "short", "query": "Super", "expected": ["0132272b-9367-4c85-a890-98d83ac65267"], "split": "dev", "qid": "short-0521"}
+{"kind": "short", "query": "Super Sticky Kush", "expected": ["01a86c7d-32c3-4576-9577-05fc1aa4debe"], "split": "dev", "qid": "short-0522"}
+{"kind": "short", "query": "Swan Road", "expected": ["0dd40e09-7c3a-4d04-be5a-033820474c4b"], "split": "dev", "qid": "short-0523"}
+{"kind": "short", "query": "Switch Lite", "expected": ["01c403ac-8846-4344-a40b-16226a9610f3"], "split": "dev", "qid": "short-0524"}
+{"kind": "short", "query": "Tã", "expected": ["01fac06e-3695-46f4-af4b-84c8be8b77bc"], "split": "dev", "qid": "short-0525"}
+{"kind": "short", "query": "Tamifine", "expected": ["008f29ab-32db-47aa-9955-b9da62b9397d"], "split": "test", "qid": "short-0526"}
+{"kind": "short", "query": "Tapocin Injection", "expected": ["031b3939-0865-4c43-b7a6-248c660f72d4"], "split": "test", "qid": "short-0527"}
+{"kind": "short", "query": "TD05 Turbo", "expected": ["02df5739-6b12-4957-8834-4e239628e350"], "split": "dev", "qid": "short-0528"}
+{"kind": "short", "query": "Telfast HD", "expected": ["037bd3df-7b90-4ecd-9b57-c03560e0411c"], "split": "dev", "qid": "short-0529"}
+{"kind": "short", "query": "Telilsartan Stada", "expected": ["02d4578d-4111-49d2-bb05-f0cae594a0fb"], "split": "test", "qid": "short-0530"}
+{"kind": "short", "query": "Tem bộ SEA Games", "expected": ["0059dae7-04b2-465b-bb25-53b01d5b1f98"], "split": "dev", "qid": "short-0531"}
+{"kind": "short", "query": "Tensioner", "expected": ["03396df6-95d3-4f3c-a802-7d83f607c935"], "split": "dev", "qid": "short-0532"}
+{"kind": "short", "query": "Terra", "expected": ["03abad6b-8811-473e-8afc-1f191fdee9a0"], "split": "test", "qid": "short-0533"}
+{"kind": "short", "query": "Test nhanh HIV SD Bioline HIV", "expected": ["0210e809-0d7d-4ca9-8eea-ea343db2eb27"], "split": "dev", "qid": "short-0534"}
+{"kind": "short", "query": "TetraMin Flakes", "expected": ["0daded31-c2db-4bd8-92ba-1b87a69f3c43"], "split": "test", "qid": "short-0535"}
+{"kind": "short", "query": "TH350", "expected": ["027b53dc-f6ff-4a43-8cfa-e72d101a806f"], "split": "dev", "qid": "short-0536"}
+{"kind": "short", "query": "Thaco Ollin", "expected": ["0201f0d5-d7e7-4cb4-a6b1-28e154402b37"], "split": "test", "qid": "short-0537"}
+{"kind": "short", "query": "Thảm lót sàn", "expected": ["0021cca5-9485-4519-8bde-99052bf8c8d9"], "split": "test", "qid": "short-0538"}
+{"kind": "short", "query": "Thanh giằng", "expected": ["04295b29-a545-4935-bffc-d3a0d15f1e20"], "split": "dev", "qid": "short-0539"}
+{"kind": "short", "query": "ThinkPad T490", "expected": ["0decbb48-a2fc-485b-83c3-030fecad5d4e"], "split": "dev", "qid": "short-0540"}
+{"kind": "short", "query": "ThinkStation P5", "expected": ["0242c2f1-f749-48b3-86cc-a887eceac4ea"], "split": "test", "qid": "short-0541"}
+{"kind": "short", "query": "Thio-usarich", "expected": ["026c9cd7-8042-4edb-8c56-9d0d8b5593d0"], "split": "test", "qid": "short-0542"}
+{"kind": "short", "query": "Thiophenicol", "expected": ["03e24109-0fed-4882-810b-978b5d3000aa"], "split": "test", "qid": "short-0543"}
+{"kind": "short", "query": "Tiền Bắc Việt", "expected": ["008fbda6-72f7-4621-abbb-0cbe25c05450"], "split": "test", "qid": "short-0544"}
+{"kind": "short", "query": "Tiền giấy 10 cents", "expected": ["00d32940-0abf-476a-8d95-89c3315c2fd2"], "split": "dev", "qid": "short-0545"}
+{"kind": "short", "query": "Tiphadocef", "expected": ["03f48f10-1df4-42fd-8f05-2e41a3248bdf"], "split": "dev", "qid": "short-0546"}
+{"kind": "short", "query": "Tirozet", "expected": ["0de921de-633d-4696-90ce-584048ce59d6"], "split": "test", "qid": "short-0547"}
+{"kind": "short", "query": "TKC 80 Twinduro", "expected": ["0376f47e-6a85-47c6-a9e3-56e87005ae37"], "split": "dev", "qid": "short-0548"}
+{"kind": "short", "query": "TM-U220", "expected": ["02e1537c-6d06-4264-80bf-e6001644affa"], "split": "test", "qid": "short-0549"}
+{"kind": "short", "query": "Tolura", "expected": ["00773fe6-734b-44c8-80b2-6adc05fd71ff"], "split": "test", "qid": "short-0550"}
+{"kind": "short", "query": "Tôn sóng", "expected": ["0103a3ee-b28a-490e-bc6f-02df34f60833"], "split": "dev", "qid": "short-0551"}
+{"kind": "short", "query": "Tourney FD-A070", "expected": ["00fb4e02-3543-4ec5-8f8f-951a1c700000"], "split": "dev", "qid": "short-0552"}
+{"kind": "short", "query": "Tourney SL-TX800", "expected": ["014549b8-d8d4-47e0-987d-0569bef079fc"], "split": "test", "qid": "short-0553"}
+{"kind": "short", "query": "Trà Atisô", "expected": ["0ded39b5-e88a-4edb-b8bd-83d58a3ada54"], "split": "test", "qid": "short-0554"}
+{"kind": "short", "query": "Training Dummy", "expected": ["0302c8d6-82f3-4bfa-8130-36785b81c648"], "split": "test", "qid": "short-0555"}
+{"kind": "short", "query": "Travel", "expected": ["041aec2b-e652-4c04-8e02-d551f27eea15"], "split": "dev", "qid": "short-0556"}
+{"kind": "short", "query": "Trống", "expected": ["0449f214-1eff-4540-bb27-db43e470b06e"], "split": "test", "qid": "short-0557"}
+{"kind": "short", "query": "Trục lái", "expected": ["008649f5-4ed1-4598-8b4d-33815f929800"], "split": "test", "qid": "short-0558"}
+{"kind": "short", "query": "Trung liên Type", "expected": ["0dcc17bf-136c-4517-8b03-f4f3a8402ad0"], "split": "dev", "qid": "short-0559"}
+{"kind": "short", "query": "TrunkBag DXP", "expected": ["0dd4b5e4-cfa8-45af-bfa2-cbf8fc2b65ab"], "split": "dev", "qid": "short-0560"}
+{"kind": "short", "query": "Tủ mát bia", "expected": ["0071eac3-a89c-4b8c-9bcc-2a69eb03d301"], "split": "test", "qid": "short-0561"}
+{"kind": "short", "query": "TUF Gaming A16", "expected": ["00bd6c4e-5243-4c42-aed8-22504eed7e66"], "split": "test", "qid": "short-0562"}
+{"kind": "short", "query": "Túi giấy", "expected": ["044fb97a-8ef8-47a8-9b54-318e892cb5f8"], "split": "dev", "qid": "short-0563"}
+{"kind": "short", "query": "Túi khô treo lưng Karst", "expected": ["021a245c-34f7-4242-82b6-3fe2324a6676"], "split": "dev", "qid": "short-0564"}
+{"kind": "short", "query": "túi trống du lịch", "expected": ["009dd407-9f6c-4e5f-9ca1-1339ac347001"], "split": "test", "qid": "short-0565"}
+{"kind": "short", "query": "Túi trữ sữa", "expected": ["00b839e4-3fa8-4545-b309-05a1adb46956"], "split": "test", "qid": "short-0566"}
+{"kind": "short", "query": "Túi vợt cầu lông", "expected": ["03d9b196-d404-424b-9ad7-3c069a949bc0"], "split": "dev", "qid": "short-0567"}
+{"kind": "short", "query": "Tượng Trang Trí", "expected": ["0dbc0e5b-5e41-4e9f-9100-e995c0e984f5"], "split": "test", "qid": "short-0568"}
+{"kind": "short", "query": "Ultegra ST-R8000", "expected": ["0061fe8c-d20b-4710-85c1-24f11230393e"], "split": "test", "qid": "short-0569"}
+{"kind": "short", "query": "Ultra Stretch", "expected": ["01282704-ca83-40ec-be6f-f0b1357aee99"], "split": "dev", "qid": "short-0570"}
+{"kind": "short", "query": "Ultralite TPU", "expected": ["02fc65c5-9c49-429e-803b-c40e4ed14467"], "split": "test", "qid": "short-0571"}
+{"kind": "short", "query": "Urokinase-Green Cross Inj", "expected": ["02f33b5f-5a9e-4851-880c-7b209f62c6a3"], "split": "test", "qid": "short-0572"}
+{"kind": "short", "query": "V15", "expected": ["0204e405-683d-4ed3-8e1d-829bee28831d"], "split": "dev", "qid": "short-0573"}
+{"kind": "short", "query": "Valsarfast", "expected": ["01090b11-5f07-4ed2-8c91-51618d02a6e2"], "split": "test", "qid": "short-0574"}
+{"kind": "short", "query": "Vastarel MR", "expected": ["0dbd413c-21cb-4d82-afc9-9e40c76c3fe4"], "split": "test", "qid": "short-0575"}
+{"kind": "short", "query": "VDO MAF Sensor", "expected": ["029bbf6a-f809-4597-90e1-a219f629f1ce"], "split": "test", "qid": "short-0576"}
+{"kind": "short", "query": "Vero", "expected": ["02597433-3929-4cc6-8197-f61a577e70ec"], "split": "test", "qid": "short-0577"}
+{"kind": "short", "query": "Versus Stratagia", "expected": ["02310d34-e146-46f1-a184-29038b2b6b9d"], "split": "dev", "qid": "short-0578"}
+{"kind": "short", "query": "Versys", "expected": ["044a7486-a1d0-40cf-84f8-6dfa793e88ca"], "split": "dev", "qid": "short-0579"}
+{"kind": "short", "query": "Ví da", "expected": ["0157e458-27e2-438f-a6a3-f11720eaf3e8"], "split": "dev", "qid": "short-0580"}
+{"kind": "short", "query": "Vilube Brake Fluid DOT", "expected": ["004dbbaf-c225-483e-9d65-339e559fc397"], "split": "dev", "qid": "short-0581"}
+{"kind": "short", "query": "Vimpat", "expected": ["039b9440-e88d-4768-bd24-4c3934df9514"], "split": "test", "qid": "short-0582"}
+{"kind": "short", "query": "VIRB Ultra", "expected": ["027d3829-72a0-41a6-9217-55b4930f9a28"], "split": "dev", "qid": "short-0583"}
+{"kind": "short", "query": "VISTHUS Tủ", "expected": ["044c26b2-9b6e-4475-9498-86e8dec45e15"], "split": "test", "qid": "short-0584"}
+{"kind": "short", "query": "Vita", "expected": ["0dbc2671-8f65-4067-8cc0-5d93cfbda0b0"], "split": "dev", "qid": "short-0585"}
+{"kind": "short", "query": "Vitamin D", "expected": ["024b4dae-de6d-4edd-9fbd-45d36acac58f"], "split": "test", "qid": "short-0586"}
+{"kind": "short", "query": "VM Series Video Wall", "expected": ["004c277a-de17-4cfd-b72c-9ee3514c075f"], "split": "dev", "qid": "short-0587"}
+{"kind": "short", "query": "Vở", "expected": ["022134e3-f3c5-4901-93a1-6e34ee7969a3"], "split": "test", "qid": "short-0588"}
+{"kind": "short", "query": "Vở Campus", "expected": ["0e1beb39-39b8-4586-9e91-be754e3c85da"], "split": "dev", "qid": "short-0589"}
+{"kind": "short", "query": "Volk Racing ZE40", "expected": ["02bdd51a-bab2-474f-8390-929e27c98ac1"], "split": "dev", "qid": "short-0590"}
+{"kind": "short", "query": "Vòng tay", "expected": ["0e03ba88-c309-4da0-81ad-4f54be221793"], "split": "dev", "qid": "short-0591"}
+{"kind": "short", "query": "Vòng tay charm pha lê", "expected": ["036a3a02-97c8-4d90-9691-d2fa9abb0bc0"], "split": "dev", "qid": "short-0592"}
+{"kind": "short", "query": "Vợt tennis Yonex EZONE", "expected": ["014a6b71-154f-4b68-bc99-730c3a5cc40f"], "split": "dev", "qid": "short-0593"}
+{"kind": "short", "query": "Voyage", "expected": ["02fd1a50-3184-48c6-a091-62515d7dafbb"], "split": "test", "qid": "short-0594"}
+{"kind": "short", "query": "WA150", "expected": ["0262dbe2-2cc2-4d7a-a195-de15dcc23ae7"], "split": "test", "qid": "short-0595"}
+{"kind": "short", "query": "We Are Glam", "expected": ["0035a0ff-bbde-46c1-bc31-ff0c2a689ed2"], "split": "dev", "qid": "short-0596"}
+{"kind": "short", "query": "Weirwolf", "expected": ["03d198bc-cbf4-43f0-8746-dc1d614febc2"], "split": "test", "qid": "short-0597"}
+{"kind": "short", "query": "Wildpeak M/T", "expected": ["00a1bf00-3d2d-4b6e-bb1a-c184a8e6a19e"], "split": "test", "qid": "short-0598"}
+{"kind": "short", "query": "Wonder Black Rice Cleansing Oil", "expected": ["01a2399b-8dc7-4f8c-a722-ac60f78dab78"], "split": "dev", "qid": "short-0599"}
+{"kind": "short", "query": "WonderSwan", "expected": ["007c14ce-13a5-4c07-ab65-2f23d2fda45f"], "split": "dev", "qid": "short-0600"}
+{"kind": "short", "query": "Wood Sage & Sea Salt", "expected": ["0261031f-88f6-449f-b0dc-48c041f81834"], "split": "test", "qid": "short-0601"}
+{"kind": "short", "query": "Xe nâng", "expected": ["0e01484a-3129-4b83-9c41-d0198dae5cbf"], "split": "dev", "qid": "short-0602"}
+{"kind": "short", "query": "Xe tăng T-54B số hiệu", "expected": ["0292adc7-fe50-4aa5-84d1-f321b4e8f4c5"], "split": "test", "qid": "short-0603"}
+{"kind": "short", "query": "Xe tăng Type", "expected": ["037aa85c-c45f-4e96-b79f-444d264e2536"], "split": "test", "qid": "short-0604"}
+{"kind": "short", "query": "XG-1275 Eagle", "expected": ["00daf07e-a1dd-4cb2-98fe-9624e702a208"], "split": "dev", "qid": "short-0605"}
+{"kind": "short", "query": "Xi măng Fico Tây", "expected": ["00b164a6-e0ab-44e4-bb36-0fd7911e067a"], "split": "test", "qid": "short-0606"}
+{"kind": "short", "query": "XT FD-M770", "expected": ["021fb8b5-e5eb-4e99-b3d3-e9aae7a12903"], "split": "dev", "qid": "short-0607"}
+{"kind": "short", "query": "Xteer Gear Oil", "expected": ["022b2025-a730-48bd-baa4-c3d3d5e424e7"], "split": "test", "qid": "short-0608"}
+{"kind": "short", "query": "XTR FD-M9000", "expected": ["00d3405f-357c-47ae-a2ea-4dafaced08d8"], "split": "test", "qid": "short-0609"}
+{"kind": "short", "query": "Yên", "expected": ["02f0afa3-9371-4f66-b454-5937f0172381"], "split": "dev", "qid": "short-0610"}
+{"kind": "short", "query": "Ysio Max", "expected": ["03b80341-1689-48d6-a80a-cfaf6d1afe2f"], "split": "dev", "qid": "short-0611"}
+{"kind": "short", "query": "Z 24-120mm f/4 S", "expected": ["0453936e-7757-4bde-a029-990a8fb9382a"], "split": "test", "qid": "short-0612"}
+{"kind": "short", "query": "Zeiss OPMI Lumera", "expected": ["030be87b-c80d-47b5-83cf-64354bdda6e7"], "split": "test", "qid": "short-0613"}
+{"kind": "short", "query": "Zinnat", "expected": ["0e18ffc3-f3c1-4b48-95b9-1fc078ae9d05"], "split": "test", "qid": "short-0614"}
+{"kind": "short", "query": "Zocor", "expected": ["0094504d-e8bc-459e-abce-405b1ea65b5a"], "split": "dev", "qid": "short-0615"}
+{"kind": "web_title", "query": "All Clad Copper Core Saute Pan with Lid", "expected": ["01d31bfa-5740-446a-a393-d95ac2d137da"], "split": "test", "qid": "web_title-0616"}
+{"kind": "web_title", "query": "Thuê xe Hyundai Aero Space 45 chỗ", "expected": ["03c8c060-b808-4686-b2ce-7c26c492a358"], "split": "test", "qid": "web_title-0617"}
+{"kind": "web_title", "query": "Tượng phật, mãng xà ngổn ngang trong chùa Chân Long", "expected": ["02a6fb37-e70c-455d-9b1c-9cfbaa60e8c4"], "split": "dev", "qid": "web_title-0618"}
+{"kind": "web_title", "query": "Gears! Gears! Gears! TreadMobiles", "expected": ["010fb7f1-4cf7-403e-b926-4b03eb6c0645"], "split": "test", "qid": "web_title-0619"}
+{"kind": "web_title", "query": "Máy chơi game Nintendo Switch Lite cũ giá rẻ Phiên bản 2020", "expected": ["01c403ac-8846-4344-a40b-16226a9610f3"], "split": "dev", "qid": "web_title-0620"}
+{"kind": "web_title", "query": "Nhà sản xuất, nhà cung cấp, nhà máy sản xuất đá Granite Flamed G654", "expected": ["004525c4-25ec-425c-afdd-1dd94cf37d7a"], "split": "dev", "qid": "web_title-0621"}
+{"kind": "web_title", "query": "Sàn gỗ Janmi W12", "expected": ["0dc89b46-bc70-4ce9-876a-f3582bdd365e"], "split": "dev", "qid": "web_title-0622"}
+{"kind": "web_title", "query": "Áo sơ mi nam jean basic cao cấp chính hãng HIDDLE H10-S8", "expected": ["03d74322-3466-4971-8020-92bd53a1bbdc"], "split": "dev", "qid": "web_title-0623"}
+{"kind": "web_title", "query": "Agituss siro/thuốc ho/thuốc tân dược/nhathuocyentrang.com", "expected": ["02c05633-e534-4644-92cd-3d641f5bf578"], "split": "test", "qid": "web_title-0624"}
+{"kind": "web_title", "query": "Chảo gang Staub Grill pan Brown 26cm nhập khẩu Pháp", "expected": ["00e4cace-ce76-4e1a-b75f-b9d008eba5aa"], "split": "test", "qid": "web_title-0625"}
+{"kind": "web_title", "query": "Ngũ hổ, tín ngưỡng thờ Mẫu trong tranh Hàng Trống", "expected": ["04403f2e-064d-4ee7-a73a-0a14e78f4443"], "split": "test", "qid": "web_title-0626"}
+{"kind": "web_title", "query": "Máy đo nồng độ khí SA-Multi 4", "expected": ["02b71f77-12a7-47f4-ba9e-09b15996f518"], "split": "test", "qid": "web_title-0627"}
+{"kind": "web_title", "query": "Đèn Thả Pha Lê Tiệp Khắc Bohemia Crystal", "expected": ["0e292bc8-4f88-4b9c-8a3a-1d2fe2440b53"], "split": "test", "qid": "web_title-0628"}
+{"kind": "web_title", "query": "Cơ cấu tổ chức của Bộ Xây dựng từ 1/3/2025", "expected": ["039f9b43-c096-4b5e-b620-1b12365ed0ed"], "split": "test", "qid": "web_title-0629"}
+{"kind": "web_title", "query": "Specialized Roval Rapide CL II", "expected": ["0e02c16d-cd4a-4e8c-806a-a6c067ef440d"], "split": "dev", "qid": "web_title-0630"}
+{"kind": "web_title", "query": "Đại lý máy phát điện Honda tại Hà Nội", "expected": ["02342a37-0d1b-4232-a7ed-c17fe4626636"], "split": "test", "qid": "web_title-0631"}
+{"kind": "web_title", "query": "Edu Science M640x Microscope", "expected": ["025fba28-ecda-4da9-8470-afa01a2347ff"], "split": "dev", "qid": "web_title-0632"}
+{"kind": "web_title", "query": "Phân biệt tàu lưới vây và tàu mành chụp", "expected": ["0318f5cf-2c89-4fd7-8688-ed2661c25a4d"], "split": "test", "qid": "web_title-0633"}
+{"kind": "web_title", "query": "Tôn Lạnh 5 sóng", "expected": ["0103a3ee-b28a-490e-bc6f-02df34f60833"], "split": "dev", "qid": "web_title-0634"}
+{"kind": "web_title", "query": "Kefir", "expected": ["01004e8f-3d58-474d-bd80-16cd458645ed"], "split": "test", "qid": "web_title-0635"}
+{"kind": "web_title", "query": "TRP G-Spec Trail SL Disc Brake", "expected": ["00152e73-97ed-4cb7-ae63-a7d111438570"], "split": "dev", "qid": "web_title-0636"}
+{"kind": "web_title", "query": "Chỉ Dafilon 4.0 ( Hộp 36 tép )", "expected": ["00ee54d3-a369-4cd9-9c64-a53250c24c78"], "split": "dev", "qid": "web_title-0637"}
+{"kind": "web_title", "query": "Mua La Roche-Posay Unisex Chính Hãng Cao Cấp", "expected": ["036b65c0-86e0-434a-aad6-06a6e47d8792"], "split": "dev", "qid": "web_title-0638"}
+{"kind": "web_title", "query": "Quần Legging Capri Relay", "expected": ["0242a906-345b-4225-b004-cc82a59c889d"], "split": "dev", "qid": "web_title-0639"}
+{"kind": "web_title", "query": "Gạch vân đá Marble", "expected": ["0196c2f4-3cbf-4aa3-b9a6-a8dc3b40dae7"], "split": "dev", "qid": "web_title-0640"}
+{"kind": "web_title", "query": "Bật mí tác dụng không ngờ của Bạch biển đậu trong Đông Y", "expected": ["01514c02-9ea7-4aea-91d3-ea1a5aee49a0"], "split": "test", "qid": "web_title-0641"}
+{"kind": "web_title", "query": "Hộp Nhựa 10 Cây Bút Chì Màu Thường (color pencils)-Colormate", "expected": ["02c14d4f-ed40-4afd-ac16-06085006faf7"], "split": "test", "qid": "web_title-0642"}
+{"kind": "web_title", "query": "Kenalog) Triamcinolone Acetonide Topical Cream 0.1%-30 gram tube NDC#", "expected": ["00d5c1d2-e9b1-4633-b112-e76056fb3856"], "split": "dev", "qid": "web_title-0643"}
+{"kind": "web_title", "query": "Ổ khóa số", "expected": ["03e3a773-5d6c-4e3d-b7f6-b21f3f9da575"], "split": "dev", "qid": "web_title-0644"}
+{"kind": "web_title", "query": "Đèn LED dây chiếu sáng LD01 Rạng Đông", "expected": ["00a26b85-88e4-4450-af58-547624fd8981"], "split": "test", "qid": "web_title-0645"}
+{"kind": "web_title", "query": "Xe GMC Savana: Giá bán cập nhật mới nhất và thông tin chi tiết", "expected": ["03cfddc2-abb2-40dc-9119-bbf34467b54b"], "split": "test", "qid": "web_title-0646"}
+{"kind": "web_title", "query": "Fila Essential Duffel Navy Blue sports bag", "expected": ["009dd407-9f6c-4e5f-9ca1-1339ac347001"], "split": "test", "qid": "web_title-0647"}
+{"kind": "web_title", "query": "MÂM MARCHESINI DÀNH CHO CBR 1000RR-R", "expected": ["048832d1-5cfc-4993-9981-e0c9a829fd51"], "split": "dev", "qid": "web_title-0648"}
+{"kind": "web_title", "query": "Cân thông minh Xiaomi Mi Body Fat Scale giá rẻ, chính hãng", "expected": ["03d2b617-aab5-450c-ae73-33d3b6d2bf5a"], "split": "dev", "qid": "web_title-0649"}
+{"kind": "web_title", "query": "Mazda 929 II 2.0 Specs, Performance, Comparisons", "expected": ["03a2250b-5ba6-4187-9a1b-410aa8ec1049"], "split": "test", "qid": "web_title-0650"}
+{"kind": "web_title", "query": "Thuốc Aucardil 12.5mg điều trị tăng huyết áp Agimexpharm 50 viên", "expected": ["0471c56a-cbd6-4049-ac2d-889df3fc7bbb"], "split": "test", "qid": "web_title-0651"}
+{"kind": "web_title", "query": "MÁY ỦI KOMATSU D53E-16", "expected": ["02326130-8ca6-4a56-9c54-cfda335b761c"], "split": "test", "qid": "web_title-0652"}
+{"kind": "web_title", "query": "Thuốc Amiodarone: Công dụng, cách dùng và những lưu ý", "expected": ["0283cb07-45c2-4fc1-a782-027fff3e5395"], "split": "dev", "qid": "web_title-0653"}
+{"kind": "web_title", "query": "Pháo giấy sinh nhật giật dây Popper Party", "expected": ["0dacaafb-63b8-4c6e-834f-501f69c88cfe"], "split": "dev", "qid": "web_title-0654"}
+{"kind": "web_title", "query": "Hoá học 10 Kết nối tri thức", "expected": ["03d852b1-620b-42fc-8184-0710a2119d69"], "split": "test", "qid": "web_title-0655"}
+{"kind": "web_title", "query": "Thuốc tiêm Atropin Sulfat HDPharma điều trị cơn co thắt phế quản", "expected": ["03998a7e-69c2-452c-b652-3d898f3fb9e4"], "split": "dev", "qid": "web_title-0656"}
+{"kind": "web_title", "query": "Dầu gội dành cho tóc nhuộm tẩy Diane Miracle You Shine Shine", "expected": ["03cfca0f-5260-4581-9099-3d2671c3e971"], "split": "test", "qid": "web_title-0657"}
+{"kind": "web_title", "query": "Thảm Trải Sàn", "expected": ["02e7e750-6bc0-429d-8377-475e4082f616"], "split": "test", "qid": "web_title-0658"}
+{"kind": "web_title", "query": "Tượng Quan Trần Triều 2", "expected": ["03567ed9-1280-4f3d-aea4-2287cffd51de"], "split": "test", "qid": "web_title-0659"}
+{"kind": "web_title", "query": "Goodr Going to Valhalla…Witness OG Sunglasses", "expected": ["034ebfdd-f463-4d2a-b3fd-736b025b1c8f"], "split": "dev", "qid": "web_title-0660"}
+{"kind": "web_title", "query": "Lựa chọn máy xét nghiệm HbA1c cho phòng khám đa khoa", "expected": ["00e211d6-8142-4c93-a7c9-bfa3ae9e80cc"], "split": "dev", "qid": "web_title-0661"}
+{"kind": "web_title", "query": "Hướng dẫn cách đổi màu bàn phím laptop Dell nhanh chóng, dễ làm", "expected": ["01ed5a47-49ce-40da-a8f8-fd6ef89d2095"], "split": "dev", "qid": "web_title-0662"}
+{"kind": "web_title", "query": "Số phận đặc biệt của chiếc xe tăng 390", "expected": ["0292adc7-fe50-4aa5-84d1-f321b4e8f4c5"], "split": "test", "qid": "web_title-0663"}
+{"kind": "web_title", "query": "15 Kinh Nguyện Thánh Brigitta", "expected": ["0db1bfc1-8ab7-4bcc-9e8c-213fe52e35be"], "split": "test", "qid": "web_title-0664"}
+{"kind": "web_title", "query": "Củ sạc nhanh Xiaomi 33w", "expected": ["001ed29f-7371-4a0e-afe3-974f1aa0f8fc"], "split": "dev", "qid": "web_title-0665"}
+{"kind": "web_title", "query": "Uniqlo Ultra Stretch Skinny Fit Color Jeans ptaufiqphotography.com", "expected": ["01282704-ca83-40ec-be6f-f0b1357aee99"], "split": "dev", "qid": "web_title-0666"}
+{"kind": "web_title", "query": "TOP 9 loại chuông xe đạp được ưa chuộng nhất hiện nay", "expected": ["01747e1b-aaca-4563-a033-cc80d5fb5cdf"], "split": "dev", "qid": "web_title-0667"}
+{"kind": "web_title", "query": "The Lorenzo Linen & Cotton Blazer Light Sage", "expected": ["01588290-2046-40f3-92d8-80d5d18aa81d"], "split": "test", "qid": "web_title-0668"}
+{"kind": "web_title", "query": "Halo BassiNest Connected Swivel Sleeper 3.0", "expected": ["0dfaeccd-accf-4f2d-abd0-2e89ef0a2cbb"], "split": "dev", "qid": "web_title-0669"}
+{"kind": "web_title", "query": "Công dụng thuốc Rabesta-20", "expected": ["0e0f2f8f-9524-4008-adfb-1cd70ad87e13"], "split": "test", "qid": "web_title-0670"}
+{"kind": "web_title", "query": "Hydrocortison", "expected": ["0db75382-84c7-4441-b771-e41514d6edb1"], "split": "test", "qid": "web_title-0671"}
+{"kind": "web_title", "query": "Tôm Sốt Cà Chua Thơm Ngon Dễ Làm", "expected": ["01404f1a-0ade-4662-a88c-e38f68d6daf6"], "split": "dev", "qid": "web_title-0672"}
+{"kind": "web_title", "query": "Trà Vinh: Chùa Âng", "expected": ["02d9db68-862f-430a-abec-6681b31cb5c0"], "split": "dev", "qid": "web_title-0673"}
+{"kind": "web_title", "query": "Mua Sodalite Giá Tốt, Giao Nhanh", "expected": ["04524f87-62f7-4fa0-8156-3b3fc5f49ca4"], "split": "test", "qid": "web_title-0674"}
+{"kind": "web_title", "query": "Sửa wave runner 650 Yamaha đời 1992", "expected": ["0170cf7b-cd8e-4446-a4ac-9ecd93b0b8c4"], "split": "test", "qid": "web_title-0675"}
+{"kind": "web_title", "query": "Khuôn xôi trung 5753", "expected": ["023aa090-273b-4d49-8d25-153528d2f21b"], "split": "dev", "qid": "web_title-0676"}
+{"kind": "web_title", "query": "Julius-K9, IDC Color & Gray Belt Harness, Size: M / 0, Neon-Gray", "expected": ["02c3a415-b4e2-4799-8a1a-a5d3e683c2a8"], "split": "test", "qid": "web_title-0677"}
+{"kind": "web_title", "query": "BAO DA ĐỰNG SÚNG NGẮN BĐS-AR-BR-OR", "expected": ["031746dd-d519-4176-b96d-13fa6b830e43"], "split": "test", "qid": "web_title-0678"}
+{"kind": "web_title", "query": "e.l.f. Flawless Satin Foundation", "expected": ["02a770c4-4f54-49df-8fed-c81f2d9d1588"], "split": "test", "qid": "web_title-0679"}
+{"kind": "web_title", "query": "Mực hộp in phun Epson T6641 Black T664100", "expected": ["0067c1f1-6cec-45b5-be7d-0fe257fe3c3e"], "split": "test", "qid": "web_title-0680"}
+{"kind": "web_title", "query": "Máy đo loãng xương toàn thân DEXXUM T Quantum", "expected": ["013a92f0-82f5-484c-be4c-dc8a28271f24"], "split": "dev", "qid": "web_title-0681"}
+{"kind": "web_title", "query": "Frisco Wire Dog & Small Pet Exercise Pen with Step-Through Door", "expected": ["0048b178-e915-4251-a119-40052e5f5a42"], "split": "test", "qid": "web_title-0682"}
+{"kind": "web_title", "query": "Sở Khoa học và Công nghệ thành phố Cần Thơ", "expected": ["01884500-3cef-4e3a-b7ad-e478bb5b838d"], "split": "test", "qid": "web_title-0683"}
+{"kind": "web_title", "query": "Pneu 225/60R17 Dunlop Grandtrek PT3 Reinforced 103H", "expected": ["00e45919-3104-4e2a-b61e-57b637d52ac3"], "split": "dev", "qid": "web_title-0684"}
+{"kind": "web_title", "query": "Karl Storz 8401KXC C-MAC Video Laryngoscope MAC #2", "expected": ["00253e6f-226f-4cc9-aabb-b041a4788ce8"], "split": "test", "qid": "web_title-0685"}
+{"kind": "web_title", "query": "Ravensburger Under the Sea Wooden 500 pc Puzzle", "expected": ["00a0dede-49fa-4812-a65c-84a3b3b913a9"], "split": "test", "qid": "web_title-0686"}
+{"kind": "web_title", "query": "Máy scan Epson DS-310 (Sheet-fed, 2 mặt, USB, 25ppm, ADF 20 tờ)", "expected": ["005ede55-93b6-4d3d-84de-f5d53ad52462"], "split": "test", "qid": "web_title-0687"}
+{"kind": "web_title", "query": "Testing a Crayola Crayon Melter", "expected": ["0176486f-9492-4368-806d-de3c3d114776"], "split": "dev", "qid": "web_title-0688"}
+{"kind": "web_title", "query": "Xưởng Khăn Rằn Nam Bộ", "expected": ["03a7f353-c4ed-483c-ac35-bd6508cb9dac"], "split": "test", "qid": "web_title-0689"}
+{"kind": "web_title", "query": "Đền Bà Chúa Kho đông nghịt khách đến vay mượn", "expected": ["0247dab7-e362-41da-8e19-f08ce872fa7d"], "split": "test", "qid": "web_title-0690"}
+{"kind": "web_title", "query": "Shimano RD-M7100 SLX 12-Speed Rear Derailleur", "expected": ["025f5127-ec41-42be-bc87-ca97e166ba80"], "split": "dev", "qid": "web_title-0691"}
+{"kind": "web_title", "query": "Tiền xu phong thủy", "expected": ["010afc9a-57b7-438f-833b-9e036035e467"], "split": "test", "qid": "web_title-0692"}
+{"kind": "web_title", "query": "Cách làm cá chép kho cay thơm ngon đậm đà, cực đưa cơm", "expected": ["03d3cf9b-05a8-4571-91e3-c9f3a207d887"], "split": "dev", "qid": "web_title-0693"}
+{"kind": "web_title", "query": "Chủ tịch nước khiển trâu cày trong lễ Tịch điền", "expected": ["004c9adc-b6f6-41b6-a316-51f94dfb7c6a"], "split": "test", "qid": "web_title-0694"}
+{"kind": "web_title", "query": "GRABER Custom Made-to-Measure Blinds and Shades at Wholesale Prices", "expected": ["02a51e25-016c-4480-8c45-79f867135655"], "split": "test", "qid": "web_title-0695"}
+{"kind": "web_title", "query": "Ngói phẳng Nakamura NP09", "expected": ["020c71eb-864f-4437-9879-dbb8dcc0bba4"], "split": "dev", "qid": "web_title-0696"}
+{"kind": "web_title", "query": "Palette pha màu Phẳng Bằng Gỗ", "expected": ["018a3ecc-d372-49cf-82ac-517280a4c64c"], "split": "dev", "qid": "web_title-0697"}
+{"kind": "web_title", "query": "POCO F2 Pro: tin tức, hình ảnh, video, bình luận mới nhất", "expected": ["019c1ec9-6e69-4cf1-a876-fc61f94fb437"], "split": "test", "qid": "web_title-0698"}
+{"kind": "web_title", "query": "Fulcrum Racing Zero, Ruote da Corsa Unisex Adulto, Dark, 28", "expected": ["022b8bd0-e34a-4c86-a123-ca07ec672af4"], "split": "test", "qid": "web_title-0699"}
+{"kind": "web_title", "query": "Dell Alienware X17 R2", "expected": ["0386dc28-027e-4368-b6f2-3d02b8b163fc"], "split": "dev", "qid": "web_title-0700"}
+{"kind": "web_title", "query": "PARACETAMOL TW3", "expected": ["0479121d-2e7d-47c3-b08d-67ff74c24183"], "split": "dev", "qid": "web_title-0701"}
+{"kind": "web_title", "query": "Liên nhục (Hạt sen): Vị thuốc quý giúp ngủ ngon, an thần", "expected": ["043cb3c5-29c5-4fb8-9100-5b40518f4589"], "split": "dev", "qid": "web_title-0702"}
+{"kind": "web_title", "query": "Cao lỏng Traluvi giúp trẻ ăn ngon, ngừa mồ hôi trộm chai 100ml", "expected": ["04750c31-a4ee-4d69-88bf-5e5f83ccd5f1"], "split": "test", "qid": "web_title-0703"}
+{"kind": "web_title", "query": "Hạt chó Ganador Premium Adult Lamb & Rice (cừu gạo cam) 1.5Kg", "expected": ["02ba304e-4844-4035-8918-3a2254e4a4d4"], "split": "test", "qid": "web_title-0704"}
+{"kind": "web_title", "query": "Mil-Spec M5 Rifle RAS for M16A4 with full rail covers", "expected": ["03e87603-3a25-4e7d-aa7f-3a320a94a932"], "split": "dev", "qid": "web_title-0705"}
+{"kind": "web_title", "query": "Maxxis Maxxcross IT M-7304 for Surron X", "expected": ["0df7316e-f232-4e4b-8a8b-d535e1b1fd79"], "split": "dev", "qid": "web_title-0706"}
+{"kind": "web_title", "query": "Toán 11, tập một", "expected": ["02a6ff4b-7aff-4798-b9c6-0f2045114ffc"], "split": "dev", "qid": "web_title-0707"}
+{"kind": "web_title", "query": "Chi cả chục triệu đồng tìm món... bánh mướt xứ Nghệ", "expected": ["044129d1-311c-4a59-843a-7e9e149ca1e3"], "split": "dev", "qid": "web_title-0708"}
+{"kind": "web_title", "query": "Giỏ tre đựng quà Tết, giỏ xách mây tre giá rẻ", "expected": ["029f36ae-5886-4b4a-9ff7-a65877449e6c"], "split": "dev", "qid": "web_title-0709"}
+{"kind": "web_title", "query": "Tượng Thờ Mẫu Gỗ Mít Sơn Son Thếp Vàng", "expected": ["03b4a730-a67a-49c1-b56d-c51f70d0ee12"], "split": "test", "qid": "web_title-0710"}
+{"kind": "web_title", "query": "Vợt Tennis Yonex EZONE 100L (2025) 285gr", "expected": ["014a6b71-154f-4b68-bc99-730c3a5cc40f"], "split": "dev", "qid": "web_title-0711"}
+{"kind": "web_title", "query": "Mô hình chăn nuôi gà: thả vườn, công nghiệp, hữu cơ", "expected": ["0290b798-6166-4dfe-8b09-40d22e350c5a"], "split": "dev", "qid": "web_title-0712"}
+{"kind": "web_title", "query": "DIFLUCAN (Fluconazole 50mg) x 3 CAPSULES.", "expected": ["0207c625-acce-41c5-94a3-6f6625232aec"], "split": "test", "qid": "web_title-0713"}
+{"kind": "web_title", "query": "Dao Tojiro Pro Nickel Damascus Santoku 170 (F-1036)", "expected": ["04702901-28cb-4720-86da-7a162029fce3"], "split": "test", "qid": "web_title-0714"}
+{"kind": "web_title", "query": "Viên uống bổ sung acid folic DHC (30 viên)", "expected": ["00fc00c9-6423-40c1-b6c2-d4ff27cfa533"], "split": "test", "qid": "web_title-0715"}
+{"kind": "web_title", "query": "Thuốc Lenalidomide Capsules 25mg Hetero điều trị ung thư (3 vỉ x 10 viên)", "expected": ["00e44a17-dcca-4e11-b5a2-a545338d885e"], "split": "test", "qid": "web_title-0716"}
+{"kind": "web_title", "query": "Áo phao bơi trẻ em Bbluv Naj 1 đến 3 tuổi", "expected": ["0233ab51-bda2-4107-b820-25dc52b217a9"], "split": "test", "qid": "web_title-0717"}
+{"kind": "web_title", "query": "Thuốc Magnesi-B6 DHG có tác dụng bổ sung magnesi và vitamin B6", "expected": ["038dd47b-57d7-4c2d-8f74-0d1ea50ea177"], "split": "test", "qid": "web_title-0718"}
+{"kind": "web_title", "query": "Áo khoác nam bomber kaki 2 lớp Khakicore GWCJ503", "expected": ["00e57e95-18cd-4748-b3b4-775aace584cf"], "split": "test", "qid": "web_title-0719"}
+{"kind": "web_title", "query": "Mua Vsmart Aris Pro Chính Hãng", "expected": ["034f61ff-1647-4411-8278-9547e2c38655"], "split": "dev", "qid": "web_title-0720"}
+{"kind": "web_title", "query": "Dexamethasone Sodium Phosphate 10 mg / mL", "expected": ["03b1d903-e3fa-4e6e-a0fe-48068c7fc469"], "split": "test", "qid": "web_title-0721"}
+{"kind": "web_title", "query": "Bellroy", "expected": ["03e7040c-0fab-48c0-af61-fd4c1bbf0257"], "split": "dev", "qid": "web_title-0722"}
+{"kind": "web_title", "query": "Tràng hạt gỗ sưa 12mm, 108 hạt, tràng hạt niệm phật", "expected": ["0252480d-0f8e-40a4-ae39-3f129c8d180f"], "split": "test", "qid": "web_title-0723"}
+{"kind": "web_title", "query": "full-race-manifold-2jzgte-supra-t4-gen-2-pro-street-dual-gate-47.jpg", "expected": ["0de4be4c-16db-4d36-bf3a-4c40dc7f6ad4"], "split": "dev", "qid": "web_title-0724"}
+{"kind": "web_title", "query": "COMETIC", "expected": ["0dba581c-a1bf-4c72-986e-6352e609b86d"], "split": "test", "qid": "web_title-0725"}
+{"kind": "web_title", "query": "VINFAST MOTIO Vinfast Motio", "expected": ["0e1c645f-0973-4bd7-90e2-4f8d5ee66396"], "split": "test", "qid": "web_title-0726"}
+{"kind": "web_title", "query": "Tập giấy in ảnh 2 mặt bóng (khổ A3)", "expected": ["00b32b51-1c5a-45d6-93f1-8fa551a00510"], "split": "test", "qid": "web_title-0727"}
+{"kind": "web_title", "query": "Thuốc Montiget 10mg Getz điều trị suyễn, viêm mũi dị ứng (14 vên)", "expected": ["005d315c-d195-49b9-8961-2e13d8f31ca7"], "split": "test", "qid": "web_title-0728"}
+{"kind": "web_title", "query": "Nệm Cuộn Topper Flow", "expected": ["0da7ff9c-21dd-4d55-be3f-3d2b8b68cf3d"], "split": "test", "qid": "web_title-0729"}
+{"kind": "web_title", "query": "Petkit Fresh Element Solo Automatic Feeder", "expected": ["045ab190-32d9-494b-b9ba-02cfa02317d8"], "split": "dev", "qid": "web_title-0730"}
+{"kind": "web_title", "query": "Đập hộp Galaxy Tab 2 10.1 chính hãng tại Việt Nam", "expected": ["00fafc05-50f8-4732-ab15-7d5c9def6823"], "split": "dev", "qid": "web_title-0731"}
+{"kind": "web_title", "query": "Cách pha trà sữa caramel tại nhà thơm ngon và siêu đơn giản", "expected": ["042cd241-f853-47d7-bc72-c17c928fe681"], "split": "dev", "qid": "web_title-0732"}
+{"kind": "web_title", "query": "Bổ não Ginkgo Biloba Nature's Way 2000mg của Úc 120 viên", "expected": ["02ca1302-39c3-4ea6-875b-69c77ced03c0"], "split": "dev", "qid": "web_title-0733"}
+{"kind": "web_title", "query": "CLUE", "expected": ["02eb0e66-124c-4c1f-a562-85c4b981f066"], "split": "test", "qid": "web_title-0734"}
+{"kind": "web_title", "query": "Giúp tớ tìm con Tigger bông gốc với", "expected": ["022dc949-440f-4c5c-be8e-1d57c65234ea"], "split": "test", "qid": "web_title-0735"}
+{"kind": "web_title", "query": "Hộp nối đôi Panasonic FN102RW", "expected": ["0020bf96-3361-44d1-8078-be076116dd0e"], "split": "test", "qid": "web_title-0736"}
+{"kind": "web_title", "query": "Cách pha trà sữa ô long truyền thống thơm ngon, dễ làm tại nhà", "expected": ["0e03d871-47d0-4453-9c6d-6899cdf5b591"], "split": "test", "qid": "web_title-0737"}
+{"kind": "web_title", "query": "Viên sủi Effer-Paralmax 500mg hộp 20 viên giúp giảm đau, hạ sốt", "expected": ["03755dfe-f3c4-45b9-9406-d2934cb1c152"], "split": "dev", "qid": "web_title-0738"}
+{"kind": "web_title", "query": "Hướng dẫn làm lẩu gà măng cay chuẩn vị, đậm đà tại nhà", "expected": ["01c2e532-429f-4112-87b3-3eab74f6f8f4"], "split": "dev", "qid": "web_title-0739"}
+{"kind": "web_title", "query": "Shimano SLX fd-m675-b", "expected": ["043dc82d-4802-4ff1-8ea3-ab05243bb13f"], "split": "dev", "qid": "web_title-0740"}
+{"kind": "web_title", "query": "Chanel 23A star pearl necklace", "expected": ["0dab841b-915e-4da2-af84-8f3052fca2dc"], "split": "dev", "qid": "web_title-0741"}
+{"kind": "web_title", "query": "Mua Jinhao Century Giá Tốt, Giao Nhanh", "expected": ["01b344cc-de5b-4ef9-81f0-d9693a82e0ac"], "split": "dev", "qid": "web_title-0742"}
+{"kind": "web_title", "query": "HYUNDAI HD270 BEN 3 CHÂN THÙNG 10 KHỐI", "expected": ["025cdbfb-43cc-48ee-b9c5-3b4e6155f206"], "split": "test", "qid": "web_title-0743"}
+{"kind": "web_title", "query": "FlexiSpot E5 standing desk review: A great choice for working at home", "expected": ["023e1ca6-dadc-416e-8f5d-4163589c8c41"], "split": "dev", "qid": "web_title-0744"}
+{"kind": "web_title", "query": "Đèn LED highbay UFO 150W Philips Driver", "expected": ["0dacf2f8-1b1a-48ca-8d51-901461ee0afe"], "split": "test", "qid": "web_title-0745"}
+{"kind": "web_title", "query": "Gốm Phù Lãng... \"xuất ngoại\"", "expected": ["038e2045-2a0f-4c88-bda5-03f78b3b6b5b"], "split": "test", "qid": "web_title-0746"}
+{"kind": "web_title", "query": "MSI Modern AM271P 11M review: A surprisingly great all-in-one", "expected": ["0361f5b4-5486-4ba6-85f1-3b7b94b7394c"], "split": "dev", "qid": "web_title-0747"}
+{"kind": "web_title", "query": "Chison ECO-6Vet", "expected": ["00a14d44-f165-40ea-b7c0-1b4527827b03"], "split": "dev", "qid": "web_title-0748"}
+{"kind": "web_title", "query": "PHÂN NƯỚC VI LƯỢNG SEACHEM FLOURISH TRACE (250ml)", "expected": ["03817b14-5d96-4595-899f-5720b84814b0"], "split": "test", "qid": "web_title-0749"}
+{"kind": "web_title", "query": "Bàn chải sắt sợi thép tay cầm gỗ 3*15 hàng Kendo-31501", "expected": ["034bd722-49a1-45b9-90d5-b23b72494ff4"], "split": "dev", "qid": "web_title-0750"}
+{"kind": "web_title", "query": "Luke Shirt Dark Chambray", "expected": ["02513c03-a69f-47af-baea-e555667e478b"], "split": "test", "qid": "web_title-0751"}
+{"kind": "web_title", "query": "Rabeact Dsr Gastrointestinal Capsule in Jaipur at ₹ 200 / Pack by ...", "expected": ["01c5c743-d2fb-477c-b673-2ec1c4c41cd3"], "split": "dev", "qid": "web_title-0752"}
+{"kind": "web_title", "query": "Cáp điện thoại 1 đôi 2 lõi 1x2x0.5 ngoài trời", "expected": ["020367f5-4a00-4635-91a9-2edd5b506a76"], "split": "dev", "qid": "web_title-0753"}
+{"kind": "web_title", "query": "Royal Aqua", "expected": ["01e68900-e9a9-425c-8caa-cd857eb46903"], "split": "test", "qid": "web_title-0754"}
+{"kind": "web_title", "query": "Tượng Tế Công Gỗ Lũa Trắc Gia Lai 28x42x23cm", "expected": ["02e1c1b3-e46b-44c8-bbd6-31799061fa17"], "split": "test", "qid": "web_title-0755"}
+{"kind": "web_title", "query": "Hoa hồng xanh pha lê cao cấp ( Various )", "expected": ["02078c2c-f25c-40c5-ab83-32314e6d3aaf"], "split": "test", "qid": "web_title-0756"}
+{"kind": "web_title", "query": "Vòi sen tắm âm tường, âm trần TOTO chính hãng, giá tốt 2026", "expected": ["046fd20f-e2f7-4c77-a09d-e5de1cb3b86a"], "split": "test", "qid": "web_title-0757"}
+{"kind": "web_title", "query": "Continental PremiumContact 6 Safe summer tire from Oulu. » Teräs-rengas Oy", "expected": ["0271b58a-6251-451c-b7bb-b73612603074"], "split": "test", "qid": "web_title-0758"}
+{"kind": "web_title", "query": "Valeo Silencio Performance 574154", "expected": ["022c2b59-327a-4952-9a9b-54bf98d7bbae"], "split": "test", "qid": "web_title-0759"}
+{"kind": "web_title", "query": "Xi măng FICO Tây Ninh: Chất lượng vượt trội bởi công nghệ Đức", "expected": ["00b164a6-e0ab-44e4-bb36-0fd7911e067a"], "split": "test", "qid": "web_title-0760"}
+{"kind": "web_title", "query": "15 năm sản xuất bánh xe cần cẩu", "expected": ["00163e4c-62c7-4f9e-96c1-f33ca6829f1a"], "split": "test", "qid": "web_title-0761"}
+{"kind": "web_title", "query": "Thuốc bổ cho phụ nữ mang thai PM Procare hộp 30 viên", "expected": ["041fc341-a68e-4350-b610-6ddc0fc13498"], "split": "dev", "qid": "web_title-0762"}
+{"kind": "web_title", "query": "panaracer gravelking mud 700x33c kevlar", "expected": ["01346b3f-3f18-4512-918b-e8d94ef3ac18"], "split": "dev", "qid": "web_title-0763"}
+{"kind": "web_title", "query": "Cách làm chả giò thịt heo cà rốt giòn ngon, đơn giản tại nhà", "expected": ["0dbc2633-0aa7-428f-a09e-15773b20d278"], "split": "test", "qid": "web_title-0764"}
+{"kind": "web_title", "query": "Ashley Furniture Trinell", "expected": ["042b6184-fbf7-42a5-a51f-04e00a562abc"], "split": "dev", "qid": "web_title-0765"}
+{"kind": "web_title", "query": "Mực in Samsung MLT-D101S/SEE Black Toner Cartridge", "expected": ["01f2396c-88a9-412d-9cf9-4196195a6e80"], "split": "test", "qid": "web_title-0766"}
+{"kind": "web_title", "query": "STANDARD Q COVID-19 Ag Home Test Kit", "expected": ["013cb3b2-f378-4d3e-9a68-1c89a58297b7"], "split": "test", "qid": "web_title-0767"}
+{"kind": "web_title", "query": "Samyang Foods Co., Ltd Spicy Carbonara Ramen Same-Day Delivery or Pickup", "expected": ["047c6ee2-98aa-4654-bf0c-b4c752b51387"], "split": "dev", "qid": "web_title-0768"}
+{"kind": "web_title", "query": "Nokia Asha 210 SIM-Free Mobile Phone", "expected": ["021dae0e-a547-42d8-ac0f-d83a45aca7e9"], "split": "test", "qid": "web_title-0769"}
+{"kind": "web_title", "query": "Đá Rối Đen Ốp Tường Rào", "expected": ["0dfc1080-ba3e-431e-8a1e-d2aff13e663b"], "split": "dev", "qid": "web_title-0770"}
+{"kind": "web_title", "query": "Đồng hồ Jaeger-LeCoultre Atmos Collection Infinite Q540531J", "expected": ["04051b36-2e9d-4e06-97ee-68e651e1e4e7"], "split": "dev", "qid": "web_title-0771"}
+{"kind": "web_title", "query": "Review lọc nhớt (lọc dầu) Bosch", "expected": ["03923e3d-3818-4f60-9307-93bed749430d"], "split": "test", "qid": "web_title-0772"}
+{"kind": "web_title", "query": "NHỮNG ĐIỀU ÍT BIẾT VỀ CÂY LÁ GIANG", "expected": ["02475ed9-7ed3-48ab-ac51-77f576175656"], "split": "test", "qid": "web_title-0773"}
+{"kind": "web_title", "query": "Địa chỉ thỉnh tượng Phật Thích Ca đẹp, uy tín nhất", "expected": ["006c2a83-31c2-4c2f-a8f2-634385307dbd"], "split": "test", "qid": "web_title-0774"}
+{"kind": "web_title", "query": "Sascha Cropped Trouser", "expected": ["01198394-d338-46bf-943e-922eaf523daf"], "split": "dev", "qid": "web_title-0775"}
+{"kind": "web_title", "query": "Thuốc trừ nấm bệnh Ridomil Gold 68WG gói 100 gram nhập khẩu- chuyên dụng.", "expected": ["0304267f-1592-4867-bced-7df76bce88eb"], "split": "dev", "qid": "web_title-0776"}
+{"kind": "web_title", "query": "Thuốc Becolugel-S cải thiện triệu chứng rối loạn tiêu hóa", "expected": ["01983fd4-b30c-4022-8624-922635910692"], "split": "test", "qid": "web_title-0777"}
+{"kind": "web_title", "query": "Toyota Hiace 2021- xe khách giá tiền tỉ bán chậm tại Việt Nam", "expected": ["0190592c-4c01-4c63-9604-18948e4f342a"], "split": "dev", "qid": "web_title-0778"}
+{"kind": "web_title", "query": "Lansinoh Breastmilk Storage Bags 180ml, Pack of 25", "expected": ["00b839e4-3fa8-4545-b309-05a1adb46956"], "split": "test", "qid": "web_title-0779"}
+{"kind": "web_title", "query": "Topeak Omni Ridecase W/Mount", "expected": ["04357697-ff81-402d-afd7-0aefefca97aa"], "split": "dev", "qid": "web_title-0780"}
+{"kind": "web_title", "query": "Sanex Skin Therapy Body Wash Anti-Dryness 450ml", "expected": ["00638840-311a-4247-9c3c-3e2750d120d7"], "split": "test", "qid": "web_title-0781"}
+{"kind": "web_title", "query": "Nike Pegasus 40 Men's Road Running Shoes. Nike ID", "expected": ["00992624-e408-4024-9ef7-a5c57268cf41"], "split": "test", "qid": "web_title-0782"}
+{"kind": "web_title", "query": "Vòng bi SKF 6204", "expected": ["0379e904-2ae2-44b1-9770-0a199854206c"], "split": "test", "qid": "web_title-0783"}
+{"kind": "web_title", "query": "Corima Aero+ MCC wheelset review", "expected": ["0071f315-0684-4f57-b76b-eb2522552200"], "split": "dev", "qid": "web_title-0784"}
+{"kind": "web_title", "query": "Chuột không dây MX Master 3s", "expected": ["0deb67c6-6be5-4541-b4ac-d1d6e47e8612"], "split": "dev", "qid": "web_title-0785"}
+{"kind": "web_title", "query": "Tôi đã làm chiếc Wonderswan của Asuka!", "expected": ["007c14ce-13a5-4c07-ab65-2f23d2fda45f"], "split": "dev", "qid": "web_title-0786"}
+{"kind": "web_title", "query": "Best Value Carbon Wheels", "expected": ["004a4ef3-5c28-4ceb-9c34-eb002e7e9a67"], "split": "test", "qid": "web_title-0787"}
+{"kind": "web_title", "query": "Giống Cây Sao Đen", "expected": ["025e681d-587a-432b-a702-441bc283c4ec"], "split": "dev", "qid": "web_title-0788"}
+{"kind": "web_title", "query": "AX Compact enclosure, WHD: 760x760x300 mm, sheet steel", "expected": ["0125740f-a283-4097-b7a8-3e8815033cc5"], "split": "dev", "qid": "web_title-0789"}
+{"kind": "web_title", "query": "Vui Trung thu với đèn ông sao bằng giấy", "expected": ["04105262-0cae-4848-af38-7b2f7bbeede6"], "split": "dev", "qid": "web_title-0790"}
+{"kind": "web_title", "query": "Amazon.com: Nike ACG Karst Backpack 29 L (Black/Dark Smoke Grey ...", "expected": ["021a245c-34f7-4242-82b6-3fe2324a6676"], "split": "dev", "qid": "web_title-0791"}
+{"kind": "web_title", "query": "Gạch vân đá Marble 2 Ấn Độ 80MABL", "expected": ["03dd373b-c1c6-40a7-9df0-a97efbabc06b"], "split": "dev", "qid": "web_title-0792"}
+{"kind": "web_title", "query": "Bụp giấm: tin tức, hình ảnh, video, bình luận mới nhất", "expected": ["004ef9e9-3a1d-4662-b603-9b3994515c6d"], "split": "test", "qid": "web_title-0793"}
+{"kind": "web_title", "query": "Cotrimxazon 960 điều trị nhiễm khuẩn đường tiêu hoá và đường tiết niệu", "expected": ["01323028-5b16-4084-9dee-5244b0cd1517"], "split": "dev", "qid": "web_title-0794"}
+{"kind": "web_title", "query": "World's First 3-D Printed Titanium Chest Implant", "expected": ["0dea91e9-71fd-4388-a181-5dfb825fe458"], "split": "test", "qid": "web_title-0795"}
+{"kind": "web_title", "query": "Bảo vật quốc gia: Bảo tượng thứ hai cất giữ kín trong kho", "expected": ["0019ea6e-8ce7-42e4-a447-cd97b15b51a7"], "split": "dev", "qid": "web_title-0796"}
+{"kind": "web_title", "query": "Ghế Băng E.Egedal", "expected": ["02625066-4a06-4b89-9ea0-918ba7fb2fa6"], "split": "test", "qid": "web_title-0797"}
+{"kind": "web_title", "query": "NỒI CƠM ĐIỆN 0.8L SUNHOUSE SHD8201", "expected": ["0054a578-aeb0-49cc-ae9c-7cdc67289aa0"], "split": "dev", "qid": "web_title-0798"}
+{"kind": "web_title", "query": "Siêu hot với đồ chơi công nghệ cho... thú cưng", "expected": ["0de9b6d8-5274-443a-949c-55d9b03a7933"], "split": "test", "qid": "web_title-0799"}
+{"kind": "web_title", "query": "Bioptron Pro 1 light therapy device Floor stand", "expected": ["0db8181e-f9f3-4839-b867-e7293ec0a596"], "split": "test", "qid": "web_title-0800"}
+{"kind": "web_title", "query": "Giới thiệu] SecretLab công bố Ghế TITAN Evo dòng 2022", "expected": ["04698ada-e298-415e-ba4d-07b638c3206d"], "split": "dev", "qid": "web_title-0801"}
+{"kind": "web_title", "query": "Chi tiết mẫu xe máy điện đầu tiên của Honda Việt Nam", "expected": ["0399d254-58e5-4298-a7e2-58bb10777378"], "split": "test", "qid": "web_title-0802"}
+{"kind": "web_title", "query": "Roland DWX-50 5-axis Dental Milling Machine", "expected": ["045c2bc9-74e8-40e2-a1af-36228b117a49"], "split": "dev", "qid": "web_title-0803"}
+{"kind": "web_title", "query": "Phòng trị côn trùng gây hại cây trồng với bẫy Pheromone", "expected": ["03403c3b-0825-4781-af7f-396e94307bb2"], "split": "dev", "qid": "web_title-0804"}
+{"kind": "web_title", "query": "First Ride: New Continental TKC80² “Gen 2” Dual Sport Tire", "expected": ["0376f47e-6a85-47c6-a9e3-56e87005ae37"], "split": "dev", "qid": "web_title-0805"}
+{"kind": "web_title", "query": "Bột làm sạch đa năng Bar Keepers Friend", "expected": ["00087c5f-6b52-425a-a3d7-2a9f24364e83"], "split": "test", "qid": "web_title-0806"}
+{"kind": "web_title", "query": "Samsonite Pro-Dlx 5 Backpack with wheels black 53 cm", "expected": ["0405b9ec-d9cf-4f7e-9807-70020b69c65d"], "split": "dev", "qid": "web_title-0807"}
+{"kind": "web_title", "query": "Tại sao Việt Nam nên thay cối 82mm bằng vũ khí này?", "expected": ["0db54768-93c4-4265-8513-ba473cfb2662"], "split": "test", "qid": "web_title-0808"}
+{"kind": "web_title", "query": "Stan's NoTubes Sealant Solution Quart Bottle (32 fl oz)", "expected": ["02271b4d-022e-41c5-89c9-2aa89b14433a"], "split": "test", "qid": "web_title-0809"}
+{"kind": "web_title", "query": "Thuốc nhỏ mắt Colflox 0.3% (5ml)", "expected": ["035b59c2-97e6-4c04-b970-9bbab5943741"], "split": "test", "qid": "web_title-0810"}
+{"kind": "web_title", "query": "Ắc quy Pinaco có tốt không, của nước nào sản xuất", "expected": ["04690214-ac86-4b59-8e3c-957c80e75237"], "split": "dev", "qid": "web_title-0811"}
+{"kind": "web_title", "query": "Entecavir Stada 0.5 mg", "expected": ["041cde56-6ca0-4a6f-8690-f5c8dcb4de4d"], "split": "dev", "qid": "web_title-0812"}
+{"kind": "web_title", "query": "Xoài đài loan", "expected": ["0233afb3-a846-4256-a5b2-a2b0fe0a2505"], "split": "dev", "qid": "web_title-0813"}
+{"kind": "web_title", "query": "Экспресс-тест STANDARD Q Influenza A/B", "expected": ["0203aa7b-386c-4d16-822a-8ebcc01dc2f8"], "split": "test", "qid": "web_title-0814"}
+{"kind": "web_title", "query": "20\" OZ Racing Hyper GT HLT Gloss Black Alloy Wheels", "expected": ["026b8a0b-22f6-4819-b9bd-f1371b0e5185"], "split": "test", "qid": "web_title-0815"}
+{"kind": "web_title", "query": "Thú nhún lò xo hình ngựa nhập khẩu dành cho bé vui chơi", "expected": ["04073306-732f-4185-a319-bdc1cad4ae0f"], "split": "dev", "qid": "web_title-0816"}
+{"kind": "web_title", "query": "Nước ép nho mix với gì ngon nhất? Top 5 công thức bổ dưỡng", "expected": ["03b9d8be-c213-4ac3-8aeb-33c51f3e7567"], "split": "test", "qid": "web_title-0817"}
+{"kind": "web_title", "query": "400mg Negram Nalidixic Acid Tablet at ₹ 150/box", "expected": ["03d4d2db-9095-49e5-9c41-4fbae35b0ae7"], "split": "dev", "qid": "web_title-0818"}
+{"kind": "web_title", "query": "Transerco đẩy nhanh chuyển đổi phương tiện sang năng lượng sạch", "expected": ["03839e66-53ec-4d83-bc10-720e38a87967"], "split": "test", "qid": "web_title-0819"}
+{"kind": "web_title", "query": "Aragon 2", "expected": ["0376b8f4-dc91-4d4b-92cc-42e23c51f14b"], "split": "dev", "qid": "web_title-0820"}
+{"kind": "web_title", "query": "Antique Lighting, Baccarat Crystal Chandelier, Dore Bronze", "expected": ["025da357-a803-465f-ba0e-43462b045477"], "split": "test", "qid": "web_title-0821"}
+{"kind": "web_title", "query": "Đại gia Thuỵ Sỹ bán xi măng Holcim Việt Nam cho Thái Lan", "expected": ["04315073-dad3-4c57-9ac9-f5497eacddfe"], "split": "test", "qid": "web_title-0822"}
+{"kind": "web_title", "query": "Lò nướng Sunhouse SHD4248 nơi bán chính hãng giá rẻ nhất", "expected": ["0114de5a-ae90-465b-8d51-abd5d1caf023"], "split": "dev", "qid": "web_title-0823"}
+{"kind": "web_title", "query": "Yogibo Pod X", "expected": ["0e159b8e-dd8a-4f69-b745-3b7f52a0a518"], "split": "test", "qid": "web_title-0824"}
+{"kind": "web_title", "query": "Tem nhãn talon logistics", "expected": ["00a817ea-cf2e-42c1-9c10-4ee6391db8a5"], "split": "dev", "qid": "web_title-0825"}
+{"kind": "web_title", "query": "Nẹp Acco sắt", "expected": ["04695227-be07-43ec-aaed-54e75a5a6639"], "split": "test", "qid": "web_title-0826"}
+{"kind": "web_title", "query": "Keracolor U Unsanded Grout", "expected": ["005a2dc2-8905-48ed-91d2-a12da2aa0196"], "split": "test", "qid": "web_title-0827"}
+{"kind": "web_title", "query": "GOAL 2 EC X 1 LITRO. AGROBOLIVAR", "expected": ["01693f19-ff06-4e19-a650-335ca61fcedb"], "split": "dev", "qid": "web_title-0828"}
+{"kind": "web_title", "query": "Ampicilin 500mg Hataphar, Điều trị một loạt các nhiễm khuẩn nhạy cảm", "expected": ["03884ee5-ba42-4f3e-98fe-0f4bc80fa8ac"], "split": "dev", "qid": "web_title-0829"}
+{"kind": "web_title", "query": "Mountain Pads Cantilever", "expected": ["03d6f52f-44b1-4291-90b3-d000c46138f1"], "split": "dev", "qid": "web_title-0830"}
+{"kind": "web_title", "query": "Mua Amply Jarguar PA 203N Gold Chính hãng, giá tốt nhất 2019", "expected": ["013a1aaf-fbb1-4447-b71c-627a9b2cef67"], "split": "dev", "qid": "web_title-0831"}
+{"kind": "web_title", "query": "Giấy Ivory là gì? Đặc điểm, Định lượng, Ứng dụng giấy Ivory", "expected": ["0282eae8-780a-4f7c-ad58-d7cd90dd3f14"], "split": "test", "qid": "web_title-0832"}
+{"kind": "web_title", "query": "Tượng Di Lặc Gánh Tiền Đào Gỗ Ngọc Am Cao 108cm", "expected": ["026569d0-0746-4d11-aab0-548567158474"], "split": "test", "qid": "web_title-0833"}
+{"kind": "web_title", "query": "Sao Việt 'đổ bộ' đêm trao giải Ngôi Sao Xanh", "expected": ["01e2f0d5-e474-4108-9c3a-d0bdb5a610a8"], "split": "dev", "qid": "web_title-0834"}
+{"kind": "web_title", "query": "Lốp motoz rallz này có ổn không?", "expected": ["0e00f547-c3fc-46cb-b941-bfa4d13944e2"], "split": "test", "qid": "web_title-0835"}
+{"kind": "web_title", "query": "KOMATSU Bulldozer / D37P-5", "expected": ["04496ee7-68b4-47b8-803c-c24e054b19f3"], "split": "test", "qid": "web_title-0836"}
+{"kind": "web_title", "query": "Norflox Norfloxacin 400mg Capl 10's", "expected": ["0476bf1a-ab49-4ece-a5cd-4de73d94daa1"], "split": "test", "qid": "web_title-0837"}
+{"kind": "web_title", "query": "Tinh hoa làng gỗ Đồng Kỵ Bắc Ninh", "expected": ["03d89ee3-c521-415d-a13a-b6d1a952e550"], "split": "test", "qid": "web_title-0838"}
+{"kind": "web_title", "query": "Hàng cũ) Tablet Oppo Pad 3 Pro 12/256GB- Hàng 99%", "expected": ["022fb8cb-58a7-4f82-9caa-d1f27c83b468"], "split": "dev", "qid": "web_title-0839"}
+{"kind": "web_title", "query": "Thuốc trị tăng huyết áp combizar 50/12.5", "expected": ["0092a3f2-fa9d-4411-88b9-11adefa82063"], "split": "dev", "qid": "web_title-0840"}
+{"kind": "web_title", "query": "Abbott Xience Prime Stent, for Hospital at ₹ 23000 in New Delhi", "expected": ["0e08c69c-b7ab-4784-bb36-918255ac8c54"], "split": "test", "qid": "web_title-0841"}
+{"kind": "web_title", "query": "Vali nhôm Samsonite Lite-Box Alu size cabin", "expected": ["04084cec-6aa3-47f9-855b-77a4dd2bacd8"], "split": "dev", "qid": "web_title-0842"}
+{"kind": "web_title", "query": "Valeo Radiator (VALEO # 732849) For Mercedes Benz E Class W211 2115003", "expected": ["04557445-61fe-4f22-b8ff-f55f03c06e70"], "split": "test", "qid": "web_title-0843"}
+{"kind": "web_title", "query": "Vali Roncato We-Glam Texture 5 tấc (20 inch)", "expected": ["0035a0ff-bbde-46c1-bc31-ff0c2a689ed2"], "split": "dev", "qid": "web_title-0844"}
+{"kind": "web_title", "query": "Na Chi Lăng", "expected": ["0458d511-ccf2-4cbd-8cf5-09375f644971"], "split": "dev", "qid": "web_title-0845"}
+{"kind": "web_title", "query": "Benadryl 25mg with 24 Tablets (Diphenhydramine)", "expected": ["0db8b1f6-7eab-49f6-b812-dff81be29355"], "split": "test", "qid": "web_title-0846"}
+{"kind": "web_title", "query": "Nhọc nhằn nghề muối", "expected": ["0420a004-e062-4124-8eda-0572d1e92c3f"], "split": "test", "qid": "web_title-0847"}
+{"kind": "web_title", "query": "Insulatard HM 100IU/ml Penfill: Price, Uses, Side Effects & How to Use", "expected": ["0e0b607f-5a14-438b-9d94-a1abf4d196de"], "split": "test", "qid": "web_title-0848"}
+{"kind": "web_title", "query": "Ví đựng passport RFID Travel Link Acc.", "expected": ["042b647c-34f1-413d-b766-b8c9a63a703a"], "split": "test", "qid": "web_title-0849"}
+{"kind": "web_title", "query": "Máy ấp trứng LIN", "expected": ["00b5d378-c9fd-48d2-8e5b-c596e0138886"], "split": "dev", "qid": "web_title-0850"}
+{"kind": "web_title", "query": "Đồng Tháp: 10 sản phẩm trái cây sấy đạt chuẩn OCOP 4 sao", "expected": ["00c19f31-c7ad-461a-b035-252c7d612037"], "split": "test", "qid": "web_title-0851"}
+{"kind": "web_title", "query": "Thay Ắc quy xe đạp điện Pega, Thay tại nhà, BH 15 tháng", "expected": ["00bc711e-067e-4966-b49d-0ce420a84848"], "split": "dev", "qid": "web_title-0852"}
+{"kind": "web_title", "query": "Thuốc xổ Fortrans (gói)", "expected": ["0df71515-b4d8-4004-97b0-387538a702fa"], "split": "dev", "qid": "web_title-0853"}
+{"kind": "web_title", "query": "McCain French Fried Potatoes Straight Cut 1.5 kg Powell's Supermarkets", "expected": ["04613480-03db-4338-9efc-b1ff87bee5df"], "split": "test", "qid": "web_title-0854"}
+{"kind": "web_title", "query": "Nhẫn Kim cương Vàng trắng 58,5% (14K) PNJ DDDDW000450", "expected": ["00e0b074-1e9c-40f4-a63b-c4ed75cd3efe"], "split": "test", "qid": "web_title-0855"}
+{"kind": "web_title", "query": "Cướp máy bay quân sự để vượt biên sau 1975", "expected": ["00425311-f6b6-4ca1-a8e2-6196ab77b866"], "split": "test", "qid": "web_title-0856"}
+{"kind": "web_title", "query": "49186510 CORTECO Track Control Arm", "expected": ["00fd2f15-5086-4af9-a9da-29736692c48e"], "split": "dev", "qid": "web_title-0857"}
+{"kind": "web_title", "query": "Ivylix Booster", "expected": ["02d4402c-5275-447b-8abe-bdab8bb26258"], "split": "dev", "qid": "web_title-0858"}
+{"kind": "web_title", "query": "Laptop ASUS Vivobook X415EA EB265T chính hãng", "expected": ["02aba922-801a-4255-8295-4684744fe26d"], "split": "test", "qid": "web_title-0859"}
+{"kind": "web_title", "query": "Áo Khoác Chống Nắng Parka AirDry™ Vải Pindot Thông Hơi UPF 50+ Nhanh K", "expected": ["0432931b-ccd0-4b6e-93a2-ac6e5a8c337c"], "split": "test", "qid": "web_title-0860"}
+{"kind": "web_title", "query": "Lupron Depot 22.5 mg injection kit for 3-month administration ...", "expected": ["0e1130c6-068a-422c-8fe2-293f6cb72dee"], "split": "dev", "qid": "web_title-0861"}
+{"kind": "web_title", "query": "Augbactam 562.5mg", "expected": ["0316013a-48c6-4c20-8477-9c089aa9947c"], "split": "test", "qid": "web_title-0862"}
+{"kind": "web_title", "query": "pallet nhựa công nghiệp giá rẻ", "expected": ["03491c38-143f-4182-80b2-a4a9286c8e39"], "split": "test", "qid": "web_title-0863"}
+{"kind": "web_title", "query": "Lamivudine Savi 150 3 vỉ x 10 viên", "expected": ["010f51ac-5f28-4f70-88c6-8eff3c6c9d60"], "split": "dev", "qid": "web_title-0864"}
+{"kind": "web_title", "query": "Công thức Mojito bạc hà chanh tươi cho quán đồ uống", "expected": ["022c8332-4662-4a8e-8a9e-254d65466451"], "split": "test", "qid": "web_title-0865"}
+{"kind": "web_title", "query": "Khăn giấy hộp Kleenex 2 lớp 170 tờ giá tốt tại Bách hoá XANH", "expected": ["01fd265b-cc9f-4522-811c-a1c0803f932c"], "split": "test", "qid": "web_title-0866"}
+{"kind": "web_title", "query": "Elite SRL Suito Direct Drive Smart Trainer", "expected": ["0466af4e-436c-42d5-b053-763e07824fd8"], "split": "dev", "qid": "web_title-0867"}
+{"kind": "web_title", "query": "Bún Thang Hà Nội", "expected": ["03bb9c0a-acf8-4615-b07e-9910d99bf2eb"], "split": "test", "qid": "web_title-0868"}
+{"kind": "web_title", "query": "Balo Tomtoc (USA) Navigator T67 Travel Laptop Backpack", "expected": ["001531c1-e59d-40e3-9690-d20ea233c05b"], "split": "dev", "qid": "web_title-0869"}
+{"kind": "web_title", "query": "Ý nghĩa việc thờ Quan Công và cách bố trí tượng hợp phong thủy", "expected": ["03765607-9b92-4b51-861d-674cfec103d9"], "split": "test", "qid": "web_title-0870"}
+{"kind": "web_title", "query": "NVIDIA Intros SHIELD Game Console, Makes GRID Cloud Service Official", "expected": ["0396c645-bb2b-4a56-91e4-0cf4c8361524"], "split": "test", "qid": "web_title-0871"}
+{"kind": "web_title", "query": "Nước rửa kính ô tô Prestone Windshield Washer Fluid 3.78 lít", "expected": ["04096c46-c109-4696-9125-f46c87101cba"], "split": "test", "qid": "web_title-0872"}
+{"kind": "web_title", "query": "TCL P735 I 4K HDR Google TV", "expected": ["02a06973-3e2f-4080-854d-ee516141d19d"], "split": "test", "qid": "web_title-0873"}
+{"kind": "web_title", "query": "Urban Decay Naked Palette", "expected": ["0186e47e-e9b5-49b4-b14d-fc9b92ba7e1d"], "split": "test", "qid": "web_title-0874"}
+{"kind": "web_title", "query": "*GƯƠNG BÁT QUÁI PHONG THỦY TIÊN THIÊN VIỀN GỖ 038", "expected": ["01ff44c2-3a36-49c5-bd1f-0c5d94b753bf"], "split": "test", "qid": "web_title-0875"}
+{"kind": "web_title", "query": "Hình tượng con nghê trong văn hóa tâm linh của người Việt", "expected": ["0076da64-61f6-4e44-831e-e43cf4117bfc"], "split": "dev", "qid": "web_title-0876"}
+{"kind": "web_title", "query": "T FATTY tires:", "expected": ["0df0808c-3ac4-4fcc-a97f-abccd544869a"], "split": "dev", "qid": "web_title-0877"}
+{"kind": "web_title", "query": "Két nước ô tô", "expected": ["0487482a-979f-4c1c-8395-2fb1a3e63db6"], "split": "dev", "qid": "web_title-0878"}
+{"kind": "web_title", "query": "Fuchs Titan GT1 Flex FR C2/C3 5W-30 Engine Oil", "expected": ["0e04fbb4-abeb-4021-8196-e7c708f6764e"], "split": "dev", "qid": "web_title-0879"}
+{"kind": "web_title", "query": "KCNC Ahead Cap with Star Nut 1 1/8", "expected": ["02f672ae-12e9-432f-9d2f-51f19b272e85"], "split": "test", "qid": "web_title-0880"}
+{"kind": "web_title", "query": "Điện thoại Vsmart Joy 4", "expected": ["01f4376a-ed9f-44bc-bc80-47153cf92168"], "split": "dev", "qid": "web_title-0881"}
+{"kind": "web_title", "query": "Trải nghiệm du thuyền sông Sài Gòn đẳng cấp bậc nhất", "expected": ["0290e479-cab0-4a63-b7ec-80d0b1cd68a9"], "split": "dev", "qid": "web_title-0882"}
+{"kind": "web_title", "query": "Đảng Sâm Tây Giang (Sâm khu 7 Quảng Nam)", "expected": ["0407e5ba-4ad1-4a39-b03f-f9da7dfecba7"], "split": "dev", "qid": "web_title-0883"}
+{"kind": "web_title", "query": "Hiệu quả từ mô hình liên kết trồng ngô sinh khối", "expected": ["02d82784-b0d9-4577-bd47-bd9fabe7afb7"], "split": "test", "qid": "web_title-0884"}
+{"kind": "web_title", "query": "Mardi Mercredi", "expected": ["03637607-e9b5-4309-84d7-eb9c557f9254"], "split": "test", "qid": "web_title-0885"}
+{"kind": "web_title", "query": "Thành công ghép giác mạc bằng laser thay vì thủ công", "expected": ["01092b81-9370-4ba6-8e6e-78f28619a837"], "split": "dev", "qid": "web_title-0886"}
+{"kind": "web_title", "query": "BÀN CAFE TAHOE WALNUT", "expected": ["04542fb1-48bb-4fb7-8266-4ab2da248353"], "split": "dev", "qid": "web_title-0887"}
+{"kind": "web_title", "query": "Comix Wall Mount Projector Screen 180 x 180 Cm.", "expected": ["0186b8d7-374f-4abf-a398-aba4d10c79f2"], "split": "test", "qid": "web_title-0888"}
+{"kind": "web_title", "query": "Tài nguyên dạy học Tiếng Anh lớp 2", "expected": ["0264aac3-2718-4c3b-941f-0ba9ff44ff20"], "split": "dev", "qid": "web_title-0889"}
+{"kind": "web_title", "query": "Bơm Trục Ngang (Bơm Ly Tâm Trục Ngang)", "expected": ["03e44ce4-63af-432f-8e75-a1fbd6ada081"], "split": "test", "qid": "web_title-0890"}
+{"kind": "web_title", "query": "Honda UMR435 LE Brushcutter 35cc", "expected": ["037ca102-df1c-4d6e-8a42-11b89a3a1256"], "split": "test", "qid": "web_title-0891"}
+{"kind": "web_title", "query": "Thuốc Grandaxin (tofisopam): Công dụng, cách dùng và lưu ý", "expected": ["036b89c5-6ba0-45d3-88f2-e15141c01011"], "split": "test", "qid": "web_title-0892"}
+{"kind": "web_title", "query": "Tỳ Hưu Một Sừng Đúc Bằng Đồng Đỏ Dài 42Cm", "expected": ["00513448-adbc-4411-ac88-ddb91ddb726d"], "split": "dev", "qid": "web_title-0893"}
+{"kind": "web_title", "query": "Giá cầu trục giàn đôi", "expected": ["030bf0c1-cd40-4eca-aac3-270109112098"], "split": "dev", "qid": "web_title-0894"}
+{"kind": "web_title", "query": "Thuốc FRECOXIA 60 điều trị triệu chứng của viêm khớp dạng thấp", "expected": ["00922ca6-9f66-4b63-9eae-7858c1ff9334"], "split": "test", "qid": "web_title-0895"}
+{"kind": "web_title", "query": "Chồn Hương làm coffee Đà Lạt", "expected": ["02247ea1-a505-40f1-9a7e-413e348a66af"], "split": "test", "qid": "web_title-0896"}
+{"kind": "web_title", "query": "Pidan Pet bed for Cats: Japanese Zen Garden Cooling Bed", "expected": ["0161fa00-b504-44c1-9666-66b6b9c0a3a9"], "split": "dev", "qid": "web_title-0897"}
+{"kind": "web_title", "query": "Nerf Rival Charger MXX-1200 Motorized Blaster", "expected": ["04290485-3603-434e-aa4f-226bf8c0d645"], "split": "test", "qid": "web_title-0898"}
+{"kind": "web_title", "query": "Ghé thăm \"công xưởng\" vàng mã lớn nhất Việt Nam", "expected": ["01110c55-bed8-4180-8517-eb75d833390c"], "split": "dev", "qid": "web_title-0899"}
+{"kind": "web_title", "query": "MQCON(Sabvoton) SVMC7245 72V1500W 45A Brushless DC Motor Programmable  Controller For Ebike Bicycle", "expected": ["0e254ea0-7df8-45c6-9ca8-44df37da2d13"], "split": "test", "qid": "web_title-0900"}
+{"kind": "web_title", "query": "Xe tải Isuzu FVM1500 Mui Bạt Bửng Nhôm", "expected": ["01284b1c-88df-4d98-9419-40f372640c3f"], "split": "test", "qid": "web_title-0901"}
+{"kind": "web_title", "query": "Yamaha A-S801 Integrated Amplifer", "expected": ["01654a1e-0f3f-4af5-b99d-51ffb4040e9d"], "split": "test", "qid": "web_title-0902"}
+{"kind": "web_title", "query": "Discover the Benefits of Acrylic Dentures", "expected": ["02654b5e-c8aa-496a-9de8-63fc0497618c"], "split": "test", "qid": "web_title-0903"}
+{"kind": "web_title", "query": "Lễ rước kiệu về Đền Hùng", "expected": ["01f38bc1-b07b-49f2-b814-2c00431128b8"], "split": "test", "qid": "web_title-0904"}
+{"kind": "web_title", "query": "Neu: Fexofenadin 180 mg gegen chronische Urtikaria", "expected": ["025811c0-cb3d-4981-8b4b-c0a8d5a51a94"], "split": "test", "qid": "web_title-0905"}
+{"kind": "web_title", "query": "Điểm danh loạt động cơ \"tuyệt phẩm\": cỡ nhỏ nhưng công suất lớn", "expected": ["0403fab3-2e7f-4777-bcd3-cb2f3c992008"], "split": "dev", "qid": "web_title-0906"}
+{"kind": "web_title", "query": "Side Loading Forklift Truck", "expected": ["02182a13-2d36-4b2f-9130-b7f6800dd816"], "split": "test", "qid": "web_title-0907"}
+{"kind": "web_title", "query": "Hoa giấy Thanh Tiên và Tết truyền thống Huế", "expected": ["009864cd-c3de-4454-965b-9037989a726c"], "split": "dev", "qid": "web_title-0908"}
+{"kind": "web_title", "query": "Nike", "expected": ["02c70f1a-0643-47f6-bd0f-711ac9db4246"], "split": "test", "qid": "web_title-0909"}
+{"kind": "web_title", "query": "Bơm chìm Ebara BEST 2", "expected": ["01ef1715-409e-45b8-9375-0877d5b156de"], "split": "dev", "qid": "web_title-0910"}
+{"kind": "web_title", "query": "Canon PowerShot SX740 HS (Silver)", "expected": ["026a7370-e3be-4660-8136-bb8c6fe95463"], "split": "test", "qid": "web_title-0911"}
+{"kind": "web_title", "query": "Thuốc Prokizil 250mg (Cefprozil 250mg)", "expected": ["02e4a7e3-306e-420b-957c-cbf1d211e0e5"], "split": "dev", "qid": "web_title-0912"}
+{"kind": "web_title", "query": "Mua Dầu Gội Hoặc Dầu Xả Redken Acidic Bonding 1000ml Australia ...", "expected": ["046d0dd5-9607-488f-9fab-0aa07a8970e8"], "split": "test", "qid": "web_title-0913"}
+{"kind": "web_title", "query": "Vòng Hoa Viếng Đám Ma DT408", "expected": ["03d560a2-1320-4be1-abd3-c4f7785d6e29"], "split": "test", "qid": "web_title-0914"}
+{"kind": "web_title", "query": "Máy in Laser đơn năng Pantum P2500W", "expected": ["01db4195-006a-49d7-9a99-a3fe2e394c1a"], "split": "dev", "qid": "web_title-0915"}
+{"kind": "web_title", "query": "GLOBAL G-2 kokkiveitsi", "expected": ["0428cf72-2579-4822-bb4a-372a124af680"], "split": "dev", "qid": "web_title-0916"}
+{"kind": "web_title", "query": "INTOC 04", "expected": ["02f90c37-075e-4b96-81b5-906ae4fc25d2"], "split": "test", "qid": "web_title-0917"}
+{"kind": "web_title", "query": "Electric Blank Cover Schneider M3TB01BC", "expected": ["0e20c46f-7708-4d0a-bc0f-6cc25ebbe145"], "split": "dev", "qid": "web_title-0918"}
+{"kind": "web_title", "query": "Hiplok DX Bike U-Lock 150x85mm", "expected": ["00da7eaa-6881-4a96-a305-84f209cf3913"], "split": "dev", "qid": "web_title-0919"}
+{"kind": "web_title", "query": "Vòng gỗ sưa đỏ bóng", "expected": ["005bc58f-2dae-44b4-85e0-5de3cd71a5c5"], "split": "dev", "qid": "web_title-0920"}
+{"kind": "web_title", "query": "Băng vệ sinh Tampon Unicharm Sofy Soft Siêu Thấm Dịu Nhẹ", "expected": ["036b6b44-6a86-4fc2-b4db-97e8069faab2"], "split": "dev", "qid": "web_title-0921"}
+{"kind": "web_title", "query": "Máy tập leo cầu thang điện kiểu mới, máy bước leo núi thẳng đứng", "expected": ["0dbd1ace-029b-4059-998a-9a79b1c66f40"], "split": "test", "qid": "web_title-0922"}
+{"kind": "web_title", "query": "Tetra ReptoMin Energy", "expected": ["0191ebe1-7ede-42ad-8570-fcf4e2fb85f3"], "split": "dev", "qid": "web_title-0923"}
+{"kind": "web_title", "query": "Cách muối dưa bắp cải rau cần siêu dễ", "expected": ["034e51f9-a4ba-45e0-b0d9-cdbe90fe8cbb"], "split": "test", "qid": "web_title-0924"}
+{"kind": "web_title", "query": "Đèn năng lượng mặt trời tốt nhất cho hiên nhà bạn", "expected": ["002eae70-16ba-4a62-b901-aa14575b2f18"], "split": "test", "qid": "web_title-0925"}
+{"kind": "web_title", "query": "Tã Quần Offspring Thấm Hút Nhanh", "expected": ["01fac06e-3695-46f4-af4b-84c8be8b77bc"], "split": "dev", "qid": "web_title-0926"}
+{"kind": "web_title", "query": "Healthy Oatmeal with Chia Seeds", "expected": ["0218243d-4e87-45f9-b280-1d8f31b07e9b"], "split": "test", "qid": "web_title-0927"}
+{"kind": "web_title", "query": "Cóc ngồi trên túi vàng", "expected": ["01846cda-63aa-4d5f-a6ae-b396b8d44bd2"], "split": "dev", "qid": "web_title-0928"}
+{"kind": "web_title", "query": "Bình chữa cháy xe đẩy 35kg chất lượng giá rẻ", "expected": ["02200191-f796-4d94-9750-9d77710e46d1"], "split": "dev", "qid": "web_title-0929"}
+{"kind": "web_title", "query": "VALI SAMSONITE Lite-Shock Spinner 55 cm", "expected": ["0e235c14-1cb4-40e0-8b33-af5adcd4fb98"], "split": "dev", "qid": "web_title-0930"}
+{"kind": "web_title", "query": "Đèn led Panel siêu mỏng JASPER", "expected": ["0047c7ad-8f9c-40af-aabf-c2a1932fdaa6"], "split": "test", "qid": "web_title-0931"}
+{"kind": "web_title", "query": "Tiền Xưa Việt Nam: Phân Loại, Nhận Biết, Định Giá", "expected": ["008fbda6-72f7-4621-abbb-0cbe25c05450"], "split": "test", "qid": "web_title-0932"}
+{"kind": "web_title", "query": "PAGID", "expected": ["0db61329-bdcf-4604-89d6-9bfc9385b8f4"], "split": "test", "qid": "web_title-0933"}
+{"kind": "web_title", "query": "Product Information｜TOSHIBA｜X-ray｜21770｜Used and Refurbished Medical  Equipment for sale", "expected": ["03419b37-de68-4ce5-a1d0-ff573ad82588"], "split": "dev", "qid": "web_title-0934"}
+{"kind": "web_title", "query": "Đôi Lục Bình Thờ Chất Liệu Gốm Sứ Họa Tiết Hoa Sen Xanh", "expected": ["01856e0d-4b8a-4684-abf6-c85881b23b41"], "split": "test", "qid": "web_title-0935"}
+{"kind": "web_title", "query": "Thuốc Calcitriol DHT 0,25mcg điều trị loãng xương sau mãn kinh", "expected": ["029e2416-4e43-4ee4-be62-e0f7bd6b3253"], "split": "test", "qid": "web_title-0936"}
+{"kind": "web_title", "query": "Cung Cấp Tấm Trang Trí, Khăn Choàng Tắm Khách Sạn Long Bình Đà Nẵng", "expected": ["009163e4-4a43-44b9-8c82-bb19726092b1"], "split": "dev", "qid": "web_title-0937"}
+{"kind": "web_title", "query": "Toyota M12x1.25 Bosch Knock Sensor Kit", "expected": ["00c79983-ca53-4976-89f9-d6b3d9e20563"], "split": "dev", "qid": "web_title-0938"}
+{"kind": "web_title", "query": "Full Speed Ahead Gossamer Pro Crankset", "expected": ["006101f1-c5cd-4383-ba86-c843213ec154"], "split": "test", "qid": "web_title-0939"}
+{"kind": "web_title", "query": "2 cách làm kim chi cải thảo chay giòn ngon đơn giản tại nhà", "expected": ["02066c5c-1c8e-478b-8b43-d45357f54276"], "split": "test", "qid": "web_title-0940"}
+{"kind": "web_title", "query": "ĐẾ NẾN TRANG TRÍ VINTAGE HÌNH LỒNG CHIM", "expected": ["0414b409-d2d4-4590-a9fa-8276f9743f0f"], "split": "test", "qid": "web_title-0941"}
+{"kind": "web_title", "query": "Cardinal Health Argyle 8888571562 Dual Drain Chest Drainage", "expected": ["018f8955-97d8-4a73-9255-12084478f6cc"], "split": "test", "qid": "web_title-0942"}
+{"kind": "web_title", "query": "EzyDog Road Runner Hands Free Dog Jogging Leash", "expected": ["029dd4b6-b65f-4448-9a0d-2c71991bdefb"], "split": "dev", "qid": "web_title-0943"}
+{"kind": "web_title", "query": "Còi Báo Âm Thanh Hình Ảnh Chống Nổ Sirena 24V", "expected": ["03e56e88-f2d2-4df7-ac23-ee64e7d3f83c"], "split": "dev", "qid": "web_title-0944"}
+{"kind": "web_title", "query": "Detroit Jacket Carhartt", "expected": ["02af2fef-8d7f-4b53-8676-b018e247f716"], "split": "test", "qid": "web_title-0945"}
+{"kind": "web_title", "query": "Bình pha trà thủy tinh crystan có lõi lọc trà và nắp inox", "expected": ["039d6495-3b84-435d-947a-3587f2cabb00"], "split": "dev", "qid": "web_title-0946"}
+{"kind": "web_title", "query": "BAO BỘT TRÉT TƯỜNG JESICA_40KG", "expected": ["032d2e9b-07d3-41b4-b379-6c29d367007c"], "split": "test", "qid": "web_title-0947"}
+{"kind": "web_title", "query": "Redsbaby Jive² review", "expected": ["0347cd61-1b4d-4fad-877f-efd1552b1afd"], "split": "dev", "qid": "web_title-0948"}
+{"kind": "web_title", "query": "Tấm Ốp Trần Nhựa Giả Gỗ, Nhựa Giả Gỗ Ốp Tường, Ốp Trần", "expected": ["00311b8a-988a-4bfb-92d5-4aa84dcda683"], "split": "dev", "qid": "web_title-0949"}
+{"kind": "web_title", "query": "Chậu rửa Lavabo TOTO LT236CS", "expected": ["0208cf70-27a0-4036-9ee2-bc571a578ff2"], "split": "dev", "qid": "web_title-0950"}
+{"kind": "web_title", "query": "Cần gạt mưa Denso Wiper Blade Premium DCP26 650 mm", "expected": ["03759622-b9fb-4ab8-b599-3e81a1f2df9c"], "split": "dev", "qid": "web_title-0951"}
+{"kind": "web_title", "query": "Cách tạo nên hương vị đặc trưng của bia Sapporo", "expected": ["013e5dba-1422-46f3-b3e2-08601936d0bb"], "split": "dev", "qid": "web_title-0952"}
+{"kind": "web_title", "query": "Bussmann LPJ-40SP", "expected": ["0288aee0-ff47-44e7-a0ee-23be2ff566b9"], "split": "dev", "qid": "web_title-0953"}
+{"kind": "web_title", "query": "Betaderm Neomycin 10g: Thuốc bôi trị viêm da, rụng tóc", "expected": ["02272097-8587-4356-9931-ed891a9af97b"], "split": "dev", "qid": "web_title-0954"}
+{"kind": "web_title", "query": "Lăn khử mùi Etiaxil cho da siêu nhạy cảm (15ml)", "expected": ["02535395-9eb8-41b7-b645-b79ef59fb4c5"], "split": "test", "qid": "web_title-0955"}
+{"kind": "web_title", "query": "Khung tập đi lucass W-89", "expected": ["00c93f88-c08d-4cc7-a910-b4df75f8a6f9"], "split": "dev", "qid": "web_title-0956"}
+{"kind": "web_title", "query": "Bột trét tường nội ngoại thất Dulux A502", "expected": ["03be1569-d242-435d-992e-674f8b97e808"], "split": "test", "qid": "web_title-0957"}
+{"kind": "web_title", "query": "Supersport Roof Carrier for Innova Crysta", "expected": ["02ceb38e-8f2d-4d04-b01a-27730752835a"], "split": "dev", "qid": "web_title-0958"}
+{"kind": "web_title", "query": "Anker Soundcore Life Q30 review", "expected": ["039ba071-e3f1-4eb0-bfea-ee76d18753a7"], "split": "test", "qid": "web_title-0959"}
+{"kind": "web_title", "query": "Beelink SER8 mini PC review", "expected": ["0dcff508-7b53-4ad8-a7f9-a603498f5156"], "split": "dev", "qid": "web_title-0960"}
+{"kind": "web_title", "query": "Combo 5 hộp Đại tràng Ích Nhân", "expected": ["03a0d372-2524-49e9-b883-58e194ccec12"], "split": "dev", "qid": "web_title-0961"}
+{"kind": "web_title", "query": "Cách làm món nấm mỡ steak ngon hơn cả thịt bò Kobe", "expected": ["039b4e2e-6cd4-490b-9cfa-c5a6751419ec"], "split": "dev", "qid": "web_title-0962"}
+{"kind": "web_title", "query": "Kem Lót Maybelline Fit Me Matte Poreless SPF20 30ml", "expected": ["0295d98b-73e7-482b-9eb6-d8f5a25c886c"], "split": "dev", "qid": "web_title-0963"}
+{"kind": "web_title", "query": "SRAM GX Eagle Transmission AXS Groupset", "expected": ["0194cbc6-4709-46c7-a827-83a938563bc8"], "split": "test", "qid": "web_title-0964"}
+{"kind": "web_title", "query": "Rượu H'Mông", "expected": ["03c44d79-7f56-41f9-933d-b61a8f2ff2e7"], "split": "test", "qid": "web_title-0965"}
+{"kind": "web_title", "query": "4moms mamaRoo 5 Baby Swing", "expected": ["02a5b954-2147-498b-9905-e6b73cb649ac"], "split": "dev", "qid": "web_title-0966"}
+{"kind": "web_title", "query": "Quần Jean Nam Dolce & Gabbana D&G Rách Slim GY07CZG8BR8S9001 Màu Xám Size 52", "expected": ["01ea0bd0-138a-43fa-86f2-507bde48e783"], "split": "dev", "qid": "web_title-0967"}
+{"kind": "web_title", "query": "Samsung Odyssey OLED G8 ra mắt", "expected": ["03838236-0516-4420-a560-76d058fd1944"], "split": "dev", "qid": "web_title-0968"}
+{"kind": "web_title", "query": "Stago Max Generation 3 FDA Clearance!", "expected": ["0dbc95f6-b7f3-4d22-abbb-82bbea3e5bb2"], "split": "dev", "qid": "web_title-0969"}
+{"kind": "web_title", "query": "Đồng (đơn vị tiền cổ)", "expected": ["02b00254-bcd8-438c-88d1-6c3f70829660"], "split": "test", "qid": "web_title-0970"}
+{"kind": "web_title", "query": "Front Disc Brake Hose (BREMBO) CLEAR", "expected": ["0444a32f-e9ef-46a7-8082-038fbec74c24"], "split": "dev", "qid": "web_title-0971"}
+{"kind": "web_title", "query": "Cẩu bánh lốp , cẩu bánh xích", "expected": ["02c2e176-c686-4076-b530-3bdafe67e35e"], "split": "dev", "qid": "web_title-0972"}
+{"kind": "web_title", "query": "01 Mâm RAYS 17", "expected": ["02310d34-e146-46f1-a184-29038b2b6b9d"], "split": "dev", "qid": "web_title-0973"}
+{"kind": "web_title", "query": "Đồng hồ vạn năng Fluke 87V Max (87-5) True RMS", "expected": ["0115d98d-93ce-4ae9-b9cb-15e55f704c67"], "split": "dev", "qid": "web_title-0974"}
+{"kind": "web_title", "query": "Coca-Cola lan tỏa thông điệp \"Gắn kết làm nên Tết diệu kỳ\" trong ...", "expected": ["0049b72f-0c83-4651-9887-279e84eeed8c"], "split": "test", "qid": "web_title-0975"}
+{"kind": "web_title", "query": "Tê thu PVC,Ong nhua PVC,Phu Kien PVC", "expected": ["030b5aa9-9900-466a-9148-0a4b5fdf9fec"], "split": "dev", "qid": "web_title-0976"}
+{"kind": "web_title", "query": "Feliway Calming Diffuser Kit for Cats", "expected": ["03ef6b50-0f7f-4322-9a69-f7bc336b641e"], "split": "dev", "qid": "web_title-0977"}
+{"kind": "web_title", "query": "Evenflo Aero2 Unboxing & Review", "expected": ["00bf0461-6ff1-4a74-99bc-5bdb77e7fbb4"], "split": "dev", "qid": "web_title-0978"}
+{"kind": "web_title", "query": "Lưới Che Nắng Mưa Trồng Rau Sạch Giá Rẻ", "expected": ["039c34b7-27ec-40af-9176-916f5c478f3b"], "split": "dev", "qid": "web_title-0979"}
+{"kind": "web_title", "query": "Ford EcoSport 2018 nâng cấp triệt để từ trong ra ngoài", "expected": ["030fe81e-5c27-46ab-82a5-6fd49af41bf2"], "split": "test", "qid": "web_title-0980"}
+{"kind": "web_title", "query": "Que thử đường huyết Medisana MediTouch 2 (50 que)", "expected": ["00a6a16e-01d6-4ba7-92f8-ac96d65e2bba"], "split": "test", "qid": "web_title-0981"}
+{"kind": "web_title", "query": "Ghế Eames trong suốt ứng dụng ghế ăn ghế tiếp khách GC625", "expected": ["04887f74-e657-4cb3-a889-28f1bb95211e"], "split": "dev", "qid": "web_title-0982"}
+{"kind": "web_title", "query": "Tranh Vinh Quy Bái Tổ Khung Đồng Mạ Vàng 24k 1M55", "expected": ["02b980fe-ef78-4620-9822-74b1afb3a7cd"], "split": "dev", "qid": "web_title-0983"}
+{"kind": "web_title", "query": "MASSIVE SOLAR UPGRADE (Outback FLEXMax 80 Charge Controller Unboxing)", "expected": ["02452f83-38ae-4ac2-a2c3-127d87540e9c"], "split": "test", "qid": "web_title-0984"}
+{"kind": "web_title", "query": "Sigma 65mm F2 DG", "expected": ["0448720f-84ef-49b6-be04-ead52b717af9"], "split": "test", "qid": "web_title-0985"}
+{"kind": "web_title", "query": "Nguyễn Hoàng Đức lần thứ 3 giành Quả bóng vàng Việt Nam", "expected": ["0dbe0177-6800-47a0-bc28-6ae5b2a41579"], "split": "dev", "qid": "web_title-0986"}
+{"kind": "web_title", "query": "Ofloxacin 200mg Domesco", "expected": ["0dd8c1ff-bca4-4f34-a7b8-08c303c040de"], "split": "test", "qid": "web_title-0987"}
+{"kind": "web_title", "query": "Garmin VIRB Ultra 30 Aviation In-Cockpit Bundle 4K Action Camera", "expected": ["027d3829-72a0-41a6-9217-55b4930f9a28"], "split": "dev", "qid": "web_title-0988"}
+{"kind": "web_title", "query": "Húng Lủi Và Bạc Hà Có Giống Nhau Không? Cách Phân Biệt Dễ Nhất", "expected": ["026ca10a-a71f-4915-ad44-e7cacd82c500"], "split": "dev", "qid": "web_title-0989"}
+{"kind": "web_title", "query": "Ổn Áp Lioa SH3-30K II", "expected": ["02f6c93e-67d5-41af-afe1-b2b96ffbe7c1"], "split": "dev", "qid": "web_title-0990"}
+{"kind": "web_title", "query": "Ngựa phong thủy đá tự nhiên Kích Hoạt May Mắn", "expected": ["0299446a-2153-4124-9d27-fec829d27ebc"], "split": "test", "qid": "web_title-0991"}
+{"kind": "web_title", "query": "Snack Nấm Đùi Gà ( Nấm Sấy Khô Nhiều Hương Vị)", "expected": ["0db6acd7-59cd-4610-936d-b28ac9da5800"], "split": "dev", "qid": "web_title-0992"}
+{"kind": "web_title", "query": "Đèn thả Carmina", "expected": ["0063f7b2-6994-48a0-ae92-731c41233224"], "split": "test", "qid": "web_title-0993"}
+{"kind": "web_title", "query": "Bếp nướng than hoa bbq ngoài trời đi cắm trại, picnic cao cấp", "expected": ["0466fb5f-f872-4061-9fd5-6b2ff86c94eb"], "split": "test", "qid": "web_title-0994"}
+{"kind": "web_title", "query": "Hội thánh Cao Đài Tiên Thiên gắn bó với dân tộc, đoàn kết đạo", "expected": ["0dcfeddb-ea7d-4722-a033-ab1871fff268"], "split": "test", "qid": "web_title-0995"}
+{"kind": "web_title", "query": "50+ Lời chúc mừng sinh nhật sếp hay, trang trọng và ý nghĩa nhất", "expected": ["02e8496f-fddd-4b3b-a3d6-b8b773441c61"], "split": "dev", "qid": "web_title-0996"}
+{"kind": "web_title", "query": "50+ Cách phối quần jean ống rộng nam cá tính phải thử 2026", "expected": ["046035c0-3ae4-4372-9e00-afabde6bb076"], "split": "test", "qid": "web_title-0997"}
+{"kind": "web_title", "query": "P170737 Lọc dầu hộp số Donaldson 3I1734 11992372", "expected": ["01229a61-3cb7-48f1-a2b9-9bb6c1b30f57"], "split": "test", "qid": "web_title-0998"}
+{"kind": "web_title", "query": "chiếc trống gỗ to nhất Việt nam đang ở đâu", "expected": ["0449f214-1eff-4540-bb27-db43e470b06e"], "split": "test", "qid": "web_title-0999"}
+{"kind": "web_title", "query": "Shimano Claris FC-R2000 Crankset", "expected": ["0080e813-c459-4b04-9095-4f7bc9d66494"], "split": "test", "qid": "web_title-1000"}
+{"kind": "web_title", "query": "Đá Sphene", "expected": ["008e403f-36aa-4e6e-8947-4a0cc5de2890"], "split": "test", "qid": "web_title-1001"}
+{"kind": "web_title", "query": "Pedal can xe đạp Funn S One Side chuẩn Shimano SPD Mountain", "expected": ["01998536-bb94-46b7-bfe4-34615e932895"], "split": "dev", "qid": "web_title-1002"}
+{"kind": "web_title", "query": "Osprey Aura AG 65", "expected": ["03eba571-2cf4-4998-9e28-acd6272ed271"], "split": "dev", "qid": "web_title-1003"}
+{"kind": "web_title", "query": "Inverter SMA 5kW Sunny Boy hiệu suất chuyển đổi tối ưu", "expected": ["03f93b27-4cad-44c4-90c6-eee5f254ebba"], "split": "dev", "qid": "web_title-1004"}
+{"kind": "web_title", "query": "Thuốc Cisplatin 10mg Bidiphar điều trị ung thư (20ml)", "expected": ["00f55392-d78a-4d3a-ad93-bc25c27f2cf2"], "split": "test", "qid": "web_title-1005"}
+{"kind": "web_title", "query": "Rượu cần Mường Vang", "expected": ["02d8b862-3719-4d52-ad40-00d6b6734ffd"], "split": "test", "qid": "web_title-1006"}
+{"kind": "web_title", "query": "Kem bôi mờ thâm sẹo Thái Dương chứa nghệ, vitamin nano bạc 20g", "expected": ["03a9fe24-d155-4840-8f72-e32bddc6de62"], "split": "test", "qid": "web_title-1007"}
+{"kind": "web_title", "query": "Thức ăn cá cảnh Tetra Min", "expected": ["0daded31-c2db-4bd8-92ba-1b87a69f3c43"], "split": "test", "qid": "web_title-1008"}
+{"kind": "web_title", "query": "Trade Paints Jotun Steelmaster 600WF Intumescent Fireproof Paint –5L", "expected": ["03b26cf6-32fa-4de2-8199-c770d7c01e12"], "split": "dev", "qid": "web_title-1009"}
+{"kind": "web_title", "query": "Hủ Tiếu Khô Tôm Thịt", "expected": ["04317d7b-a222-437f-b205-0067c7da22fc"], "split": "dev", "qid": "web_title-1010"}
+{"kind": "web_title", "query": "KEM Ủ TÊ HÀN QUỐC CHEUM CAINE CREAM LIDOCAINE 10.56%", "expected": ["03c62b10-78e7-44b9-baa5-8127e4b66d3f"], "split": "test", "qid": "web_title-1011"}
+{"kind": "web_title", "query": "Mobil Super 1000 20W-50 Engine Oil", "expected": ["0132272b-9367-4c85-a890-98d83ac65267"], "split": "dev", "qid": "web_title-1012"}
+{"kind": "web_title", "query": "Cat 972M Wheel Loader Loading Trucks", "expected": ["01b5492a-11f6-4f86-9be6-c703ea0e89d3"], "split": "dev", "qid": "web_title-1013"}
+{"kind": "web_title", "query": "Vaccine AVAC ASF LIVE: 'Lá chắn' bảo hộ chéo chủng virus lai", "expected": ["0dbd6989-fbad-4e9f-a584-d81f76bc614e"], "split": "dev", "qid": "web_title-1014"}
+{"kind": "web_title", "query": "Phayant: -sưu tầm-Cách tạo một đạo bùa hộ thân .", "expected": ["0db6ad53-0b14-4ffc-82ad-7714191c0c15"], "split": "test", "qid": "web_title-1015"}
+{"kind": "web_title", "query": "Cặp nhẫn cưới Kim cương Vàng 75% (18K) PNJ Vàng Son 00633-00313", "expected": ["0dd44758-30df-4a50-a327-22749de10657"], "split": "dev", "qid": "web_title-1016"}
+{"kind": "web_title", "query": "MÁY XÉT NGHIỆM MIỄN DỊCH TỰ ĐỘNG COBAS E411 CÓ GÌ ĐẶC BIỆT?", "expected": ["0dc6d504-a7a1-490f-9661-7722374da02d"], "split": "dev", "qid": "web_title-1017"}
+{"kind": "web_title", "query": "Nguồn gốc Thắp đèn trong Phật giáo.", "expected": ["02ccc09f-785d-4534-a548-e282498f3bc3"], "split": "dev", "qid": "web_title-1018"}
+{"kind": "web_title", "query": "Mexique Stool", "expected": ["03cbdd5a-a134-4015-ad81-bf5bb7643512"], "split": "dev", "qid": "web_title-1019"}
+{"kind": "web_title", "query": "Signia Insio Charge&Go AX", "expected": ["012707dc-55df-47e1-886c-eabed072f4b5"], "split": "test", "qid": "web_title-1020"}
+{"kind": "web_title", "query": "Metzeler Sportec M9 RR Motorcycle Tires First Look (6 Fast Facts)", "expected": ["0deec578-a7da-480b-b058-782bda39d7c0"], "split": "dev", "qid": "web_title-1021"}
+{"kind": "web_title", "query": "Shimano 105 5800 Braze On Front Derailleur", "expected": ["0142e74e-810b-4317-a88a-2c2d24850c96"], "split": "dev", "qid": "web_title-1022"}
+{"kind": "web_title", "query": "Nhà sản xuất và nhà cung cấp palăng cầu trục tại Trung Quốc", "expected": ["0019ba48-be59-4bdb-ad37-34e25a147d6f"], "split": "dev", "qid": "web_title-1023"}
+{"kind": "web_title", "query": "7 kỹ Thuật Mộc Nhân Tiệt Quyền Đạo", "expected": ["0e0fc887-56a8-4ccc-94e2-c5c70542841d"], "split": "dev", "qid": "web_title-1024"}
+{"kind": "web_title", "query": "Lọc gió điều hòa Nissan Terra", "expected": ["034e0304-e7cb-4828-8617-682ed943ff7b"], "split": "dev", "qid": "web_title-1025"}
+{"kind": "web_title", "query": "OLIGHT RN1500 Front Lamp for Bike LED USB 1500 Lumen 164 m", "expected": ["029e6509-2dff-4f22-8152-6a72a0b1431b"], "split": "test", "qid": "web_title-1026"}
+{"kind": "web_title", "query": "Máy Pha Cà Phê Viên Nén Nespresso 2025", "expected": ["03d4ff31-f257-4a71-957c-2d851ba117ef"], "split": "dev", "qid": "web_title-1027"}
+{"kind": "web_title", "query": "Biến tần Sofar 20kW 20000TL-G2 3 Pha (hòa lưới)", "expected": ["01ea0198-7452-42e4-bdba-04a3c40cca3d"], "split": "test", "qid": "web_title-1028"}
+{"kind": "web_title", "query": "CHẬU CÂY lưỡi hổ Sansevieria francisii lá vuốt nhọn đột biến vàng- NHẬP  KHẨU", "expected": ["02a973c2-9fec-46af-8158-0d4c8c0fc4a6"], "split": "test", "qid": "web_title-1029"}
+{"kind": "web_title", "query": "Giò Đạp SRAM SRAM SX Eagle DUB 12 Speed Crankset", "expected": ["02e6ee66-fa0c-470f-9520-6bbd63293d85"], "split": "dev", "qid": "web_title-1030"}
+{"kind": "web_title", "query": "Bộ phanh dầu Tektro HD M275", "expected": ["047beefb-1ac2-432f-8528-5b2669d7b49a"], "split": "dev", "qid": "web_title-1031"}
+{"kind": "web_title", "query": "Hunt Wheels Trail Wide wheelset review", "expected": ["021a1b56-fad1-4ed5-886b-d0bc9e56912e"], "split": "test", "qid": "web_title-1032"}
+{"kind": "web_title", "query": "Panaracer GravelKing X1 + TLR Folding Tyre", "expected": ["00ce241a-4a8a-410f-be38-99e5ddfabb6d"], "split": "test", "qid": "web_title-1033"}
+{"kind": "web_title", "query": "Mặt Trống Đồng Đông Sơn Treo Tường Bằng Đồng Đỏ kết hợp Bản Đồ ...", "expected": ["01fc7683-d704-415e-a435-e53d888a157b"], "split": "test", "qid": "web_title-1034"}
+{"kind": "web_title", "query": "Giá Tốt] Ống Nhựa PPR Chống Tia UV", "expected": ["0334d147-8a21-4a6a-80ec-904dd092d606"], "split": "dev", "qid": "web_title-1035"}
+{"kind": "web_title", "query": "Máy gặt đập liên hợp lúa mì lúa gạo đầy đủ", "expected": ["0dd96151-d939-4872-96ce-1ebb19b99119"], "split": "test", "qid": "web_title-1036"}
+{"kind": "web_title", "query": "Vali kéo AeroStep", "expected": ["00780c6a-2216-43e4-a22c-74f5741406ce"], "split": "dev", "qid": "web_title-1037"}
+{"kind": "web_title", "query": "Lexus RX 350 Luxury", "expected": ["0451a488-d342-4341-b7f5-d822a6c00f97"], "split": "test", "qid": "web_title-1038"}
+{"kind": "web_title", "query": "Áo nỉ cổ tròn cặp đôi nữ hình in trước ngực và thân sau", "expected": ["01a3f480-5ab4-4188-8f84-423992707660"], "split": "dev", "qid": "web_title-1039"}
+{"kind": "web_title", "query": "Ổ cắm kéo dài LiOA có công tắc từng ổ 6DOF32N", "expected": ["002e3e67-95f0-4a5a-9a48-5278c4a79c0e"], "split": "test", "qid": "web_title-1040"}
+{"kind": "web_title", "query": "Chrono®", "expected": ["00b97fe4-be5d-45ff-8fb8-01ca2ada25c3"], "split": "dev", "qid": "web_title-1041"}
+{"kind": "web_title", "query": "Khóa chữ U", "expected": ["03934204-bddb-4358-8e09-b7434107e04d"], "split": "dev", "qid": "web_title-1042"}
+{"kind": "web_title", "query": "Hé lộ sức mạnh bộ đôi tàu ngầm mini của Hải quân Việt Nam", "expected": ["03a212a8-ee29-42bb-a381-5b5879e38393"], "split": "dev", "qid": "web_title-1043"}
+{"kind": "web_title", "query": "Còi Sên Bosch 12V EC6", "expected": ["0de9e327-4637-4dfb-864f-2d337956f380"], "split": "test", "qid": "web_title-1044"}
+{"kind": "web_title", "query": "Về miền Tây thăm cồn Hưng Phong ngắm cảnh miệt vườn thật đã", "expected": ["004d7fea-c494-474c-9ce2-9e47b38e71eb"], "split": "test", "qid": "web_title-1045"}
+{"kind": "web_title", "query": "Tấm tăng lều kèm cọc du lịch dã ngoại", "expected": ["00586804-45fc-439a-93e5-b7ba8c6d63d2"], "split": "dev", "qid": "web_title-1046"}
+{"kind": "web_title", "query": "Tượng Tôn Ngộ Không Phong Thần Để Ô Tô", "expected": ["00145419-5c4d-4ecf-b1c6-87b1d5d40a31"], "split": "test", "qid": "web_title-1047"}
+{"kind": "web_title", "query": "Buy Ixel (Milnacipran) 25mg 50mg 28'S 56'S Capsule Online", "expected": ["0216051f-38a3-467a-85b8-73f07305ecb3"], "split": "dev", "qid": "web_title-1048"}
+{"kind": "web_title", "query": "Midori MD rô noted Notebook", "expected": ["012a1039-6eb3-45ab-adb9-0bab9d112d19"], "split": "dev", "qid": "web_title-1049"}
+{"kind": "web_title", "query": "Việt Nam 50 đồng 1972", "expected": ["0df4a748-5e2f-410a-8331-6ba203afb221"], "split": "dev", "qid": "web_title-1050"}
+{"kind": "web_title", "query": "Tủ chùa gỗ gụ 6 mái", "expected": ["00502157-6430-40c8-91cc-ea63f16e8781"], "split": "test", "qid": "web_title-1051"}
+{"kind": "web_title", "query": "[Bán lẻ] 1 chai nước ép trái nhàu Tahitian Noni Juice", "expected": ["008ee54a-2a10-4338-b7cb-3372da2bf64d"], "split": "dev", "qid": "web_title-1052"}
+{"kind": "web_title", "query": "Đặc điểm gà Đông tảo", "expected": ["00210d05-294c-4817-8928-4c2d175b7a3e"], "split": "dev", "qid": "web_title-1053"}
+{"kind": "web_title", "query": "Buy Decathlon Domyos", "expected": ["01215819-5f4d-433d-9536-f4aec9e2260c"], "split": "dev", "qid": "web_title-1054"}
+{"kind": "web_title", "query": "Legrand Pop-Up Box 8 Modules, BRush Stainless Steel Finish", "expected": ["011eb0da-2594-497f-81cd-63774dea1c9a"], "split": "dev", "qid": "web_title-1055"}
+{"kind": "web_title", "query": "iPad Pro 11-inch M2 2022", "expected": ["015aaee0-b9dd-4d7b-9eaf-f6e66a13ac5a"], "split": "test", "qid": "web_title-1056"}
+{"kind": "web_title", "query": "Peugeot 5008 Rooftop Carrier Cross Bars (2010-2017)", "expected": ["02967237-1b71-4c6e-947b-ee658e3421d1"], "split": "test", "qid": "web_title-1057"}
+{"kind": "web_title", "query": "freudenberg simrit seals, freudenberg simrit catalogues, freudenberg simrit  supplier", "expected": ["0176dbf9-6ece-4731-9328-4bfe9bc7c867"], "split": "test", "qid": "web_title-1058"}
+{"kind": "web_title", "query": "Thuốc Osimertinib 80mg được lựa chọn chỉ định đầu tay cho ung thư phổi", "expected": ["01528fea-87de-4aab-85ec-9b3c27758abc"], "split": "test", "qid": "web_title-1059"}
+{"kind": "web_title", "query": "Agate Bookend", "expected": ["0dcaa4b1-154e-4c8f-8040-59eb3dfe23c4"], "split": "test", "qid": "web_title-1060"}
+{"kind": "web_title", "query": "Thức ăn cho chó lớn dạng sốt Pedigree", "expected": ["022bfec8-5e56-44d8-920f-c1c8c3307ce6"], "split": "test", "qid": "web_title-1061"}
+{"kind": "web_title", "query": "Xiaomi Redmi 13C: Tính năng, thông số kỹ thuật và đánh giá cập nhật", "expected": ["0312bc85-ae1a-485e-bbe8-ad83a4df51d8"], "split": "test", "qid": "web_title-1062"}
+{"kind": "web_title", "query": "Xúc xích Đức, lịch sử và những câu chuyện", "expected": ["00f968c2-4540-4ede-91ff-35daf68f48f6"], "split": "dev", "qid": "web_title-1063"}
+{"kind": "web_title", "query": "Relove Second hand Online shop Dior silk scarf", "expected": ["03d7bd16-43a9-42fd-b940-78e8c76d1535"], "split": "test", "qid": "web_title-1064"}
+{"kind": "web_title", "query": "Chiêm ngưỡng Ferrari Portofino", "expected": ["02bd6f67-81cf-460b-b9d1-54fe9c073612"], "split": "dev", "qid": "web_title-1065"}
+{"kind": "web_title", "query": "Kenwood DMX7525S 6.92\" HD Wireless CarPlay Head Unit", "expected": ["0284499d-d8b6-4990-a257-e936a547b998"], "split": "test", "qid": "web_title-1066"}
+{"kind": "web_title", "query": "Toyota 62-8FD30 Diesel Forklift", "expected": ["0e01484a-3129-4b83-9c41-d0198dae5cbf"], "split": "dev", "qid": "web_title-1067"}
+{"kind": "web_title", "query": "Ingenuity ConvertMe Swing-2-Seat, Nash", "expected": ["0265eeb4-3876-4241-a946-d5aa108e6b88"], "split": "dev", "qid": "web_title-1068"}
+{"kind": "web_title", "query": "0160D020ON/-V Hydac lọc thủy lực đường áp", "expected": ["0472fdb2-0eac-4af7-825c-bb9b2062cb8e"], "split": "dev", "qid": "web_title-1069"}
+{"kind": "web_title", "query": "Văn hóa Việt trong màu nâu sồng và áo ngũ thân", "expected": ["02a6ec81-d76c-4e85-907b-3d3085547875"], "split": "test", "qid": "web_title-1070"}
+{"kind": "web_title", "query": "Infusionstechnik, Infusionssysteme BeneFusion nDS", "expected": ["00a715c8-4fa2-4840-831f-1d38d3752bfa"], "split": "dev", "qid": "web_title-1071"}
+{"kind": "web_title", "query": "Quan Âm Để Xe Hơi, Ô Tô Ngồi Tự Tại", "expected": ["02763e4d-caab-49ad-a3c8-3e5f9849ee76"], "split": "dev", "qid": "web_title-1072"}
+{"kind": "web_title", "query": "Ammonite White & Turquoise 19-Piece Dinner Set Luminarc", "expected": ["0e1e262b-648a-4c10-ad8e-a22d8bbff3ef"], "split": "dev", "qid": "web_title-1073"}
+{"kind": "web_title", "query": "Xe Máy Sym Galaxy 50cc Chính Hãng", "expected": ["0ddb0994-2f84-4062-8a2b-dbdeb99d8d5b"], "split": "dev", "qid": "web_title-1074"}
+{"kind": "web_title", "query": "Negroni: a foolproof recipe", "expected": ["0442736e-8e23-40ae-9d5a-da0d337d81e8"], "split": "test", "qid": "web_title-1075"}
+{"kind": "web_title", "query": "Shop Aurora 3P Tent & Footprint", "expected": ["03a2fef5-cdac-4a94-aa72-f7d0804aab40"], "split": "dev", "qid": "web_title-1076"}
+{"kind": "web_title", "query": "SHIMANO XTR FD-M9050 Di2 Front Derailleur (3 x 11)", "expected": ["00d3405f-357c-47ae-a2ea-4dafaced08d8"], "split": "test", "qid": "web_title-1077"}
+{"kind": "web_title", "query": "Armstrong Mineral Fiber Ceiling Tile at ₹ 44/square feet", "expected": ["02305030-c6af-4d40-b99f-4474f1acabb9"], "split": "dev", "qid": "web_title-1078"}
+{"kind": "web_title", "query": "OCEAN NUTRITION", "expected": ["0370fa21-f4c0-4eae-9357-62e15de547e7"], "split": "dev", "qid": "web_title-1079"}
+{"kind": "web_title", "query": "Tượng đài Trần Hưng Đạo", "expected": ["01b77fe3-1cb3-4d50-b4ec-e27bcccbf0c9"], "split": "dev", "qid": "web_title-1080"}
+{"kind": "web_title", "query": "Cách Nấu Canh Mồng Tơi Đơn Giản Mà Ngon, Ngọt Mát", "expected": ["013192a2-063d-4111-9ef8-6ebaafb96cdd"], "split": "test", "qid": "web_title-1081"}
+{"kind": "web_title", "query": "Mens Nike Alphafly 3", "expected": ["0e1c96ff-c2e3-4aa0-bfb1-1176c4570a2f"], "split": "test", "qid": "web_title-1082"}
+{"kind": "web_title", "query": "ABUS Granit XPlus 540/160HB U-Lock 300mm + Bracket SH B", "expected": ["039cd0a6-ee6a-497e-a5f5-561493e804fb"], "split": "test", "qid": "web_title-1083"}
+{"kind": "web_title", "query": "7 Plus", "expected": ["038dc37f-6dc5-4c9b-abaf-566e094fa0ec"], "split": "test", "qid": "web_title-1084"}
+{"kind": "web_title", "query": "20 BỘ TAM SỰ BẰNG ĐỒNG đẹp nhất", "expected": ["028023b2-2e9f-4e03-a38f-d3930f51ff7d"], "split": "dev", "qid": "web_title-1085"}
+{"kind": "web_title", "query": "IKEA Sarita Curtains (sheer) 2, Furniture & Home Living, Home Decor,  Curtains & Blinds on Carousell", "expected": ["007aedb0-04b0-4d85-9cda-e6abe476adbc"], "split": "test", "qid": "web_title-1086"}
+{"kind": "web_title", "query": "Liebherr L 586 XPower® wheel loaders with adaptive working lighting for  Dowideit Recycling GmbH", "expected": ["03159afa-11d1-40ae-89c6-7a68f3547482"], "split": "test", "qid": "web_title-1087"}
+{"kind": "web_title", "query": "Sàn Gỗ Nhựa TPWood HD140x25-4S Wood", "expected": ["0185dc51-b873-44b3-849e-562997cc4de6"], "split": "test", "qid": "web_title-1088"}
+{"kind": "web_title", "query": "Ống Eppendorf", "expected": ["0de5cfd9-723e-4315-b1ff-946f658383dc"], "split": "test", "qid": "web_title-1089"}
+{"kind": "web_title", "query": "Văn hóa Đông Sơn", "expected": ["0db7f673-13b6-4737-8f1f-86fbc0120b67"], "split": "dev", "qid": "web_title-1090"}
+{"kind": "web_title", "query": "Áo gile phản quang túi hộp 2 khoá các màu", "expected": ["004e7423-f083-4f77-bc91-609033d9019c"], "split": "test", "qid": "web_title-1091"}
+{"kind": "web_title", "query": "New DT Swiss ARC 1100 38 Wheelset", "expected": ["01d27a49-7e5e-4cd8-bb60-5665197b3598"], "split": "dev", "qid": "web_title-1092"}
+{"kind": "web_title", "query": "BỒN CẦU TOTO 2 KHỐI CS735DT3 TOTO NAM ANH", "expected": ["0227808f-c447-4717-ad33-885c08081cb0"], "split": "dev", "qid": "web_title-1093"}
+{"kind": "web_title", "query": "VỎ/LỐP XE ĐẠP CORSA PRO", "expected": ["01259de6-868f-438a-a23a-f073025a5c1f"], "split": "test", "qid": "web_title-1094"}
+{"kind": "web_title", "query": "Monocef SB 500/250mg Injection 1's", "expected": ["0226cb98-9b7d-4be7-80e1-3f449573d81a"], "split": "dev", "qid": "web_title-1095"}
+{"kind": "web_title", "query": "Thuốc Espumisan 40mg/ml trị đầy hơi, khó tiêu (30ml)", "expected": ["022a55e0-2ecd-4851-ae33-fe8c836f7825"], "split": "test", "qid": "web_title-1096"}
+{"kind": "web_title", "query": "CEFOPERAZONE MKP 2G", "expected": ["03c0869f-16c5-44fe-9058-e834221c8aa9"], "split": "test", "qid": "web_title-1097"}
+{"kind": "web_title", "query": "Khẩu trang y tế Famapro Extra 4 lớp màu trắng hộp 50 cái", "expected": ["0406b95e-3843-4385-a86e-e89bc2a15f16"], "split": "test", "qid": "web_title-1098"}
+{"kind": "web_title", "query": "Creon Pancrelipase Capsule in New Delhi, Karmic Meditraders Private Limited", "expected": ["020c932d-30f8-4e36-a752-ab4b224aed69"], "split": "dev", "qid": "web_title-1099"}
+{"kind": "web_title", "query": "Bosch Brake Pad Front BP1349 (0986 494 427) For Mercedes Benz Gl-Class", "expected": ["03cf298d-3bba-420a-a035-93a50ed57e45"], "split": "test", "qid": "web_title-1100"}
+{"kind": "web_title", "query": "Găng tay cao su cách điện 1000v I THỦY LỰC TRƯỜNG AN", "expected": ["009d15c5-7aa0-44f7-a9c4-1df66df47e89"], "split": "test", "qid": "web_title-1101"}
+{"kind": "web_title", "query": "Euvixim 100mg điều trị nhiễm khuẩn hô hấp tiết niệu hộp 20 viên", "expected": ["01d49ce7-fbcf-4a06-9c08-025a402cdb49"], "split": "test", "qid": "web_title-1102"}
+{"kind": "web_title", "query": "Kệ trang trí, kệ để cây cảnh mặt tròn giá rẻ TR255", "expected": ["0220277b-e781-4ceb-85f9-6be21184cdb6"], "split": "test", "qid": "web_title-1103"}
+{"kind": "web_title", "query": "Azithromycin, trị nhiễm khuẩn đường hô hấp trên và dưới, nhiễm khuẩn da", "expected": ["029746d1-ba01-47ab-b5b3-6531752ee4b9"], "split": "dev", "qid": "web_title-1104"}
+{"kind": "web_title", "query": "GM TH350 High Energy Green Transmission Rebuild Deluxe Kit 1969-1986", "expected": ["027b53dc-f6ff-4a43-8cfa-e72d101a806f"], "split": "dev", "qid": "web_title-1105"}
+{"kind": "web_title", "query": "Đen Bình Định", "expected": ["01aaf988-0e15-49e3-825e-d908c467080e"], "split": "test", "qid": "web_title-1106"}
+{"kind": "web_title", "query": "Nặng lòng với cồng chiêng Tây Nguyên", "expected": ["040ed2c8-ecfa-4b2b-9da1-e9d043e71ed0"], "split": "test", "qid": "web_title-1107"}
+{"kind": "web_title", "query": "Tã dán ngừa hăm Mamamy có tốt không? Có những size nào?", "expected": ["046d3399-8cd7-4e7d-a2d6-7c29ad944ba6"], "split": "test", "qid": "web_title-1108"}
+{"kind": "web_title", "query": "Haworth Fern Chair UK", "expected": ["0ddd9a91-2315-4286-bcb8-31698e6fd7bf"], "split": "dev", "qid": "web_title-1109"}
+{"kind": "web_title", "query": "Thu hồi thuốc giảm đau, hạ sốt Aspirin pH8 500mg", "expected": ["02e731ba-254d-4c5d-b522-a23033f40308"], "split": "dev", "qid": "web_title-1110"}
+{"kind": "web_title", "query": "SÚNG NGẮN K59", "expected": ["02f35612-eece-4907-a967-9af457f30dab"], "split": "dev", "qid": "web_title-1111"}
+{"kind": "web_title", "query": "Invacare", "expected": ["044e476c-af9f-4013-88e9-057e01c3bdd6"], "split": "test", "qid": "web_title-1112"}
+{"kind": "web_title", "query": "Máy xúc lật Liebherr L 506 để bán từ Lithuania Raseiniai, NG51781", "expected": ["03be2058-de6b-47bf-bd34-a50ff91926e9"], "split": "test", "qid": "web_title-1113"}
+{"kind": "web_title", "query": "Ceftizoxime thuốc điều trị nhiễm khuẩn và những lưu ý khi sử dụng", "expected": ["03e652b4-6d85-49f2-a0b5-e398c8b86fad"], "split": "dev", "qid": "web_title-1114"}
+{"kind": "web_title", "query": "DT Swiss GRC 1400 SPLINE 42 Gravel Wheelset", "expected": ["0e08e631-1955-44c0-8bbf-864ea536f573"], "split": "dev", "qid": "web_title-1115"}
+{"kind": "web_title", "query": "Kalmar Electric Empty Container Handler", "expected": ["039be05d-8164-4e07-9982-ddd693efbdb5"], "split": "test", "qid": "web_title-1116"}
+{"kind": "web_title", "query": "Công dụng thuốc Pharnaraton", "expected": ["0091aac5-7bce-4c32-8104-2ed5857fe8eb"], "split": "dev", "qid": "web_title-1117"}
+{"kind": "web_title", "query": "FSA K-Force Carbon Di2 Compatible Seatpost 25.4x350 Offset 25mm Cannon", "expected": ["008a6bf8-48f9-432d-8064-9380d5071117"], "split": "dev", "qid": "web_title-1118"}
+{"kind": "web_title", "query": "Mứt Pha Chế Sầu Riêng Dona LA'BON 1kg", "expected": ["044c3989-5685-474f-8f69-bbed9cc9d585"], "split": "test", "qid": "web_title-1119"}
+{"kind": "web_title", "query": "Điểm danh các pho tượng Quan Âm Bồ Tát từ Bắc đến Nam", "expected": ["01bc4cdd-9141-4ad5-88a3-884c990b7896"], "split": "test", "qid": "web_title-1120"}
+{"kind": "web_title", "query": "Rượu Sapa", "expected": ["029b7f59-320c-431b-9319-ee35e319571b"], "split": "test", "qid": "web_title-1121"}
+{"kind": "web_title", "query": "Sika Boom®-420 Fire", "expected": ["0332c02f-b752-4cb0-9c9f-7701e0615985"], "split": "dev", "qid": "web_title-1122"}
+{"kind": "web_title", "query": "Efexor Xr 75mg Cap 14's", "expected": ["030317f8-e008-43e2-adf0-ce33aaea7020"], "split": "dev", "qid": "web_title-1123"}
+{"kind": "web_title", "query": "M.A.C Cosmetics Lip Pencil Spice 1.45g South Korea", "expected": ["0305ff9f-f172-45c1-9da0-5e2aa673fea0"], "split": "test", "qid": "web_title-1124"}
+{"kind": "web_title", "query": "Chầu Đệ tứ Khâm Sai là ai?", "expected": ["0deaa7b3-ec95-4be5-b22d-4d7735688c1b"], "split": "dev", "qid": "web_title-1125"}
+{"kind": "web_title", "query": "Test nhanh HIV 1/2 3.0 SD Bioline (Hàn Quốc)", "expected": ["0210e809-0d7d-4ca9-8eea-ea343db2eb27"], "split": "dev", "qid": "web_title-1126"}
+{"kind": "web_title", "query": "Xe đạp mini QT City 26 Inch", "expected": ["0412a7c5-3a1a-4ed8-9122-b9fdaadad804"], "split": "test", "qid": "web_title-1127"}
+{"kind": "web_title", "query": "Bình Nước Cắm Trại Nalgene Tritan Wmb 1L", "expected": ["01b07dea-8dd3-4376-9858-029c333d2e40"], "split": "dev", "qid": "web_title-1128"}
+{"kind": "web_title", "query": "Thuốc Stufort cap 400/25mg trị suy giảm mạch máu não giá bao nhiêu?", "expected": ["02f2c874-5e29-4039-8168-c5032ad863ee"], "split": "dev", "qid": "web_title-1129"}
+{"kind": "web_title", "query": "Escitalopram 10mg Mylan 10 vỉ x 10 viên", "expected": ["0e016ed4-57f1-4072-99dd-c76a4c51ad25"], "split": "dev", "qid": "web_title-1130"}
+{"kind": "web_title", "query": "Link Tải Miễn Phí Logo Công Đoàn Vector PNG, PDF, AI", "expected": ["0e078905-8241-4ceb-a235-d0c1272039a7"], "split": "test", "qid": "web_title-1131"}
+{"kind": "web_title", "query": "CHẢ VỊT VÂN ĐÌNH", "expected": ["0dc25ef7-3f78-4660-9958-5153c7ac0775"], "split": "dev", "qid": "web_title-1132"}
+{"kind": "web_title", "query": "Nhớt Hộp Số Tự Động AISIN AFW+ ATF 4 Lít ATFMT4S", "expected": ["00d0aa78-00b6-4bbe-a9ae-135d19e3ece2"], "split": "dev", "qid": "web_title-1133"}
+{"kind": "web_title", "query": "Marcy Home Gym System 150lb Weight Stack Machine", "expected": ["0462f8ab-288c-4232-be84-e33baebb0bb0"], "split": "dev", "qid": "web_title-1134"}
+{"kind": "web_title", "query": "Sac à dos de voyage 40L, Travel 500 Organizer noir", "expected": ["041aec2b-e652-4c04-8e02-d551f27eea15"], "split": "dev", "qid": "web_title-1135"}
+{"kind": "web_title", "query": "Cây sao giống", "expected": ["0e0ac0a5-50ab-4a56-93e9-e93a2422b53a"], "split": "test", "qid": "web_title-1136"}
+{"kind": "web_title", "query": "Gel tách huyết thanh hoạt động như thế nào?", "expected": ["027c53cb-9972-404a-b3bd-44b63c1c76c1"], "split": "test", "qid": "web_title-1137"}
+{"kind": "web_title", "query": "Mua nan tre làm đèn trung thu giá tốt, năm 2024", "expected": ["037d01d6-5b84-4ee1-b54f-37bd3a2d1be0"], "split": "test", "qid": "web_title-1138"}
+{"kind": "web_title", "query": "EUCATOL (Gói 15 viên kẹo ngậm)", "expected": ["02639537-5ef3-4437-b9c3-707ababf0272"], "split": "dev", "qid": "web_title-1139"}
+{"kind": "web_title", "query": "Thưởng thức khoai sọ Mán Mộc Châu ngọt lịm đốn tim bao người", "expected": ["00b0a2b5-4904-412b-b3ff-772a0c6a8d61"], "split": "dev", "qid": "web_title-1140"}
+{"kind": "web_title", "query": "OtterBox, Defender Series Pro Case for iPhone 15 Pro Max, Black", "expected": ["02176d65-15ff-4fa8-902d-fd68398c5ec8"], "split": "dev", "qid": "web_title-1141"}
+{"kind": "web_title", "query": "Vango Trangia MultiFuel Burner General Accessories Trangia", "expected": ["03b1e503-66fe-465a-98ba-a4b47f41118d"], "split": "test", "qid": "web_title-1142"}
+{"kind": "web_title", "query": "Oral Suspension in Sirmaur, Himachal Pradesh", "expected": ["00d44eb2-3bbf-48d0-802e-3b8c4fde0bc5"], "split": "test", "qid": "web_title-1143"}
+{"kind": "web_title", "query": "BLAM LIVE L165P", "expected": ["0df77613-c6d3-4ebb-9312-73089526a123"], "split": "test", "qid": "web_title-1144"}
+{"kind": "web_title", "query": "Prednison 5mg Uphace trị bệnh thấp khớp (Lọ 500 Viên)", "expected": ["006ebf32-2171-4a90-b3c9-c5dda30220ab"], "split": "test", "qid": "web_title-1145"}
+{"kind": "web_title", "query": "ROG Phone 6 Pro (18GB", "expected": ["00c89cff-1738-498c-b695-835853fd0216"], "split": "test", "qid": "web_title-1146"}
+{"kind": "web_title", "query": "Nông dân Việt dạy Tây lội bùn cày ruộng, thổi lửa nấu cơm", "expected": ["02ade31d-ed4d-4ce6-888d-1231dca247ee"], "split": "test", "qid": "web_title-1147"}
+{"kind": "web_title", "query": "Pioneer AVH-2550NEX", "expected": ["01275325-5d77-42dd-b103-bb71b93bbf0f"], "split": "test", "qid": "web_title-1148"}
+{"kind": "web_title", "query": "Máy Đo Điện Trở Đất Kyoritsu 4105A 2000Ω Chính Hãng", "expected": ["03b378a6-561d-4d5c-baef-4c1d948ae9db"], "split": "test", "qid": "web_title-1149"}
+{"kind": "web_title", "query": "Khám Phá Cách Pha Chế Cocktail Manhattan", "expected": ["0deb9416-a13e-44e2-97b3-d4d9e12f48a9"], "split": "dev", "qid": "web_title-1150"}
+{"kind": "web_title", "query": "Shimano XT M8120 Trail pedal review", "expected": ["038220d6-443d-42e9-8d82-31e7e865b83f"], "split": "test", "qid": "web_title-1151"}
+{"kind": "web_title", "query": "Caterpillar D4H: Prices, Specs, and Trends", "expected": ["03f6c860-21c1-4690-a173-5b7fe3ed07cd"], "split": "dev", "qid": "web_title-1152"}
+{"kind": "web_title", "query": "Bạt Nhựa PVC, Bạt PVC Tarpaulin Chống Nước Độ Bền Cao", "expected": ["0438c12c-2d04-4f19-b500-1134e7502c34"], "split": "test", "qid": "web_title-1153"}
+{"kind": "web_title", "query": "Fellowes Powershred W11C 11-Sheet Personal Cross-Cut Paper Shredder", "expected": ["0e031241-75e3-4d22-a620-cd56936b4c5c"], "split": "test", "qid": "web_title-1154"}
+{"kind": "web_title", "query": "Hộp Mực CT201610 Cho Máy in Xerox P205B M205b M205f M205Fw", "expected": ["0e159ef9-7a8d-41c3-b176-cafa0b100a0b"], "split": "test", "qid": "web_title-1155"}
+{"kind": "web_title", "query": "Đồng hồ Cartier Drive de Cartier Large WSNM0009", "expected": ["030f2fcb-cfb7-4014-80f2-9ea701989efc"], "split": "dev", "qid": "web_title-1156"}
+{"kind": "web_title", "query": "Bánh trôi, bánh chay và hương vị cổ truyền Tết Hàn thực", "expected": ["009e5c4a-c53c-4ac5-a26c-6a5b36eaf5ab"], "split": "dev", "qid": "web_title-1157"}
+{"kind": "web_title", "query": "Trồng rau cần nước bằng phương pháp thủy canh", "expected": ["0dd42be3-e98f-4d49-bf9a-30994bd79d01"], "split": "dev", "qid": "web_title-1158"}
+{"kind": "web_title", "query": "Balo Mèo Phi Hành Gia Hello Cat Cationic", "expected": ["027e02ea-fc8e-483b-9069-fb7348e3e822"], "split": "dev", "qid": "web_title-1159"}
+{"kind": "web_title", "query": "Vũ khí văn hóa Đông Sơn", "expected": ["00d19fae-fa5a-4516-b0b1-85b4cda8c620"], "split": "dev", "qid": "web_title-1160"}
+{"kind": "web_title", "query": "Khánh Hòa: Công nhận 11 nghề truyền thống, làng nghề, làng nghề truyền  thống", "expected": ["0dddb624-ab1d-41a7-8310-c7c3e95ce0bc"], "split": "dev", "qid": "web_title-1161"}
+{"kind": "web_title", "query": "Nike Nigeria 2026 Dri-FIT Energy Top", "expected": ["027796c3-dbaa-4e27-9fa4-14fd9c47a71f"], "split": "test", "qid": "web_title-1162"}
+{"kind": "web_title", "query": "CQ Mart Food & Wine. Nước Yến Sào Khánh Hòa Sanest Lon 190ml", "expected": ["0109bfef-d4aa-4928-b8d4-da5f3ca69f58"], "split": "dev", "qid": "web_title-1163"}
+{"kind": "web_title", "query": "Mobin sườn MSD xăng cơ", "expected": ["03316c50-73fd-4d17-b093-8ba54946c050"], "split": "test", "qid": "web_title-1164"}
+{"kind": "web_title", "query": "Bình cầu 3 cổ, đáy tròn, Iwaki-Japan", "expected": ["0048e40a-c857-4723-8275-54873fc7c6fe"], "split": "dev", "qid": "web_title-1165"}
+{"kind": "web_title", "query": "Dao nhà trường đã về (Dao đầu bếp Victorinox Fibrox 20cm siêu rộng)", "expected": ["00fa1b52-fb97-4438-b52b-8b66c07be477"], "split": "test", "qid": "web_title-1166"}
+{"kind": "web_title", "query": "Debridat 100mg(Trimebutine)H2vỉ x15viên", "expected": ["0dde7b70-8a1d-4277-b632-79e73498ab92"], "split": "test", "qid": "web_title-1167"}
+{"kind": "web_title", "query": "Top 10 phuộc xe máy Wave giúp xe chạy CỰC ÊM", "expected": ["044b6d11-1cba-45f8-abe2-154de8dbd64f"], "split": "dev", "qid": "web_title-1168"}
+{"kind": "web_title", "query": "Playstation Move PSMove V2 Motion Controller Twin pack CECH-ZCM2E– Console  Central", "expected": ["023f16d1-1163-4d1d-8a6b-bff0d4f7f699"], "split": "test", "qid": "web_title-1169"}
+{"kind": "web_title", "query": "99988: Losi from Scorchio showroom, Losi Baja Rey 1/10 mk1 ...", "expected": ["02922cff-bd6d-41c6-a52b-f797dffb251d"], "split": "dev", "qid": "web_title-1170"}
+{"kind": "web_title", "query": "Vali kéo Octolite Neo", "expected": ["010a1baa-949b-4ecc-9f4b-39c6188c065a"], "split": "dev", "qid": "web_title-1171"}
+{"kind": "web_title", "query": "Balô dã ngoại Arpenaz NH100 10L", "expected": ["0e28d54d-58ae-4ac6-b614-80f58de6f313"], "split": "test", "qid": "web_title-1172"}
+{"kind": "web_title", "query": "Van hằng nhiệt Toyota chính hãng nhập khẩu", "expected": ["0dc7831e-fad8-4b99-a535-64c77c67f903"], "split": "test", "qid": "web_title-1173"}
+{"kind": "web_title", "query": "Wacom Cintiq 24 Creative Pen Display Tablet", "expected": ["02524d0b-c4f7-4366-9033-12aa96fe30ee"], "split": "dev", "qid": "web_title-1174"}
+{"kind": "web_title", "query": "Báo Giá] Ống Luồn Dây Điện Đàn Hồi", "expected": ["033cb9da-730f-41d2-8fab-9bc9ca8d668a"], "split": "dev", "qid": "web_title-1175"}
+{"kind": "web_title", "query": "Impact Diet Whey", "expected": ["0dbe583d-49d4-4366-b4c3-858cea79e497"], "split": "dev", "qid": "web_title-1176"}
+{"kind": "web_title", "query": "TOP 25 Trần Thạch Cao đẹp sang trọng của 2020", "expected": ["0046d377-3c04-41bd-9284-5faef1222466"], "split": "test", "qid": "web_title-1177"}
+{"kind": "web_title", "query": "Áo Khoác Khuyến mãi", "expected": ["01226992-a497-49bb-bded-c62f282f7bcd"], "split": "test", "qid": "web_title-1178"}
+{"kind": "web_title", "query": "Munchkin Smash Up", "expected": ["00e253a5-4e6d-4138-9752-819c3cd06487"], "split": "dev", "qid": "web_title-1179"}
+{"kind": "web_title", "query": "Ắc quy Bosch 70AH", "expected": ["0198f4a5-74ee-44c8-899a-5d7f0e8ef95d"], "split": "test", "qid": "web_title-1180"}
+{"kind": "web_title", "query": "Bồn Cầu Nắp Điện Tử AC-4005/CW-KB22AVN INAX", "expected": ["00945cb6-c73a-4827-a8ee-5af1ad9c7de6"], "split": "test", "qid": "web_title-1181"}
+{"kind": "web_title", "query": "Tiểu cảnh thủy tinh treo", "expected": ["00ed594f-f334-4092-9967-2641536313ed"], "split": "test", "qid": "web_title-1182"}
+{"kind": "web_title", "query": "Vỏ Pirelli 100/80-17 Angel City", "expected": ["00d1cf64-7e72-4a4c-a1a7-4bc1f6ae1605"], "split": "dev", "qid": "web_title-1183"}
+{"kind": "web_title", "query": "So sánh bê tông bọt và bê tông khí chưng áp (AAC)", "expected": ["00ed3fe9-fd8c-4614-ba6c-7b4fc00ebb59"], "split": "test", "qid": "web_title-1184"}
+{"kind": "web_title", "query": "Cân đồng hồ Nhơn Hòa 100Kg NHS-100", "expected": ["00e74ff0-04a7-425c-af2d-60e8693a0808"], "split": "test", "qid": "web_title-1185"}
+{"kind": "web_title", "query": "Buy Mefenamic Acid 500mg Tablets Online Today", "expected": ["0460f777-0240-4036-83ef-2a7edc21e82a"], "split": "dev", "qid": "web_title-1186"}
+{"kind": "web_title", "query": "Cách NỘM XOÀI XANH HẢI SẢN chuẩn công thức ngon líu lưỡi", "expected": ["009552e8-4fd3-414c-99fe-6d8fd0d6734d"], "split": "dev", "qid": "web_title-1187"}
+{"kind": "web_title", "query": "Sập thờ gỗ Gụ trạm Tứ Linh Chân 20 chuẩn phong thuỷ ST868", "expected": ["02a824af-12fc-4080-935b-4cea464ea050"], "split": "dev", "qid": "web_title-1188"}
+{"kind": "web_title", "query": "Mua chăn thổ cẩm Sapa giá tốt ở đâu? -", "expected": ["0472c91b-7f07-443e-90c2-40283145264e"], "split": "test", "qid": "web_title-1189"}
+{"kind": "web_title", "query": "3MF154 Mass Air Flow Sensor", "expected": ["00fdb9f9-4887-44c0-ab69-34c646ad9a79"], "split": "test", "qid": "web_title-1190"}
+{"kind": "web_title", "query": "Khóa cáp kết hợp du lịch đạt chuẩn TSA", "expected": ["006562c6-fdb3-48a0-9f3c-21aa9548bb85"], "split": "dev", "qid": "web_title-1191"}
+{"kind": "web_title", "query": "Lễ ăn hỏi gồm 9 tráp sang trọng", "expected": ["0df8df5f-dd6c-44ce-8fe8-f9720a25b471"], "split": "dev", "qid": "web_title-1192"}
+{"kind": "web_title", "query": "Kính mặt dựng kết hợp cửa sổ mở hất", "expected": ["00ab7541-29ea-4752-bd0d-6cbcc3290b8d"], "split": "test", "qid": "web_title-1193"}
+{"kind": "web_title", "query": "Chậu Rửa Bát Inox 2 Hố Hafele 567.24.437", "expected": ["02fed13b-1ad3-4c17-940b-6a043b6723be"], "split": "test", "qid": "web_title-1194"}
+{"kind": "web_title", "query": "Làng lư đồng An Hội", "expected": ["047823d5-72b2-4fa9-b7a0-5214eeb790dc"], "split": "dev", "qid": "web_title-1195"}
+{"kind": "web_title", "query": "Terpin-U Usa-Nic (C/200v) tại shopthuocsi", "expected": ["01a62cfc-9a65-405f-a754-82f3c188327c"], "split": "test", "qid": "web_title-1196"}
+{"kind": "web_title", "query": "Lồng Đèn Phật Giáo Hình Bát Giác Phong Cách Hàn Quốc Độc Đáo", "expected": ["027349cb-1b2c-4576-b2d2-ee259b9181bc"], "split": "test", "qid": "web_title-1197"}
+{"kind": "web_title", "query": "SPIRAMYCIN 1.500.000I.U", "expected": ["00738433-7d3e-4bf3-8cd7-b4ed06377d88"], "split": "dev", "qid": "web_title-1198"}
+{"kind": "web_title", "query": "streptomycin for poultry", "expected": ["0339f5b0-3e87-4b2b-8f54-a826b5bc9d58"], "split": "test", "qid": "web_title-1199"}
+{"kind": "web_title", "query": "iFlight ProTek35 3.5\" 4S CineWhoop w/ DJI Digital HD FPV System", "expected": ["00d488b2-5804-40db-9106-b742121a172b"], "split": "dev", "qid": "web_title-1200"}
+{"kind": "web_title", "query": "Ga Trải Giường Y Tế, Tấm Drap Có Chun, 90x1,9m", "expected": ["0175a415-7b69-4989-9a29-6afa6fb19e66"], "split": "dev", "qid": "web_title-1201"}
+{"kind": "web_title", "query": "Điều Hòa Chính Xác", "expected": ["0479a1cb-2cb1-49db-b6a6-9bc78dc7e5b4"], "split": "dev", "qid": "web_title-1202"}
+{"kind": "web_title", "query": "MOTUL MC CARE C2 CHAIN LUBE ROAD", "expected": ["03c4297b-e397-43f2-938a-91399f918449"], "split": "dev", "qid": "web_title-1203"}
+{"kind": "web_title", "query": "Ống Luồn Dây Điện", "expected": ["03a96be9-6380-4549-94f2-89e7937cd1c3"], "split": "dev", "qid": "web_title-1204"}
+{"kind": "web_title", "query": "Cao dán giảm đau Salonpas Pain Relief Patch hộp 5 miếng", "expected": ["02aecbc1-0e47-40c1-a688-2ee035df7ab4"], "split": "dev", "qid": "web_title-1205"}
+{"kind": "web_title", "query": "Osprey UltraLight Roll Organizer, Poppy Orange, One Size", "expected": ["020ac2fd-1023-453e-9b00-c2ac46ce83e2"], "split": "dev", "qid": "web_title-1206"}
+{"kind": "web_title", "query": "Inderal (Propranolol Hydrochloride)", "expected": ["03b4b75c-86cf-4de6-9f00-81e09bd1a9c7"], "split": "dev", "qid": "web_title-1207"}
+{"kind": "web_title", "query": "Giá chậu rồng xưa Archives", "expected": ["023419c2-e5c0-4594-a7ea-1036d458dfed"], "split": "dev", "qid": "web_title-1208"}
+{"kind": "web_title", "query": "Thuốc Tiger Balm Plaster-RD cải thiện triệu chứng đau nhức mỏi cơ", "expected": ["0dfe92cf-b7b4-40d9-a186-a39b5eb1fad4"], "split": "test", "qid": "web_title-1209"}
+{"kind": "web_title", "query": "Berberin ( 10 vỉ x 10 viên)", "expected": ["0e1e3319-ca04-464a-865f-cfc788948720"], "split": "test", "qid": "web_title-1210"}
+{"kind": "web_title", "query": "Màn hình E-Ink trên Kindle sẽ không bao giờ lỗi thời.", "expected": ["022b4199-bba0-4a02-9af3-36b5cc3801fd"], "split": "dev", "qid": "web_title-1211"}
+{"kind": "web_title", "query": "Đá ruby sao cực hiếm trị giá gần 100 triệu USD", "expected": ["02c8c2f4-bb9c-4856-8d92-bb2c75cff343"], "split": "dev", "qid": "web_title-1212"}
+{"kind": "web_title", "query": "Sản phẩm Loa ô tô Hertz DSK 165.3", "expected": ["001af48c-b33d-43d3-a572-e85356f569c6"], "split": "dev", "qid": "web_title-1213"}
+{"kind": "web_title", "query": "Men's Summer Style Guide with Helly Hansen", "expected": ["0e01a303-cc0e-4525-a442-91edb3a13d72"], "split": "dev", "qid": "web_title-1214"}
+{"kind": "web_title", "query": "Súng tiểu liên Thompson", "expected": ["00c97d6a-65b5-42f1-b5ca-d941faa2e5a7"], "split": "dev", "qid": "web_title-1215"}

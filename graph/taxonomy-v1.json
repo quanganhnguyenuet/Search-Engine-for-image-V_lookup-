@@ -1,0 +1,699 @@
+{
+ "version": "taxonomy-v1",
+ "status": "frozen",
+ "note": "Two levels: L1 groups, L2 categories. Every entity gets exactly one L2 (IS_A ProductType -> IN Category). priority marks the four priority groups of PLAN_PRODUCTS_V1.md decision 9. Descriptions are boundary rules for labelling, not marketing copy. ProductType (below L2) carries the fine type, e.g. 'Má phanh ô tô', 'Lọc gió', 'Groupset'.",
+ "priority_groups": {
+  "fashion_jewelry": "Trang sức và quần áo cao cấp",
+  "phones": "Điện thoại",
+  "tech": "Đồ công nghệ",
+  "vehicle_parts": "Phụ tùng phương tiện giao thông"
+ },
+ "categories": [
+  {
+   "id": "drug",
+   "name": "Thuốc & dược phẩm",
+   "children": [
+    {
+     "id": "drug.oral",
+     "name": "Tân dược dạng uống",
+     "description": "Viên, nang, gói, siro dùng đường uống, kê đơn hoặc không kê đơn."
+    },
+    {
+     "id": "drug.injection",
+     "name": "Thuốc tiêm & dịch truyền",
+     "description": "Thuốc tiêm, bột pha tiêm, dịch truyền, thuốc cản quang."
+    },
+    {
+     "id": "drug.topical",
+     "name": "Thuốc dùng ngoài",
+     "description": "Kem, gel, cao dán, thuốc nhỏ mắt/mũi/tai, thuốc đặt."
+    },
+    {
+     "id": "drug.vaccine_bio",
+     "name": "Vắc-xin & sinh phẩm",
+     "description": "Vắc-xin, huyết thanh, sinh phẩm điều trị."
+    },
+    {
+     "id": "drug.supplement",
+     "name": "Thực phẩm chức năng & vitamin",
+     "description": "Vitamin, khoáng chất, thực phẩm bảo vệ sức khỏe; không phải thuốc điều trị."
+    },
+    {
+     "id": "drug.traditional",
+     "name": "Đông dược & thuốc dân tộc",
+     "description": "Thuốc y học cổ truyền, cao, trà thuốc, dược liệu."
+    },
+    {
+     "id": "drug.veterinary",
+     "name": "Thuốc thú y",
+     "description": "Thuốc, vắc-xin, thuốc tẩy giun dùng cho vật nuôi."
+    }
+   ]
+  },
+  {
+   "id": "medical",
+   "name": "Thiết bị & vật tư y tế",
+   "children": [
+    {
+     "id": "medical.home",
+     "name": "Thiết bị y tế gia đình",
+     "description": "Nhiệt kế, máy đo huyết áp, SpO2, máy xông, cân sức khỏe dùng tại nhà."
+    },
+    {
+     "id": "medical.clinical",
+     "name": "Thiết bị y tế chuyên dụng",
+     "description": "Máy gây mê, kính hiển vi phẫu thuật, máy tiệt trùng, thiết bị bệnh viện/nha khoa."
+    },
+    {
+     "id": "medical.consumable",
+     "name": "Vật tư tiêu hao & xét nghiệm",
+     "description": "Que test, ống nghiệm, catheter, băng gạc, khẩu trang y tế, dụng cụ phẫu thuật dùng một lần."
+    },
+    {
+     "id": "medical.mobility",
+     "name": "Dụng cụ hỗ trợ & chỉnh hình",
+     "description": "Khung tập đi, nạng, nẹp, đai, chân giả, xe lăn."
+    }
+   ]
+  },
+  {
+   "id": "beauty",
+   "name": "Mỹ phẩm & chăm sóc cá nhân",
+   "children": [
+    {
+     "id": "beauty.skincare",
+     "name": "Chăm sóc da",
+     "description": "Sữa rửa mặt, kem dưỡng, chống nắng, tẩy trang."
+    },
+    {
+     "id": "beauty.makeup",
+     "name": "Trang điểm",
+     "description": "Kem nền, son, phấn, dụng cụ trang điểm."
+    },
+    {
+     "id": "beauty.hair",
+     "name": "Chăm sóc tóc",
+     "description": "Dầu gội, dầu xả, thuốc nhuộm, tạo kiểu."
+    },
+    {
+     "id": "beauty.oral",
+     "name": "Chăm sóc răng miệng",
+     "description": "Kem đánh răng, nước súc miệng, bàn chải."
+    },
+    {
+     "id": "beauty.fragrance",
+     "name": "Nước hoa",
+     "description": "Nước hoa, xịt thơm cơ thể."
+    },
+    {
+     "id": "beauty.hygiene",
+     "name": "Vệ sinh cá nhân",
+     "description": "Sữa tắm, khử mùi, dao cạo, tã người lớn, dung dịch vệ sinh."
+    }
+   ]
+  },
+  {
+   "id": "fashion",
+   "name": "Thời trang & trang sức",
+   "priority": "fashion_jewelry",
+   "children": [
+    {
+     "id": "fashion.clothing",
+     "name": "Quần áo",
+     "description": "Áo, quần, váy, đồ thể thao mặc hằng ngày. Trang phục truyền thống thuộc culture.costume."
+    },
+    {
+     "id": "fashion.shoes",
+     "name": "Giày dép",
+     "description": "Giày, dép, sandal, ủng."
+    },
+    {
+     "id": "fashion.bags",
+     "name": "Túi, balo & vali",
+     "description": "Túi xách, ví, balo thời trang, vali. Balo trekking thuộc outdoor.camping."
+    },
+    {
+     "id": "fashion.jewelry",
+     "name": "Trang sức",
+     "description": "Nhẫn, dây chuyền, vòng, bông tai, vàng bạc đá quý làm trang sức."
+    },
+    {
+     "id": "fashion.watches",
+     "name": "Đồng hồ đeo tay",
+     "description": "Đồng hồ đeo tay cơ, quartz. Đồng hồ thông minh thuộc phone.wearable; đồng hồ treo tường thuộc home.decor."
+    },
+    {
+     "id": "fashion.accessories",
+     "name": "Phụ kiện thời trang",
+     "description": "Kính mắt, khăn, mũ, thắt lưng."
+    }
+   ]
+  },
+  {
+   "id": "phone",
+   "name": "Điện thoại & thiết bị di động",
+   "priority": "phones",
+   "children": [
+    {
+     "id": "phone.handset",
+     "name": "Điện thoại",
+     "description": "Điện thoại di động, smartphone, điện thoại gập."
+    },
+    {
+     "id": "phone.tablet",
+     "name": "Máy tính bảng & máy đọc sách",
+     "description": "Tablet, Kindle."
+    },
+    {
+     "id": "phone.accessory",
+     "name": "Phụ kiện di động",
+     "description": "Ốp lưng, củ sạc, cáp, sạc dự phòng, giá đỡ điện thoại."
+    },
+    {
+     "id": "phone.wearable",
+     "name": "Thiết bị đeo thông minh",
+     "description": "Đồng hồ thông minh, vòng đeo, thẻ định vị (AirTag)."
+    }
+   ]
+  },
+  {
+   "id": "tech",
+   "name": "Đồ công nghệ & điện tử",
+   "priority": "tech",
+   "children": [
+    {
+     "id": "tech.computer",
+     "name": "Máy tính & laptop",
+     "description": "Laptop, máy bàn, máy trạm, mini PC, TV box."
+    },
+    {
+     "id": "tech.display",
+     "name": "Màn hình, TV & máy chiếu",
+     "description": "Màn hình máy tính, TV, máy chiếu, màn chiếu."
+    },
+    {
+     "id": "tech.audio",
+     "name": "Âm thanh",
+     "description": "Tai nghe, loa, amply, micro. Loa ô tô thuộc car.accessory."
+    },
+    {
+     "id": "tech.camera",
+     "name": "Máy ảnh, camera & drone",
+     "description": "Máy ảnh, ống kính, action cam, flycam dân dụng. UAV quân sự/hàng không thuộc transport.aircraft."
+    },
+    {
+     "id": "tech.printer",
+     "name": "Máy in, máy scan & mực",
+     "description": "Máy in, máy scan, hộp mực, mực in."
+    },
+    {
+     "id": "tech.peripheral",
+     "name": "Linh kiện & phụ kiện máy tính",
+     "description": "Bàn phím, chuột, hub, ổ cứng, linh kiện PC."
+    },
+    {
+     "id": "tech.gaming",
+     "name": "Máy chơi game & thiết bị game",
+     "description": "Máy chơi game, tay cầm, ghế gaming."
+    },
+    {
+     "id": "tech.smart_home",
+     "name": "Thiết bị mạng & nhà thông minh",
+     "description": "Router, camera an ninh, công tắc/ổ cắm thông minh."
+    }
+   ]
+  },
+  {
+   "id": "car",
+   "name": "Ô tô, xe tải & phụ tùng ô tô",
+   "children": [
+    {
+     "id": "car.vehicle",
+     "name": "Ô tô & xe tải",
+     "description": "Xe ô tô, xe khách, xe tải, bán tải nguyên chiếc. Xe công trình thuộc industrial.construction."
+    },
+    {
+     "id": "car.parts",
+     "name": "Phụ tùng ô tô",
+     "priority": "vehicle_parts",
+     "description": "Động cơ, hộp số, ly hợp, phanh, treo, lái, lọc, gương, ca-lăng, đèn, kính, thân vỏ của ô tô và xe tải. Loại cụ thể (má phanh, lọc gió...) ghi ở ProductType."
+    },
+    {
+     "id": "car.tyres_wheels",
+     "name": "Lốp & mâm ô tô",
+     "priority": "vehicle_parts",
+     "description": "Lốp, săm, mâm/la-zăng ô tô và xe tải."
+    },
+    {
+     "id": "car.fluids_electrical",
+     "name": "Dầu nhớt, dung dịch & điện ô tô",
+     "priority": "vehicle_parts",
+     "description": "Dầu động cơ, dầu hộp số, nước làm mát, dầu phanh, nước rửa kính, ắc-quy, bugi, cảm biến, cầu chì ô tô."
+    },
+    {
+     "id": "car.accessory",
+     "name": "Phụ kiện & đồ chơi ô tô",
+     "priority": "vehicle_parts",
+     "description": "Thảm, giá đỡ, loa, màn hình, camera hành trình, baga, hóa chất chăm sóc xe."
+    }
+   ]
+  },
+  {
+   "id": "moto",
+   "name": "Xe máy, mô tô & phụ tùng",
+   "children": [
+    {
+     "id": "moto.vehicle",
+     "name": "Xe máy & mô tô",
+     "description": "Xe máy, mô tô, xe tay ga, mô tô điện nguyên chiếc."
+    },
+    {
+     "id": "moto.parts",
+     "name": "Phụ tùng xe máy",
+     "priority": "vehicle_parts",
+     "description": "Nồi, sên, nhông, pô, phanh, phuộc, đèn, dàn áo, lọc của xe máy và mô tô."
+    },
+    {
+     "id": "moto.tyres_wheels",
+     "name": "Lốp & mâm xe máy",
+     "priority": "vehicle_parts",
+     "description": "Lốp, săm, mâm xe máy và mô tô."
+    },
+    {
+     "id": "moto.fluids_electrical",
+     "name": "Nhớt, dung dịch & điện xe máy",
+     "priority": "vehicle_parts",
+     "description": "Nhớt, dầu láp, nước mát, ắc-quy, bugi xe máy."
+    },
+    {
+     "id": "moto.accessory",
+     "name": "Phụ kiện & đồ bảo hộ xe máy",
+     "priority": "vehicle_parts",
+     "description": "Mũ bảo hiểm, găng, baga, thùng, đồ chơi xe máy."
+    }
+   ]
+  },
+  {
+   "id": "bike",
+   "name": "Xe đạp & phụ tùng xe đạp",
+   "children": [
+    {
+     "id": "bike.vehicle",
+     "name": "Xe đạp & xe điện nhỏ",
+     "description": "Xe đạp, xe đạp điện, xe trượt, scooter nguyên chiếc."
+    },
+    {
+     "id": "bike.drivetrain",
+     "name": "Bộ truyền động & linh kiện xe đạp",
+     "priority": "vehicle_parts",
+     "description": "Groupset, đề, tay đề, giò đạp, sên, líp, phanh, pedal, motor trợ lực."
+    },
+    {
+     "id": "bike.frame_cockpit",
+     "name": "Khung, ghi-đông & yên xe đạp",
+     "priority": "vehicle_parts",
+     "description": "Khung, phuộc, ghi-đông, pô-tăng, cốt yên, yên."
+    },
+    {
+     "id": "bike.tyres_wheels",
+     "name": "Lốp & vành xe đạp",
+     "priority": "vehicle_parts",
+     "description": "Lốp, săm, vành, bộ bánh, băng lót vành xe đạp."
+    },
+    {
+     "id": "bike.accessory",
+     "name": "Phụ kiện xe đạp",
+     "priority": "vehicle_parts",
+     "description": "Bơm, khóa, đèn, chuông, giá đỡ, túi, đồng hồ xe đạp."
+    }
+   ]
+  },
+  {
+   "id": "transport",
+   "name": "Tàu thuyền & máy bay",
+   "children": [
+    {
+     "id": "transport.watercraft",
+     "name": "Tàu thuyền",
+     "description": "Tàu, thuyền, phà, mô tô nước."
+    },
+    {
+     "id": "transport.aircraft",
+     "name": "Máy bay & UAV",
+     "description": "Máy bay dân dụng/quân sự, UAV không phải flycam tiêu dùng."
+    }
+   ]
+  },
+  {
+   "id": "industrial",
+   "name": "Máy móc & thiết bị công nghiệp",
+   "children": [
+    {
+     "id": "industrial.construction",
+     "name": "Máy xây dựng & xe công trình",
+     "description": "Máy xúc, máy ủi, cẩu, máy khoan cọc, xe lu."
+    },
+    {
+     "id": "industrial.material_handling",
+     "name": "Xe nâng & thiết bị kho",
+     "description": "Xe nâng, xe nâng người, pallet, kệ kho."
+    },
+    {
+     "id": "industrial.power_tools",
+     "name": "Dụng cụ điện & dụng cụ cầm tay",
+     "description": "Máy khoan, máy cắt, máy cưa, ampe kìm, bút thử điện, dụng cụ sửa chữa."
+    },
+    {
+     "id": "industrial.pumps_hydraulics",
+     "name": "Bơm, máy nén & thủy lực",
+     "description": "Máy bơm, máy nén khí, lọc thủy lực, van."
+    },
+    {
+     "id": "industrial.electrical",
+     "name": "Thiết bị điện công nghiệp & năng lượng",
+     "description": "Inverter, ổn áp, tủ điện, rơ le, pin lưu trữ, tấm pin mặt trời, cáp."
+    },
+    {
+     "id": "industrial.agri_machinery",
+     "name": "Máy nông nghiệp",
+     "description": "Máy cày, máy gặt, máy cắt cỏ, máy phun thuốc."
+    },
+    {
+     "id": "industrial.safety",
+     "name": "Bảo hộ lao động & PCCC",
+     "description": "Bình chữa cháy, chăn chống cháy, áo phản quang, đồ bảo hộ."
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "name": "Nhà cửa & xây dựng",
+   "children": [
+    {
+     "id": "home.building_material",
+     "name": "Vật liệu xây dựng",
+     "description": "Xi măng, gạch, đá, cát, thép, keo dán gạch, chống thấm, sơn, bột trét."
+    },
+    {
+     "id": "home.electrical",
+     "name": "Thiết bị điện dân dụng",
+     "description": "Ổ cắm, công tắc, ống luồn dây, cầu dao gia đình."
+    },
+    {
+     "id": "home.lighting",
+     "name": "Đèn & chiếu sáng",
+     "description": "Bóng đèn, đèn LED, đèn trần, đèn bàn, đèn trang trí. Đèn thờ thuộc culture.worship; đèn Trung thu thuộc culture.festival."
+    },
+    {
+     "id": "home.sanitary_water",
+     "name": "Thiết bị vệ sinh & nước",
+     "description": "Bồn cầu, bồn rửa, bồn nước, máy lọc nước, sen vòi."
+    },
+    {
+     "id": "home.furniture",
+     "name": "Nội thất",
+     "description": "Tủ, bàn, ghế, giường, nệm, kệ."
+    },
+    {
+     "id": "home.decor",
+     "name": "Trang trí nhà cửa",
+     "description": "Thảm, rèm, bình hoa, đồng hồ treo tường, tranh trang trí không mang ý nghĩa thờ cúng."
+    }
+   ]
+  },
+  {
+   "id": "household",
+   "name": "Đồ gia dụng & nhà bếp",
+   "children": [
+    {
+     "id": "household.kitchenware",
+     "name": "Dụng cụ nhà bếp & bàn ăn",
+     "description": "Chảo, nồi, dao, chén đĩa, ly, khuôn."
+    },
+    {
+     "id": "household.appliance",
+     "name": "Điện gia dụng",
+     "description": "Nồi cơm điện, tủ lạnh, bàn ủi, máy pha cà phê, robot hút bụi, máy massage."
+    },
+    {
+     "id": "household.cleaning_storage",
+     "name": "Đồ dùng & vệ sinh nhà cửa",
+     "description": "Bột giặt, nước tẩy rửa, thùng nhựa, đồ lưu trữ."
+    }
+   ]
+  },
+  {
+   "id": "food",
+   "name": "Thực phẩm & đồ uống",
+   "children": [
+    {
+     "id": "food.dish",
+     "name": "Món ăn",
+     "description": "Món đã chế biến: bún, phở, lẩu, cháo, món kho, món nướng, đồ ăn nhanh."
+    },
+    {
+     "id": "food.cake_snack",
+     "name": "Bánh, kẹo & đồ ăn vặt",
+     "description": "Bánh truyền thống, bánh ngọt, kẹo, snack, mứt."
+    },
+    {
+     "id": "food.produce",
+     "name": "Rau, củ, quả & hạt",
+     "description": "Nông sản tươi hoặc khô chưa chế biến thành món."
+    },
+    {
+     "id": "food.meat_seafood",
+     "name": "Thịt, cá & hải sản",
+     "description": "Nguyên liệu thịt, cá, hải sản tươi, đông lạnh hoặc khô."
+    },
+    {
+     "id": "food.packaged",
+     "name": "Thực phẩm đóng gói & gia vị",
+     "description": "Mì gói, đồ hộp, gia vị, nước chấm, gạo đóng gói."
+    },
+    {
+     "id": "food.coffee_tea",
+     "name": "Cà phê & trà",
+     "description": "Cà phê, trà, đồ uống pha chế từ cà phê/trà."
+    },
+    {
+     "id": "food.drink",
+     "name": "Nước giải khát, nước ép & sữa",
+     "description": "Nước ép, sinh tố, nước ngọt, nước khoáng, sữa uống."
+    },
+    {
+     "id": "food.alcohol",
+     "name": "Bia & rượu",
+     "description": "Bia, rượu vang, rượu mạnh, rượu ngâm, rượu dân tộc."
+    }
+   ]
+  },
+  {
+   "id": "baby_toy",
+   "name": "Mẹ & bé, đồ chơi",
+   "children": [
+    {
+     "id": "baby_toy.baby",
+     "name": "Đồ dùng cho mẹ & bé",
+     "description": "Tã, sữa công thức, bình sữa, ti giả, xe đẩy, nôi."
+    },
+    {
+     "id": "baby_toy.toy",
+     "name": "Đồ chơi",
+     "description": "Đồ chơi trẻ em, xe điều khiển, súng đồ chơi, thú bông, đồ chơi gỗ."
+    },
+    {
+     "id": "baby_toy.game",
+     "name": "Board game & xếp hình",
+     "description": "Board game, cờ, puzzle, Lego."
+    }
+   ]
+  },
+  {
+   "id": "outdoor",
+   "name": "Thể thao & dã ngoại",
+   "children": [
+    {
+     "id": "outdoor.sports",
+     "name": "Dụng cụ thể thao",
+     "description": "Vợt, cầu, bóng, máy tập, tạ, đồ bơi."
+    },
+    {
+     "id": "outdoor.camping",
+     "name": "Cắm trại & dã ngoại",
+     "description": "Lều, bạt, balo trekking, bàn ghế dã ngoại, dây leo núi, đèn pin."
+    },
+    {
+     "id": "outdoor.travel",
+     "name": "Phụ kiện du lịch",
+     "description": "Túi du lịch, khóa hành lý, gối, túi đựng đồ."
+    }
+   ]
+  },
+  {
+   "id": "animal",
+   "name": "Thú cưng, chăn nuôi & thủy sản",
+   "children": [
+    {
+     "id": "animal.pet_food",
+     "name": "Thức ăn thú cưng",
+     "description": "Hạt, pate, bánh thưởng cho chó mèo, cá cảnh, bò sát."
+    },
+    {
+     "id": "animal.pet_supply",
+     "name": "Phụ kiện thú cưng",
+     "description": "Giường, balo, đồ chơi, vòng cổ, bể cá, dụng cụ nuôi cá cảnh."
+    },
+    {
+     "id": "animal.livestock",
+     "name": "Vật nuôi & giống vật nuôi",
+     "description": "Trâu, bò, lợn, gà, vịt, cá giống; con vật như sản phẩm."
+    },
+    {
+     "id": "animal.feed_aquaculture",
+     "name": "Thức ăn chăn nuôi & vật tư thủy sản",
+     "description": "Cám, premix, thức ăn thủy sản, dụng cụ đánh bắt và nuôi trồng thủy sản."
+    }
+   ]
+  },
+  {
+   "id": "agri",
+   "name": "Nông nghiệp & cây trồng",
+   "children": [
+    {
+     "id": "agri.seed_plant",
+     "name": "Cây giống & hạt giống",
+     "description": "Cây giống, hạt giống, lúa giống, cây cảnh."
+    },
+    {
+     "id": "agri.chemical",
+     "name": "Thuốc bảo vệ thực vật & phân bón",
+     "description": "Thuốc trừ sâu, trừ nấm, diệt cỏ, phân bón."
+    },
+    {
+     "id": "agri.supply",
+     "name": "Vật tư nông nghiệp",
+     "description": "Màng phủ, bạt ao, lưới, nhà màng, dụng cụ làm vườn."
+    }
+   ]
+  },
+  {
+   "id": "culture",
+   "name": "Văn hóa, tâm linh & thủ công",
+   "children": [
+    {
+     "id": "culture.worship",
+     "name": "Đồ thờ cúng",
+     "description": "Bàn thờ, tủ thờ, đèn thờ, lư hương, hương nến, câu đối thờ."
+    },
+    {
+     "id": "culture.statue_fengshui",
+     "name": "Tượng & vật phong thủy",
+     "description": "Tượng Phật, tượng thần, tỳ hưu, linh vật, đá phong thủy."
+    },
+    {
+     "id": "culture.votive",
+     "name": "Vàng mã & đồ cúng lễ",
+     "description": "Vàng mã, hình nhân, đồ cúng, mâm lễ."
+    },
+    {
+     "id": "culture.art",
+     "name": "Tranh, thư pháp & mỹ thuật",
+     "description": "Tranh dân gian, sơn mài, tranh thờ, thư pháp, tác phẩm mỹ thuật."
+    },
+    {
+     "id": "culture.craft",
+     "name": "Đồ thủ công mỹ nghệ",
+     "description": "Đồ mây tre đan, gốm sứ, đồ đồng, pha lê, khảm, dệt thổ cẩm."
+    },
+    {
+     "id": "culture.instrument",
+     "name": "Nhạc cụ",
+     "description": "Nhạc cụ dân tộc và hiện đại."
+    },
+    {
+     "id": "culture.antique",
+     "name": "Cổ vật, tiền cổ & sưu tầm",
+     "description": "Cổ vật, tiền cổ, tem, hiện vật bảo tàng."
+    },
+    {
+     "id": "culture.costume",
+     "name": "Trang phục truyền thống & lễ phục",
+     "description": "Áo dài, trang phục dân tộc, lễ phục tôn giáo."
+    },
+    {
+     "id": "culture.festival",
+     "name": "Đồ lễ hội & Tết",
+     "description": "Đèn Trung thu, đồ trang trí Tết, đồ rước lễ hội."
+    }
+   ]
+  },
+  {
+   "id": "office",
+   "name": "Văn phòng phẩm & học tập",
+   "children": [
+    {
+     "id": "office.stationery",
+     "name": "Văn phòng phẩm",
+     "description": "Bút, sổ, giấy, decal, dụng cụ vẽ."
+    },
+    {
+     "id": "office.books",
+     "name": "Sách & học liệu",
+     "description": "Sách giáo khoa, sách, tài liệu học tập."
+    },
+    {
+     "id": "office.packaging",
+     "name": "Bao bì & đóng gói",
+     "description": "Thùng carton, túi giấy, màng bọc."
+    }
+   ]
+  },
+  {
+   "id": "other",
+   "name": "Không phải sản phẩm & khác",
+   "children": [
+    {
+     "id": "other.place",
+     "name": "Địa điểm & công trình",
+     "description": "Địa danh, di tích, bến phà, công trình kiến trúc, cơ sở sản xuất."
+    },
+    {
+     "id": "other.military",
+     "name": "Vũ khí & khí tài quân sự",
+     "description": "Súng, bom, khí tài; không gồm đồ chơi."
+    },
+    {
+     "id": "other.scene",
+     "name": "Cảnh, hoạt động & con người",
+     "description": "Ảnh mô tả hoạt động, sự kiện hoặc con người thay vì một sản phẩm."
+    },
+    {
+     "id": "other.unclear",
+     "name": "Chưa xác định",
+     "description": "Bằng chứng không đủ để xếp loại; luôn đưa vào hàng đợi người duyệt."
+    }
+   ]
+  }
+ ],
+ "attributes": {
+  "market_tier": {
+   "applies_to": [
+    "fashion"
+   ],
+   "values": {
+    "luxury": "Hàng hiệu cao cấp (Gucci, Dior, Bvlgari, Cartier, Burberry...) hoặc trang sức kim loại quý/đá quý (vàng 18K trở lên, kim cương).",
+    "premium": "Thương hiệu tầm trung cao (Lululemon, Salomon, Carhartt...).",
+    "mass": "Hàng phổ thông, trang sức thời trang không dùng kim loại quý.",
+    "unknown": "Không đủ bằng chứng; vào hàng đợi người duyệt."
+   },
+   "sources": [
+    "brand tier (Brand.tier, duyệt theo từng hãng)",
+    "bằng chứng của entity: chất liệu, tiêu đề, mô tả"
+   ],
+   "priority_rule": "Nhóm ưu tiên 'trang sức và quần áo cao cấp' = fashion.* với market_tier = luxury; báo cáo riêng thêm phần còn lại của fashion."
+  }
+ },
+ "frozen_at": "2026-11-24",
+ "taxonomy_sha256": "e4b0113631beae979995dd5b85562f039b60aaaee5098ebcb9b531f9969709e4"
+}

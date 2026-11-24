@@ -1,0 +1,13 @@
+{
+ "version": 1,
+ "queries_sha256": "71c8dddd061f4819fb28fab90afac637689b53f6650185605931f23806ac64df",
+ "graph_fingerprint": "7e3bbb48aac0a2a15b3f9f38e1d0a6dbb0dfd1d027555f5cdf3b81e1f010909c",
+ "identity_review_fingerprint": "93f5c2c9c2cae720219657ea3a959d22631697090bc38e5d15dbae75efa8c35a",
+ "counts": {
+  "short/dev": 314,
+  "short/test": 302,
+  "web_title/dev": 301,
+  "web_title/test": 299
+ },
+ "note": "short rows are partly circular with short_aliases; web_title rows are not"
+}

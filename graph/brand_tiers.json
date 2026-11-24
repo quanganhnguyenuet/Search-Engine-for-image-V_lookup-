@@ -1,0 +1,287 @@
+{
+ "version": "brand-tiers-v1",
+ "brands": {
+  "brand:american-tourister": {
+   "name": "American Tourister",
+   "tier": "mass",
+   "votes": {
+    "mass": 2
+   },
+   "entities": 2,
+   "status": "proposed"
+  },
+  "brand:bellroy": {
+   "name": "Bellroy",
+   "tier": "premium",
+   "votes": {
+    "premium": 2,
+    "mass": 1
+   },
+   "entities": 3,
+   "status": "proposed"
+  },
+  "brand:burberry": {
+   "name": "Burberry",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:bvlgari": {
+   "name": "Bvlgari",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 3
+   },
+   "entities": 3,
+   "status": "proposed"
+  },
+  "brand:carhartt": {
+   "name": "Carhartt",
+   "tier": "premium",
+   "votes": {
+    "premium": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:cartier": {
+   "name": "Cartier",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:chanel": {
+   "name": "Chanel",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 2
+   },
+   "entities": 2,
+   "status": "proposed"
+  },
+  "brand:chrome-hearts": {
+   "name": "Chrome Hearts",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:converse": {
+   "name": "Converse",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:dior": {
+   "name": "Dior",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:fila": {
+   "name": "Fila",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:forclaz": {
+   "name": "Forclaz",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:goodr": {
+   "name": "Goodr",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:gucci": {
+   "name": "Gucci",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 2
+   },
+   "entities": 2,
+   "status": "proposed"
+  },
+  "brand:huy": {
+   "name": "Huy",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:keen": {
+   "name": "Keen",
+   "tier": "premium",
+   "votes": {
+    "premium": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:mardi-mercredi": {
+   "name": "Mardi Mercredi",
+   "tier": "premium",
+   "votes": {
+    "premium": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:mizuno": {
+   "name": "Mizuno",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:monos": {
+   "name": "Monos",
+   "tier": "premium",
+   "votes": {
+    "premium": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:new-balance": {
+   "name": "New Balance",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:nike": {
+   "name": "Nike",
+   "tier": "mass",
+   "votes": {
+    "mass": 5
+   },
+   "entities": 5,
+   "status": "proposed"
+  },
+  "brand:osprey": {
+   "name": "Osprey",
+   "tier": "premium",
+   "votes": {
+    "premium": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:pierre-cardin": {
+   "name": "Pierre Cardin",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:pnj": {
+   "name": "PNJ",
+   "tier": "luxury",
+   "votes": {
+    "luxury": 3
+   },
+   "entities": 3,
+   "status": "proposed"
+  },
+  "brand:roncato": {
+   "name": "Roncato",
+   "tier": "premium",
+   "votes": {
+    "premium": 2
+   },
+   "entities": 2,
+   "status": "proposed"
+  },
+  "brand:samsonite": {
+   "name": "Samsonite",
+   "tier": "premium",
+   "votes": {
+    "premium": 4,
+    "mass": 1
+   },
+   "entities": 5,
+   "status": "proposed"
+  },
+  "brand:swarovski": {
+   "name": "Swarovski",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:the-north-face": {
+   "name": "The North Face",
+   "tier": "premium",
+   "votes": {
+    "premium": 2
+   },
+   "entities": 2,
+   "status": "proposed"
+  },
+  "brand:tomtoc": {
+   "name": "Tomtoc",
+   "tier": "mass",
+   "votes": {
+    "mass": 1
+   },
+   "entities": 1,
+   "status": "proposed"
+  },
+  "brand:under-armour": {
+   "name": "Under Armour",
+   "tier": "unknown",
+   "votes": {
+    "mass": 1,
+    "premium": 1
+   },
+   "entities": 2,
+   "status": "proposed"
+  },
+  "brand:uniqlo": {
+   "name": "Uniqlo",
+   "tier": "mass",
+   "votes": {
+    "mass": 3
+   },
+   "entities": 3,
+   "status": "proposed"
+  }
+ }
+}

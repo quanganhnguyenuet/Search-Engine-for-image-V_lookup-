@@ -16,7 +16,6 @@ class Settings(BaseSettings):
     api_host: str = "0.0.0.0"
     api_port: int = 8000
 
-    database_url: str = "postgresql+asyncpg://visualseek:visualseek@localhost:5432/visualseek"
     qdrant_url: str = "http://localhost:6333"
     qdrant_api_key: str = ""
 

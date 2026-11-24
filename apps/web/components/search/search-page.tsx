@@ -3,6 +3,7 @@
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { SearchTracePanel } from "@/components/search/search-trace";
 import { API_URL, type SearchResponse, searchText } from "@/lib/search";
 import { cn } from "@/lib/utils";
 
@@ -152,7 +153,12 @@ export function SearchPage() {
             </Button>
           </div>
         )}
-        {state.kind === "done" && <Results data={state.data} clientMs={state.clientMs} onPick={run} />}
+        {state.kind === "done" && (
+          <>
+            <SearchTracePanel data={state.data} />
+            <Results data={state.data} clientMs={state.clientMs} onPick={run} />
+          </>
+        )}
       </section>
     </main>
   );
@@ -207,7 +213,12 @@ function Results({
         </div>
         <Timings timings={data.timings} clientMs={clientMs} />
       </div>
-      {data.results.length === 0 ? (
+      {data.results.length === 0 && data.trace.status === "no_target" ? (
+        <p className="rounded-lg border border-dashed p-6 text-sm text-muted-foreground">
+          {data.trace.values.map((value) => value.label).join(", ") || "Hãng này"} không còn sản phẩm
+          nào khác ngoài {data.trace.origins.map((node) => node.label).join(", ")} trong dữ liệu.
+        </p>
+      ) : data.results.length === 0 ? (
         <p className="rounded-lg border border-dashed p-6 text-sm text-muted-foreground">
           Không có ảnh phù hợp. Thử bỏ bớt chi tiết hoặc dùng tên sản phẩm.
         </p>
@@ -247,6 +258,8 @@ function Results({
   );
 }
 
+const TIERS: Record<string, string> = { luxury: "cao cấp", premium: "tầm trung cao", mass: "phổ thông" };
+
 function PlanChips({ data }: { data: SearchResponse }) {
   const { plan } = data;
   const chips: { label: string; tone?: "brand" | "warn" }[] = [];
@@ -257,7 +270,12 @@ function PlanChips({ data }: { data: SearchResponse }) {
   for (const name of anchors) chips.push({ label: `Loại trừ: ${name}`, tone: "warn" });
   if (plan.hops) chips.push({ label: `${plan.hops} sản phẩm liên quan` });
   if (plan.dense_seed) chips.push({ label: "Khớp gần đúng" });
-  if (plan.grouped) chips.push({ label: "Chia đều theo sản phẩm" });
+  const byCategory = (data.trace.category?.groups.length ?? 0) > 1;
+  if (plan.grouped && !byCategory) chips.push({ label: "Chia đều theo sản phẩm" });
+  const category = data.trace.category;
+  for (const { label } of category?.categories ?? []) chips.push({ label: `Loại hàng: ${label}`, tone: "brand" });
+  for (const tier of category?.tiers ?? []) chips.push({ label: `Hạng: ${TIERS[tier] ?? tier}`, tone: "brand" });
+  if (byCategory) chips.push({ label: "Chia đều theo loại hàng" });
   if (!chips.length) chips.push({ label: "Tìm theo nội dung" });
   return (
     <ul className="flex flex-wrap gap-1.5" aria-label="Cách hệ thống hiểu câu">

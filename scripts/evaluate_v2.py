@@ -140,9 +140,9 @@ def extras(row: dict, results: list[dict]) -> dict:
 
 # ---- run -----------------------------------------------------------------------------------
 def run(args: argparse.Namespace) -> None:
-    rows = load(EVAL / f"{args.split}.jsonl")
-    warmup = load(EVAL / "warmup.jsonl")
-    manifest = json.loads((EVAL / "manifest.json").read_text(encoding="utf-8"))
+    rows = load(args.eval / f"{args.split}.jsonl")
+    warmup = load(args.eval / "warmup.jsonl")
+    manifest = json.loads((args.eval / "manifest.json").read_text(encoding="utf-8"))
     order = list(range(len(rows)))
     random.Random(SEED).shuffle(order)
     url = args.api.rstrip("/") + "/api/v1/search/text"
@@ -292,6 +292,7 @@ def main() -> None:
     sub = parser.add_subparsers(dest="cmd", required=True)
     p_run = sub.add_parser("run")
     p_run.add_argument("--split", choices=["dev", "test"], default="dev")
+    p_run.add_argument("--eval", type=Path, default=EVAL, help="eval set directory")
     p_run.add_argument("--api", default="http://127.0.0.1:8000")
     p_run.add_argument("--timeout", type=float, default=2.0)
     p_run.add_argument("--label", default="")

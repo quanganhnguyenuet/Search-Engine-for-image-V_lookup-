@@ -1,4 +1,4 @@
-"""Qdrant collection schema and the single ``query_points`` request used per search."""
+"""Qdrant collection schema, ranking and branch scores for search traces."""
 
 from __future__ import annotations
 
@@ -13,8 +13,17 @@ from visualseek_retrieval.lexical import SparseVector
 COLLECTION = "products_v1_images"
 DENSE = "doc"
 SPARSE = "sparse"
+IMAGE = "img"  # SigLIP2 image tower, see scripts/embed_images.py
+IMAGE_DIM = 768
 POINT_NAMESPACE = uuid.UUID("7b1d1f0e-3c55-4c1e-9a52-6a0f4f1d2b3c")
-PAYLOAD_INDEXES = ("entity_ids", "brand_ids", "domain")
+PAYLOAD_INDEXES = (
+    "entity_ids",
+    "brand_ids",
+    "domain",
+    "categories",
+    "category_l1s",
+    "market_tiers",
+)
 
 
 def point_id(asset_id: str) -> str:
@@ -37,6 +46,30 @@ def ensure_collection(client: QdrantClient, name: str = COLLECTION) -> None:
         client.create_payload_index(name, key, field_schema=models.PayloadSchemaType.KEYWORD)
 
 
+def ensure_image_vector(client: QdrantClient, name: str = COLLECTION) -> bool:
+    """Add the SigLIP2 ``img`` vector to an existing collection; True if it was created.
+
+    Stored as float16: the source vectors are float16 already, so nothing is lost and the
+    vector takes half the RAM of float32 on the free tier.
+    """
+    vectors = client.get_collection(name).config.params.vectors
+    if isinstance(vectors, dict) and IMAGE in vectors:
+        existing = vectors[IMAGE]
+        if existing.size != IMAGE_DIM or existing.distance != models.Distance.COSINE:
+            raise RuntimeError(f"{name}.{IMAGE} exists with an unexpected schema: {existing}")
+        return False
+    client.create_vector_name(
+        name,
+        IMAGE,
+        models.DenseVectorNameConfig(
+            dense=models.DenseVectorConfig(
+                size=IMAGE_DIM, distance=models.Distance.COSINE, datatype=models.Datatype.FLOAT16
+            )
+        ),
+    )
+    return True
+
+
 @dataclass
 class EntityBoosts:
     """Entity sets from spotting (S1) and graph expansion (S2) that shape the score."""
@@ -47,13 +80,37 @@ class EntityBoosts:
     w_seed: float = 1.0
     w_hop: float = 0.5
     w_anchor: float = 2.0
+    # B2 category intent: a soft prior on payload ``categories`` / ``market_tiers``.
+    categories: list[str] = field(default_factory=list)
+    tiers: list[str] = field(default_factory=list)
+    w_category: float = 0.0
+    w_tier: float = 0.0
+    category_prefetch: bool = False
+    graph_prefetch: bool = True
 
     def targets(self) -> list[str]:
         return sorted(set(self.seeds) | set(self.hops))
 
+    def score(self, entity_ids: list[str]) -> float:
+        entities = set(entity_ids)
+        return (
+            (self.w_seed if entities.intersection(self.seeds) else 0.0)
+            + (self.w_hop if entities.intersection(self.hops) else 0.0)
+            - (self.w_anchor if entities.intersection(self.anchors) else 0.0)
+        )
+
+    def category_score(self, categories: list[str], tiers: list[str]) -> float:
+        return (self.w_category if set(categories) & set(self.categories) else 0.0) + (
+            self.w_tier if set(tiers) & set(self.tiers) else 0.0
+        )
+
 
 def _in(entity_ids: list[str]) -> models.FieldCondition:
     return models.FieldCondition(key="entity_ids", match=models.MatchAny(any=entity_ids))
+
+
+def _field_in(key: str, values: list[str]) -> models.FieldCondition:
+    return models.FieldCondition(key=key, match=models.MatchAny(any=values))
 
 
 def build_request(
@@ -63,6 +120,7 @@ def build_request(
     *,
     depth: int = 100,
     filter_brand: str | None = None,
+    blocked_assets: list[str] | None = None,
 ) -> dict:
     """Arguments for ``query_points``/``query_points_groups``: one round-trip per query."""
     channels = [
@@ -74,12 +132,20 @@ def build_request(
         ),
     ]
     targets = boosts.targets()
-    if targets:
+    if targets and boosts.graph_prefetch:
         # Guarantees candidates for spotted/expanded entities even when content search misses them.
         channels.append(
             models.Prefetch(
                 query=dense, using=DENSE, filter=models.Filter(must=[_in(targets)]), limit=depth
             )
+        )
+    if boosts.categories and boosts.w_category and boosts.category_prefetch:
+        # Candidates of the asked category even when the text channels rank them low.
+        must = [_field_in("categories", boosts.categories)]
+        if boosts.tiers:
+            must.append(_field_in("market_tiers", boosts.tiers))
+        channels.append(
+            models.Prefetch(query=dense, using=DENSE, filter=models.Filter(must=must), limit=depth)
         )
     fused = models.Prefetch(
         prefetch=channels, query=models.FusionQuery(fusion=models.Fusion.RRF), limit=depth * 2
@@ -91,20 +157,73 @@ def build_request(
         terms.append(models.MultExpression(mult=[boosts.w_hop, _in(boosts.hops)]))
     if boosts.anchors:
         terms.append(models.MultExpression(mult=[-boosts.w_anchor, _in(boosts.anchors)]))
+    if boosts.categories and boosts.w_category:
+        terms.append(
+            models.MultExpression(
+                mult=[boosts.w_category, _field_in("categories", boosts.categories)]
+            )
+        )
+    if boosts.tiers and boosts.w_tier:
+        terms.append(
+            models.MultExpression(mult=[boosts.w_tier, _field_in("market_tiers", boosts.tiers)])
+        )
     query = (
         models.FormulaQuery(formula=models.SumExpression(sum=terms))
         if len(terms) > 1
         else models.FusionQuery(fusion=models.Fusion.RRF)
     )
+    query_filter = _filter(filter_brand, blocked_assets)
     if len(terms) == 1:
         # Without boosts the fusion itself is the final query; no extra nesting level.
-        return {"prefetch": channels, "query": query, "query_filter": _brand(filter_brand)}
-    return {"prefetch": [fused], "query": query, "query_filter": _brand(filter_brand)}
+        return {"prefetch": channels, "query": query, "query_filter": query_filter}
+    return {"prefetch": [fused], "query": query, "query_filter": query_filter}
 
 
-def _brand(brand_id: str | None) -> models.Filter | None:
-    if not brand_id:
+def _filter(brand_id: str | None, blocked_assets: list[str] | None) -> models.Filter | None:
+    if not brand_id and not blocked_assets:
         return None
     return models.Filter(
         must=[models.FieldCondition(key="brand_ids", match=models.MatchValue(value=brand_id))]
+        if brand_id
+        else None,
+        must_not=[models.HasIdCondition(has_id=[point_id(asset) for asset in blocked_assets])]
+        if blocked_assets
+        else None,
     )
+
+
+def _channel_name(channel: models.Prefetch) -> str:
+    if channel.using == SPARSE:
+        return "sparse"
+    conditions = channel.filter.must if channel.filter else []
+    if any(getattr(c, "key", None) == "categories" for c in conditions):
+        return "category_prefetch"
+    return "graph_prefetch" if conditions else "dense"
+
+
+def branch_scores(client: QdrantClient, collection: str, request: dict) -> dict:
+    """Replay the ranker's prefetches as one batch to expose their raw scores and ranks."""
+    channels = request["prefetch"]
+    if isinstance(request["query"], models.FormulaQuery):
+        channels = channels[0].prefetch
+    queries = []
+    for channel in channels:
+        filters = [value for value in (channel.filter, request["query_filter"]) if value]
+        queries.append(
+            models.QueryRequest(
+                query=channel.query,
+                using=channel.using,
+                filter=models.Filter(must=filters) if filters else None,
+                limit=channel.limit,
+                with_payload=False,
+            )
+        )
+    names = [_channel_name(channel) for channel in channels]
+    responses = client.query_batch_points(collection, requests=queries)
+    return {
+        name: {
+            str(point.id): {"rank": rank, "score": point.score}
+            for rank, point in enumerate(response.points, start=1)
+        }
+        for name, response in zip(names, responses, strict=True)
+    }

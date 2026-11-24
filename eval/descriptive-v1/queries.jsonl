@@ -1,0 +1,114 @@
+{"qid": "a001", "kind": "attribute", "query": "chuột máy tính màu trắng", "object": "chuột máy tính", "attribute": "màu trắng", "split": "dev"}
+{"qid": "a002", "kind": "attribute", "query": "chuột không dây màu đen", "object": "chuột máy tính", "attribute": "màu đen", "split": "test"}
+{"qid": "a003", "kind": "attribute", "query": "bàn phím cơ màu trắng", "object": "bàn phím", "attribute": "màu trắng", "split": "dev"}
+{"qid": "a004", "kind": "attribute", "query": "bàn phím có đèn led nhiều màu", "object": "bàn phím", "attribute": "đèn LED nhiều màu", "split": "test"}
+{"qid": "a005", "kind": "attribute", "query": "tai nghe chụp tai màu đen", "object": "tai nghe chụp tai", "attribute": "màu đen", "split": "dev"}
+{"qid": "a006", "kind": "attribute", "query": "tai nghe màu trắng", "object": "tai nghe", "attribute": "màu trắng", "split": "test"}
+{"qid": "a007", "kind": "attribute", "query": "laptop vỏ màu bạc", "object": "laptop", "attribute": "vỏ màu bạc", "split": "dev"}
+{"qid": "a008", "kind": "attribute", "query": "điện thoại màu xanh", "object": "điện thoại", "attribute": "màu xanh", "split": "test"}
+{"qid": "a009", "kind": "attribute", "query": "điện thoại nắp gập", "object": "điện thoại", "attribute": "kiểu nắp gập", "split": "dev"}
+{"qid": "a010", "kind": "attribute", "query": "áo khoác màu đỏ", "object": "áo khoác", "attribute": "màu đỏ", "split": "test"}
+{"qid": "a011", "kind": "attribute", "query": "áo thun màu trắng", "object": "áo thun", "attribute": "màu trắng", "split": "dev"}
+{"qid": "a012", "kind": "attribute", "query": "áo len màu xám", "object": "áo len", "attribute": "màu xám", "split": "test"}
+{"qid": "a013", "kind": "attribute", "query": "đầm màu đen", "object": "đầm / váy", "attribute": "màu đen", "split": "dev"}
+{"qid": "a014", "kind": "attribute", "query": "váy họa tiết hoa", "object": "đầm / váy", "attribute": "họa tiết hoa", "split": "test"}
+{"qid": "a015", "kind": "attribute", "query": "giày thể thao màu trắng", "object": "giày thể thao", "attribute": "màu trắng", "split": "dev"}
+{"qid": "a016", "kind": "attribute", "query": "giày da màu nâu", "object": "giày da", "attribute": "màu nâu", "split": "test"}
+{"qid": "a017", "kind": "attribute", "query": "balo màu đen", "object": "balo", "attribute": "màu đen", "split": "dev"}
+{"qid": "a018", "kind": "attribute", "query": "vali kéo màu bạc", "object": "vali", "attribute": "màu bạc", "split": "test"}
+{"qid": "a019", "kind": "attribute", "query": "vali màu xanh", "object": "vali", "attribute": "màu xanh", "split": "dev"}
+{"qid": "a020", "kind": "attribute", "query": "bình nước bằng inox", "object": "bình nước", "attribute": "inox (thép không gỉ)", "split": "test"}
+{"qid": "a021", "kind": "attribute", "query": "bình giữ nhiệt màu hồng", "object": "bình giữ nhiệt", "attribute": "màu hồng", "split": "dev"}
+{"qid": "a022", "kind": "attribute", "query": "nồi cơm điện màu trắng", "object": "nồi cơm điện", "attribute": "màu trắng", "split": "test"}
+{"qid": "a023", "kind": "attribute", "query": "chảo chống dính màu đỏ", "object": "chảo", "attribute": "màu đỏ", "split": "dev"}
+{"qid": "a024", "kind": "attribute", "query": "ghế gỗ", "object": "ghế", "attribute": "bằng gỗ", "split": "test"}
+{"qid": "a025", "kind": "attribute", "query": "ghế văn phòng màu đen", "object": "ghế văn phòng", "attribute": "màu đen", "split": "dev"}
+{"qid": "a026", "kind": "attribute", "query": "tủ gỗ màu nâu sẫm", "object": "tủ", "attribute": "gỗ màu nâu sẫm", "split": "test"}
+{"qid": "a027", "kind": "attribute", "query": "bàn gỗ mặt tròn", "object": "bàn", "attribute": "bằng gỗ, mặt tròn", "split": "dev"}
+{"qid": "a028", "kind": "attribute", "query": "tượng phật bằng gỗ", "object": "tượng Phật", "attribute": "bằng gỗ", "split": "test"}
+{"qid": "a029", "kind": "attribute", "query": "tượng bằng đồng", "object": "tượng", "attribute": "bằng đồng", "split": "dev"}
+{"qid": "a030", "kind": "attribute", "query": "tượng sứ màu trắng", "object": "tượng", "attribute": "sứ trắng", "split": "test"}
+{"qid": "a031", "kind": "attribute", "query": "đèn thờ bằng đồng", "object": "đèn thờ", "attribute": "bằng đồng", "split": "dev"}
+{"qid": "a032", "kind": "attribute", "query": "bình gốm men xanh", "object": "bình gốm", "attribute": "men màu xanh", "split": "test"}
+{"qid": "a033", "kind": "attribute", "query": "chậu cây bằng gốm", "object": "chậu cây", "attribute": "bằng gốm", "split": "dev"}
+{"qid": "a034", "kind": "attribute", "query": "nhẫn vàng", "object": "nhẫn", "attribute": "vàng (kim loại vàng)", "split": "test"}
+{"qid": "a035", "kind": "attribute", "query": "nhẫn đính đá màu xanh", "object": "nhẫn", "attribute": "đá màu xanh", "split": "dev"}
+{"qid": "a036", "kind": "attribute", "query": "vòng tay bạc", "object": "vòng tay", "attribute": "bằng bạc", "split": "test"}
+{"qid": "a037", "kind": "attribute", "query": "đồng hồ đeo tay dây da", "object": "đồng hồ đeo tay", "attribute": "dây da", "split": "dev"}
+{"qid": "a038", "kind": "attribute", "query": "đồng hồ đeo tay mặt màu xanh", "object": "đồng hồ đeo tay", "attribute": "mặt số màu xanh", "split": "test"}
+{"qid": "a039", "kind": "attribute", "query": "đồng hồ treo tường hình tròn", "object": "đồng hồ treo tường", "attribute": "hình tròn", "split": "dev"}
+{"qid": "a040", "kind": "attribute", "query": "xe ô tô màu đỏ", "object": "ô tô", "attribute": "màu đỏ", "split": "test"}
+{"qid": "a041", "kind": "attribute", "query": "xe ô tô màu trắng", "object": "ô tô", "attribute": "màu trắng", "split": "dev"}
+{"qid": "a042", "kind": "attribute", "query": "xe tải màu xanh", "object": "xe tải", "attribute": "màu xanh", "split": "test"}
+{"qid": "a043", "kind": "attribute", "query": "xe đạp màu đen", "object": "xe đạp", "attribute": "màu đen", "split": "dev"}
+{"qid": "a044", "kind": "attribute", "query": "lốp xe đạp viền nâu", "object": "lốp xe đạp", "attribute": "thành lốp màu nâu", "split": "test"}
+{"qid": "a045", "kind": "attribute", "query": "mâm xe màu đen", "object": "mâm (vành) xe", "attribute": "màu đen", "split": "dev"}
+{"qid": "a046", "kind": "attribute", "query": "vỉ thuốc màu bạc", "object": "vỉ thuốc", "attribute": "vỉ màu bạc", "split": "test"}
+{"qid": "a047", "kind": "attribute", "query": "viên nang hai màu", "object": "viên nang", "attribute": "hai màu", "split": "dev"}
+{"qid": "a048", "kind": "attribute", "query": "viên thuốc màu vàng", "object": "viên thuốc", "attribute": "màu vàng", "split": "test"}
+{"qid": "a049", "kind": "attribute", "query": "hộp thuốc màu xanh lá", "object": "hộp thuốc", "attribute": "màu xanh lá", "split": "dev"}
+{"qid": "a050", "kind": "attribute", "query": "lọ thuốc nhỏ mắt màu trắng", "object": "lọ thuốc nhỏ mắt", "attribute": "màu trắng", "split": "test"}
+{"qid": "a051", "kind": "attribute", "query": "chai thủy tinh màu nâu", "object": "chai / lọ thủy tinh", "attribute": "màu nâu", "split": "dev"}
+{"qid": "a052", "kind": "attribute", "query": "bánh màu xanh lá", "object": "bánh", "attribute": "màu xanh lá", "split": "test"}
+{"qid": "a053", "kind": "attribute", "query": "bún nước dùng màu đỏ", "object": "bún", "attribute": "nước dùng màu đỏ", "split": "dev"}
+{"qid": "a054", "kind": "attribute", "query": "nước ép màu cam", "object": "nước ép", "attribute": "màu cam", "split": "test"}
+{"qid": "a055", "kind": "attribute", "query": "thảm màu xám", "object": "thảm", "attribute": "màu xám", "split": "dev"}
+{"qid": "a056", "kind": "attribute", "query": "gạch ốp vân đá trắng", "object": "gạch ốp", "attribute": "vân đá màu trắng", "split": "test"}
+{"qid": "a057", "kind": "attribute", "query": "kính bơi màu xanh", "object": "kính bơi", "attribute": "màu xanh", "split": "dev"}
+{"qid": "a058", "kind": "attribute", "query": "vợt cầu lông màu đỏ", "object": "vợt cầu lông", "attribute": "màu đỏ", "split": "test"}
+{"qid": "a059", "kind": "attribute", "query": "tranh sơn mài nền đen", "object": "tranh sơn mài", "attribute": "nền đen", "split": "dev"}
+{"qid": "a060", "kind": "attribute", "query": "đồ chơi bằng gỗ", "object": "đồ chơi", "attribute": "bằng gỗ", "split": "test"}
+{"qid": "a061", "kind": "attribute", "query": "thú nhồi bông màu hồng", "object": "thú nhồi bông", "attribute": "màu hồng", "split": "dev"}
+{"qid": "a062", "kind": "attribute", "query": "son môi màu đỏ", "object": "son môi", "attribute": "màu đỏ", "split": "test"}
+{"qid": "a063", "kind": "attribute", "query": "hũ kem dưỡng màu trắng", "object": "kem dưỡng", "attribute": "hũ màu trắng", "split": "dev"}
+{"qid": "a064", "kind": "attribute", "query": "loa bluetooth màu xanh", "object": "loa", "attribute": "màu xanh", "split": "test"}
+{"qid": "a065", "kind": "attribute", "query": "máy in màu trắng", "object": "máy in", "attribute": "màu trắng", "split": "dev"}
+{"qid": "c001", "kind": "category", "query": "thuốc kháng sinh", "object": "thuốc kháng sinh", "attribute": null, "split": "dev"}
+{"qid": "c002", "kind": "category", "query": "thuốc giảm đau hạ sốt", "object": "thuốc giảm đau hạ sốt", "attribute": null, "split": "test"}
+{"qid": "c003", "kind": "category", "query": "thuốc ho cho trẻ em", "object": "thuốc ho cho trẻ em", "attribute": null, "split": "dev"}
+{"qid": "c004", "kind": "category", "query": "thuốc tiêm", "object": "thuốc tiêm", "attribute": null, "split": "test"}
+{"qid": "c005", "kind": "category", "query": "que test nhanh", "object": "que test nhanh", "attribute": null, "split": "dev"}
+{"qid": "c006", "kind": "category", "query": "khẩu trang y tế", "object": "khẩu trang y tế", "attribute": null, "split": "test"}
+{"qid": "c007", "kind": "category", "query": "máy đo huyết áp", "object": "máy đo huyết áp", "attribute": null, "split": "dev"}
+{"qid": "c008", "kind": "category", "query": "nhiệt kế", "object": "nhiệt kế", "attribute": null, "split": "test"}
+{"qid": "c009", "kind": "category", "query": "dụng cụ hỗ trợ đi lại cho người già", "object": "dụng cụ hỗ trợ đi lại cho người già", "attribute": null, "split": "dev"}
+{"qid": "c010", "kind": "category", "query": "dụng cụ phẫu thuật", "object": "dụng cụ phẫu thuật", "attribute": null, "split": "test"}
+{"qid": "c011", "kind": "category", "query": "thức ăn cho mèo", "object": "thức ăn cho mèo", "attribute": null, "split": "dev"}
+{"qid": "c012", "kind": "category", "query": "đồ chơi cho chó", "object": "đồ chơi cho chó", "attribute": null, "split": "test"}
+{"qid": "c013", "kind": "category", "query": "phanh đĩa xe đạp", "object": "phanh đĩa xe đạp", "attribute": null, "split": "dev"}
+{"qid": "c014", "kind": "category", "query": "bugi", "object": "bugi", "attribute": null, "split": "test"}
+{"qid": "c015", "kind": "category", "query": "lốp ô tô", "object": "lốp ô tô", "attribute": null, "split": "dev"}
+{"qid": "c016", "kind": "category", "query": "laptop chơi game", "object": "laptop chơi game", "attribute": null, "split": "test"}
+{"qid": "c017", "kind": "category", "query": "máy in văn phòng", "object": "máy in văn phòng", "attribute": null, "split": "dev"}
+{"qid": "c018", "kind": "category", "query": "máy lọc nước", "object": "máy lọc nước", "attribute": null, "split": "test"}
+{"qid": "c019", "kind": "category", "query": "nhạc cụ dân tộc", "object": "nhạc cụ dân tộc", "attribute": null, "split": "dev"}
+{"qid": "c020", "kind": "category", "query": "đồ thờ cúng trên ban thờ", "object": "đồ thờ cúng trên ban thờ", "attribute": null, "split": "test"}
+{"qid": "c021", "kind": "category", "query": "trang phục truyền thống", "object": "trang phục truyền thống", "attribute": null, "split": "dev"}
+{"qid": "c022", "kind": "category", "query": "món ăn Nhật Bản", "object": "món ăn Nhật Bản", "attribute": null, "split": "test"}
+{"qid": "c023", "kind": "category", "query": "bia đóng lon", "object": "bia đóng lon", "attribute": null, "split": "dev"}
+{"qid": "c024", "kind": "category", "query": "rượu ngâm", "object": "rượu ngâm", "attribute": null, "split": "test"}
+{"qid": "c025", "kind": "category", "query": "cà phê", "object": "cà phê", "attribute": null, "split": "dev"}
+{"qid": "c026", "kind": "category", "query": "sữa rửa mặt", "object": "sữa rửa mặt", "attribute": null, "split": "test"}
+{"qid": "c027", "kind": "category", "query": "board game", "object": "board game", "attribute": null, "split": "dev"}
+{"qid": "c028", "kind": "category", "query": "đồ cắm trại dã ngoại", "object": "đồ cắm trại dã ngoại", "attribute": null, "split": "test"}
+{"qid": "c029", "kind": "category", "query": "cây giống", "object": "cây giống", "attribute": null, "split": "dev"}
+{"qid": "c030", "kind": "category", "query": "thuốc trừ sâu cho cây", "object": "thuốc trừ sâu cho cây", "attribute": null, "split": "test"}
+{"qid": "c031", "kind": "category", "query": "vật liệu xây dựng", "object": "vật liệu xây dựng", "attribute": null, "split": "dev"}
+{"qid": "c032", "kind": "category", "query": "xe nâng hàng", "object": "xe nâng hàng", "attribute": null, "split": "test"}
+{"qid": "c033", "kind": "category", "query": "máy bay quân sự", "object": "máy bay quân sự", "attribute": null, "split": "dev"}
+{"qid": "c034", "kind": "category", "query": "cổ vật bằng vàng", "object": "cổ vật bằng vàng", "attribute": null, "split": "test"}
+{"qid": "c035", "kind": "category", "query": "đồ dùng cho em bé", "object": "đồ dùng cho em bé", "attribute": null, "split": "dev"}
+{"qid": "c036", "kind": "category", "query": "phụ tùng động cơ ô tô", "object": "phụ tùng động cơ ô tô", "attribute": null, "split": "test"}
+{"qid": "v001", "kind": "visual", "query": "đồ vật hình con rồng", "object": null, "attribute": "có hình con rồng", "split": "dev"}
+{"qid": "v002", "kind": "visual", "query": "đồ trang trí hình hoa sen", "object": null, "attribute": "có hình hoa sen", "split": "test"}
+{"qid": "v003", "kind": "visual", "query": "món ăn gói trong lá chuối", "object": null, "attribute": "gói trong lá chuối", "split": "dev"}
+{"qid": "v004", "kind": "visual", "query": "sản phẩm họa tiết caro", "object": null, "attribute": "họa tiết caro", "split": "test"}
+{"qid": "v005", "kind": "visual", "query": "đồ vật bằng thủy tinh trong suốt", "object": null, "attribute": "thủy tinh trong suốt", "split": "dev"}
+{"qid": "v006", "kind": "visual", "query": "đồ đan bằng mây tre", "object": null, "attribute": "đan bằng mây/tre", "split": "test"}
+{"qid": "v007", "kind": "visual", "query": "đồ vật mạ vàng", "object": null, "attribute": "mạ vàng / ánh vàng kim", "split": "dev"}
+{"qid": "v008", "kind": "visual", "query": "sản phẩm đựng trong hộp thiếc", "object": null, "attribute": "đựng trong hộp thiếc", "split": "test"}
+{"qid": "v009", "kind": "visual", "query": "đồ vật có hình con mèo", "object": null, "attribute": "có hình con mèo", "split": "dev"}
+{"qid": "v010", "kind": "visual", "query": "món ăn màu đỏ trông cay", "object": null, "attribute": "món ăn màu đỏ, trông cay", "split": "test"}
+{"qid": "x001", "kind": "ambiguous", "query": "con chuột màu đen", "object": "chuột (máy tính hoặc con vật)", "attribute": "màu đen", "split": "dev"}
+{"qid": "x002", "kind": "ambiguous", "query": "quả táo đỏ", "object": "táo (quả, hình, đồ vật)", "attribute": "màu đỏ", "split": "test"}
+{"qid": "x003", "kind": "ambiguous", "query": "bóng màu trắng", "object": "bóng (quả bóng hoặc bóng đèn)", "attribute": "màu trắng", "split": "dev"}

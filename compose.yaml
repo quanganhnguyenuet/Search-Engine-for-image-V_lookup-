@@ -27,7 +27,6 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-development}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://visualseek:visualseek@postgres:5432/visualseek}
       QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
       QDRANT_API_KEY: ${QDRANT_API_KEY:-}
     ports:
@@ -36,8 +35,6 @@ services:
       - ./services/api:/workspace/services/api
       - ./data:/data
     depends_on:
-      postgres:
-        condition: service_healthy
       qdrant:
         condition: service_started
     healthcheck:
@@ -47,21 +44,24 @@ services:
       retries: 5
       start_period: 10s
 
-  postgres:
-    image: postgres:16-alpine
+  neo4j:
+    image: neo4j:5.26.33
+    profiles: [graph]
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-visualseek}
-      POSTGRES_USER: ${POSTGRES_USER:-visualseek}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-visualseek}
+      NEO4J_AUTH: ${NEO4J_AUTH:-neo4j/}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - neo4j_data:/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test:
+        - CMD-SHELL
+        - 'cypher-shell -a bolt://127.0.0.1:7687 -d neo4j -u neo4j -p "$${NEO4J_AUTH#*/}" "RETURN 1"'
       interval: 5s
-      timeout: 3s
-      retries: 10
+      timeout: 10s
+      retries: 12
+      start_period: 20s
 
   qdrant:
     image: qdrant/qdrant:v1.13.4
@@ -73,6 +73,6 @@ services:
 
 volumes:
   web_node_modules:
-  postgres_data:
+  neo4j_data:
   qdrant_data:
 

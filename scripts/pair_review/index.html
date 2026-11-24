@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duyệt cặp trùng</title>
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef0f3; --border: #d5d9e0;
+  --text: #16191f; --muted: #545b67; --brand: #1d4ed8; --brand-ink: #ffffff;
+  --ok: #166534; --ok-soft: #dcfce7; --part: #92400e; --part-soft: #fef3c7;
+  --danger: #b91c1c; --danger-soft: #fee2e2; --focus: #2563eb;
+  --radius: 8px; --shadow: 0 1px 2px rgb(0 0 0 / .06);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115; --surface: #171a20; --surface-2: #20242c; --border: #333946;
+    --text: #e8eaee; --muted: #a2a9b5; --brand: #6d9bff; --brand-ink: #0b1220;
+    --ok: #86efac; --ok-soft: #12321f; --part: #fcd34d; --part-soft: #3a2d0c;
+    --danger: #fca5a5; --danger-soft: #3b1616; --focus: #8ab4ff;
+    --shadow: none; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; min-height: 100dvh; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.top { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; padding: 12px 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.top h1 { font-size: 20px; line-height: 1.2; margin: 0; }
+.progress { display: flex; align-items: center; gap: 12px; flex: 1 1 240px; color: var(--muted); font-size: 14px; }
+.bar { flex: 1; max-width: 320px; height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.bar > span { display: block; height: 100%; width: 0; background: var(--brand); transition: width .2s ease-out; }
+.top label { font-size: 14px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+select, input[type=text] { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; min-height: 44px; }
+.layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: calc(100dvh - 69px); }
+.sidebar { border-right: 1px solid var(--border); background: var(--surface); overflow: auto; max-height: calc(100dvh - 69px); position: sticky; top: 69px; }
+.sidebar ol { list-style: none; margin: 0; padding: 8px; }
+.sidebar button { width: 100%; display: grid; grid-template-columns: 28px 1fr; gap: 8px; text-align: left; border: 0; background: transparent; border-radius: var(--radius); padding: 8px; min-height: 44px; cursor: pointer; }
+.sidebar button:hover { background: var(--surface-2); }
+.sidebar button[aria-current="true"] { background: var(--surface-2); box-shadow: inset 3px 0 0 var(--brand); }
+.sidebar .q { font-size: 14px; }
+.sidebar .sub { display: block; font-size: 12px; color: var(--muted); }
+.mark { font-size: 13px; font-weight: 700; color: var(--muted); }
+.mark.same { color: var(--ok); } .mark.variant { color: var(--brand); } .mark.distinct { color: var(--muted); } .mark.skip { color: var(--part); }
+main { padding: 16px 24px 160px; min-width: 0; }
+.meta { margin: 0; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.signals { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+.chip { font-size: 13px; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); }
+.chip.warn { border-color: var(--part); background: var(--part-soft); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.side { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; box-shadow: var(--shadow); min-width: 0; }
+.side h2 { font-size: 22px; line-height: 1.2; margin: 4px 0 8px; overflow-wrap: anywhere; }
+.side .label { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.side .count { font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+.thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.thumb { position: relative; aspect-ratio: 1; padding: 0; border: 2px solid var(--border); border-radius: 8px; background: var(--surface-2); overflow: hidden; cursor: zoom-in; display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+.thumb.shared { border-color: var(--part); }
+.thumb img { width: 100%; height: 100%; object-fit: contain; }
+.thumb .tag { position: absolute; left: 3px; bottom: 3px; font-size: 10px; line-height: 16px; font-weight: 700; padding: 0 5px; white-space: nowrap; border-radius: 999px; background: var(--part-soft); color: var(--part); border: 1px solid var(--part); }
+.titles { margin: 12px 0 0; padding-left: 18px; font-size: 14px; color: var(--muted); }
+.titles li { overflow-wrap: anywhere; }
+.merged { margin: 8px 0 0; padding: 8px 12px; border-radius: var(--radius); background: var(--part-soft); color: var(--text); font-size: 14px; border: 1px solid var(--part); }
+.actions { position: fixed; bottom: 0; left: 300px; right: 0; display: flex; flex-direction: column; gap: 8px; padding: 12px 24px; background: var(--surface); border-top: 1px solid var(--border); }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.row .note { flex: 1 1 260px; }
+.btn { min-height: 44px; padding: 8px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-weight: 600; }
+.btn:hover { background: var(--surface-2); }
+.btn[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+kbd { font: 12px ui-monospace, SFMono-Regular, Consolas, monospace; border: 1px solid currentColor; border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; opacity: .8; }
+.status { font-size: 14px; min-height: 21px; margin: 0; }
+.status.error { color: var(--danger); }
+.notice { padding: 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); max-width: 760px; margin-bottom: 16px; font-size: 14px; }
+.notice.error { border-color: var(--danger); background: var(--danger-soft); }
+.notice code { font: 13px ui-monospace, SFMono-Regular, Consolas, monospace; }
+dialog { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); padding: 16px; max-width: min(960px, 96vw); }
+dialog::backdrop { background: rgb(0 0 0 / .6); }
+dialog img { display: block; max-width: 100%; max-height: 78vh; margin: 0 auto 12px; object-fit: contain; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; max-height: 220px; border-right: 0; border-bottom: 1px solid var(--border); }
+  .actions { position: static; padding: 12px 16px 24px; }
+  main { padding: 16px; }
+  .pair { grid-template-columns: 1fr; }
+  .thumbs { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Duyệt cặp entity trùng</h1>
+  <div class="progress"><span id="progress-text">Đang tải…</span><div class="bar" aria-hidden="true"><span id="progress-bar"></span></div></div>
+  <label>Hiển thị
+    <select id="filter">
+      <option value="all">Tất cả cặp</option>
+      <option value="todo">Chưa duyệt</option>
+      <option value="skip">Đã bỏ qua</option>
+      <option value="done">Đã quyết định</option>
+    </select>
+  </label>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Danh sách cặp"><ol id="list"></ol></nav>
+  <main id="main"><div id="content"><p>Đang tải…</p></div></main>
+</div>
+<div class="actions" id="actions" hidden>
+  <div class="choices" role="group" aria-label="Quyết định">
+    <button class="btn" type="button" data-choice="keep-left">Cùng một entity · giữ tên trái <kbd>1</kbd></button>
+    <button class="btn" type="button" data-choice="keep-right">Cùng một entity · giữ tên phải <kbd>2</kbd></button>
+    <button class="btn" type="button" data-choice="VARIANT_OF">Biến thể, không gộp <kbd>3</kbd></button>
+    <button class="btn" type="button" data-choice="DISTINCT">Khác nhau <kbd>4</kbd></button>
+    <button class="btn" type="button" data-choice="SKIP">Chưa chắc, bỏ qua <kbd>S</kbd></button>
+  </div>
+  <div class="row">
+    <input type="text" class="note" id="note" maxlength="500" placeholder="Ghi chú lý do (không bắt buộc), lưu làm bằng chứng" aria-label="Ghi chú lý do">
+    <button class="btn" id="prev" type="button">← Cặp trước</button>
+    <button class="btn" id="next" type="button">Cặp sau →</button>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </div>
+</div>
+<dialog id="zoom" aria-label="Ảnh phóng to">
+  <img id="zoom-img" alt="">
+  <div class="row" style="justify-content: space-between"><span id="zoom-name"></span><button class="btn" type="button" id="zoom-close">Đóng <kbd>Esc</kbd></button></div>
+</dialog>
+<script>
+"use strict";
+const SHOWN = 8;
+const S = { pairs: [], cards: {}, idx: -1, filter: "all", busy: false, reviewer: "" };
+const $ = (id) => document.getElementById(id);
+const SOURCE = { name: "tên giống", shared_images: "ảnh dùng chung", dense: "embedding gần" };
+function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function recall(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+function status(p) {
+  if (p.decision) return p.decision.decision;
+  return p.skipped ? "SKIP" : null;
+}
+function mark(p) {
+  const s = status(p);
+  return { SAME_AS: ["=", "same", "cùng entity"], VARIANT_OF: ["≈", "variant", "biến thể"], DISTINCT: ["≠", "distinct", "khác nhau"], SKIP: ["?", "skip", "bỏ qua"] }[s] || ["•", "", "chưa duyệt"];
+}
+function visible() {
+  return S.pairs.map((p, i) => [p, i]).filter(([p]) => {
+    const s = status(p);
+    return S.filter === "all" || (S.filter === "todo" && !s) || (S.filter === "skip" && s === "SKIP") || (S.filter === "done" && s && s !== "SKIP");
+  });
+}
+
+function renderProgress() {
+  const done = S.pairs.filter((p) => p.decision).length;
+  const skipped = S.pairs.filter((p) => p.skipped).length;
+  $("progress-text").textContent = `Đã quyết định ${done}/${S.pairs.length} cặp · bỏ qua ${skipped} · người duyệt ${S.reviewer}`;
+  $("progress-bar").style.width = `${S.pairs.length ? (100 * done) / S.pairs.length : 0}%`;
+}
+
+function renderList() {
+  const list = $("list");
+  list.replaceChildren();
+  const rows = visible();
+  if (!rows.length) {
+    const li = document.createElement("li");
+    li.className = "sub"; li.style.padding = "8px";
+    li.textContent = S.filter === "todo" ? "Đã duyệt hết. Chọn “Tất cả cặp” để xem lại." : "Không có cặp nào.";
+    list.append(li);
+  }
+  for (const [p, i] of rows) {
+    const [sym, cls, label] = mark(p);
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = `<span class="mark"></span><span><span class="q"></span><span class="sub"></span></span>`;
+    const m = b.querySelector(".mark");
+    m.textContent = sym; m.className = `mark ${cls}`; m.setAttribute("aria-label", label);
+    b.querySelector(".q").textContent = `${S.cards[p.src].name} ↔ ${S.cards[p.dst].name}`;
+    b.querySelector(".sub").textContent = p.found_by.map((s) => SOURCE[s] || s).join(" + ");
+    if (i === S.idx) b.setAttribute("aria-current", "true");
+    b.addEventListener("click", () => open(i));
+    li.append(b);
+    list.append(li);
+  }
+  renderProgress();
+}
+
+function side(card, label, shared, merged) {
+  const el = document.createElement("section");
+  el.className = "side";
+  el.setAttribute("aria-label", `${label}: ${card.name}`);
+  el.innerHTML = `<span class="label"></span><h2></h2><p class="count"></p><div class="thumbs"></div><ol class="titles"></ol>`;
+  el.querySelector(".label").textContent = label;
+  el.querySelector("h2").textContent = card.name;
+  const ordered = [...card.images.filter((a) => shared.has(a)), ...card.images.filter((a) => !shared.has(a))];
+  el.querySelector(".count").textContent = `${card.image_count} ảnh trong corpus · hiển thị ${Math.min(SHOWN, ordered.length)}`;
+  const grid = el.querySelector(".thumbs");
+  for (const asset of ordered.slice(0, SHOWN)) {
+    const t = document.createElement("button");
+    t.type = "button";
+    t.className = "thumb" + (shared.has(asset) ? " shared" : "");
+    t.setAttribute("aria-label", `Phóng to ảnh của ${card.name}${shared.has(asset) ? " (ảnh dùng chung)" : ""}`);
+    const img = document.createElement("img");
+    img.loading = "lazy"; img.alt = ""; img.width = 160; img.height = 160; img.src = `/img/${asset}`;
+    img.addEventListener("error", () => { t.textContent = "Không tải được ảnh"; });
+    t.append(img);
+    if (shared.has(asset)) { const tag = document.createElement("span"); tag.className = "tag"; tag.textContent = "chung"; t.append(tag); }
+    t.addEventListener("click", () => zoom(asset, card.name, t));
+    grid.append(t);
+  }
+  const titles = el.querySelector(".titles");
+  if (!card.titles.length) { const li = document.createElement("li"); li.textContent = "Không có tiêu đề trang nguồn"; titles.append(li); }
+  for (const title of card.titles) { const li = document.createElement("li"); li.textContent = title; titles.append(li); }
+  if (merged) { const n = document.createElement("p"); n.className = "merged"; n.textContent = `Đã được gộp vào “${merged}”. Không thể gộp lần nữa; chọn Biến thể hoặc Khác nhau, hoặc gộp entity kia vào entity này.`; el.append(n); }
+  return el;
+}
+
+function renderPair() {
+  const p = S.pairs[S.idx];
+  const content = $("content");
+  content.replaceChildren();
+  const head = document.createElement("section");
+  head.innerHTML = `<p class="meta"></p><div class="signals"></div>`;
+  head.querySelector(".meta").textContent = `Cặp ${S.idx + 1}/${S.pairs.length}`;
+  const sig = head.querySelector(".signals");
+  const chip = (text, warn) => { const c = document.createElement("span"); c.className = "chip" + (warn ? " warn" : ""); c.textContent = text; sig.append(c); };
+  chip(`Tìm thấy qua: ${p.found_by.map((s) => SOURCE[s] || s).join(", ")}`);
+  if (p.shared_assets.length) chip(`${p.shared_assets.length} ảnh dùng chung`, true);
+  if (p.name_similarity !== null) chip(`Tên giống ${p.name_similarity.toFixed(2)}`);
+  if (p.dense_cosine !== null) chip(`Cosine embedding ${p.dense_cosine.toFixed(2)}`);
+  if (p.decision) chip(`Đã lưu: ${mark(p)[2]} (${p.decision.reviewer})`, false);
+  const shared = new Set(p.shared_assets);
+  const pair = document.createElement("div");
+  pair.className = "pair";
+  pair.append(side(S.cards[p.src], "Trái", shared, p.merged_into[p.src]), side(S.cards[p.dst], "Phải", shared, p.merged_into[p.dst]));
+  content.append(head, pair);
+  $("actions").hidden = false;
+  $("note").value = p.decision ? (p.note || "") : "";
+  for (const b of document.querySelectorAll("[data-choice]")) b.setAttribute("aria-pressed", String(choiceOf(p) === b.dataset.choice));
+  $("prev").disabled = step(-1) < 0;
+  $("next").disabled = step(1) < 0;
+}
+
+function choiceOf(p) {
+  const s = status(p);
+  if (s === "SAME_AS") return p.decision.dst === p.src ? "keep-left" : "keep-right";
+  return s;
+}
+
+function open(i) {
+  S.idx = i;
+  $("status").textContent = ""; $("status").className = "status";
+  renderPair(); renderList();
+  store("pairs.idx", `${S.pairs[i].src}|${S.pairs[i].dst}`);
+  window.scrollTo({ top: 0 });
+}
+function step(dir) {
+  const rows = visible().map(([, i]) => i);
+  const cand = dir > 0 ? rows.filter((i) => i > S.idx) : rows.filter((i) => i < S.idx).reverse();
+  return cand.length ? cand[0] : -1;
+}
+function nextTodo() {
+  const rows = visible().map(([, i]) => i).filter((i) => i > S.idx);
+  return rows.find((i) => !status(S.pairs[i])) ?? rows[0] ?? -1;
+}
+
+async function decide(choice) {
+  if (S.busy || S.idx < 0) return;
+  const p = S.pairs[S.idx];
+  const body = { src: p.src, dst: p.dst, note: $("note").value.trim(), decision: choice, keep: null };
+  if (choice === "keep-left") { body.decision = "SAME_AS"; body.keep = p.src; }
+  if (choice === "keep-right") { body.decision = "SAME_AS"; body.keep = p.dst; }
+  S.busy = true;
+  for (const b of document.querySelectorAll("[data-choice]")) b.disabled = true;
+  $("status").className = "status"; $("status").textContent = "Đang lưu…";
+  try {
+    const r = await fetch("/api/decisions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    const res = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(Array.isArray(res.detail) ? res.detail.map((d) => d.msg).join("; ") : res.detail || `HTTP ${r.status}`);
+    await refresh();
+    const n = nextTodo();
+    if (n >= 0 && n !== S.idx) { open(n); $("status").textContent = "Đã lưu cặp trước."; }
+    else { renderPair(); renderList(); $("status").textContent = "Đã lưu. Không còn cặp nào phía sau trong danh sách đang hiển thị."; }
+  } catch (error) {
+    $("status").className = "status error";
+    $("status").textContent = `Chưa lưu được: ${error.message}`;
+  } finally {
+    S.busy = false;
+    for (const b of document.querySelectorAll("[data-choice]")) b.disabled = false;
+  }
+}
+
+let zoomOrigin = null;
+function zoom(asset, name, origin) {
+  zoomOrigin = origin;
+  $("zoom-img").src = `/img/${asset}`; $("zoom-img").alt = name; $("zoom-name").textContent = name;
+  $("zoom").showModal();
+}
+$("zoom-close").addEventListener("click", () => $("zoom").close());
+$("zoom").addEventListener("close", () => zoomOrigin && zoomOrigin.focus());
+$("zoom").addEventListener("click", (e) => { if (e.target === $("zoom")) $("zoom").close(); });
+for (const b of document.querySelectorAll("[data-choice]")) b.addEventListener("click", () => decide(b.dataset.choice));
+$("prev").addEventListener("click", () => { const i = step(-1); if (i >= 0) open(i); });
+$("next").addEventListener("click", () => { const i = step(1); if (i >= 0) open(i); });
+$("filter").addEventListener("change", (e) => { S.filter = e.target.value; store("pairs.filter", S.filter); renderList(); });
+document.addEventListener("keydown", (e) => {
+  if (e.target.closest("input, select, dialog") || e.ctrlKey || e.metaKey || e.altKey) return;
+  const map = { "1": "keep-left", "2": "keep-right", "3": "VARIANT_OF", "4": "DISTINCT", s: "SKIP", S: "SKIP" };
+  if (map[e.key]) { e.preventDefault(); decide(map[e.key]); }
+  else if (e.key === "ArrowRight") { const i = step(1); if (i >= 0) open(i); }
+  else if (e.key === "ArrowLeft") { const i = step(-1); if (i >= 0) open(i); }
+});
+
+async function refresh() {
+  const r = await fetch("/api/state");
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const data = await r.json();
+  S.pairs = data.pairs; S.cards = data.cards; S.reviewer = data.reviewer;
+}
+
+async function load() {
+  try {
+    await refresh();
+    S.filter = recall("pairs.filter") || "all";
+    $("filter").value = S.filter;
+    const saved = recall("pairs.idx");
+    const last = S.pairs.findIndex((p) => `${p.src}|${p.dst}` === saved);
+    const first = S.pairs.findIndex((p) => !status(p));
+    open(last >= 0 ? last : Math.max(0, first));
+  } catch (error) {
+    const box = document.createElement("div");
+    box.className = "notice error";
+    box.innerHTML = "<strong>Không tải được hàng đợi.</strong><p></p>";
+    box.querySelector("p").textContent = `${error.message}. Kiểm tra pair_review_server.py đang chạy và đã chạy audit_entity_review.py, rồi tải lại trang.`;
+    $("content").replaceChildren(box);
+    $("progress-text").textContent = "Lỗi tải dữ liệu";
+  }
+}
+load();
+</script>
+</body>
+</html>

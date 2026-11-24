@@ -147,8 +147,8 @@ Brand  -COUNTRY->        Country
 **Lưu trữ: Neo4j.** Graph nhỏ (~2.3k entity cộng vài nghìn node Brand/Type/Ingredient...), nên Neo4j được chọn vì tiện làm việc, không phải vì tải:
 - Neo4j là nơi lưu chính. Node có `id` ổn định; cạnh mang thuộc tính `source`, `confidence`, `reviewed`, `reviewer`.
 - Cypher dùng cho ba việc: hàng đợi duyệt cạnh (`reviewed = false`, sắp theo `confidence`), sinh path multi-hop cho bộ eval (chỉ đi trên cạnh `reviewed = true`), và kiểm tra tính nhất quán (entity thiếu `IS_A`, Brand trùng tên).
-- Chạy Neo4j Community bằng Docker trong `compose.yaml`, pin chính xác phiên bản. Không cần plugin GDS.
-- **Lúc truy vấn không gọi Neo4j.** Khi khởi động, API export cạnh `reviewed = true` thành snapshot (ma trận kề `scipy.sparse` cộng bảng id), kèm fingerprint = sha256 của danh sách cạnh đã sắp. PPR chạy bằng power iteration trong RAM, mục tiêu < 5 ms; `networkx.pagerank` chỉ dùng làm oracle trong test. Response và báo cáo eval ghi fingerprint snapshot, nên mỗi số đo gắn với đúng một phiên bản graph.
+- Chạy Neo4j Community 5.26.33 LTS qua profile `graph` trong `compose.yaml`. Dữ liệu duyệt lưu trong volume `neo4j_data`. [Docker image chính thức](https://github.com/docker-library/official-images/blob/master/library/neo4j)
+- Job offline ở B5 export cạnh `reviewed = true` thành snapshot, kèm fingerprint SHA-256 của danh sách cạnh đã sắp. API nạp snapshot vào RAM khi khởi động. Response và báo cáo eval ghi fingerprint snapshot để đối chiếu với phiên bản graph đã dùng.
 
 ### 4.2 Mô tả ảnh và text để index
 
@@ -379,14 +379,16 @@ Thời gian là ước tính cho một người làm cùng agent; đo lại sau 
 
 ### P2. Knowledge graph (3–5 ngày)
 - Bước miễn phí: brand từ JSON-LD, hoạt chất/alias từ phần trong ngoặc, mã mẫu bằng regex (dùng lại `pc.codes` / `entity_need` của pipeline gán nhãn).
-- Bước LLM (offline): agy trích xuất theo schema, 25 entity/call (~95 call). Thử 200 entity trước.
+- **LLM cho B2–B4:** Gemini 3.8 Flash, model ID `gemini-3.8-flash`, với `thinkingLevel: LOW`. Chạy qua Gemini Developer API Batch bằng JSONL, mỗi request xử lý một entity. Giữ cố định model ID trong cả đợt, ghi version API trả về nếu có và cache theo hash của bằng chứng, prompt, schema và cấu hình model. [Model](https://aistudio.google.com/docs/models/gemini-3.8-flash) · [Batch API](https://aistudio.google.com/docs/batch-api#input-file)
+- **B2:** model đề xuất `ProductType` và hai cấp danh mục từ taxonomy hiện hành, kèm trích đoạn. Hoàn tất duyệt phân loại cho 2.304 entity trước B3.
+- **B3:** khảo sát khoảng 200 entity phân tầng theo taxonomy đã duyệt. Dùng các trích đoạn thực tế để chốt quan hệ theo danh mục, kiểu node đích, cụm từ hỏi và ví dụ.
+- **B4:** chạy pilot đa danh mục với schema đã đóng băng, rồi mới mở rộng toàn corpus. Output JSON phải qua kiểm tra schema tại máy. Mỗi cạnh có bằng chứng phải dẫn tới `source_id` và trích đoạn khớp nguồn của đúng entity. Giữ cạnh chỉ dựa trên kiến thức model ở trạng thái `unverified`; đưa entity thiếu bằng chứng vào hàng chờ crawl lại. Kiểm thủ công trích đoạn có thực sự chứng minh cạnh, đo theo từng quan hệ, và lấy chi phí từ token thực tế của pilot. [Structured output](https://aistudio.google.com/docs/structured-output)
 - Gộp node bằng chuỗi + embedding; người duyệt cặp mơ hồ.
 - Duyệt 100% MADE_BY, HAS_INGREDIENT, FITS; Codex kiểm lại cạnh `confidence` thấp. Hàng đợi duyệt lấy bằng Cypher.
 - Taxonomy Category có đủ bốn nhóm ưu tiên; gán `IS_A` / `IN` cho mọi entity.
 - Hạ tầng:
-  - thay Postgres bằng Neo4j Community trong `compose.yaml`, pin phiên bản;
+  - khởi động Neo4j Community từ profile `graph` để nạp kết quả B4 và duyệt cạnh ở B5;
   - script nạp idempotent từ file trích xuất (`MERGE` theo `id`);
-  - bỏ `DATABASE_URL` trong config API.
 - Output:
   - graph trong Neo4j;
   - `scripts/export_graph_snapshot.py` (cạnh đã duyệt → file snapshot + fingerprint);
@@ -451,19 +453,19 @@ Thời gian là ước tính cho một người làm cùng agent; đo lại sau 
 
 ## 7. Tối ưu quota
 
-Giả định tài nguyên: agy (Gemini flash), Codex, OpenAI API, Kaggle T4×2, một máy GPU, Qdrant Cloud free.
+Tài nguyên dự kiến gồm Gemini Developer API cho trích xuất graph, agy cho paraphrase eval, Codex, Kaggle T4×2, một máy GPU và Qdrant Cloud free.
 
 1. **Miễn phí trước, LLM sau:** JSON-LD, phần trong ngoặc, regex, OCR có sẵn lấy tối đa thông tin trước khi gọi LLM.
-2. **LLM theo entity, không theo ảnh:** 2.304 entity, 25 entity/call ≈ 93 call (thay vì ~31k call theo ảnh).
+2. **LLM theo entity:** mỗi dòng JSONL là một entity. Ghép nhiều dòng thành một batch để có thể đối soát và chạy lại riêng các request lỗi.
 3. **Việc theo ảnh chạy local:** VLM caption, embedding, OCR, rerank trên GPU.
 4. **Cache mọi output** theo hash(input + phiên bản prompt/model); chạy lại không tốn quota.
 5. **Lặp trên lát 200 entity / 200 ảnh;** chạy toàn bộ khi đã qua gate.
 6. **Không gọi LLM lúc truy vấn.** Mọi câu truy vấn khi eval và khi dùng thật đều 0 call.
-7. **Đúng quota cho đúng việc:** agy cho trích xuất hàng loạt; Codex cho kiểm cạnh tranh chấp và viết code; OpenAI API chỉ khi cần, ưu tiên Batch API cho việc offline.
+7. **Chi phí graph:** Gemini 3.8 Flash trên Batch trả phí có giá $0,375/triệu token đầu vào và $1,875/triệu token đầu ra (gồm thinking) đến hết 31/12/2026. Từ 01/01/2027 mức tương ứng là $0,75 và $3,75. Dùng số token của pilot để ước tính ngân sách chạy toàn bộ. [Bảng giá Gemini](https://aistudio.google.com/docs/pricing#gemini-3.8-flash)
 
 | Việc | Nguồn | Khối lượng ước tính |
 |---|---|---|
-| Graph | agy | ~95 call (+ thử 200 entity) |
+| Graph | Gemini 3.8 Flash Batch | Một request/entity/lượt chạy, đo token trên pilot |
 | Paraphrase eval | agy | ~15 call |
 | Kiểm cạnh tranh chấp | Codex | vài chục call |
 | VLM caption 30.2k ảnh | GPU local / Kaggle | 0 API |

@@ -1,0 +1,30 @@
+{"id": "mc001", "query": "phụ kiện trang trí xe hơi và nhạc cụ truyền thống", "intents": [["car.accessory"], ["culture.instrument"]], "kind": "multi_category"}
+{"id": "mc002", "query": "máy xúc công trình xây dựng và đồ thờ cúng", "intents": [["industrial.construction"], ["culture.worship"]], "kind": "multi_category"}
+{"id": "mc003", "query": "dụng cụ thể thao và phụ tùng xe máy", "intents": [["outdoor.sports"], ["moto.parts"]], "kind": "multi_category"}
+{"id": "mc004", "query": "phụ kiện trang trí xe hơi và lốp xe đạp", "intents": [["car.accessory"], ["bike.tyres_wheels"]], "kind": "multi_category"}
+{"id": "mc005", "query": "đồ thờ cúng và bảo hộ lao động", "intents": [["culture.worship"], ["industrial.safety"]], "kind": "multi_category"}
+{"id": "mc006", "query": "thức ăn cho chó mèo và lốp xe đạp", "intents": [["animal.pet_food"], ["bike.tyres_wheels"]], "kind": "multi_category"}
+{"id": "mc007", "query": "lốp xe máy và nội thất bàn ghế", "intents": [["moto.tyres_wheels"], ["home.furniture"]], "kind": "multi_category"}
+{"id": "mc008", "query": "đèn chiếu sáng và lều cắm trại dã ngoại", "intents": [["home.lighting"], ["outdoor.camping"]], "kind": "multi_category"}
+{"id": "mc009", "query": "giày thể thao và kem dưỡng da mặt", "intents": [["fashion.shoes"], ["beauty.skincare"]], "kind": "multi_category"}
+{"id": "mc010", "query": "phụ kiện trang trí xe hơi và laptop và máy tính để bàn", "intents": [["car.accessory"], ["tech.computer"]], "kind": "multi_category"}
+{"id": "mc011", "query": "nước hoa nam và dụng cụ hỗ trợ người khuyết tật", "intents": [["beauty.fragrance"], ["medical.mobility"]], "kind": "multi_category"}
+{"id": "mc012", "query": "máy bay và thức ăn cho chó mèo", "intents": [["transport.aircraft"], ["animal.pet_food"]], "kind": "multi_category"}
+{"id": "mc013", "query": "tiền cổ đồ cổ sưu tầm và bánh kẹo đồ ăn vặt", "intents": [["culture.antique"], ["food.cake_snack"]], "kind": "multi_category"}
+{"id": "mc014", "query": "nội thất bàn ghế và thuốc bôi ngoài da", "intents": [["home.furniture"], ["drug.topical"]], "kind": "multi_category"}
+{"id": "mc015", "query": "vật liệu xây dựng và phụ tùng ô tô", "intents": [["home.building_material"], ["car.parts"]], "kind": "multi_category"}
+{"id": "mc016", "query": "phụ kiện trang trí xe hơi hoặc dụng cụ nhà bếp", "intents": [["car.accessory"], ["household.kitchenware"]], "kind": "multi_category"}
+{"id": "mc017", "query": "đồ chơi trẻ em hoặc đèn chiếu sáng", "intents": [["baby_toy.toy"], ["home.lighting"]], "kind": "multi_category"}
+{"id": "mc018", "query": "dụng cụ nhà bếp hoặc áo quần thời trang", "intents": [["household.kitchenware"], ["fashion.clothing"]], "kind": "multi_category"}
+{"id": "mc019", "query": "đèn chiếu sáng hoặc thuốc giảm đau dạng viên", "intents": [["home.lighting"], ["drug.oral"]], "kind": "multi_category"}
+{"id": "mc020", "query": "tượng phật phong thủy hoặc tàu thuyền", "intents": [["culture.statue_fengshui"], ["transport.watercraft"]], "kind": "multi_category"}
+{"id": "mc021", "query": "máy đo huyết áp tại nhà hoặc vitamin và thực phẩm chức năng", "intents": [["medical.home"], ["drug.supplement"]], "kind": "multi_category"}
+{"id": "mc022", "query": "thuốc bôi ngoài da hoặc vali kéo du lịch", "intents": [["drug.topical"], ["fashion.bags"]], "kind": "multi_category"}
+{"id": "mc023", "query": "tiền cổ đồ cổ sưu tầm hoặc dây chuyền vàng", "intents": [["culture.antique"], ["fashion.jewelry"]], "kind": "multi_category"}
+{"id": "mc024", "query": "vật liệu xây dựng, thuốc tiêm truyền tĩnh mạch", "intents": [["home.building_material"], ["drug.injection"]], "kind": "multi_category"}
+{"id": "mc025", "query": "màn hình tivi, phụ kiện trang trí xe hơi", "intents": [["tech.display"], ["car.accessory"]], "kind": "multi_category"}
+{"id": "mc026", "query": "bảo hộ lao động, tượng phật phong thủy", "intents": [["industrial.safety"], ["culture.statue_fengshui"]], "kind": "multi_category"}
+{"id": "mc027", "query": "vali kéo du lịch, tàu thuyền", "intents": [["fashion.bags"], ["transport.watercraft"]], "kind": "multi_category"}
+{"id": "mc028", "query": "nhẫn kim cương, nội thất bàn ghế", "intents": [["fashion.jewelry"], ["home.furniture"]], "kind": "multi_category"}
+{"id": "mc029", "query": "máy tính bảng, linh kiện xe đạp", "intents": [["phone.tablet"], ["bike.drivetrain"]], "kind": "multi_category"}
+{"id": "mc030", "query": "thuốc giảm đau dạng viên, máy giặt máy hút bụi", "intents": [["drug.oral"], ["household.appliance"]], "kind": "multi_category"}

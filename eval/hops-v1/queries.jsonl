@@ -1,0 +1,40 @@
+{"qid": "h01", "kind": "multi_hop", "query": "hãng làm bugi Bosch Super Plus còn bán những gì", "intents": null, "tests": "short name, 'hãng làm X'"}
+{"qid": "h02", "kind": "multi_hop", "query": "ngoài lọc dầu Bosch ra thì Bosch còn sản phẩm nào cho ô tô", "intents": null, "tests": "brand named + exclusion + category limit"}
+{"qid": "h03", "kind": "multi_hop", "query": "các mẫu khác của hãng sản xuất Shimano Ultegra ST-R8000", "intents": null, "tests": "template-like baseline"}
+{"qid": "h04", "kind": "multi_hop", "query": "đồ Shimano nhưng không phải bộ đề", "intents": null, "tests": "brand + category exclusion (unsupported)"}
+{"qid": "h05", "kind": "multi_hop", "query": "cùng hãng với vali Samsonite Lite-Box còn có những túi nào", "intents": null, "tests": "'cùng hãng với X' + category"}
+{"qid": "h06", "kind": "multi_hop", "query": "những sản phẩm khác của hãng làm nồi chiên không dầu Philips", "intents": null, "tests": "short name"}
+{"qid": "h07", "kind": "multi_hop", "query": "hãng của Redmi Note 11 còn có điện thoại nào khác", "intents": null, "tests": "hop + category limit"}
+{"qid": "h08", "kind": "multi_hop", "query": "ngoài Komatsu PC2000 ra hãng đó còn máy công trình nào", "intents": null, "tests": "'ngoài X ra' + 'hãng đó'"}
+{"qid": "h09", "kind": "multi_hop", "query": "lốp Schwalbe khác ngoài Magic Mary", "intents": null, "tests": "brand + exclusion, no 'hãng'"}
+{"qid": "h10", "kind": "multi_hop", "query": "Maxxis có những lốp nào, trừ Maxxis Receptor", "intents": null, "tests": "brand + 'trừ'"}
+{"qid": "h11", "kind": "multi_hop", "query": "sản phẩm cùng thương hiệu với giày Nike Pegasus 40", "intents": null, "tests": "'cùng thương hiệu'"}
+{"qid": "h12", "kind": "multi_hop", "query": "các sản phẩm khác của hãng sản xuất máy in HP DeskJet 2330", "intents": null, "tests": "template-like baseline"}
+{"qid": "h13", "kind": "multi_hop", "query": "Yonex ngoài vợt tennis còn bán gì", "intents": null, "tests": "brand + category exclusion (unsupported)"}
+{"qid": "h14", "kind": "multi_hop", "query": "hãng làm xe Toyota Vios còn sản xuất xe gì khác", "intents": null, "tests": "hop + category limit"}
+{"qid": "h15", "kind": "multi_hop", "query": "phụ tùng khác cùng hãng với gương chiếu hậu Hyundai Stargazer", "intents": null, "tests": "hop + category limit"}
+{"qid": "h16", "kind": "multi_hop", "query": "những món khác của Anker ngoài sạc dự phòng PowerCore", "intents": null, "tests": "brand + exclusion, colloquial"}
+{"qid": "h17", "kind": "multi_hop", "query": "Canon còn có máy ảnh nào khác ngoài PowerShot SX740", "intents": null, "tests": "brand + exclusion + category limit"}
+{"qid": "h18", "kind": "multi_hop", "query": "ngoài nhẫn kim cương PNJ thì PNJ còn trang sức gì", "intents": null, "tests": "brand repeated + exclusion"}
+{"qid": "h19", "kind": "multi_hop", "query": "thuốc khác chữa cùng bệnh với Famotidin", "intents": null, "tests": "TREATS relation (unsupported, baseline)"}
+{"qid": "h20", "kind": "multi_hop", "query": "phụ tùng lắp được cho xe Honda Air Blade", "intents": null, "tests": "FITS relation (unsupported, baseline)"}
+{"qid": "m01", "kind": "multi_intent", "query": "Kindle Paperwhite và tai nghe Anker Soundcore Life Q30", "intents": ["Kindle Paperwhite", "Anker Soundcore Life Q30"], "tests": "two named"}
+{"qid": "m02", "kind": "multi_intent", "query": "Kindle Paperwhite và tai nghe", "intents": ["Kindle Paperwhite", "tai nghe (bất kỳ)"], "tests": "named + generic category"}
+{"qid": "m03", "kind": "multi_intent", "query": "chuột Logitech MX Master 3 với bàn phím", "intents": ["chuột Logitech MX Master 3", "bàn phím (bất kỳ)"], "tests": "'với' joins two objects here"}
+{"qid": "m04", "kind": "multi_intent", "query": "vợt tennis Yonex, giày Nike chạy bộ và balo Osprey", "intents": ["vợt tennis Yonex", "giày chạy bộ Nike", "balo Osprey"], "tests": "three intents, brand + type"}
+{"qid": "m05", "kind": "multi_intent", "query": "ổn áp Lioa hoặc ổ cắm Schneider", "intents": ["ổn áp Lioa", "ổ cắm Schneider"], "tests": "'hoặc', brand + type"}
+{"qid": "m06", "kind": "multi_intent", "query": "bugi Bosch và nhớt Mobil cho ô tô", "intents": ["bugi Bosch", "nhớt Mobil"], "tests": "brand + type twice"}
+{"qid": "m07", "kind": "multi_intent", "query": "máy hút bụi Samsung Jet 75 và nồi chiên không dầu Philips", "intents": ["Samsung Jet 75", "nồi chiên Philips"], "tests": "two named, long"}
+{"qid": "m08", "kind": "multi_intent", "query": "Asus ROG Phone 6, ngoài ra cho xem cả laptop Asus TUF", "intents": ["Asus ROG Phone 6", "laptop Asus TUF"], "tests": "'ngoài ra' additive"}
+{"qid": "m09", "kind": "multi_intent", "query": "lốp Michelin Pro4 và săm xe đạp", "intents": ["lốp Michelin Pro4", "săm xe đạp (bất kỳ)"], "tests": "named + generic"}
+{"qid": "m10", "kind": "multi_intent", "query": "tượng phật phong thủy và đồ thờ cúng bằng đồng", "intents": ["tượng phật phong thủy", "đồ thờ cúng bằng đồng"], "tests": "two categories + attribute"}
+{"qid": "m11", "kind": "multi_intent", "query": "giày thể thao nam và đồng hồ đeo tay", "intents": ["giày thể thao nam", "đồng hồ đeo tay"], "tests": "two categories"}
+{"qid": "m12", "kind": "multi_intent", "query": "Uniqlo Pocketable Parka cùng với áo chạy bộ Nike Dri-FIT", "intents": ["Uniqlo Pocketable Parka", "áo Nike Dri-FIT"], "tests": "'cùng với'"}
+{"qid": "m13", "kind": "multi_intent", "query": "điện thoại Vsmart hoặc Redmi giá rẻ", "intents": ["điện thoại Vsmart", "điện thoại Redmi"], "tests": "two brands + category + tier word"}
+{"qid": "m14", "kind": "multi_intent", "query": "máy in Canon và mực in Epson", "intents": ["máy in Canon", "mực in Epson"], "tests": "brand + type twice"}
+{"qid": "m15", "kind": "multi_intent", "query": "xe nâng Toyota và máy xúc Komatsu", "intents": ["xe nâng Toyota", "máy xúc Komatsu"], "tests": "brand + type twice"}
+{"qid": "m16", "kind": "multi_intent", "query": "nhẫn cưới Bvlgari và dây chuyền vàng", "intents": ["nhẫn cưới Bvlgari", "dây chuyền vàng (bất kỳ)"], "tests": "named + generic jewelry"}
+{"qid": "m17", "kind": "multi_intent", "query": "thức ăn cho mèo và đồ chơi cho chó", "intents": ["thức ăn cho mèo", "đồ chơi cho chó"], "tests": "two categories"}
+{"qid": "m18", "kind": "multi_intent", "query": "lều cắm trại Naturehike, bếp mini và balo leo núi", "intents": ["lều Naturehike", "bếp mini", "balo leo núi"], "tests": "three intents, mixed"}
+{"qid": "m19", "kind": "multi_intent", "query": "Espumisan và thuốc giảm đau dạng viên", "intents": ["Espumisan", "thuốc giảm đau dạng viên"], "tests": "named drug + category"}
+{"qid": "m20", "kind": "multi_intent", "query": "trang sức PNJ nhưng không phải nhẫn", "intents": ["trang sức PNJ trừ nhẫn"], "tests": "brand + category exclusion (unsupported)"}

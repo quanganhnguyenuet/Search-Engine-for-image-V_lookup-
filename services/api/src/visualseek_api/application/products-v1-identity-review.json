@@ -1,0 +1,2715 @@
+{
+  "version": 1,
+  "corpus_fingerprint": "861911cb10dd5651e2b2297585230bf8dfe72a2265820011914791f4777e3455",
+  "reviewer": "Codex",
+  "entity_pairs": [
+    {
+      "src": "00dba6eb-d4d5-4503-be6e-5a1885f8ec9f",
+      "dst": "00a400f8-7e67-4340-bf9a-1533e9a052d4",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Hai nhãn Doxycyclin capsules có sáu ảnh chung. Các hàm lượng đọc được trong tập ảnh của nhãn rút gọn đều là 100 mg; cả hai tập gồm nhiều hãng."
+        },
+        {
+          "asset_id": "034ecd708f440149ff06d0769366db618ef73fc651482c93e83414b50f8176f0",
+          "text": "Ảnh chung có chữ DOXYCYCLIN 100 mg và DOMESCO."
+        },
+        {
+          "asset_id": "041196839b90f0242e74a368ab81c748b45f1d17acf71f8105c12881b227cd85",
+          "text": "Ảnh của nhãn rút gọn ghi DOXYCYCLINE 100 mg và nguồn Mekophar."
+        }
+      ]
+    },
+    {
+      "src": "00e0b074-1e9c-40f4-a63b-c4ed75cd3efe",
+      "dst": "0244d1f8-8166-493f-91c5-927ca14e46a2",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "asset_id": "2caf2985a5078eb1706d68f4586c055e151080c5a3dea2b9261ca0461297ea18",
+          "text": "Nhãn Nhẫn kim cương có ảnh từ các hãng khác ngoài PNJ, ví dụ Nhẫn Kim Cương 14K LP Jewelry."
+        }
+      ]
+    },
+    {
+      "src": "004c54ca-ebe5-40d9-adbd-69b69afdeb73",
+      "dst": "0deac200-899c-43ed-9fb0-351886b545e1",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "asset_id": "040be47dff7c5ea1de0791bfb9a607153419ba3c6be55eef14ab4c08269f0a0d",
+          "text": "Hộp ghi Arginine Veyron và Pierre Fabre."
+        },
+        {
+          "asset_id": "3f6882c3897414d259872162691c11514484ac3388d8c6bd4b70620d3b347a33",
+          "text": "Trang nguồn ghi AT Arginin của Dược phẩm An Thiên."
+        }
+      ]
+    },
+    {
+      "src": "010ba249-0018-474c-b781-379da18cdc09",
+      "dst": "03e60635-576e-4a6f-a5d1-77eb97346b7f",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "asset_id": "5c359da17cacc39613c9e8639933cc3ac70ba1610919b9d2201e1b02d7b44f92",
+          "text": "Nguồn ảnh của nhãn cụ thể ghi Sinh tố na (mãng cầu ta)."
+        },
+        {
+          "asset_id": "11d1d5ffbbb77d1ff7633ff3650fbecfb65d902ce869e58e8b710d20da49d22e",
+          "text": "Nhãn Sinh tố bao gồm ảnh từ những vị khác, ví dụ Sinh Tố Đào."
+        }
+      ]
+    },
+    {
+      "src": "02e6ee66-fa0c-470f-9520-6bbd63293d85",
+      "dst": "0dd200fc-9527-4bbd-b911-b7063b1ade95",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Mã dòng trên hai nhãn là SRAM SX Eagle và SRAM GX Eagle."
+        }
+      ]
+    },
+    {
+      "src": "0220fe04-7198-44ec-aa81-db3acce7412c",
+      "dst": "0dfe62e7-3663-4183-87bf-8a443070bb36",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên ghi hai mẫu xe tương thích khác nhau là Peugeot 2008 và Peugeot 5008."
+        }
+      ]
+    },
+    {
+      "src": "00ce241a-4a8a-410f-be38-99e5ddfabb6d",
+      "dst": "01fda84c-41ca-41c9-a982-5f14e7878e28",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hậu tố mẫu lốp GravelKing là X1 và R."
+        }
+      ]
+    },
+    {
+      "src": "02e8318b-2893-44e1-bef6-af91f4cdf045",
+      "dst": "03f6ddae-159d-4125-bab3-f109c60a0c1c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên hai SKU OxyContin ghi riêng 80 mg và 10 mg."
+        }
+      ]
+    },
+    {
+      "src": "02f6c93e-67d5-41af-afe1-b2b96ffbe7c1",
+      "dst": "0dd676fe-3ae4-4592-957e-a27debd0ac21",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã ổn áp là LiOA 3D-30K và 3D-60K."
+        }
+      ]
+    },
+    {
+      "src": "0db8e729-7c67-4f93-99b3-abfee605f654",
+      "dst": "0de14a20-4102-49e8-8c98-4b6744fad8a3",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Nhãn ghi MFZ35 (35 kg xe đẩy) và MFZ2 (2 kg)."
+        }
+      ]
+    },
+    {
+      "src": "0245d1bc-6297-4d1f-98d7-91873f0eb5f8",
+      "dst": "03159afa-11d1-40ae-89c6-7a68f3547482",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã máy Liebherr là L580 và L586."
+        }
+      ]
+    },
+    {
+      "src": "0245d1bc-6297-4d1f-98d7-91873f0eb5f8",
+      "dst": "03be2058-de6b-47bf-bd34-a50ff91926e9",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã máy Liebherr là L580 và L508."
+        }
+      ]
+    },
+    {
+      "src": "03159afa-11d1-40ae-89c6-7a68f3547482",
+      "dst": "03be2058-de6b-47bf-bd34-a50ff91926e9",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã máy Liebherr là L586 và L508."
+        }
+      ]
+    },
+    {
+      "src": "01346b3f-3f18-4512-918b-e8d94ef3ac18",
+      "dst": "01fda84c-41ca-41c9-a982-5f14e7878e28",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hậu tố mẫu lốp GravelKing là Mud và R."
+        }
+      ]
+    },
+    {
+      "src": "00738433-7d3e-4bf3-8cd7-b4ed06377d88",
+      "dst": "036048bd-e9f7-4419-a182-0b107aab6058",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên và bao bì trong corpus phân biệt mức 1,5 MIU và 0,75 MIU."
+        }
+      ]
+    },
+    {
+      "src": "02326130-8ca6-4a56-9c54-cfda335b761c",
+      "dst": "04496ee7-68b4-47b8-803c-c24e054b19f3",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã máy Komatsu là D53 và D37."
+        }
+      ]
+    },
+    {
+      "src": "02cc9c6e-65c3-4693-8011-4f2313115c44",
+      "dst": "02e1954e-a47f-4543-bf76-aa88d31902a7",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên ghi hai mã nhiệt kế Beurer FT 90 và FT 95."
+        }
+      ]
+    },
+    {
+      "src": "02e1954e-a47f-4543-bf76-aa88d31902a7",
+      "dst": "0e16de7d-6b0c-4d8c-98db-9bf6dfd3890c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên ghi hai mã nhiệt kế Beurer FT 95 và FT 65."
+        }
+      ]
+    },
+    {
+      "src": "00ce241a-4a8a-410f-be38-99e5ddfabb6d",
+      "dst": "01346b3f-3f18-4512-918b-e8d94ef3ac18",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hậu tố mẫu lốp GravelKing là X1 và Mud."
+        }
+      ]
+    },
+    {
+      "src": "014078ba-e524-4ffd-997d-a75cd822750f",
+      "dst": "026cc625-a90d-4ead-9f43-4bf009e5d2c0",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Niên hiệu trên hai nhãn là Cảnh Hưng và Cảnh Thịnh, mặt lưng cũng khác."
+        }
+      ]
+    },
+    {
+      "src": "0302f86d-f4b4-4afb-8eed-f98b1c1573e7",
+      "dst": "0dca1c3f-e5de-41b2-adb9-389a9517dfa2",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã màn hình Zestech là ZX10 Pro và Z800."
+        }
+      ]
+    },
+    {
+      "src": "02427ef2-3b4d-4a6d-b4d8-679e35c62835",
+      "dst": "0dad2658-bd09-43bc-81a7-64c6cb6534dd",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã đèn Philips là RC048B và RC132V."
+        }
+      ]
+    },
+    {
+      "src": "025811c0-cb3d-4981-8b4b-c0a8d5a51a94",
+      "dst": "037c2982-2a32-45ce-b825-0d751b391523",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai nhãn là Fexofenadin 180 và Fexofenadin 120-HV."
+        }
+      ]
+    },
+    {
+      "src": "0147642b-66d0-4f28-9cc7-09b02d96f60d",
+      "dst": "039dfd4d-5d0a-441d-bb4e-38c26de7f983",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã hộp số Ford TorqShift là 5R110W và 6R140."
+        }
+      ]
+    },
+    {
+      "src": "00764fde-7f6f-4f51-8dd3-7b8389ad5056",
+      "dst": "02b3a33d-270c-4fd7-a813-62d5a4e89b2c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Một nhãn ghi đôi hươu, nhãn kia ghi dơi ngũ phúc."
+        }
+      ]
+    },
+    {
+      "src": "01d27a49-7e5e-4cd8-bb60-5665197b3598",
+      "dst": "0e08e631-1955-44c0-8bbf-864ea536f573",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai mã DT Swiss là ARC 1100 và GRC 1400."
+        }
+      ]
+    },
+    {
+      "src": "0327cefc-61f5-4279-8dd8-91e485825aed",
+      "dst": "0e0006bf-c5ca-4647-b990-d1fbfc2eb81d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Hai thế hệ Redmi Note là 2 và 11."
+        }
+      ]
+    },
+    {
+      "src": "04488bfc-3d31-4420-9a7a-d1cdaf715dcd",
+      "dst": "045396bf-2b56-43fe-b254-8304f98c7b88",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên phân biệt trụ thạch anh và thạch anh hình trái tim."
+        }
+      ]
+    },
+    {
+      "src": "0355dde8-b4f9-42c4-ae75-aef46eb49d68",
+      "dst": "043a07e0-313e-416c-aed1-33ce5f345355",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Tên bộ ly Bohemia phân biệt hai mẫu Lara và Pavo."
+        }
+      ]
+    },
+    {
+      "src": "0032d1d5-f77a-45d3-8d9d-edfe64038b37",
+      "dst": "0e07c402-1a7d-4035-aa8b-e56f63cdc059",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Bồn nhựa Sơn Hà (Sơn Hà Plastic) và Bồn nhựa Sơn Hà cùng phạm vi sản phẩm. Hai nhãn có tám ảnh chung."
+        },
+        {
+          "asset_id": "06e6faf70d2e16659edc31fe8e61b9ab8556d6a44867757981295849aed6ea87",
+          "text": "Bồn nhựa Sơn Hà Vân đá 3000L Đứng"
+        }
+      ]
+    },
+    {
+      "src": "03500114-f9f7-4989-94aa-d07426eada58",
+      "dst": "016bff45-cecd-4d02-a197-179cc51c73ae",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "asset_id": "034eeebb994197b800345caf0d2877697914f57c340c91ce8483ee516c48350f",
+          "text": "Mặt hộp ghi Famotidin STADA 40 mg."
+        },
+        {
+          "asset_id": "0a6da7c62b6eb36af647cdf0c3ed88801f54ff10c5b0744dd22bba75ded6cec4",
+          "text": "Mặt hộp trong nhãn Famotidine Stada ghi Фамотидин 20 мг và STADA."
+        }
+      ]
+    },
+    {
+      "src": "01c10f86-f302-4cea-b95d-0a3ab5451c54",
+      "dst": "0dacaafb-63b8-4c6e-834f-501f69c88cfe",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "asset_id": "b48a6fd87a4b2397d58df9106214536d07cd4e917d24856d67dca2405f4fce24",
+          "text": "Cách Làm Pháo Hoa Bằng Giấy Trang Trí Ngày Tết"
+        },
+        {
+          "asset_id": "294158d7de9f5e97e54d2449f063695ba594e6906850d9473c194ac6d6142e4f",
+          "text": "Pháo giấy bắn kim tuyến 80cm nút bấm"
+        }
+      ]
+    },
+    {
+      "src": "0e00b21e-36e4-4df1-811b-19bbf342d8bc",
+      "dst": "037145a7-397d-4d38-b70a-897e3490cbde",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "1a015a9b6efe993c1d566026b9f792e342e717b6914c6279216333bc30724abd",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "2d79307a1d44d3277a7acdf1d6693607954241a6b3101684c6b044d3746d2867",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "35487f40061a8ad31755c79f1cecb7e6fd88e81922f0e2471381e78dba88f18a",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:07:24+00:00"
+    },
+    {
+      "src": "01c2e532-429f-4112-87b3-3eab74f6f8f4",
+      "dst": "021e72bc-16aa-4ef7-a571-8beba6c83343",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "00bb17d0df93dbce1ec340154a1727f70f0bb3d076dcf926aa19b67f5aa6d253",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "1a5b98c95454f1e95e0485f265f1e5d5be88a7b36db231f5ea4b484ba0869481",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "2be3fa2b4e3ab3735b4d51631e2d8b17fd158cdbd345b9bfb4da0928b7edd7d7",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:07:33+00:00"
+    },
+    {
+      "src": "03efe717-7c06-43b7-87c0-d633a21a020e",
+      "dst": "0dea91d5-71d3-40bf-ada0-2ccb9dd6d04a",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "31dbafb65b2e4471bc67a508afb9de1a73ed415315f66ea427676b949ba8e3ba",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "471c118702c66f8d5abb8ae137c08a154d76ff24a4358cb04254f6d756bcfd56",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "7939fd4fdf1ce0f153852576d6fafac8a2a1debd73b864fb2053111ffce6becd",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:07:38+00:00"
+    },
+    {
+      "src": "02426c8f-6afd-44e2-820c-19042c841644",
+      "dst": "01ed41a9-2f63-46d8-ad30-3cadf8c863df",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "169e37924538f4399aab720c07c557e8ff430b4dc8fe4b5683c4aaaece912cc0",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "2166bb76466f09b09642f83f3e50bbc34d372c03719868c120ddb92f73920313",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "57db1f574bb491b3c583ca6cbab1be483cd5cdda27c3e4c5572f7c695ae26dc4",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:07:42+00:00"
+    },
+    {
+      "src": "02282212-8810-4ed6-b010-af4b4a835c62",
+      "dst": "02ae40b5-e3e2-4e6f-9ca6-665f42fd79ba",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "0688b57d8b69308eada06cafe6926179e024b606591d6c083d20efd4a205ba38",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "1847c8a8bd9eb48841d1e7f06e6520b3e9c84b22a9362245dd7702ecf4f49b17",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "1c8419cd59943d554f3f85a56d604b3dcb0e2a6965d333d95d0e7b1a05ea0548",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:07:53+00:00"
+    },
+    {
+      "src": "005e7c95-6c9f-4693-8f8b-5589318af7a4",
+      "dst": "01213180-5897-4626-bdee-fbd4466fec2c",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "0fc22513cbb5728b67ab4b6cc83f957c933383b8567a88617aeabedb34ea395e",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "66619039ebb2e222139338199673d3498129070ec1309fc1d9743496410dc7ba",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "a90421d2d004afc95f1262b579c81ba80291ea94c3c2536ea2d675b6462d3191",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:07:59+00:00"
+    },
+    {
+      "src": "0dd200fc-9527-4bbd-b911-b7063b1ade95",
+      "dst": "0194cbc6-4709-46c7-a827-83a938563bc8",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "05f873d0c1a0df4b495bfc4c40658b20e2710f994f67070ea276cf8530d115fc",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "49ca03691622c6b41881e76d5248cf1ab57dc59b96fe57bf23b35342ea19779c",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "7d0dac5257d53c0b1482517c08f174cf823814eb446391e8eb3417f6274908fd",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:08:04+00:00"
+    },
+    {
+      "src": "017ec0e4-0d0d-4093-9aec-1d92abf0b837",
+      "dst": "0019902b-dfcd-46be-a686-22d5f01bcb5c",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "140b9bf1e03dc0c2d9b81d89df371b15a20070f170365b5c43c8bdf32529d5f9",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "46ebb485b6e203460c98d95ca2d291fb4d18c293d8f10f42fc7f5668b6ee1e15",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "f8b2f33c4c548341104d6d99d9d1b73be25bdda5d377bf54de0f1d30b76905d9",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:08:07+00:00"
+    },
+    {
+      "src": "0260f9cc-7372-449d-91bf-e20b13434c9c",
+      "dst": "03cfca0f-5260-4581-9099-3d2671c3e971",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "254e4dfb6217c6128e535a7107815adb43208d36eabdee919508defac2e0a1fd",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "2f6c57f2734282c830c7f56a7ba895575f48597ae391eb20593eee7ab23b35d4",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "aed5b1d605d82668f6205bce3e06b49d97ec5eaf4272929da32354dad599cd52",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:09:16+00:00"
+    },
+    {
+      "src": "00b3a2c0-f629-465b-bff0-1dbabea646f1",
+      "dst": "04417da0-c1c0-4466-8f62-1145f218d82d",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "4278ec825bbe0f693fd4ef6f5d37b98a14fe37625f67674e60653b7adad1f47c",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "aebfcf14f1603318a256b584cb153368f010344592726a41cc8d8a6f5f08272a",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:10:01+00:00"
+    },
+    {
+      "src": "02656a64-694f-41a2-bd73-de44357bc6e8",
+      "dst": "02f7aa7e-0a90-4519-9bfc-e3b7186d5a40",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "34a1840d88f963d1560fba7c5eb4d3575c4c05996d47130984bcef5ad423233b",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "81f83a547ab005f32ef33e35b2265e206af856d511a72997c2f8d3bff50d3cc6",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:10:18+00:00"
+    },
+    {
+      "src": "00738433-7d3e-4bf3-8cd7-b4ed06377d88",
+      "dst": "0082f982-de6c-40a2-8a60-30022348c6c4",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "3fcdd10fd3ba0fb4a42f86517f632a70b7cb1d4604caf7a2ada48c944291193a",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "a3615c1dd2ecb12e274f62fc6992b164df5e588571015b4473101021781b9b96",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:11:56+00:00"
+    },
+    {
+      "src": "02ee0859-9834-4d25-8b43-2e5355027438",
+      "dst": "04750c31-a4ee-4d69-88bf-5e5f83ccd5f1",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "294a9b2ddf3ede6b0322cb6c5514d791044725a8564a219410713d2bc7b600c0",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:13:15+00:00"
+    },
+    {
+      "src": "00c93f88-c08d-4cc7-a910-b4df75f8a6f9",
+      "dst": "03b9be87-76f2-4ee9-b019-daae362ee932",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "90f76c06bb7924686e1a2cbdcfab1c349e0f5cca7c3d572001182b957a7d6a78",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:14:43+00:00"
+    },
+    {
+      "src": "002e3e67-95f0-4a5a-9a48-5278c4a79c0e",
+      "dst": "024d27a9-374c-4b8d-9e3c-1ecac348b622",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "4aaeafb94c9369528b84bbd36d18378a23af3eb97d59d8637acc4144697cb837",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:16:43+00:00"
+    },
+    {
+      "src": "0475fe85-d803-472f-ba82-e6374f2707c7",
+      "dst": "01effe1d-e81e-4eaa-a78a-7bd60299cd09",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "f34c9826e9e72080ae2b9c1ad97c420c65bc1d207cff4ae8797a3135196ad7d5",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:17:25+00:00"
+    },
+    {
+      "src": "00daf07e-a1dd-4cb2-98fe-9624e702a208",
+      "dst": "0194cbc6-4709-46c7-a827-83a938563bc8",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "7162ed5f591385465dd346ad1bd06914b1793798a14208839d9ccae557cb91f9",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:20:13+00:00"
+    },
+    {
+      "src": "03e435f2-4462-49b5-bd88-147857746899",
+      "dst": "00585923-e1b1-4c50-a79e-8733149a1393",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "ba0a014818ffa32bcc949a35a84b184ceb6c20a057c1c9301b122f6d7c49c355",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:21:25+00:00"
+    },
+    {
+      "src": "01405e69-0406-43ac-954d-ec45d7954605",
+      "dst": "02e6ee66-fa0c-470f-9520-6bbd63293d85",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "d01ca12ab65941cd1c8a5521cbba3259a918cb08d20280553acd88c7ba8fcad5",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:21:35+00:00"
+    },
+    {
+      "src": "038dd47b-57d7-4c2d-8f74-0d1ea50ea177",
+      "dst": "03b278cf-d31f-4dd1-b566-59b17b2b0d9d",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "0542a54c13ceb115811a65438f8d935e4182b6b04729d18beb062fc977c529b8",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "06af94cb09fcb8a4d0ee821743a9bc36a488b02ab77a1cefe9d4114a823fee37",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "0bcc87b34c49130d8291bf5fd2688da076c700637ceef11e6be4ad54ae4f72ad",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:21:50+00:00"
+    },
+    {
+      "src": "0dc93111-debf-447e-8391-7509081c2ddd",
+      "dst": "00789171-07fc-49b1-a945-f96b1c5532ba",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "0b56d3d7ea91ed6a6e6b4bce8f878354baea8d232171944b31167ac111de52a2",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "5fbb9caac14d2be7d299485dcfc60d955fde94cc1a07c0072abe0347c170c72b",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "60441126b82af6978cbb570f6898558a388b1cc8d7257fc2604641f074f43e99",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:26:47+00:00"
+    },
+    {
+      "src": "03d4d2db-9095-49e5-9c41-4fbae35b0ae7",
+      "dst": "023226bc-82a5-4782-af4e-4c290e5d5e80",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "03fa0bf1dbfada9f67e265ff75cb48adbc71b0158f62ce8c3e8f935538975119",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "6373b4f4c5eedb5840e2392f1183c02d9d69ed455df0f8c25f3d5fcc1583ba68",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "702bfc189be16e69d19e73343c1afd87be84ae0a292052983fb11d0cc76c305d",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:26:56+00:00"
+    },
+    {
+      "src": "01f1fa33-7257-4c36-a21b-9da1334a3a12",
+      "dst": "0dee2223-9bae-4799-aa57-ab87e7fe7f31",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "9f49b2001dd6a55e786a808556ee222bf5d648aab1d906da7900be1e305725be",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "ed15393d08c0e03386be82b89fe7bac7c7355cf26a8ce846cd67eff517845bb0",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "ed21f1521107d90616bd69044d91deb6e9627d6a25386e726617e38cb4a40512",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:27:02+00:00"
+    },
+    {
+      "src": "025e681d-587a-432b-a702-441bc283c4ec",
+      "dst": "0e0ac0a5-50ab-4a56-93e9-e93a2422b53a",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "63cdcfb99cd4c79c9923f999826246fb31b107b8940861c7d5f378ec1f10188b",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "cf21be0accbeebc7f7ca3dfc27746e677dd1771278481d7e15d03a75f60dc931",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "ec4edbe6a7994afa4aff26f6b062d1a3aab61ca185dd5ab9034f5ef9b44bd8c3",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:27:12+00:00"
+    },
+    {
+      "src": "009e5c4a-c53c-4ac5-a26c-6a5b36eaf5ab",
+      "dst": "03d74af4-4df2-4b7c-bdfc-14cc4ae01a00",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "057d43a0aa084b1b1b201800af1d1e1f58809149fd804a97b46edb771f0cfd5f",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "f3665e4f26e1d0a62dd6f4ace93f397fded8851f0d3450e7d2bfb8e4b9790a41",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:27:16+00:00"
+    },
+    {
+      "src": "01c59d55-9bae-405b-8200-312b1664b6a1",
+      "dst": "01004e8f-3d58-474d-bd80-16cd458645ed",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "668cd80d78bfa1a229cd9a33f4ca94c0575c1cada82ece9a551319d4decf5d78",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "aee6ca2c3eb8587a5110a33e56225cea09af62d49cf6e76f29afec7bfdc1e545",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:29:23+00:00"
+    },
+    {
+      "src": "01b64d6e-34dd-44c8-92f4-e0394c2ea6dc",
+      "dst": "01bbc2e7-461c-4a8c-a918-0b24c65ae9cf",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "61cee8d9b5137cbcae0d57b30e7b95ec065a344cd90c8377efd5e9c748c02071",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "cafaa28ee9df125bbef5b3f2eefe71a4f6c783eb715324791900526212a4f181",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:29:35+00:00"
+    },
+    {
+      "src": "02200191-f796-4d94-9750-9d77710e46d1",
+      "dst": "0db8e729-7c67-4f93-99b3-abfee605f654",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "72e5d18d1fdd019dc6e87c03e586028a141129b02ad07de0b095bf3c6b1a481f",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "b2069ec9d7b639c18a5e67051021278bc2fdbb0dd30063f7a5b157e0933b5e85",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:29:42+00:00"
+    },
+    {
+      "src": "025f5127-ec41-42be-bc87-ca97e166ba80",
+      "dst": "039e48e5-0def-4488-aa28-4655736ba2f0",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "88c82f540397b17b38e7cadc41cc895b0c9f3bcb1138a0500591b85d2f09d074",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "d42f5fe98f5c9965935345aab81cb4812692957cae4ece821c484f5e28e041b6",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:30:02+00:00"
+    },
+    {
+      "src": "033cb9da-730f-41d2-8fab-9bc9ca8d668a",
+      "dst": "03a96be9-6380-4549-94f2-89e7937cd1c3",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "14be477b199acb2b3af920b04f626b158341fc0f5648574cd914430b43b8f039",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "88ae196cdf7718c8ea175b4ba19227449cda3febde6862411ff42cbfd26e88a3",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:30:07+00:00"
+    },
+    {
+      "src": "0379e904-2ae2-44b1-9770-0a199854206c",
+      "dst": "042e05ac-2ed5-4564-bcba-61853ac58317",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "7b60b6af98014127df94f98c0d549f505f4b87015f84ce52338fb043d5679cfb",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "badb5a69e3ca87186a725dfeed36790187e7ff59f1de6d2e8390539445aa16f5",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:30:14+00:00"
+    },
+    {
+      "src": "0de76fe4-c06b-4e5d-bd7c-6cbdacfa380f",
+      "dst": "00096563-2adb-4009-84f1-802c8800602c",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "33effc9ecfb2f7e377d57c303cbdfe6f32c679454c4bdfea2e3bd2735ebebd57",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:30:37+00:00"
+    },
+    {
+      "src": "022e5824-79a1-452b-ac71-e26ca5165152",
+      "dst": "001bfb16-cefc-4211-bd00-4c0f7a761314",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "78d850734df7a9238ca156d11b3094e7339cc63e4f4b5befc010db171200dce2",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:30:59+00:00"
+    },
+    {
+      "src": "006562c6-fdb3-48a0-9f3c-21aa9548bb85",
+      "dst": "03e3a773-5d6c-4e3d-b7f6-b21f3f9da575",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "88f2a3533055c17aa0453db53f36946700413e1c7950e79df4a8dc42d8db075f",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:31:16+00:00"
+    },
+    {
+      "src": "00789171-07fc-49b1-a945-f96b1c5532ba",
+      "dst": "00b9bb9d-80e1-45d2-b4af-b3f26b17877d",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "80f3dc061c315953aec0a2e444c09ff6ff0d200aa3519617538831fb2a91d01f",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:31:28+00:00"
+    },
+    {
+      "src": "008126d7-e0af-435c-a730-78683da37880",
+      "dst": "041a6335-0550-4531-aec9-2f3c69a855c7",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "9afada8dac8832d285ae22fb71a26d70a70ac035bf318e0bf0f0e97246708907",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:31:46+00:00"
+    },
+    {
+      "src": "008794eb-5166-491e-97c7-b33c7a04b9d5",
+      "dst": "00c633f7-ddcc-46a8-aaa1-72717820fc44",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "b546e36a91789d5068b01c19e7c087cc808f224d977e4519620dbca829660262",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:32:10+00:00"
+    },
+    {
+      "src": "009552e8-4fd3-414c-99fe-6d8fd0d6734d",
+      "dst": "015902af-09cc-469f-8370-62b9fb104a2d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "c7cea085efcfda1d0f9cca26edfd341f5231c1e1badb97554c74997cfc046cd1",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:32:14+00:00"
+    },
+    {
+      "src": "00b9bb9d-80e1-45d2-b4af-b3f26b17877d",
+      "dst": "0dc93111-debf-447e-8391-7509081c2ddd",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "80f3dc061c315953aec0a2e444c09ff6ff0d200aa3519617538831fb2a91d01f",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:32:23+00:00"
+    },
+    {
+      "src": "00c29902-46e1-41a2-9522-f85d8f6f9217",
+      "dst": "011383aa-0553-472d-bf72-ea3164fb1c56",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "8ad2829df25eb25edf4bccf951b7caf9d5ca05396de3403265fedd1d58792060",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:32:26+00:00"
+    },
+    {
+      "src": "00c29902-46e1-41a2-9522-f85d8f6f9217",
+      "dst": "041a6335-0550-4531-aec9-2f3c69a855c7",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "8ad2829df25eb25edf4bccf951b7caf9d5ca05396de3403265fedd1d58792060",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:34:46+00:00"
+    },
+    {
+      "src": "00c633f7-ddcc-46a8-aaa1-72717820fc44",
+      "dst": "038e2045-2a0f-4c88-bda5-03f78b3b6b5b",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "311cfa8a6c9f049c486d0368878c2593206ce1d6168aac641e18fe9a3a1bcd2a",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:34:55+00:00"
+    },
+    {
+      "src": "00c93f88-c08d-4cc7-a910-b4df75f8a6f9",
+      "dst": "021471d3-0ae2-4210-a17b-01ae3aa5a10d",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "4bd4b08c9f3ef45018f571871f56ce4f7a2d9fdc8a3338b6a176cc7145e1f72b",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:35:04+00:00"
+    },
+    {
+      "src": "00d9114b-e26a-4575-b75f-2b20d63140f0",
+      "dst": "0dd4b5e4-cfa8-45af-bfa2-cbf8fc2b65ab",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "4cfba2543887704d731f680b78abf9530a6d2beddf81e665e38a2a6278a32e6b",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:35:13+00:00"
+    },
+    {
+      "src": "00e0b074-1e9c-40f4-a63b-c4ed75cd3efe",
+      "dst": "0dd44758-30df-4a50-a327-22749de10657",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "8b01cc2122ab2483eec8425b0e4b68cc7eae3779d3a1674554e445f9c666fe82",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:35:19+00:00"
+    },
+    {
+      "src": "00ecd939-d3ab-4438-b8de-3cf4e327b1ca",
+      "dst": "0dddb624-ab1d-41a7-8310-c7c3e95ce0bc",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "128112f000a2cc1b31a616830c41a54d15575f743d51f89726b3fe47f0471042",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:35:44+00:00"
+    },
+    {
+      "src": "0105929e-d590-4dba-b9ef-c550f27d36ef",
+      "dst": "0dc9b6c9-a2bd-47de-ad71-723ff2b1fd25",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "ea4d252760d8e940ea4281d193381e2950f9ce1a331d8b93cd924310a215a547",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:35:51+00:00"
+    },
+    {
+      "src": "011383aa-0553-472d-bf72-ea3164fb1c56",
+      "dst": "041a6335-0550-4531-aec9-2f3c69a855c7",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "8ad2829df25eb25edf4bccf951b7caf9d5ca05396de3403265fedd1d58792060",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:35:59+00:00"
+    },
+    {
+      "src": "012f67b2-d67c-4eae-95db-f15a28be0452",
+      "dst": "0db75382-84c7-4441-b771-e41514d6edb1",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "382f1ebd3dff306bd5b97177cf2aa71ba0dcbeff0575733d15a6bf3eb31e3a14",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:36:19+00:00"
+    },
+    {
+      "src": "016622fb-dcd7-412a-b41f-c8e58c90863a",
+      "dst": "0dc9c323-20c6-46aa-95de-ea8c8fa7f85c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "bd8eb38ade71a60fd1a0d59653e1cbbe27669d88e4493dd6e70b98437daad904",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:39:47+00:00"
+    },
+    {
+      "src": "01669702-8de3-4fd8-9744-0f27f12fdba3",
+      "dst": "03db20ef-f5bb-461a-8c0a-98d560571eaf",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "9af444d937ae6cf6e744f30f085d31bb572b740e05f026a6fdc6997874fef1e2",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:39:54+00:00"
+    },
+    {
+      "src": "01669702-8de3-4fd8-9744-0f27f12fdba3",
+      "dst": "0438c12c-2d04-4f19-b500-1134e7502c34",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "9af444d937ae6cf6e744f30f085d31bb572b740e05f026a6fdc6997874fef1e2",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:40:03+00:00"
+    },
+    {
+      "src": "01846cda-63aa-4d5f-a6ae-b396b8d44bd2",
+      "dst": "033002b8-fc83-4f5e-a1e0-a60bedaddc86",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "8a17c709efe4fa5a2589204eac905d8cf86fde964adec5e137622ff26b2288be",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:40:17+00:00"
+    },
+    {
+      "src": "019332f3-810a-492c-bfb4-9efc1014c5d5",
+      "dst": "04557445-61fe-4f22-b8ff-f55f03c06e70",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "c813eb9b2e358fa5659c5e70e33c9668a28a4a43de1e374d6e836f2b5aefb134",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:40:26+00:00"
+    },
+    {
+      "src": "03c60fde-c74d-4dd7-ab3f-a54c9447c91a",
+      "dst": "01ac38ef-6300-4c0e-bf94-b8ed61e02699",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "6fce8e88d12bd8bf5f33cde608562a8e2a9179521ec7c10fed5f855df5938b78",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:40:47+00:00"
+    },
+    {
+      "src": "021471d3-0ae2-4210-a17b-01ae3aa5a10d",
+      "dst": "03b9be87-76f2-4ee9-b019-daae362ee932",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "46fd5d6213b856837c8bf711d61bec649a795199acde20840d32ba1e5e653b53",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:41:06+00:00"
+    },
+    {
+      "src": "025811c0-cb3d-4981-8b4b-c0a8d5a51a94",
+      "dst": "037bd3df-7b90-4ecd-9b57-c03560e0411c",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "4269ca9ca383d005b1874837c580fadd32a56fe3bf5e9dfa78d09507d64d7a77",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:41:15+00:00"
+    },
+    {
+      "src": "029f36ae-5886-4b4a-9ff7-a65877449e6c",
+      "dst": "035a09a5-7404-4ce8-a9ce-52ec7364241e",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "6ee3d28816323ad502791aaa6364f23d911ad2eb9edea57b2ea9653ce64b8f98",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:41:20+00:00"
+    },
+    {
+      "src": "0300c61b-556b-4e3a-8e98-42089d1c0ff3",
+      "dst": "04105262-0cae-4848-af38-7b2f7bbeede6",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "89998a78b38a846c39a134843cbbd191bdf55d27445401e2c856a894b9ac0d09",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:41:24+00:00"
+    },
+    {
+      "src": "031036d0-4ae8-4a53-8fcc-8415708a1ff2",
+      "dst": "04504e1e-f11a-42a7-a2ff-4d7f8199b7db",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "bf27a5715537e43ddf20e6e91a31af99f982c85bb39294aa56ffd97bbfdea7e0",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:41:30+00:00"
+    },
+    {
+      "src": "031235ff-cb36-4aee-b270-9f1355e09566",
+      "dst": "03f10c28-32a4-4611-81db-78a8c8973404",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "e5596bc1bdeccbfb14338ffc9a4d16c5cdb7f622ea57183bcec463dd7ca88090",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:41:51+00:00"
+    },
+    {
+      "src": "03839e66-53ec-4d83-bc10-720e38a87967",
+      "dst": "0dd20b34-30e7-42d0-84fe-21393c1d8121",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "53cdc9b03c312595c5d195c072e7de93b98ea2e0c344b0d20dd7bf1659341120",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:04+00:00"
+    },
+    {
+      "src": "03db20ef-f5bb-461a-8c0a-98d560571eaf",
+      "dst": "0438c12c-2d04-4f19-b500-1134e7502c34",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "9af444d937ae6cf6e744f30f085d31bb572b740e05f026a6fdc6997874fef1e2",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:09+00:00"
+    },
+    {
+      "src": "0e1beb39-39b8-4586-9e91-be754e3c85da",
+      "dst": "0445d88e-64c0-40f9-b563-5ad645ff0193",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "681b29c3838faf3c56942de59445efe222cf09575fdb92ebc4f0b5faaab5ba49",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:14+00:00"
+    },
+    {
+      "src": "0e057d12-a239-476d-aba0-ec59ab1c4c3b",
+      "dst": "0dccecfb-1461-403f-b446-8a22e3655915",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "c1658c776256d6cd56d0570f0997443d721443dd89102581fa0b49adce010533",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:21+00:00"
+    },
+    {
+      "src": "02a6ff4b-7aff-4798-b9c6-0f2045114ffc",
+      "dst": "0e0cadf7-3af7-4900-ac35-3e031cde4e2c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:26+00:00"
+    },
+    {
+      "src": "0316013a-48c6-4c20-8477-9c089aa9947c",
+      "dst": "0439cd35-b62c-4c31-a68e-7e0ef644076b",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:31+00:00"
+    },
+    {
+      "src": "004534bf-b68b-4175-9a49-aa8f86e22d60",
+      "dst": "02fd80fe-fb29-46e0-b804-1f76e3fdd289",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:38+00:00"
+    },
+    {
+      "src": "0388012d-9dec-4c94-8226-24fe3950d86c",
+      "dst": "03ae1f27-bee5-4d09-b26b-08d063cf3844",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:40+00:00"
+    },
+    {
+      "src": "00577afa-8bf5-4e54-bf28-abe1b334df08",
+      "dst": "01ff3fff-d397-4657-8440-65e9dcac503a",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:43+00:00"
+    },
+    {
+      "src": "02cc9c6e-65c3-4693-8011-4f2313115c44",
+      "dst": "0e16de7d-6b0c-4d8c-98db-9bf6dfd3890c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:45+00:00"
+    },
+    {
+      "src": "00daf07e-a1dd-4cb2-98fe-9624e702a208",
+      "dst": "01405e69-0406-43ac-954d-ec45d7954605",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:47+00:00"
+    },
+    {
+      "src": "037d01d6-5b84-4ee1-b54f-37bd3a2d1be0",
+      "dst": "04105262-0cae-4848-af38-7b2f7bbeede6",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:50+00:00"
+    },
+    {
+      "src": "0319313a-c892-4807-91cd-6cbca2107747",
+      "dst": "034e51f9-a4ba-45e0-b0d9-cdbe90fe8cbb",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:52+00:00"
+    },
+    {
+      "src": "01805437-f490-49d1-ba28-ba4b7b5b985a",
+      "dst": "0dc6d504-a7a1-490f-9661-7722374da02d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:53+00:00"
+    },
+    {
+      "src": "04084cec-6aa3-47f9-855b-77a4dd2bacd8",
+      "dst": "0e235c14-1cb4-40e0-8b33-af5adcd4fb98",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:55+00:00"
+    },
+    {
+      "src": "0102ae77-8673-45c4-a9a1-7b34384410af",
+      "dst": "0442cde6-c329-4326-b229-853b9f46ac0b",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:42:57+00:00"
+    },
+    {
+      "src": "0142e74e-810b-4317-a88a-2c2d24850c96",
+      "dst": "042695d1-af6f-471c-b387-a0922d07ec29",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:00+00:00"
+    },
+    {
+      "src": "00491447-3147-4d02-8cd2-fb03828ef451",
+      "dst": "0e0b607f-5a14-438b-9d94-a1abf4d196de",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:02+00:00"
+    },
+    {
+      "src": "014ebe2e-22e9-4ff9-a77d-58a843413ffd",
+      "dst": "01c0bd00-c0ac-4d4a-9273-3be90ffc6488",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:10+00:00"
+    },
+    {
+      "src": "01f38bc1-b07b-49f2-b814-2c00431128b8",
+      "dst": "0de6a86c-7ec1-4dba-b3eb-8a1e7ec32a92",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:14+00:00"
+    },
+    {
+      "src": "0267af7f-0e1e-45c1-a3ee-aa59bdd7ea60",
+      "dst": "02c95791-45f0-4b63-af17-80259885f346",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:16+00:00"
+    },
+    {
+      "src": "032c6299-fe6d-48ef-a341-f2c70f48721e",
+      "dst": "03bb3f94-b0a4-4afb-b05f-c1b9a55473f3",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:18+00:00"
+    },
+    {
+      "src": "00344e3b-db9f-4581-98a8-456fc42c5add",
+      "dst": "01856e0d-4b8a-4684-abf6-c85881b23b41",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:25+00:00"
+    },
+    {
+      "src": "00e0b074-1e9c-40f4-a63b-c4ed75cd3efe",
+      "dst": "0e03ba88-c309-4da0-81ad-4f54be221793",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:28+00:00"
+    },
+    {
+      "src": "001af48c-b33d-43d3-a572-e85356f569c6",
+      "dst": "03688f5d-b078-4795-aadb-ec604646eac5",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:28+00:00"
+    },
+    {
+      "src": "00e74690-c08e-49d6-80bd-3ae9bd7d0d5c",
+      "dst": "01f4376a-ed9f-44bc-bc80-47153cf92168",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:30+00:00"
+    },
+    {
+      "src": "01381b22-6c44-4540-9b40-9b0eb1e5d889",
+      "dst": "020bf2bf-3bc8-4177-8fbe-3a28f7f20f19",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:32+00:00"
+    },
+    {
+      "src": "02ade31d-ed4d-4ce6-888d-1231dca247ee",
+      "dst": "046ee82c-0b78-4362-8eef-f3a5eaeaa805",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:42+00:00"
+    },
+    {
+      "src": "00fc00c9-6423-40c1-b6c2-d4ff27cfa533",
+      "dst": "024b4dae-de6d-4edd-9fbd-45d36acac58f",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:44+00:00"
+    },
+    {
+      "src": "00aefe65-4951-4982-abfe-0a20ce57b383",
+      "dst": "031e52e0-e6b8-4a96-a16c-61b244279e9c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:47+00:00"
+    },
+    {
+      "src": "00b3a2c0-f629-465b-bff0-1dbabea646f1",
+      "dst": "042a38fa-c8c6-444c-9595-f860e1d437d5",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:50+00:00"
+    },
+    {
+      "src": "024221c1-c226-4be4-a6e1-cbb8eeb9083d",
+      "dst": "02ff51f4-9c35-44ad-9c9c-590c0369b8b2",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:54+00:00"
+    },
+    {
+      "src": "0091910f-dd36-4306-ac6f-933b7cd7c52c",
+      "dst": "02e89aaa-81e1-45e3-9d18-7e9d118a311f",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:55+00:00"
+    },
+    {
+      "src": "0097e25a-b921-4b88-bbb7-9f8bf677d799",
+      "dst": "01b4680d-1c90-4be0-b637-8aa9bc3a8e24",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:43:58+00:00"
+    },
+    {
+      "src": "010a1baa-949b-4ecc-9f4b-39c6188c065a",
+      "dst": "0405b9ec-d9cf-4f7e-9807-70020b69c65d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:00+00:00"
+    },
+    {
+      "src": "036bca83-4003-4500-b99c-e456a67120b7",
+      "dst": "03d83dbc-522d-4205-9bb5-7353584e225e",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:04+00:00"
+    },
+    {
+      "src": "02475ed9-7ed3-48ab-ac51-77f576175656",
+      "dst": "029cb84e-0a52-46c4-b58a-6e37f69e192b",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:06+00:00"
+    },
+    {
+      "src": "02523421-609d-4d0f-9eb6-f65bc6232c10",
+      "dst": "03900b34-bfce-4f24-8c4c-a6b4a0d29f7d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:08+00:00"
+    },
+    {
+      "src": "008b2f55-1cb8-4993-822c-9a6983a538fe",
+      "dst": "03a68538-c0e3-423f-8965-8ca76bfbed3e",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:12+00:00"
+    },
+    {
+      "src": "01392d7a-1a7e-42c5-8f7e-d3de83b29728",
+      "dst": "0184433b-0371-4788-9aa6-38e32336314d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:14+00:00"
+    },
+    {
+      "src": "0013af8e-60c5-48bb-b165-885aab2eef1d",
+      "dst": "01b6b66d-8eb9-469f-97dd-54047d0079a2",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:19+00:00"
+    },
+    {
+      "src": "02d7f648-6f46-4e34-955e-253900531a1c",
+      "dst": "0e292bc8-4f88-4b9c-8a3a-1d2fe2440b53",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:30+00:00"
+    },
+    {
+      "src": "031bbaa2-ce0a-457f-85a8-f2abd166efeb",
+      "dst": "04290485-3603-434e-aa4f-226bf8c0d645",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:33+00:00"
+    },
+    {
+      "src": "01c5c743-d2fb-477c-b673-2ec1c4c41cd3",
+      "dst": "0e0f2f8f-9524-4008-adfb-1cd70ad87e13",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:35+00:00"
+    },
+    {
+      "src": "035ef8ee-ef02-4167-9108-4d32b35f95c0",
+      "dst": "0de1710c-c471-468d-8bba-e7fcb96e80d4",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:37+00:00"
+    },
+    {
+      "src": "01c147bb-fb08-4e10-a68a-5786fa51f66f",
+      "dst": "0334bf69-4d6d-427a-a82b-33f44667472c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:40+00:00"
+    },
+    {
+      "src": "005c0458-7fb3-400d-aed7-226a14548d07",
+      "dst": "032e8696-4043-4f28-8c87-c26fb97341d4",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:44:41+00:00"
+    },
+    {
+      "src": "01bed6a4-1168-4ed2-a50a-3bacf9e14acb",
+      "dst": "03316c50-73fd-4d17-b093-8ba54946c050",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:45:02+00:00"
+    },
+    {
+      "src": "02ccc09f-785d-4534-a548-e282498f3bc3",
+      "dst": "0414b409-d2d4-4590-a9fa-8276f9743f0f",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:45:45+00:00"
+    },
+    {
+      "src": "0005e132-439d-48c9-9a93-d4259136419f",
+      "dst": "02656a64-694f-41a2-bd73-de44357bc6e8",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:45:48+00:00"
+    },
+    {
+      "src": "003980de-a0a9-4d9c-8a57-a836b5e178f1",
+      "dst": "03c387e3-a619-4d44-821a-c9115329137f",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:45:56+00:00"
+    },
+    {
+      "src": "035bc9cc-6aaf-424b-bdd0-d2d28c3c2c2a",
+      "dst": "03884ee5-ba42-4f3e-98fe-0f4bc80fa8ac",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:46:05+00:00"
+    },
+    {
+      "src": "00743947-14e0-4174-a374-c1e05e6b785b",
+      "dst": "046d4fcb-77bc-4ab5-afe3-b7a6dabaaaf2",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:46:53+00:00"
+    },
+    {
+      "src": "00daf07e-a1dd-4cb2-98fe-9624e702a208",
+      "dst": "0dd200fc-9527-4bbd-b911-b7063b1ade95",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:05+00:00"
+    },
+    {
+      "src": "01282704-ca83-40ec-be6f-f0b1357aee99",
+      "dst": "02984fb7-9b16-4941-ac33-e44d9761f3a6",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:11+00:00"
+    },
+    {
+      "src": "00daf07e-a1dd-4cb2-98fe-9624e702a208",
+      "dst": "02e6ee66-fa0c-470f-9520-6bbd63293d85",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:13+00:00"
+    },
+    {
+      "src": "01767a18-554a-4b23-b2a4-fa162a62c67a",
+      "dst": "03ee6930-6c3b-460f-b2f9-0ea0b4211601",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:16+00:00"
+    },
+    {
+      "src": "03d74322-3466-4971-8020-92bd53a1bbdc",
+      "dst": "046035c0-3ae4-4372-9e00-afabde6bb076",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:20+00:00"
+    },
+    {
+      "src": "00a5f08c-8e77-494b-88bc-d3a344229aa5",
+      "dst": "0e01484a-3129-4b83-9c41-d0198dae5cbf",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:31+00:00"
+    },
+    {
+      "src": "03bb3f94-b0a4-4afb-b05f-c1b9a55473f3",
+      "dst": "04400bc8-6e1c-46c4-bc18-f9be3f16fe68",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:32+00:00"
+    },
+    {
+      "src": "004ec668-547d-47e0-ad2c-17f10f0ad405",
+      "dst": "03a591f7-6ccd-4aac-ad6d-da67a05c35b3",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:35+00:00"
+    },
+    {
+      "src": "002e3e67-95f0-4a5a-9a48-5278c4a79c0e",
+      "dst": "02dda54a-dd38-41d6-81b7-504e4ebd4744",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:38+00:00"
+    },
+    {
+      "src": "01405e69-0406-43ac-954d-ec45d7954605",
+      "dst": "0194cbc6-4709-46c7-a827-83a938563bc8",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:48+00:00"
+    },
+    {
+      "src": "01405e69-0406-43ac-954d-ec45d7954605",
+      "dst": "0dd200fc-9527-4bbd-b911-b7063b1ade95",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:50+00:00"
+    },
+    {
+      "src": "01717e5a-cbfa-4788-81ce-1337d47f17b6",
+      "dst": "03d76ecd-16c6-4c3a-9621-c3f85df6886d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:47:54+00:00"
+    },
+    {
+      "src": "01e37c71-c7b9-46dd-8047-4e572d783069",
+      "dst": "04295d69-22a5-4dba-a05b-6df099ce8c04",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:48:08+00:00"
+    },
+    {
+      "src": "0160a81b-d91b-481d-a327-82debd94dafd",
+      "dst": "01ff44c2-3a36-49c5-bd1f-0c5d94b753bf",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:48:12+00:00"
+    },
+    {
+      "src": "042a38fa-c8c6-444c-9595-f860e1d437d5",
+      "dst": "04417da0-c1c0-4466-8f62-1145f218d82d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:48:24+00:00"
+    },
+    {
+      "src": "00b9bb9d-80e1-45d2-b4af-b3f26b17877d",
+      "dst": "0442ab52-621e-404b-a0d1-d1a322d3c82e",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:48:27+00:00"
+    },
+    {
+      "src": "00bdfdfb-38f8-4743-8670-95b35608da54",
+      "dst": "014b3bfc-1511-4bef-8349-13cb212b2558",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:48:30+00:00"
+    },
+    {
+      "src": "014a9a45-1b51-4395-98e3-e28a291b0e8f",
+      "dst": "04462280-0439-4775-91c9-debf06dc463c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:09+00:00"
+    },
+    {
+      "src": "01ec4fed-a3f9-453e-8733-bea935ce25b9",
+      "dst": "025f5127-ec41-42be-bc87-ca97e166ba80",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:13+00:00"
+    },
+    {
+      "src": "03cfef83-3cc6-4583-975c-3e0df7542c3a",
+      "dst": "04557445-61fe-4f22-b8ff-f55f03c06e70",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:19+00:00"
+    },
+    {
+      "src": "01226992-a497-49bb-bded-c62f282f7bcd",
+      "dst": "0432931b-ccd0-4b6e-93a2-ac6e5a8c337c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:23+00:00"
+    },
+    {
+      "src": "004c54ca-ebe5-40d9-adbd-69b69afdeb73",
+      "dst": "022b244a-3850-476b-8836-71eb5713f58d",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:26+00:00"
+    },
+    {
+      "src": "008f924e-29bd-4cba-9236-18ffa208950f",
+      "dst": "01282704-ca83-40ec-be6f-f0b1357aee99",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:29+00:00"
+    },
+    {
+      "src": "00b2b2ef-872e-499b-8fd7-97a82251ec13",
+      "dst": "029746d1-ba01-47ab-b5b3-6531752ee4b9",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:38+00:00"
+    },
+    {
+      "src": "00f63e94-ff01-492f-b047-53c3b1593087",
+      "dst": "046ee82c-0b78-4362-8eef-f3a5eaeaa805",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:42+00:00"
+    },
+    {
+      "src": "01f906c7-0d69-4fb4-819a-8e4abe1a837e",
+      "dst": "0dfe62e7-3663-4183-87bf-8a443070bb36",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:44+00:00"
+    },
+    {
+      "src": "032c6299-fe6d-48ef-a341-f2c70f48721e",
+      "dst": "04400bc8-6e1c-46c4-bc18-f9be3f16fe68",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:45+00:00"
+    },
+    {
+      "src": "03a7c8db-0baf-45fc-9a81-087f0a489b38",
+      "dst": "0432931b-ccd0-4b6e-93a2-ac6e5a8c337c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:47+00:00"
+    },
+    {
+      "src": "004ec668-547d-47e0-ad2c-17f10f0ad405",
+      "dst": "0dc6efd8-2742-437c-be92-1f015d56acc1",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:50+00:00"
+    },
+    {
+      "src": "00e59997-bd37-4d61-92ba-d7eab2d088f9",
+      "dst": "02f50118-ea35-40f5-97ba-4a3e744ee7e4",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:53+00:00"
+    },
+    {
+      "src": "01326acf-e6dd-46df-af7e-e61deb1c27c2",
+      "dst": "03b4b75c-86cf-4de6-9f00-81e09bd1a9c7",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:55+00:00"
+    },
+    {
+      "src": "019f0502-f3d0-407a-8f62-c999fd87da85",
+      "dst": "0432931b-ccd0-4b6e-93a2-ac6e5a8c337c",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:57+00:00"
+    },
+    {
+      "src": "01b23110-21e0-4ce5-bc71-c7eee66d80e4",
+      "dst": "0252f095-162f-46ed-900a-8d96400c2858",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:58+00:00"
+    },
+    {
+      "src": "01b6b66d-8eb9-469f-97dd-54047d0079a2",
+      "dst": "03aad909-61ed-46bb-b484-81728e4af7d5",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:49:58+00:00"
+    },
+    {
+      "src": "01a64768-57e2-4f33-94d0-aa75db6d90bb",
+      "dst": "043cb3c5-29c5-4fb8-9100-5b40518f4589",
+      "decision": "DISTINCT",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:50:02+00:00"
+    },
+    {
+      "src": "0dc9b6c9-a2bd-47de-ad71-723ff2b1fd25",
+      "dst": "03efe717-7c06-43b7-87c0-d633a21a020e",
+      "decision": "SAME_AS",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "7c97749a66079dd67564aa742aa8afaeffd10c58f8bfaddecb6a31c6c0764bfd",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "e509480d5a309d92a90d72be646375c420c9ce5f3d6ffeb8ceb004834cbe240c",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "e6a914188a11b62c04b2f495ab4d15972e802b64049e09a6fc48e5e92390311c",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:58:45+00:00"
+    },
+    {
+      "src": "0dbc2633-0aa7-428f-a09e-15773b20d278",
+      "dst": "0dc93111-debf-447e-8391-7509081c2ddd",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "7d06fcf4c68bd9f17077096ad3c2d58ddae97aa71e3f24ffe453b798f8ba8b96",
+          "text": "Ảnh dùng chung của hai nhãn."
+        },
+        {
+          "asset_id": "84dda5a07412c5175f99d95b22f34480a6dde734bd4431950a4703eccfb19d72",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:58:51+00:00"
+    },
+    {
+      "src": "00789171-07fc-49b1-a945-f96b1c5532ba",
+      "dst": "0dbc2633-0aa7-428f-a09e-15773b20d278",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "64655990ed220a56711628a32f839176d3179ff8b8a0ded877d9378d1179d671",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:59:02+00:00"
+    },
+    {
+      "src": "01c2e532-429f-4112-87b3-3eab74f6f8f4",
+      "dst": "0dc869d0-59d6-46aa-87cb-911db540e21c",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "d657bdea328e771308d6b47bc1f689975e42b797878d6a2e34c7a3fb754434f2",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T17:59:05+00:00"
+    },
+    {
+      "src": "0194cbc6-4709-46c7-a827-83a938563bc8",
+      "dst": "02e6ee66-fa0c-470f-9520-6bbd63293d85",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "e265ccf925ea3da928280a4db5c0f7879a58062389c96278fff8803f927fd19b",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T18:00:38+00:00"
+    },
+    {
+      "src": "00c29902-46e1-41a2-9522-f85d8f6f9217",
+      "dst": "01381b22-6c44-4540-9b40-9b0eb1e5d889",
+      "decision": "VARIANT_OF",
+      "evidence": [
+        {
+          "text": "Người duyệt xác nhận trên trang duyệt cặp."
+        },
+        {
+          "asset_id": "c3df0b9c5033151d67e05fe5c3858c046b379eb46b292e4833d13f1b9f02f93c",
+          "text": "Ảnh dùng chung của hai nhãn."
+        }
+      ],
+      "reviewer": "human-1",
+      "reviewed_at": "2026-11-23T18:01:12+00:00"
+    }
+  ],
+  "aliases": {
+    "016bff45-cecd-4d02-a197-179cc51c73ae": [
+      "Famotidin Stada",
+      "Famotidin Stada 20 mg",
+      "Famotidin Stada 20mg",
+      "Famotidine Stada 20 mg",
+      "Famotidine Stada 20mg"
+    ],
+    "03500114-f9f7-4989-94aa-d07426eada58": [
+      "Famotidin Stada 40 mg",
+      "Famotidin Stada 40mg",
+      "Famotidine Stada 40",
+      "Famotidine Stada 40 mg",
+      "Famotidine Stada 40mg"
+    ],
+    "01c10f86-f302-4cea-b95d-0a3ab5451c54": [
+      "Pháo giấy trang trí"
+    ],
+    "0dacaafb-63b8-4c6e-834f-501f69c88cfe": [
+      "Pháo giấy bắn kim tuyến"
+    ]
+  },
+  "rejected_depictions": [
+    {
+      "asset_id": "b72ba2ea1f6237dc2786295b4864a2b78c208270e27612abe5d397fdc8a1a89d",
+      "entity_id": "03500114-f9f7-4989-94aa-d07426eada58",
+      "indexed_entity_ids": [
+        "03500114-f9f7-4989-94aa-d07426eada58"
+      ],
+      "evidence": "Chữ trên hộp ghi Omeprazole 40 mg và Nhà máy STADA Việt Nam. Corpus không có entity Omeprazole."
+    },
+    {
+      "asset_id": "8df0341519ae91e402f6c260da34fc5dd2ac6786d6b9cf8c20ed60246fe8ddbc",
+      "entity_id": "016bff45-cecd-4d02-a197-179cc51c73ae",
+      "indexed_entity_ids": [
+        "016bff45-cecd-4d02-a197-179cc51c73ae"
+      ],
+      "evidence": "Mặt hộp ghi Famotidine 40 mg và Zagros Darou. Corpus không có entity Famotidine Zagros."
+    }
+  ],
+  "eval_query_corrections": {
+    "single_named-0492": {
+      "original": "Pháo giấy",
+      "query": "Pháo giấy trang trí",
+      "reason": "Cụm gốc có thể chỉ mẫu giấy trang trí hoặc ống bắn kim tuyến. Câu sửa phù hợp với nhãn đích trong dev."
+    }
+  }
+}

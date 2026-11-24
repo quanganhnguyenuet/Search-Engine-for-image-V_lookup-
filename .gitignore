@@ -9,6 +9,8 @@ htmlcov/
 
 node_modules/
 .next/
+# Old Next.js cache moved aside (owned by another sandbox user, cannot be deleted)
+.next-stale-codex/
 out/
 coverage/
 *.tsbuildinfo

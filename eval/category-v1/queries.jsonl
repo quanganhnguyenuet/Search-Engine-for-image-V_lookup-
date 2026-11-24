@@ -1,0 +1,63 @@
+{"id": "cat001", "query": "thuốc giảm đau dạng viên", "categories": ["drug.oral"], "tiers": null, "kind": "category"}
+{"id": "cat002", "query": "thuốc tiêm truyền tĩnh mạch", "categories": ["drug.injection"], "tiers": null, "kind": "category"}
+{"id": "cat003", "query": "thuốc bôi ngoài da", "categories": ["drug.topical"], "tiers": null, "kind": "category"}
+{"id": "cat004", "query": "vitamin và thực phẩm chức năng", "categories": ["drug.supplement"], "tiers": null, "kind": "category"}
+{"id": "cat005", "query": "máy đo huyết áp tại nhà", "categories": ["medical.home"], "tiers": null, "kind": "category"}
+{"id": "cat006", "query": "dụng cụ hỗ trợ người khuyết tật", "categories": ["medical.mobility"], "tiers": null, "kind": "category"}
+{"id": "cat007", "query": "kem dưỡng da mặt", "categories": ["beauty.skincare"], "tiers": null, "kind": "category"}
+{"id": "cat008", "query": "son môi và phấn trang điểm", "categories": ["beauty.makeup"], "tiers": null, "kind": "category"}
+{"id": "cat009", "query": "dầu gội chăm sóc tóc", "categories": ["beauty.hair"], "tiers": null, "kind": "category"}
+{"id": "cat010", "query": "nước hoa nam", "categories": ["beauty.fragrance"], "tiers": null, "kind": "category"}
+{"id": "cat011", "query": "áo quần thời trang", "categories": ["fashion.clothing"], "tiers": null, "kind": "category"}
+{"id": "cat012", "query": "giày thể thao", "categories": ["fashion.shoes"], "tiers": null, "kind": "category"}
+{"id": "cat013", "query": "vali kéo du lịch", "categories": ["fashion.bags"], "tiers": null, "kind": "category"}
+{"id": "cat014", "query": "balo đựng laptop", "categories": ["fashion.bags"], "tiers": null, "kind": "category"}
+{"id": "cat015", "query": "nhẫn kim cương", "categories": ["fashion.jewelry"], "tiers": null, "kind": "category"}
+{"id": "cat016", "query": "dây chuyền vàng", "categories": ["fashion.jewelry"], "tiers": null, "kind": "category"}
+{"id": "cat017", "query": "đồng hồ đeo tay", "categories": ["fashion.watches"], "tiers": null, "kind": "category"}
+{"id": "cat018", "query": "trang sức hàng hiệu", "categories": ["fashion.jewelry"], "tiers": ["luxury"], "kind": "tier"}
+{"id": "cat019", "query": "túi xách hàng hiệu", "categories": ["fashion.bags"], "tiers": ["luxury"], "kind": "tier"}
+{"id": "cat020", "query": "quần áo cao cấp", "categories": ["fashion.clothing"], "tiers": ["luxury"], "kind": "tier"}
+{"id": "cat021", "query": "giày dép giá rẻ phổ thông", "categories": ["fashion.shoes"], "tiers": ["mass"], "kind": "tier"}
+{"id": "cat022", "query": "điện thoại thông minh", "categories": ["phone.handset"], "tiers": null, "kind": "category"}
+{"id": "cat023", "query": "máy tính bảng", "categories": ["phone.tablet"], "tiers": null, "kind": "category"}
+{"id": "cat024", "query": "laptop và máy tính để bàn", "categories": ["tech.computer"], "tiers": null, "kind": "category"}
+{"id": "cat025", "query": "màn hình tivi", "categories": ["tech.display"], "tiers": null, "kind": "category"}
+{"id": "cat026", "query": "tai nghe và loa", "categories": ["tech.audio"], "tiers": null, "kind": "category"}
+{"id": "cat027", "query": "máy ảnh và camera", "categories": ["tech.camera"], "tiers": null, "kind": "category"}
+{"id": "cat028", "query": "máy in và mực in", "categories": ["tech.printer"], "tiers": null, "kind": "category"}
+{"id": "cat029", "query": "chuột và bàn phím máy tính", "categories": ["tech.peripheral"], "tiers": null, "kind": "category"}
+{"id": "cat030", "query": "phụ tùng ô tô", "categories": ["car.parts"], "tiers": null, "kind": "category"}
+{"id": "cat031", "query": "lốp xe ô tô", "categories": ["car.tyres_wheels"], "tiers": null, "kind": "category"}
+{"id": "cat032", "query": "dầu nhớt động cơ ô tô", "categories": ["car.fluids_electrical"], "tiers": null, "kind": "category"}
+{"id": "cat033", "query": "phụ kiện trang trí xe hơi", "categories": ["car.accessory"], "tiers": null, "kind": "category"}
+{"id": "cat034", "query": "phụ tùng xe máy", "categories": ["moto.parts"], "tiers": null, "kind": "category"}
+{"id": "cat035", "query": "lốp xe máy", "categories": ["moto.tyres_wheels"], "tiers": null, "kind": "category"}
+{"id": "cat036", "query": "linh kiện xe đạp", "categories": ["bike.drivetrain"], "tiers": null, "kind": "category"}
+{"id": "cat037", "query": "lốp xe đạp", "categories": ["bike.tyres_wheels"], "tiers": null, "kind": "category"}
+{"id": "cat038", "query": "tàu thuyền", "categories": ["transport.watercraft"], "tiers": null, "kind": "category"}
+{"id": "cat039", "query": "máy bay", "categories": ["transport.aircraft"], "tiers": null, "kind": "category"}
+{"id": "cat040", "query": "máy xúc công trình xây dựng", "categories": ["industrial.construction"], "tiers": null, "kind": "category"}
+{"id": "cat041", "query": "dụng cụ điện cầm tay", "categories": ["industrial.power_tools"], "tiers": null, "kind": "category"}
+{"id": "cat042", "query": "bảo hộ lao động", "categories": ["industrial.safety"], "tiers": null, "kind": "category"}
+{"id": "cat043", "query": "vật liệu xây dựng", "categories": ["home.building_material"], "tiers": null, "kind": "category"}
+{"id": "cat044", "query": "đèn chiếu sáng", "categories": ["home.lighting"], "tiers": null, "kind": "category"}
+{"id": "cat045", "query": "nội thất bàn ghế", "categories": ["home.furniture"], "tiers": null, "kind": "category"}
+{"id": "cat046", "query": "dụng cụ nhà bếp", "categories": ["household.kitchenware"], "tiers": null, "kind": "category"}
+{"id": "cat047", "query": "máy giặt máy hút bụi", "categories": ["household.appliance"], "tiers": null, "kind": "category"}
+{"id": "cat048", "query": "món ăn Việt Nam", "categories": ["food.dish"], "tiers": null, "kind": "category"}
+{"id": "cat049", "query": "bánh kẹo đồ ăn vặt", "categories": ["food.cake_snack"], "tiers": null, "kind": "category"}
+{"id": "cat050", "query": "cà phê và trà", "categories": ["food.coffee_tea"], "tiers": null, "kind": "category"}
+{"id": "cat051", "query": "bia rượu", "categories": ["food.alcohol"], "tiers": null, "kind": "category"}
+{"id": "cat052", "query": "đồ chơi trẻ em", "categories": ["baby_toy.toy"], "tiers": null, "kind": "category"}
+{"id": "cat053", "query": "đồ dùng cho mẹ và bé", "categories": ["baby_toy.baby"], "tiers": null, "kind": "category"}
+{"id": "cat054", "query": "dụng cụ thể thao", "categories": ["outdoor.sports"], "tiers": null, "kind": "category"}
+{"id": "cat055", "query": "lều cắm trại dã ngoại", "categories": ["outdoor.camping"], "tiers": null, "kind": "category"}
+{"id": "cat056", "query": "thức ăn cho chó mèo", "categories": ["animal.pet_food"], "tiers": null, "kind": "category"}
+{"id": "cat057", "query": "hạt giống cây trồng", "categories": ["agri.seed_plant"], "tiers": null, "kind": "category"}
+{"id": "cat058", "query": "tượng phật phong thủy", "categories": ["culture.statue_fengshui"], "tiers": null, "kind": "category"}
+{"id": "cat059", "query": "đồ thờ cúng", "categories": ["culture.worship"], "tiers": null, "kind": "category"}
+{"id": "cat060", "query": "nhạc cụ truyền thống", "categories": ["culture.instrument"], "tiers": null, "kind": "category"}
+{"id": "cat061", "query": "tiền cổ đồ cổ sưu tầm", "categories": ["culture.antique"], "tiers": null, "kind": "category"}
+{"id": "cat062", "query": "văn phòng phẩm bút vở", "categories": ["office.stationery"], "tiers": null, "kind": "category"}
+{"id": "cat063", "query": "súng ống vũ khí quân sự", "categories": ["other.military"], "tiers": null, "kind": "category"}

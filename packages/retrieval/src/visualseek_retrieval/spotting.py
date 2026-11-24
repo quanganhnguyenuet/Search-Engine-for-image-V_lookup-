@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
+from visualseek_retrieval.entity_review import EntityReview
 from visualseek_retrieval.text import normalize, surface, token_matches
 
 MAX_SPAN = 12
@@ -44,6 +45,7 @@ class Spotting:
     matches: list[Match] = field(default_factory=list)
     ambiguous: list[Match] = field(default_factory=list)
     dense_top: list[tuple[str, float]] = field(default_factory=list)
+    entity_scores: np.ndarray | None = None  # query-to-entity-card cosines, one per row
 
 
 def _words(text: str) -> list[str]:
@@ -51,18 +53,34 @@ def _words(text: str) -> list[str]:
 
 
 class EntitySpotter:
-    def __init__(self, graph: dict, entity_dense: np.ndarray) -> None:
-        self.entity_ids = [entity["id"] for entity in graph["entities"]]
+    def __init__(
+        self,
+        graph: dict,
+        entity_dense: np.ndarray,
+        review: EntityReview | None = None,
+        short_aliases: dict[str, list[str]] | None = None,
+        suppressed_aliases: dict[str, list[str]] | None = None,
+    ) -> None:
+        review = review or EntityReview()
+        suppressed_aliases = suppressed_aliases or {}
+        self.entity_ids = [review.canonical(entity["id"]) for entity in graph["entities"]]
         self.entity_dense = entity_dense
         self.table: dict[tuple[str, ...], list[Entry]] = defaultdict(list)
-        surfaces: dict[str, dict[str, list[str]]] = {}
         for entity in graph["entities"]:
             # Prefer an accented spelling of the alias when the name provides one.
             spelled = {normalize(text): _words(text) for text in (entity["name"], entity["core"])}
-            surfaces[entity["id"]] = spelled
+            blocked = set(suppressed_aliases.get(entity["id"], ()))
             for alias in entity["aliases"]:
+                if alias in blocked:
+                    continue  # shared with other entities (scripts/build_short_aliases.py)
                 words = spelled.get(alias) or alias.split()
-                self._add(Entry("entity", entity["id"], tuple(words)))
+                self._add(Entry("entity", review.canonical(entity["id"]), tuple(words)))
+            for alias in review.aliases.get(entity["id"], ()):
+                self._add(Entry("entity", review.canonical(entity["id"]), tuple(_words(alias))))
+        # Collision-checked offline (scripts/build_short_aliases.py), keyed by canonical id.
+        for entity_id, aliases in (short_aliases or {}).items():
+            for alias in aliases:
+                self._add(Entry("entity", review.canonical(entity_id), tuple(_words(alias))))
         for brand in graph["brands"]:
             for alias in {*brand["aliases"], normalize(brand["name"])}:
                 words = (
@@ -116,8 +134,15 @@ class EntitySpotter:
                     target.append(item)
         if query_vector is not None:
             scores = self.entity_dense @ query_vector
-            top = np.argsort(-scores)[:top_k]
-            result.dense_top = [(self.entity_ids[i], float(scores[i])) for i in top]
+            result.entity_scores = scores
+            unique = set()
+            for index in np.argsort(-scores):
+                entity_id = self.entity_ids[index]
+                if len(result.dense_top) >= top_k:
+                    break
+                if entity_id not in unique:
+                    result.dense_top.append((entity_id, float(scores[index])))
+                    unique.add(entity_id)
         return result
 
 
