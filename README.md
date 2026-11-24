@@ -49,12 +49,22 @@ Set `NEO4J_AUTH=neo4j/<local-password>` in `.env` before the first start. Use a
 password of at least eight characters.
 
 ```bash
-docker compose up -d --wait neo4j
+docker compose --profile graph up -d --wait neo4j
+pip install "neo4j>=5.28,<6"
+python scripts/neo4j_load_graph.py   # copies search/graph.json into Neo4j
 ```
 
 Open Neo4j Browser at <http://127.0.0.1:7474> and sign in as `neo4j`. Bolt listens
 on `bolt://127.0.0.1:7687`. The `neo4j_data` volume persists the graph between
 container runs. B5 takes its inputs from B4. The search API reads a local graph snapshot.
+
+`NEO4J_AUTH` only sets the password when the volume is created. After you change it in
+`.env`, the old password still applies to an existing `neo4j_data` volume.
+
+`neo4j_load_graph.py` loads entities, brands, categories, `MADE_BY` (with `reviewed` and
+`reviewer`), `IS_A` and `SAME_AS`. A reload deletes whatever the new snapshot no longer
+has. Neo4j is a copy for viewing the graph: the API never reads it, and nothing is
+written back to `graph.json`.
 
 ## Text search (products-v1 MVP)
 
