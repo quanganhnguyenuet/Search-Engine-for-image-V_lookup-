@@ -62,6 +62,8 @@ class SearchService:
     def load(cls, settings: Settings) -> SearchService:
         from visualseek_retrieval.encoder import TextEncoder
         from visualseek_retrieval.entity_review import EntityReview
+        from visualseek_retrieval.fusion import FusionSettings, VisualFusion
+        from visualseek_retrieval.image_text import ImageTextEncoder
         from visualseek_retrieval.pipeline import SearchPipeline
         from visualseek_retrieval.qdrant_store import connect
 
@@ -85,11 +87,50 @@ class SearchService:
             root / "short_aliases.json", graph, review.fingerprint if review else None
         )
         categories, categories_status = load_categories(root / "entity_categories.json", graph)
+        cat_by_entity = (categories or {}).get("entities", {})
         image_paths = {}
+        asset_ids = []
+        payloads = {}
         for line in (root / "doc_texts.jsonl").read_text(encoding="utf-8").splitlines():
             row = json.loads(line)
-            image_paths[row["asset_id"]] = row["image_path"]
+            aid = row["asset_id"]
+            asset_ids.append(aid)
+            image_paths[aid] = row["image_path"]
+            c_eids = [
+                review.canonical(eid) if review else eid for eid in row.get("entity_ids") or []
+            ]
+            c_infos = [cat_by_entity[eid] for eid in c_eids if eid in cat_by_entity]
+            payloads[aid] = {
+                "asset_id": aid,
+                "entity_ids": row.get("entity_ids") or [],
+                "brand_ids": row.get("brand_ids") or [],
+                "image_path": row.get("image_path"),
+                "page_title": row.get("page_title"),
+                "domain": row.get("domain"),
+                "categories": sorted({e["category"] for e in c_infos if e.get("category")}),
+                "market_tiers": sorted(
+                    {
+                        e["market_tier"]
+                        for e in c_infos
+                        if e.get("category_l1") == "fashion" and e.get("market_tier")
+                    }
+                ),
+            }
         encoder = TextEncoder(device=settings.search_embed_device)
+        image_encoder = None
+        fusion = None
+        doc_dense_path = root / "doc_dense.npy"
+        img_siglip_path = root / "img_siglip2.npy"
+        if doc_dense_path.exists() and img_siglip_path.exists():
+            image_encoder = ImageTextEncoder(device=settings.search_embed_device)
+            fusion = VisualFusion(
+                asset_ids,
+                np.load(doc_dense_path),
+                np.load(img_siglip_path),
+                FusionSettings(
+                    text_candidates=50, img_candidates=25, alpha_attribute=0.1, alpha_plain=0.1
+                ),
+            )
         client = connect(settings.qdrant_url, settings.qdrant_api_key)
         pipeline = SearchPipeline(
             graph,
@@ -101,6 +142,9 @@ class SearchService:
             short_aliases=short_aliases["aliases"] if short_aliases else None,
             suppressed_aliases=short_aliases["suppressed"]["aliases"] if short_aliases else None,
             categories=categories,
+            image_encoder=image_encoder,
+            fusion=fusion,
+            payloads=payloads,
         )
         executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="search")
         for query in WARMUP_QUERIES:  # pay TLS, CUDA and tokenizer start-up before serving

@@ -81,6 +81,19 @@ def test_request_adds_category_boost_terms_and_optional_prefetch():
     assert [c.key for c in channel.filter.must] == ["categories", "market_tiers"]
 
 
+def test_a_query_of_several_category_groups_gets_one_channel_per_group():
+    groups = ["outdoor.camping", "car.vehicle", "moto.vehicle"]
+    boosts = EntityBoosts(categories=groups, w_category=0.2, category_groups=groups)
+    channels = build_request([0.0] * 3, lexical.query_vector("lều"), boosts)["prefetch"][0].prefetch
+    assert [c.filter.must[0].match.any for c in channels[2:]] == [[g] for g in groups]
+    # One group is the single-category case: no extra channel (it lowered descriptive nDCG).
+    boosts = EntityBoosts(categories=groups[:1], w_category=0.2, category_groups=groups[:1])
+    assert (
+        len(build_request([0.0] * 3, lexical.query_vector("lều"), boosts)["prefetch"][0].prefetch)
+        == 2
+    )
+
+
 GRAPH = {
     "fingerprint": "test",
     "entities": [
@@ -137,3 +150,22 @@ def test_trace_reports_the_category_cue():
     trace = pipe._trace(plan, None)
     assert trace["status"] == "category"
     assert trace["category"]["categories"] == [{"id": "fashion.shoes", "label": "Giày dép"}]
+
+
+def test_a_phrase_at_the_head_of_types_is_a_cue_even_when_it_also_qualifies_others():
+    from visualseek_retrieval.categories import CategoryLexicon
+
+    entities = {
+        f"v{i}": {"product_type": t, "category": "moto.vehicle"}
+        for i, t in enumerate(["Xe máy", "Xe máy điện", "Xe máy số"])
+    }
+    entities |= {
+        f"p{i}": {"product_type": t, "category": "moto.parts"}
+        for i, t in enumerate(["Sên xe máy", "Lốp xe máy", "Tay biên xe máy", "Dây ga xe máy"])
+    }
+    lexicon = CategoryLexicon.build(entities, {})
+    # Anywhere, "xe máy" is split 3/7: no cue. At the head it is only ever a motorbike.
+    assert lexicon.detect("xe máy").categories == ["moto.vehicle"]
+    # In a query a head-only cue must head its phrase as well: here it qualifies "lốp".
+    assert "moto.vehicle" not in lexicon.detect("lốp xe máy").categories
+    assert lexicon.detect("cho xe máy").categories == ["moto.vehicle"]

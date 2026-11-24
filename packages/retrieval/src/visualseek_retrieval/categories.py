@@ -53,10 +53,11 @@ def words_of(text: str, accented: bool) -> list[str]:
     return (surface(text) if accented else normalize(text)).split()
 
 
-def ngrams(words: list[str]) -> set[tuple[str, ...]]:
+def ngrams(words: list[str], head: bool = False) -> set[tuple[str, ...]]:
+    """Word n-grams; with ``head`` only those that start the phrase."""
     out = set()
     for n in range(1, MAX_NGRAM + 1):
-        for start in range(len(words) - n + 1):
+        for start in range(min(1, len(words) - n + 1) if head else len(words) - n + 1):
             gram = tuple(words[start : start + n])
             if not all(normalize(w) in STOPWORDS or w.isdigit() for w in gram):
                 out.add(gram)
@@ -82,14 +83,16 @@ class CategoryLexicon:
         self.names = names  # category id -> Vietnamese name
 
     @staticmethod
-    def _table(entities: dict[str, dict], names: dict[str, str], accented: bool) -> dict:
+    def _table(
+        entities: dict[str, dict], names: dict[str, str], accented: bool, head: bool = False
+    ) -> dict:
         votes: dict[tuple[str, ...], Counter] = defaultdict(Counter)
         for entity in entities.values():
-            for gram in ngrams(words_of(entity["product_type"], accented)):
+            for gram in ngrams(words_of(entity["product_type"], accented), head):
                 votes[gram][entity["category"]] += 1
         for category, name in names.items():
             for part in split_label(name):
-                for gram in ngrams(words_of(part, accented)):
+                for gram in ngrams(words_of(part, accented), head):
                     votes[gram][category] += NAME_VOTES
         table = {}
         for gram, counter in votes.items():
@@ -104,7 +107,20 @@ class CategoryLexicon:
 
     @classmethod
     def build(cls, entities: dict[str, dict], names: dict[str, str]) -> CategoryLexicon:
-        return cls(cls._table(entities, names, True), cls._table(entities, names, False), names)
+        """Vietnamese noun phrases are head-first: "xe máy" in "Lốp xe máy" only qualifies a
+        tyre. The votes of phrases at the head of a product type ("Xe máy điện") decide a cue
+        first; votes from anywhere in the type are the fallback for the other phrases."""
+
+        def table(accented: bool) -> dict:
+            anywhere = cls._table(entities, names, accented)
+            out = {gram: (*entry, False) for gram, entry in anywhere.items()}
+            for gram, entry in cls._table(entities, names, accented, head=True).items():
+                # Flag the cues that only the head votes make: in a query they must head their
+                # phrase too ("xe máy" alone, not in "lốp xe máy").
+                out[gram] = (*entry, anywhere.get(gram, (None,))[0] != entry[0])
+            return out
+
+        return cls(table(True), table(False), names)
 
     def detect(self, query: str) -> CategoryIntent:
         accented = surface(query) != normalize(query)
@@ -117,6 +133,8 @@ class CategoryLexicon:
                 if any(covered[start : start + n]):
                     continue
                 entry = table.get(tuple(words[start : start + n]))
+                if entry and entry[3] and start and normalize(words[start - 1]) not in STOPWORDS:
+                    continue  # a head-only cue qualifying the word before it
                 if entry:
                     covered[start : start + n] = [True] * n
                     matches.append(

@@ -64,3 +64,103 @@ def test_rank_unions_image_candidates_and_uses_both_scores():
 def test_row_count_mismatch_raises():
     with pytest.raises(ValueError):
         VisualFusion(["a"], np.zeros((2, 3)), np.zeros((1, 2)))
+
+
+def test_pipeline_wires_visual_fusion_on_descriptive_queries_only():
+    from qdrant_client import QdrantClient, models
+
+    from visualseek_retrieval import lexical
+    from visualseek_retrieval.pipeline import SearchPipeline, Settings
+
+    graph = {
+        "fingerprint": "test",
+        "entities": [
+            {
+                "id": "e1",
+                "name": "Chuột Razer Viper",
+                "core": "Chuột Razer Viper",
+                "brand_id": "brand:razer",
+                "aliases": ["chuot razer viper", "viper"],
+            },
+            {
+                "id": "e2",
+                "name": "Bàn gỗ sồi",
+                "core": "Bàn gỗ sồi",
+                "brand_id": None,
+                "aliases": ["ban go soi"],
+            },
+        ],
+        "brands": [{"id": "brand:razer", "name": "Razer", "aliases": ["razer"]}],
+        "edges": [{"src": "e1", "rel": "MADE_BY", "dst": "brand:razer"}],
+    }
+    entity_dense = np.array([[1.0, 0.0], [0.0, 1.0]], dtype=np.float32)
+    doc_dense = np.array([[0.8, 0.2], [0.7, 0.3]], dtype=np.float32)
+    img_dense = np.array([[0.1, 0.9], [0.95, 0.05]], dtype=np.float32)
+    client = QdrantClient(location=":memory:", force_disable_check_same_thread=True)
+    client.create_collection(
+        "test",
+        vectors_config={"doc": models.VectorParams(size=2, distance=models.Distance.COSINE)},
+        sparse_vectors_config={"sparse": models.SparseVectorParams()},
+    )
+    for idx, (aid, eid, vec) in enumerate([("a1", "e1", doc_dense[0]), ("a2", "e2", doc_dense[1])]):
+        sp = lexical.query_vector("bàn gỗ màu nâu")
+        client.upsert(
+            "test",
+            points=[
+                models.PointStruct(
+                    id=idx,
+                    vector={
+                        "doc": vec.tolist(),
+                        "sparse": models.SparseVector(indices=sp.indices, values=sp.values),
+                    },
+                    payload={
+                        "asset_id": aid,
+                        "entity_ids": [eid],
+                        "categories": ["home.furniture"],
+                    },
+                )
+            ],
+        )
+
+    class TextEnc:
+        def encode(self, texts):
+            return np.array([[0.6, 0.6] for _ in texts], dtype=np.float32)
+
+    class ImgEnc:
+        def encode(self, texts):
+            return np.array([[1.0, 0.0] for _ in texts], dtype=np.float32)
+
+    fusion = VisualFusion(
+        ["a1", "a2"],
+        doc_dense,
+        img_dense,
+        FusionSettings(text_candidates=10, img_candidates=2, alpha_attribute=0.1, alpha_plain=0.1),
+    )
+    pipe = SearchPipeline(
+        graph,
+        entity_dense,
+        TextEnc(),
+        client,
+        "test",
+        settings=Settings(dense_seed_min=2.0, out_of_scope_max=0.0),
+        image_encoder=ImgEnc(),
+        fusion=fusion,
+    )
+    desc = pipe.search("bàn gỗ màu nâu")
+    assert desc["trace"]["channels"]["img"] == "ready"
+    assert desc["results"][0]["asset_id"] == "a2"
+    assert desc["results"][0]["scores"]["img"] is not None
+
+    named = pipe.search("Chuột Razer Viper")
+    assert named["trace"]["channels"]["img"] == "inactive"
+    assert named["results"][0]["scores"]["img"] is None
+
+
+def test_an_attribute_phrase_starts_with_the_attribute():
+    from visualseek_retrieval.fusion import starts_with_visual_attribute
+
+    assert starts_with_visual_attribute("màu trắng")
+    assert starts_with_visual_attribute("dây da")
+    assert not starts_with_visual_attribute("bàn phím màu trắng")
+    assert not starts_with_visual_attribute("dây chuyền vàng")
+    assert not starts_with_visual_attribute("đồng hồ dây da")

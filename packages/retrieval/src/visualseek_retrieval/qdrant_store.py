@@ -87,6 +87,9 @@ class EntityBoosts:
     w_tier: float = 0.0
     category_prefetch: bool = False
     graph_prefetch: bool = True
+    # A query of several categories ("lều, xe ô tô và xe máy"): one dense channel per group, so
+    # every group has candidates although one query vector sits closest to only one of them.
+    category_groups: list[str] = field(default_factory=list)
 
     def targets(self) -> list[str]:
         return sorted(set(self.seeds) | set(self.hops))
@@ -147,6 +150,14 @@ def build_request(
         channels.append(
             models.Prefetch(query=dense, using=DENSE, filter=models.Filter(must=must), limit=depth)
         )
+    if len(boosts.category_groups) >= 2:
+        for group in boosts.category_groups:
+            must = [_field_in("categories", [group])]
+            channels.append(
+                models.Prefetch(
+                    query=dense, using=DENSE, filter=models.Filter(must=must), limit=depth
+                )
+            )
     fused = models.Prefetch(
         prefetch=channels, query=models.FusionQuery(fusion=models.Fusion.RRF), limit=depth * 2
     )

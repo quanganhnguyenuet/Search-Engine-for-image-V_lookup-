@@ -96,6 +96,13 @@ def has_visual_attribute(query: str) -> bool:
     return bool(_ATTRIBUTE.search(text))
 
 
+def starts_with_visual_attribute(text: str) -> bool:
+    """Whether the phrase is an attribute ("màu trắng", "dây da"), not an object that carries
+    one ("bàn phím màu trắng", "dây chuyền vàng", "đồng hồ dây da")."""
+    text = surface(text)
+    return not _MASK.match(text) and bool(_ATTRIBUTE.match(text))
+
+
 @dataclass
 class FusionSettings:
     text_candidates: int = 200

@@ -45,5 +45,6 @@ class ImageTextEncoder:
             return_tensors="pt",
         ).to(self.device)
         with torch.inference_mode():
-            features = self._model.get_text_features(**inputs).pooler_output
+            out = self._model.get_text_features(**inputs)
+            features = out.pooler_output if hasattr(out, "pooler_output") else out
         return torch.nn.functional.normalize(features.float(), dim=-1).cpu().numpy()

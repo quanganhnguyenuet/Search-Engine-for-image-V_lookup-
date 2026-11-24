@@ -74,6 +74,18 @@ class TraceCategory(BaseModel):
     groups: list[str] = []
 
 
+class TraceTypeRequest(BaseModel):
+    brand: str
+    include: list[str]
+    exclude: list[str]
+    named: list[str] = []
+    of: int
+    kept: int
+    # absent: the type exists in the catalogue but the brand has none of it (no product kept);
+    # category: no product of the type, but some of the brand's products share its category.
+    status: Literal["none", "no_match", "no_narrowing", "filtered", "category", "absent"]
+
+
 class SearchTrace(BaseModel):
     version: Literal[1]
     relation: str | None
@@ -87,6 +99,7 @@ class SearchTrace(BaseModel):
     unsupported_cues: list[TraceCue]
     negation: TraceNegation | None
     category: TraceCategory | None = None
+    type_requests: list[TraceTypeRequest] = []
     status: Literal[
         "clarification",
         "out_of_scope",

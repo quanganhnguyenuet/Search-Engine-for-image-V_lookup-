@@ -52,6 +52,9 @@ def _words(text: str) -> list[str]:
     return [word for word in surface(text).split() if normalize(word)]
 
 
+query_words = _words  # the tokens that Match.start/end index
+
+
 class EntitySpotter:
     def __init__(
         self,
