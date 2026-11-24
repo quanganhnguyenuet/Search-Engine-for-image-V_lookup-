@@ -7,6 +7,11 @@ Only sources that cost no LLM quota are used:
 
 Every edge records ``source`` and ``confidence`` and is ``reviewed = false``: this graph is
 silver, not the reviewed graph of PLAN_PRODUCTS_V1.md section 4.1.
+
+The MADE_BY review (scripts/brand_review_server.py) is then applied: the last decision per
+entity keeps the edge (``reviewed = true``), removes it, or moves the product to another
+brand; eval/graph-review/brand_apply.json names the new brands and the targets that are not
+manufacturers. The decisions must have been made on this same silver graph.
 Output: ``<out>/graph.json`` with a fingerprint over the sorted edge list.
 """
 
@@ -24,6 +29,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "packages" / "retrieval" / "src"))
 
 from visualseek_retrieval.text import normalize  # noqa: E402
+
+BRAND_DECISIONS = ROOT / "eval/graph-review/brand_decisions.jsonl"
+BRAND_APPLY = ROOT / "eval/graph-review/brand_apply.json"
 
 # Normalised JSON-LD "brand" values that are categories, generic drugs or noise, not brands.
 BRAND_STOP = {
@@ -319,33 +327,93 @@ def build(entities: list[dict], assets: list[dict]) -> dict:
         {**brand, "aliases": sorted(brand["aliases"])}
         for brand in sorted(brands.values(), key=lambda b: b["id"])
     ]
-    edges.sort(key=lambda edge: (edge["src"], edge["rel"], edge["dst"]))
-    fingerprint = hashlib.sha256(
-        json.dumps(edges, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    return seal(
+        {
+            "version": "graph-lite-v1",
+            "reviewed": False,
+            "entities": out_entities,
+            "brands": brand_list,
+            "edges": edges,
+        }
+    )
+
+
+def seal(graph: dict) -> dict:
+    """Sort the edges and (re)compute the edge and alias fingerprints."""
+    graph["edges"].sort(key=lambda edge: (edge["src"], edge["rel"], edge["dst"]))
+    graph["fingerprint"] = hashlib.sha256(
+        json.dumps(graph["edges"], ensure_ascii=False, sort_keys=True).encode("utf-8")
     ).hexdigest()
     # Aliases change S1 behaviour without changing edges; they get their own fingerprint.
-    aliases_sha256 = hashlib.sha256(
+    graph["aliases_sha256"] = hashlib.sha256(
         json.dumps(
-            [[e["id"], e["aliases"]] for e in out_entities]
-            + [[b["id"], b["aliases"]] for b in brand_list],
+            [[e["id"], e["aliases"]] for e in graph["entities"]]
+            + [[b["id"], b["aliases"]] for b in graph["brands"]],
             ensure_ascii=False,
         ).encode("utf-8")
     ).hexdigest()
-    return {
-        "version": "graph-lite-v1",
-        "aliases_sha256": aliases_sha256,
-        "reviewed": False,
-        "fingerprint": fingerprint,
-        "entities": out_entities,
-        "brands": brand_list,
-        "edges": edges,
-    }
+    return graph
+
+
+def apply_brand_review(graph: dict, decisions: list[dict], plan: dict) -> dict:
+    """Apply the MADE_BY review to a freshly built silver graph; returns counts.
+
+    ``decisions`` are the rows of brand_decisions.jsonl (the last one per entity wins),
+    ``plan`` is brand_apply.json. A decision made on another graph is refused: its edge may
+    not be the one the reviewer saw.
+    """
+    latest = {row["entity_id"]: row for row in decisions}
+    base = graph["fingerprint"]
+    stale = {row["graph_fingerprint"] for row in latest.values()} - {base}
+    if stale:
+        raise SystemExit(f"brand decisions were made on another graph: {sorted(stale)}")
+    not_a_brand, new_brands = plan.get("not_a_brand", {}), plan.get("new_brands", {})
+    entities = {entity["id"]: entity for entity in graph["entities"]}
+    brands = {brand["id"]: brand for brand in graph["brands"]}
+    counts = collections.Counter()
+    kept = []
+    for edge in graph["edges"]:
+        decision = latest.get(edge["src"]) if edge["rel"] == "MADE_BY" else None
+        if decision is None:
+            kept.append(edge)
+            continue
+        if decision["from_brand"] != edge["dst"]:
+            raise SystemExit(f"{edge['src']}: decided for {decision['from_brand']}")
+        verdict, target = decision["verdict"], decision.get("to_brand")
+        if verdict == "reassign" and target in not_a_brand:
+            verdict = "reject"
+        if verdict == "reject":
+            entities[edge["src"]]["brand_id"] = None
+            counts["removed"] += 1
+            continue
+        if verdict == "reassign":
+            if target.startswith("new:"):
+                if target not in new_brands:
+                    raise SystemExit(f"{target}: add it to brand_apply.json new_brands")
+                spec = new_brands[target]
+                brands.setdefault(spec["id"], {**spec, "aliases": sorted(spec["aliases"])})
+                target = spec["id"]
+            elif target not in brands:
+                raise SystemExit(f"{edge['src']}: unknown brand {target}")
+            edge = {**edge, "dst": target, "source": "review", "confidence": 1.0}
+            entities[edge["src"]]["brand_id"] = target
+            counts["moved"] += 1
+        else:
+            counts["confirmed"] += 1
+        kept.append({**edge, "reviewed": True, "reviewer": decision["reviewer"]})
+    used = {edge["dst"] for edge in kept if edge["rel"] == "MADE_BY"}
+    counts["brands_dropped"] = sum(brand_id not in used for brand_id in brands)
+    graph["brands"] = sorted((b for i, b in brands.items() if i in used), key=lambda b: b["id"])
+    graph["edges"] = kept
+    graph["made_by_review"] = {"base_fingerprint": base, **counts}
+    return seal(graph)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--corpus", type=Path, default=ROOT / "data/processed/products-v1")
     parser.add_argument("--out", type=Path, default=ROOT / "data/processed/products-v1/search")
+    parser.add_argument("--silver", action="store_true", help="skip the MADE_BY review")
     args = parser.parse_args()
 
     entities = [
@@ -358,6 +426,14 @@ def main() -> None:
         for line in (args.corpus / "assets.jsonl").read_text(encoding="utf-8").splitlines()
     ]
     graph = build(entities, assets)
+    if BRAND_DECISIONS.exists() and not args.silver:
+        decisions = [
+            json.loads(line)
+            for line in BRAND_DECISIONS.read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+        plan = json.loads(BRAND_APPLY.read_text(encoding="utf-8")) if BRAND_APPLY.exists() else {}
+        apply_brand_review(graph, decisions, plan)
     corpus_lock = json.loads((ROOT / "locks/products-v1-corpus.json").read_text(encoding="utf-8"))
     graph["corpus_fingerprint"] = corpus_lock["corpus_fingerprint"]
     args.out.mkdir(parents=True, exist_ok=True)
@@ -375,6 +451,7 @@ def main() -> None:
                 "brands_with_2plus_entities": sum(count >= 2 for count in sizes.values()),
                 "aliases": sum(len(entity["aliases"]) for entity in graph["entities"]),
                 "fingerprint": graph["fingerprint"],
+                "made_by_review": graph.get("made_by_review"),
             },
             ensure_ascii=False,
         )

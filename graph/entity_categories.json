@@ -15324,7 +15324,7 @@
   },
   "00b164a6-e0ab-44e4-bb36-0fd7911e067a": {
    "basis": "evidence",
-   "brand_id": "brand:ninh",
+   "brand_id": null,
    "category": "home.building_material",
    "category_l1": "home",
    "category_name": "Vật liệu xây dựng",
@@ -15436,7 +15436,7 @@
   },
   "00b5a440-87c6-4045-984a-50358852e247": {
    "basis": "evidence",
-   "brand_id": "brand:samsung",
+   "brand_id": "brand:galaxy-bike",
    "category": "bike.vehicle",
    "category_l1": "bike",
    "category_name": "Xe đạp & xe điện nhỏ",
@@ -16066,7 +16066,7 @@
   },
   "00d19fae-fa5a-4516-b0b1-85b4cda8c620": {
    "basis": "evidence",
-   "brand_id": "brand:mun",
+   "brand_id": null,
    "category": "culture.antique",
    "category_l1": "culture",
    "category_name": "Cổ vật, tiền cổ & sưu tầm",
@@ -18502,7 +18502,7 @@
   },
   "012cef04-7ebd-4011-93be-31c55d7edc5b": {
    "basis": "knowledge",
-   "brand_id": "brand:cp",
+   "brand_id": null,
    "category": "animal.livestock",
    "category_l1": "animal",
    "category_name": "Vật nuôi & giống vật nuôi",
@@ -20686,7 +20686,7 @@
   },
   "018cc53d-7ade-417e-8fbe-44478a0e009a": {
    "basis": "evidence",
-   "brand_id": "brand:eo",
+   "brand_id": null,
    "category": "culture.antique",
    "category_l1": "culture",
    "category_name": "Cổ vật, tiền cổ & sưu tầm",
@@ -22324,7 +22324,7 @@
   },
   "01cd9738-feb1-4abd-8c7d-93595df5c265": {
    "basis": "evidence",
-   "brand_id": "brand:ninh",
+   "brand_id": null,
    "category": "food.cake_snack",
    "category_l1": "food",
    "category_name": "Bánh, kẹo & đồ ăn vặt",
@@ -24368,7 +24368,7 @@
   },
   "022763a3-9952-4f12-a283-4a95ced07404": {
    "basis": "knowledge",
-   "brand_id": "brand:ninh",
+   "brand_id": null,
    "category": "food.dish",
    "category_l1": "food",
    "category_name": "Món ăn",
@@ -24410,7 +24410,7 @@
   },
   "0228ed2a-2e40-4063-9773-0092343e0f47": {
    "basis": "evidence",
-   "brand_id": "brand:mun",
+   "brand_id": null,
    "category": "home.furniture",
    "category_l1": "home",
    "category_name": "Nội thất",
@@ -26790,7 +26790,7 @@
   },
   "02840e20-6b01-4838-b50f-185824751227": {
    "basis": "evidence",
-   "brand_id": "brand:braun",
+   "brand_id": null,
    "category": "drug.injection",
    "category_l1": "drug",
    "category_name": "Thuốc tiêm & dịch truyền",
@@ -27294,7 +27294,7 @@
   },
   "029b7f59-320c-431b-9319-ee35e319571b": {
    "basis": "evidence",
-   "brand_id": "brand:cai",
+   "brand_id": null,
    "category": "food.alcohol",
    "category_l1": "food",
    "category_name": "Bia & rượu",
@@ -28862,7 +28862,7 @@
   },
   "02d8f378-8ec7-4572-b9cf-c98417b12ef9": {
    "basis": "evidence",
-   "brand_id": "brand:eo",
+   "brand_id": null,
    "category": "culture.antique",
    "category_l1": "culture",
    "category_name": "Cổ vật, tiền cổ & sưu tầm",
@@ -30458,7 +30458,7 @@
   },
   "0312bc85-ae1a-485e-bbe8-ad83a4df51d8": {
    "basis": "evidence",
-   "brand_id": "brand:xiaomi",
+   "brand_id": "brand:redmi",
    "category": "phone.handset",
    "category_l1": "phone",
    "category_name": "Điện thoại",
@@ -30892,7 +30892,7 @@
   },
   "0327cefc-61f5-4279-8dd8-91e485825aed": {
    "basis": "evidence",
-   "brand_id": "brand:xiaomi",
+   "brand_id": "brand:redmi",
    "category": "phone.handset",
    "category_l1": "phone",
    "category_name": "Điện thoại",
@@ -34924,7 +34924,7 @@
   },
   "03cec952-08ed-4042-9bf4-f92baac643d7": {
    "basis": "knowledge",
-   "brand_id": "brand:mac",
+   "brand_id": "brand:hauck",
    "category": "baby_toy.baby",
    "category_l1": "baby_toy",
    "category_name": "Đồ dùng cho mẹ & bé",
@@ -35820,7 +35820,7 @@
   },
   "03ec60ac-edca-41f0-89a2-e432affa0d33": {
    "basis": "evidence",
-   "brand_id": "brand:samsung",
+   "brand_id": "brand:galaxy-paint",
    "category": "home.building_material",
    "category_l1": "home",
    "category_name": "Vật liệu xây dựng",
@@ -37122,7 +37122,7 @@
   },
   "0427a505-041c-49cb-95f6-769300bbeeb7": {
    "basis": "evidence",
-   "brand_id": "brand:cai",
+   "brand_id": null,
    "category": "food.produce",
    "category_l1": "food",
    "category_name": "Rau, củ, quả & hạt",
@@ -38522,7 +38522,7 @@
   },
   "0459ec34-544e-4948-a4e3-038fe1a052a2": {
    "basis": "evidence",
-   "brand_id": "brand:heineken",
+   "brand_id": null,
    "category": "food.alcohol",
    "category_l1": "food",
    "category_name": "Bia & rượu",
@@ -38998,7 +38998,7 @@
   },
   "046f57ff-4e07-4d10-b3a6-9252d469a525": {
    "basis": "evidence",
-   "brand_id": "brand:new",
+   "brand_id": null,
    "category": "animal.livestock",
    "category_l1": "animal",
    "category_name": "Vật nuôi & giống vật nuôi",
@@ -39796,7 +39796,7 @@
   },
   "0491fbf6-1eb5-4f15-ab7c-f76aaecf8343": {
    "basis": "evidence",
-   "brand_id": "brand:huy",
+   "brand_id": null,
    "category": "culture.antique",
    "category_l1": "culture",
    "category_name": "Cổ vật, tiền cổ & sưu tầm",
@@ -41238,7 +41238,7 @@
   },
   "0ddb0994-2f84-4062-8a2b-dbdeb99d8d5b": {
    "basis": "evidence",
-   "brand_id": "brand:samsung",
+   "brand_id": "brand:sym",
    "category": "moto.vehicle",
    "category_l1": "moto",
    "category_name": "Xe máy & mô tô",
@@ -42316,7 +42316,7 @@
   },
   "0e0006bf-c5ca-4647-b990-d1fbfc2eb81d": {
    "basis": "evidence",
-   "brand_id": "brand:xiaomi",
+   "brand_id": "brand:redmi",
    "category": "phone.handset",
    "category_l1": "phone",
    "category_name": "Điện thoại",
@@ -42596,7 +42596,7 @@
   },
   "0e078905-8241-4ceb-a235-d0c1272039a7": {
    "basis": "evidence",
-   "brand_id": "brand:huy",
+   "brand_id": null,
    "category": "fashion.accessories",
    "category_l1": "fashion",
    "category_name": "Phụ kiện thời trang",

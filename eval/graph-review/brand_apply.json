@@ -1,0 +1,18 @@
+{
+ "note": "How scripts/build_graph_lite.py applies brand_decisions.jsonl. Agreed with the reviewer on 2026-11-24: targets that are a culture, a place, a material or an issuer are not manufacturers, so their MADE_BY edge is removed (candidates for ORIGIN and other relations in P5); new brands get a short name, and an alias that cannot collide with another brand.",
+ "not_a_brand": {
+  "new:văn hoá Óc Eo": "ORIGIN",
+  "new:văn hoá gò mun": "ORIGIN",
+  "new:new zealand": "ORIGIN",
+  "new:gỗ mun": "MATERIAL",
+  "new:huy hiệu nhà nước": "ISSUER",
+  "new:huy chương thể thao": "ISSUER"
+ },
+ "new_brands": {
+  "new:xe máy Sym": {"id": "brand:sym", "name": "SYM", "aliases": ["sym"]},
+  "new:redmi": {"id": "brand:redmi", "name": "Redmi", "aliases": ["redmi"]},
+  "new:Hauck": {"id": "brand:hauck", "name": "Hauck", "aliases": ["hauck"]},
+  "new:sơn Galaxy": {"id": "brand:galaxy-paint", "name": "Galaxy (sơn)", "aliases": ["son galaxy"]},
+  "new:hãng xe đạp Galaxy": {"id": "brand:galaxy-bike", "name": "Galaxy (xe đạp)", "aliases": ["xe dap galaxy"]}
+ }
+}

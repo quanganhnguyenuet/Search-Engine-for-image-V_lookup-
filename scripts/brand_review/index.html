@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duyệt cạnh hãng</title>
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef0f3; --border: #d5d9e0;
+  --text: #16191f; --muted: #545b67; --brand: #1d4ed8; --brand-ink: #ffffff;
+  --ok: #166534; --ok-soft: #dcfce7; --part: #92400e; --part-soft: #fef3c7;
+  --danger: #b91c1c; --danger-soft: #fee2e2; --focus: #2563eb; --radius: 8px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115; --surface: #171a20; --surface-2: #20242c; --border: #333946;
+    --text: #e8eaee; --muted: #a2a9b5; --brand: #6d9bff; --brand-ink: #0b1220;
+    --ok: #86efac; --ok-soft: #12321f; --part: #fcd34d; --part-soft: #3a2d0c;
+    --danger: #fca5a5; --danger-soft: #3b1616; --focus: #8ab4ff; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; min-height: 100dvh; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.top { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; padding: 12px 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.top h1 { font-size: 20px; margin: 0; }
+.progress { flex: 1 1 240px; color: var(--muted); font-size: 14px; display: flex; gap: 12px; align-items: center; }
+.bar { flex: 1; max-width: 320px; height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.bar > span { display: block; height: 100%; width: 0; background: var(--brand); }
+.layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); }
+.sidebar { border-right: 1px solid var(--border); background: var(--surface); overflow: auto; max-height: calc(100dvh - 57px); position: sticky; top: 57px; }
+.sidebar .filter { padding: 8px 8px 0; }
+.sidebar .filter input { width: 100%; min-height: 36px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+.sidebar ol { list-style: none; margin: 0; padding: 8px; }
+.sidebar button { width: 100%; display: flex; justify-content: space-between; gap: 8px; text-align: left; border: 0; background: transparent; border-radius: var(--radius); padding: 8px; min-height: 40px; cursor: pointer; font-size: 14px; }
+.sidebar button:hover { background: var(--surface-2); }
+.sidebar button[aria-current="true"] { background: var(--surface-2); box-shadow: inset 3px 0 0 var(--brand); }
+.sidebar .cnt { color: var(--muted); white-space: nowrap; }
+.sidebar .cnt.done { color: var(--ok); font-weight: 700; }
+.sidebar .flag { color: var(--danger); font-weight: 700; }
+main { padding: 16px 24px 120px; min-width: 0; }
+h2 { font-size: 26px; margin: 0 0 4px; }
+.meta { color: var(--muted); margin: 0 0 12px; font-size: 14px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 2px solid var(--border); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card.reject { border-color: var(--danger); background: var(--danger-soft); }
+.card.reassign { border-color: var(--part); background: var(--part-soft); }
+.card.saved { border-color: var(--ok); }
+.card h3 { font-size: 15px; margin: 0; overflow-wrap: anywhere; }
+.thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.thumbs span { aspect-ratio: 1; background: var(--surface-2); border-radius: 6px; overflow: hidden; display: grid; place-items: center; font-size: 11px; color: var(--muted); }
+.thumbs img { width: 100%; height: 100%; object-fit: contain; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--border); }
+.chip.warn { border-color: var(--danger); color: var(--danger); }
+.chip.weak { border-color: var(--part); color: var(--part); }
+.ptype { font-weight: 600; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.row input { flex: 1 1 140px; min-height: 32px; padding: 2px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+.btn { min-height: 40px; padding: 6px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-weight: 600; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+.btn.small { min-height: 32px; padding: 2px 10px; font-size: 13px; }
+.verdict { font-size: 13px; font-weight: 700; }
+.actions { position: fixed; bottom: 0; left: 300px; right: 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 12px 24px; background: var(--surface); border-top: 1px solid var(--border); }
+.status { font-size: 14px; margin: 0; }
+.status.error { color: var(--danger); }
+kbd { font: 12px ui-monospace, Consolas, monospace; border: 1px solid currentColor; border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; max-height: 240px; }
+  .actions { position: static; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Duyệt cạnh MADE_BY (sản phẩm → hãng)</h1>
+  <div class="progress"><span id="progress">Đang tải…</span><div class="bar" aria-hidden="true"><span id="bar"></span></div></div>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Hãng">
+    <div class="filter"><input id="filter" type="search" placeholder="Lọc hãng…" aria-label="Lọc hãng"></div>
+    <ol id="list"></ol>
+  </nav>
+  <main><div id="content"><p>Đang tải…</p></div></main>
+</div>
+<datalist id="brands"></datalist>
+<div class="actions" id="actions" hidden>
+  <button class="btn primary" id="approve" type="button">Duyệt trang này <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+</div>
+<script>
+"use strict";
+const S = { brands: [], options: [], current: null, edits: {}, busy: false, reviewer: "", unbranded: 0 };
+const $ = (id) => document.getElementById(id);
+const brandOf = (id) => S.brands.find((b) => b.id === id);
+const optionName = (id) => (S.options.find((o) => o.id === id) || {}).name || (id || "").replace(/^new:/, "mới: ");
+
+function renderList() {
+  const list = $("list");
+  list.replaceChildren();
+  const q = $("filter").value.trim().toLowerCase();
+  for (const b of S.brands) {
+    if (q && !b.name.toLowerCase().includes(q)) continue;
+    const done = b.cards.filter((c) => c.decision).length;
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    const name = document.createElement("span");
+    name.textContent = b.name;
+    if (b.outliers && done < b.cards.length) {
+      const f = document.createElement("span"); f.className = "flag"; f.textContent = " !"; f.title = `${b.outliers} sản phẩm khác nhóm`; name.append(f);
+    }
+    const cnt = document.createElement("span"); cnt.className = "cnt"; cnt.textContent = `${done}/${b.cards.length}`;
+    if (done === b.cards.length) cnt.classList.add("done");
+    btn.append(name, cnt);
+    if (b.id === S.current) btn.setAttribute("aria-current", "true");
+    btn.addEventListener("click", () => open(b.id));
+    li.append(btn); list.append(li);
+  }
+  const cards = S.brands.flatMap((b) => b.cards);
+  const done = cards.filter((c) => c.decision).length;
+  const wrong = cards.filter((c) => c.decision && c.decision.verdict !== "ok").length;
+  $("progress").textContent = `Đã duyệt ${done}/${cards.length} cạnh · sai ${wrong} · ${S.unbranded} entity chưa có hãng · người duyệt ${S.reviewer}`;
+  $("bar").style.width = `${cards.length ? (100 * done) / cards.length : 0}%`;
+}
+
+function shownVerdict(c) {
+  const e = S.edits[c.entity_id];
+  if (e) return e;
+  if (c.decision) return { verdict: c.decision.verdict, to_brand: c.decision.to_brand ? optionName(c.decision.to_brand) : "" };
+  return { verdict: "ok", to_brand: "" };
+}
+
+function card(c) {
+  const el = document.createElement("article");
+  el.className = "card";
+  const v = shownVerdict(c);
+  if (S.edits[c.entity_id]) el.classList.add(v.verdict); else if (c.decision) el.classList.add(v.verdict === "ok" ? "saved" : v.verdict);
+  el.innerHTML = `<h3></h3><div class="thumbs"></div><div class="ptype"></div><div class="chips"></div><div class="row"></div>`;
+  el.querySelector("h3").textContent = c.name;
+  const th = el.querySelector(".thumbs");
+  for (let i = 0; i < 3; i++) {
+    const s = document.createElement("span");
+    const a = c.images[i];
+    if (a) { const img = document.createElement("img"); img.loading = "lazy"; img.alt = ""; img.src = `/img/${a}`; s.append(img); } else s.textContent = "—";
+    th.append(s);
+  }
+  el.querySelector(".ptype").textContent = `${c.product_type || "?"} · ${c.category || "chưa có danh mục"}`;
+  const chips = el.querySelector(".chips");
+  const chip = (t, cls) => { const x = document.createElement("span"); x.className = `chip ${cls || ""}`; x.textContent = t; chips.append(x); };
+  if (c.outlier) chip("khác nhóm với phần lớn sản phẩm của hãng", "warn");
+  chip(`nguồn: ${c.source}`, c.source === "name" ? "weak" : "");
+  chip(`tin cậy ${c.confidence}`, c.confidence < 0.8 ? "weak" : "");
+  const row = el.querySelector(".row");
+  const label = document.createElement("span"); label.className = "verdict";
+  label.textContent = v.verdict === "ok" ? "Đúng hãng" : v.verdict === "reject" ? "Sai: gỡ cạnh" : "Đổi sang hãng:";
+  row.append(label);
+  if (v.verdict === "reassign") {
+    const input = document.createElement("input");
+    input.setAttribute("list", "brands"); input.maxLength = 80; input.value = v.to_brand || "";
+    input.placeholder = "tên hãng (có sẵn hoặc mới)";
+    input.setAttribute("aria-label", `Hãng đúng của ${c.name}`);
+    input.addEventListener("input", () => { S.edits[c.entity_id] = { verdict: "reassign", to_brand: input.value }; updateButton(); });
+    row.append(input);
+  }
+  const set = (verdict, text) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "btn small"; b.textContent = text;
+    b.addEventListener("click", () => {
+      if (verdict === null) delete S.edits[c.entity_id];
+      else S.edits[c.entity_id] = { verdict, to_brand: verdict === "reassign" ? (v.to_brand || "") : "" };
+      renderPage();
+      if (verdict === "reassign") { const inp = document.querySelector(`[aria-label="Hãng đúng của ${CSS.escape(c.name)}"]`); if (inp) inp.focus(); }
+    });
+    row.append(b);
+  };
+  if (v.verdict !== "reject") set("reject", "Sai, gỡ cạnh");
+  if (v.verdict !== "reassign") set("reassign", "Đổi hãng");
+  if (S.edits[c.entity_id]) set(null, "Bỏ sửa");
+  else if (v.verdict !== "ok") set("ok", "Thật ra đúng");
+  return el;
+}
+
+function updateButton() {
+  const b = brandOf(S.current);
+  if (!b) return;
+  const n = b.cards.filter((c) => S.edits[c.entity_id]).length;
+  $("approve").textContent = `Duyệt trang này (${b.cards.length} cạnh, sửa ${n})`;
+}
+
+function renderPage() {
+  const b = brandOf(S.current);
+  const content = $("content");
+  content.replaceChildren();
+  const h = document.createElement("h2"); h.textContent = b.name; h.tabIndex = -1;
+  const meta = document.createElement("p"); meta.className = "meta";
+  meta.textContent = `${b.id} · alias: ${b.aliases.join(", ") || "—"} · ${b.cards.length} sản phẩm · ${b.outliers} khác nhóm · ${b.name_only} cạnh chỉ dựa vào tên. Chỉ đánh dấu cạnh sai, rồi duyệt cả trang: thẻ chưa đánh dấu được ghi là đúng.`;
+  const grid = document.createElement("div"); grid.className = "grid";
+  for (const c of b.cards) grid.append(card(c));
+  content.append(h, meta, grid);
+  $("actions").hidden = false;
+  updateButton();
+}
+
+function open(id) {
+  if (Object.keys(S.edits).length && !confirm("Trang này có sửa chưa lưu. Bỏ và chuyển?")) return;
+  S.edits = {}; S.current = id;
+  $("status").textContent = ""; $("status").className = "status";
+  renderList(); renderPage(); window.scrollTo({ top: 0 });
+  try { localStorage.setItem("brand.current", id); } catch (e) {}
+}
+
+async function approve() {
+  if (S.busy || !S.current) return;
+  const b = brandOf(S.current);
+  const items = b.cards.map((c) => {
+    const e = S.edits[c.entity_id];
+    if (e) return { entity_id: c.entity_id, verdict: e.verdict, to_brand: (e.to_brand || "").trim() };
+    if (c.decision) return { entity_id: c.entity_id, verdict: c.decision.verdict, to_brand: c.decision.to_brand || "" };
+    return { entity_id: c.entity_id, verdict: "ok", to_brand: "" };
+  });
+  const missing = items.find((i) => i.verdict === "reassign" && !i.to_brand);
+  if (missing) { $("status").className = "status error"; $("status").textContent = "Có thẻ “Đổi hãng” chưa ghi tên hãng."; return; }
+  S.busy = true; $("status").className = "status"; $("status").textContent = "Đang lưu…";
+  try {
+    const r = await fetch("/api/decisions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ brand_id: b.id, items }) });
+    const body = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(Array.isArray(body.detail) ? body.detail.map((d) => d.msg).join("; ") : body.detail || `HTTP ${r.status}`);
+    S.edits = {};
+    await refresh();
+    const next = S.brands.find((x) => x.cards.some((c) => !c.decision));
+    if (next) { open(next.id); $("status").textContent = `Đã lưu ${body.saved} cạnh của ${b.name}.`; }
+    else { renderList(); renderPage(); $("status").textContent = "Đã duyệt hết."; }
+  } catch (error) {
+    $("status").className = "status error"; $("status").textContent = `Chưa lưu được: ${error.message}`;
+  } finally { S.busy = false; }
+}
+
+async function refresh() {
+  const r = await fetch("/api/state");
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const d = await r.json();
+  S.brands = d.brands; S.options = d.options; S.reviewer = d.reviewer; S.unbranded = d.unbranded;
+  const dl = $("brands"); dl.replaceChildren();
+  for (const o of S.options) { const opt = document.createElement("option"); opt.value = o.name; dl.append(opt); }
+}
+
+$("approve").addEventListener("click", approve);
+$("filter").addEventListener("input", renderList);
+document.addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); approve(); } });
+window.addEventListener("beforeunload", (e) => { if (Object.keys(S.edits).length) { e.preventDefault(); e.returnValue = ""; } });
+
+(async () => {
+  try {
+    await refresh();
+    let saved = null; try { saved = localStorage.getItem("brand.current"); } catch (e) {}
+    const first = (S.brands.find((b) => b.cards.some((c) => !c.decision)) || S.brands[0]).id;
+    open(saved && brandOf(saved) ? saved : first);
+  } catch (error) {
+    $("content").textContent = `Không tải được dữ liệu: ${error.message}. Kiểm tra brand_review_server.py.`;
+  }
+})();
+</script>
+</body>
+</html>

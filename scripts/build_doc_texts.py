@@ -9,6 +9,10 @@ Outputs in ``<out>``:
   doc_dense.npy       float32 [assets, 1024], row order = doc_texts.jsonl
   entity_dense.npy    float32 [entities, 1024], row order = graph.json entities
   texts_manifest.json fingerprints and settings
+
+With ``--reuse <dir>`` the vectors of an earlier build are kept for every doc_text and entity
+card whose text is unchanged, and only the changed ones are embedded (a graph review touches a
+few hundred of 30k documents, which a CPU embeds in minutes).
 """
 
 from __future__ import annotations
@@ -98,6 +102,30 @@ def compose(asset: dict, entities: dict[str, dict], brand_names: dict[str, str])
     return "\n".join(sections)
 
 
+def embed_new(
+    encoder,
+    ids: list[str],
+    texts: list[str],
+    known: dict[tuple[str, str], np.ndarray],
+    batch_size: int,
+):
+    """Vectors for ``texts``, taken from ``known`` when (id, text) is there, else embedded.
+
+    Keyed by id as well: duplicate texts were embedded in different batches, and an unchanged
+    row must keep its own vector bit for bit (the index update then skips it)."""
+    keys = list(zip(ids, texts, strict=True))
+    todo = [i for i, key in enumerate(keys) if key not in known]
+    out = np.empty((len(texts), encoder.model.get_sentence_embedding_dimension()), np.float32)
+    for i, key in enumerate(keys):
+        if key in known:
+            out[i] = known[key]
+    if todo:
+        # Sorting by length keeps padding small; vectors are written back in the original order.
+        todo.sort(key=lambda i: len(texts[i]))
+        out[todo] = encoder.encode([texts[i] for i in todo], batch_size=batch_size)
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--corpus", type=Path, default=ROOT / "data/processed/products-v1")
@@ -105,6 +133,7 @@ def main() -> None:
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--texts-only", action="store_true")
+    parser.add_argument("--reuse", type=Path, help="earlier artifact dir to take vectors from")
     args = parser.parse_args()
 
     graph = json.loads((args.out / "graph.json").read_text(encoding="utf-8"))
@@ -144,13 +173,31 @@ def main() -> None:
         return
 
     cards = [entity_card(entity, brand_names) for entity in graph["entities"]]
+    doc_texts = [row["doc_text"] for row in rows]
+    doc_ids = [row["asset_id"] for row in rows]
+    card_ids = [entity["id"] for entity in graph["entities"]]
+    old_docs: dict[tuple[str, str], np.ndarray] = {}
+    old_cards: dict[tuple[str, str], np.ndarray] = {}
+    if args.reuse:
+        old_rows = [
+            json.loads(line)
+            for line in (args.reuse / "doc_texts.jsonl").read_text(encoding="utf-8").splitlines()
+        ]
+        old_dense = np.load(args.reuse / "doc_dense.npy")
+        old_docs = {
+            (row["asset_id"], row["doc_text"]): old_dense[i] for i, row in enumerate(old_rows)
+        }
+        old_graph = json.loads((args.reuse / "graph.json").read_text(encoding="utf-8"))
+        old_names = {brand["id"]: brand["name"] for brand in old_graph["brands"]}
+        old_entity_dense = np.load(args.reuse / "entity_dense.npy")
+        old_cards = {
+            (entity["id"], entity_card(entity, old_names)): old_entity_dense[i]
+            for i, entity in enumerate(old_graph["entities"])
+        }
     encoder = TextEncoder(device=args.device, max_tokens=DOC_MAX_TOKENS)
     started = time.perf_counter()
-    # Sorting by length keeps padding small; vectors are written back in the original order.
-    order = np.argsort([len(row["doc_text"]) for row in rows])
-    dense = np.empty((len(rows), encoder.model.get_sentence_embedding_dimension()), np.float32)
-    dense[order] = encoder.encode([rows[i]["doc_text"] for i in order], batch_size=args.batch_size)
-    entity_dense = encoder.encode(cards, batch_size=64)
+    dense = embed_new(encoder, doc_ids, doc_texts, old_docs, args.batch_size)
+    entity_dense = embed_new(encoder, card_ids, cards, old_cards, 64)
     elapsed = time.perf_counter() - started
     np.save(args.out / "doc_dense.npy", dense)
     np.save(args.out / "entity_dense.npy", entity_dense)
@@ -166,6 +213,11 @@ def main() -> None:
         "corpus_fingerprint": graph["corpus_fingerprint"],
         "ocr_min_score": OCR_MIN_SCORE,
         "embed_seconds": round(elapsed, 1),
+        "reused": {
+            "from": str(args.reuse) if args.reuse else None,
+            "docs": sum(key in old_docs for key in zip(doc_ids, doc_texts, strict=True)),
+            "cards": sum(key in old_cards for key in zip(card_ids, cards, strict=True)),
+        },
     }
     (args.out / "texts_manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     print(json.dumps(manifest))
