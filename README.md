@@ -43,6 +43,44 @@ uv run uvicorn visualseek_api.main:app --app-dir services/api/src --reload
 cd apps/web && npm ci && npm run dev
 ```
 
+## Quick start (local search stack)
+
+The search API reads Qdrant Cloud (`QDRANT_URL` / `QDRANT_API_KEY` in `.env`) and the
+artifacts under `data/processed/products-v1/search`. Start the three parts in separate
+terminals from the repository root. The commands use the `product-ingest` venv.
+
+```powershell
+# 1. API on :8000 (loads bge-m3 and SigLIP2, takes 1-2 minutes before it answers)
+$env:SEARCH_ENABLED = "true"
+$env:PYTHONPATH = "packages/retrieval/src"
+.\.venv\product-ingest\Scripts\python.exe -m uvicorn visualseek_api.main:app --app-dir services/api/src --host 127.0.0.1 --port 8000
+
+# 2. Web UI on :3000
+cd apps/web; npm run dev
+
+# 3. Neo4j on :7474 / :7687 (optional, only to view the graph; needs Docker running)
+docker compose --profile graph up -d --wait neo4j
+```
+
+Check that the API is up: <http://localhost:8000/api/v1/search/info>, then open
+<http://localhost:3000>. That is all you need day to day: the enriched graph is already
+on disk, in Qdrant and in Neo4j.
+
+### Only when you change the graph
+
+Skip this unless you enrich or review the graph again. The API keeps the graph and
+`entity_categories.json` in memory, so restart it after any change to them. Run in this order:
+
+```powershell
+python scripts/graph_enrich.py free                   # zero-quota extraction from evidence
+python scripts/graph_enrich.py run --ids all          # Gemini enrichment (cached per entity)
+python scripts/graph_apply.py merge                   # writes graph/entity_categories.json
+python scripts/neo4j_load_graph.py                    # reload Neo4j (drops edges no longer in the snapshot)
+# then restart the API (step 1 above)
+```
+
+Run `make check` before relying on the result.
+
 ## Neo4j for graph review
 
 Set `NEO4J_AUTH=neo4j/<local-password>` in `.env` before the first start. Use a

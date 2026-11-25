@@ -13,7 +13,7 @@ Mọi số liệu bên dưới do chạy lại trong phiên này trên code, gra
 2. **Thay đổi lớn nhất là câu ghép.** Tỉ lệ câu có ảnh cho *mọi* vế (`all_parts@10`) tăng từ 0.60 lên 0.85 trên dev và đạt 0.90 trên holdout.
 3. **Bộ lọc loại hàng (P1) và graph boost đều có tác dụng thật trên dữ liệu mới**: bỏ bất kỳ thành phần nào thì P@10 và Recall@10 giảm 0.13 đến 0.25, khoảng tin cậy 95% đều nằm dưới 0.
 4. **Tìm thấy và đã sửa 1 lỗi thật** (mục 5.1): tên sản phẩm có dấu `&` hoặc `,` bị cắt thành nhiều vế, sinh ý định giả. Lỗi do P3 gây ra, silver dev bắt được, hops không bắt được.
-5. **Chưa đo**: P6 (fusion ảnh) end-to-end, silver test, và latency dưới tải (mục 6).
+5. **P6 (fusion ảnh SigLIP2) đã đo end-to-end trên pipeline thật** (mục 6): descriptive-v1 nDCG@10 từ 0.580 lên 0.796 (dev) và từ 0.579 lên 0.788 (test). Fusion không còn áp cho câu nhiều vế, vì ở đó nó làm mất vế thứ hai. Chưa đo: silver test và latency dưới tải.
 
 ---
 
@@ -129,7 +129,15 @@ Graph đã duyệt có 723 cạnh `MADE_BY` (tất cả `reviewed`) nhưng **1.5
 
 ## 6. Chưa đo, cần nói rõ
 
-- **P6 (fusion ảnh SigLIP2) chưa được đo end-to-end.** API đã bật fusion (silver chạy qua API nên đã có fusion), nhưng `build_pipeline` trong `scripts/evaluate_category.py` chưa truyền `image_encoder` và `fusion`, nên eval offline (hops, category-v1) không dùng fusion. Con số 0.793 (dev) là kết quả offline `tune_fusion` từ trước. Các số 0.798 và 0.815 trong `docs/bao-cao-cap-nhat-p1-p6-2026-11-24.md` không truy được nguồn và chưa được tái lập.
+- **P6 (fusion ảnh SigLIP2), đo bổ sung sau checkpoint.** `build_pipeline` giờ dựng fusion giống hệt API (hàm dùng chung `fusion.load_visual` và `fusion.asset_payloads`), và `scripts/evaluate_descriptive.py` chạy pipeline thật với fusion bật và tắt, chấm bằng điểm chấm tay của descriptive-v1:
+
+  | descriptive-v1 | Chỉ text | Có fusion | Chênh lệch (CI95) | Fusion được dùng |
+  |---|---|---|---|---|
+  | dev (56 câu) | 0.580 | **0.796** | +0.216 (+0.154 đến +0.281) | 55/56 |
+  | test (52 câu, chạy một lần để xác nhận) | 0.579 | **0.788** | +0.209 (+0.133 đến +0.286) | 50/52 |
+
+  judged@10 của cấu hình fusion là 0.94 (dev) và 0.92 (test). Số test 0.815 trong báo cáo cũ của phiên trước không tái lập được; số đo thật là 0.788.
+  Kiểm tra hồi quy trên category-v1: câu một danh mục P@10 0.844 lên 0.871 (+0.027, CI còn chứa 0). Câu nhiều vế ban đầu bị **hại** (all_intents 0.80 xuống 0.67), vì một vector ảnh cho "A và B" chỉ kéo về một vật. Đã sửa: fusion chỉ áp cho câu một vế, câu nhiều vế trở lại 0.80/0.82, descriptive không đổi.
 - **Silver test (327 câu) chưa chạy**, theo nguyên tắc chỉ chạy một lần ở cuối trên cấu hình đã chốt.
 - **descriptive-v1** không chạy lại. category-v1 chỉ chạy lại để kiểm tra kênh theo nhóm danh mục: 63 câu một danh mục và 30 câu nhiều danh mục, điểm không đổi.
 - **Latency dưới tải** chưa đo; con số ở mục 4 là chạy tuần tự từng câu.
@@ -138,11 +146,10 @@ Graph đã duyệt có 723 cạnh `MADE_BY` (tất cả `reviewed`) nhưng **1.5
 
 ## 7. Khuyến nghị
 
-1. **Dựng lại Rel của silver từ graph đã duyệt** để silver dev trở lại dùng được làm smoke test.
-2. **Nối fusion vào `build_pipeline`** rồi đo P6 trên descriptive, category-v1 và silver (mục 6).
-3. **P5**: làm dày graph (hãng cho 1.581 entity chưa có, rồi `FITS`/`TREATS`), duyệt trong Neo4j. Khi có Rel đầy đủ từ graph thì Recall@10 của hops mới tính đúng nghĩa, không còn là cận trên theo pool.
-4. **P8**: giảm latency (chỉ gọi `branch_scores` khi bật trace).
-5. Chạy lại holdout ở checkpoint tiếp theo (thay đổi segments chưa được đo trên holdout) và chỉ đọc số tổng hợp.
+1. **Dựng lại Rel của silver từ graph đã duyệt** để silver dev trở lại dùng được làm smoke test (nên làm cùng P5).
+2. **P5**: làm dày graph (hãng cho 1.581 entity chưa có, rồi `FITS`/`TREATS`), duyệt trong Neo4j. Khi có Rel đầy đủ từ graph thì Recall@10 của hops mới tính đúng nghĩa, không còn là cận trên theo pool.
+3. **P8**: giảm latency (chỉ gọi `branch_scores` khi bật trace).
+4. Chạy lại holdout ở checkpoint tiếp theo (thay đổi segments và điều kiện fusion chưa được đo trên holdout) và chỉ đọc số tổng hợp.
 
 ---
 
