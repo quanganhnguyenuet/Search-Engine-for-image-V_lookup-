@@ -1,3 +1,4 @@
+import { relationLabel } from "@/lib/search";
 import type { SearchResponse, SearchScores, SearchTrace, TraceEdge } from "@/lib/search";
 
 const STATUS: Record<SearchTrace["status"], string> = {
@@ -56,7 +57,7 @@ export function SearchTracePanel({ data }: { data: SearchResponse }) {
           <div>
             <dt className="text-muted-foreground">Quan hệ nhận ra</dt>
             <dd className="font-medium">
-              {trace.relation ?? "—"}
+              {trace.relation ? `${relationLabel(trace.relation)} (${trace.relation})` : "—"}
               {trace.cue && <> · <q>{trace.cue}</q></>}
             </dd>
           </div>

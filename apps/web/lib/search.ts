@@ -37,6 +37,21 @@ export type TraceEdge = {
   evidence: { field: string; text: string }[];
 };
 
+const RELATION_LABEL: Record<string, string> = {
+  MADE_BY: "cùng hãng",
+  TREATS: "cùng công dụng",
+  HAS_INGREDIENT: "cùng hoạt chất / thành phần",
+  FITS: "lắp được cho cùng dòng xe",
+  ORIGIN: "cùng vùng / xuất xứ",
+  IS_A: "cùng loại",
+};
+
+/** Vietnamese name of a graph relation; an unknown one is shown as the API sent it. */
+export function relationLabel(relation: string | null): string {
+  if (!relation) return RELATION_LABEL.MADE_BY;
+  return RELATION_LABEL[relation] ?? relation;
+}
+
 export type SearchTrace = {
   version: 1;
   relation: string | null;

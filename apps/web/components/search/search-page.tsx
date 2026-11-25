@@ -4,7 +4,7 @@ import { type FormEvent, useCallback, useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button";
 import { SearchTracePanel } from "@/components/search/search-trace";
-import { API_URL, type SearchResponse, searchText } from "@/lib/search";
+import { API_URL, relationLabel, type SearchResponse, searchText } from "@/lib/search";
 import { cn } from "@/lib/utils";
 
 const EXAMPLES = [
@@ -266,7 +266,7 @@ function PlanChips({ data }: { data: SearchResponse }) {
   const seeds = plan.seed_names.slice(0, plan.seeds.length);
   const anchors = plan.seed_names.slice(plan.seeds.length);
   for (const name of seeds) chips.push({ label: `Thực thể: ${name}`, tone: "brand" });
-  if (plan.relation) chips.push({ label: "Quan hệ: cùng hãng", tone: "brand" });
+  if (plan.relation) chips.push({ label: `Quan hệ: ${relationLabel(data.trace.relation)}`, tone: "brand" });
   for (const name of anchors) chips.push({ label: `Loại trừ: ${name}`, tone: "warn" });
   if (plan.hops) chips.push({ label: `${plan.hops} sản phẩm liên quan` });
   if (plan.dense_seed) chips.push({ label: "Khớp gần đúng" });

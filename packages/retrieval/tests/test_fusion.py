@@ -155,6 +155,10 @@ def test_pipeline_wires_visual_fusion_on_descriptive_queries_only():
     assert named["trace"]["channels"]["img"] == "inactive"
     assert named["results"][0]["scores"]["img"] is None
 
+    # Two objects: one image vector would lean to one of them, so the query stays on text.
+    two = pipe.search("bàn gỗ màu nâu và ghế nhựa trắng")
+    assert two["trace"]["channels"]["img"] == "inactive"
+
 
 def test_an_attribute_phrase_starts_with_the_attribute():
     from visualseek_retrieval.fusion import starts_with_visual_attribute
@@ -164,3 +168,29 @@ def test_an_attribute_phrase_starts_with_the_attribute():
     assert not starts_with_visual_attribute("bàn phím màu trắng")
     assert not starts_with_visual_attribute("dây chuyền vàng")
     assert not starts_with_visual_attribute("đồng hồ dây da")
+
+
+def test_asset_payloads_carry_the_categories_of_canonical_entities():
+    from visualseek_retrieval.entity_review import EntityReview
+    from visualseek_retrieval.fusion import asset_payloads
+
+    rows = [
+        {"asset_id": "a1", "entity_ids": ["dup"], "brand_ids": [], "image_path": "x.jpg"},
+        {"asset_id": "a2", "entity_ids": ["bag"], "brand_ids": ["brand:b"], "image_path": "y"},
+    ]
+    categories = {
+        "entities": {
+            "shoe": {"category": "fashion.shoes", "category_l1": "fashion", "market_tier": "mass"},
+            "bag": {"category": "household.kitchenware", "category_l1": "household"},
+        }
+    }
+    out = asset_payloads(rows, EntityReview(canonical_ids={"dup": "shoe"}), categories)
+    assert out["a1"]["categories"] == ["fashion.shoes"] and out["a1"]["market_tiers"] == ["mass"]
+    assert out["a1"]["entity_ids"] == ["dup"]  # the payload keeps the corpus ids
+    assert out["a2"]["categories"] == ["household.kitchenware"] and out["a2"]["market_tiers"] == []
+
+
+def test_load_visual_needs_both_vector_files(tmp_path):
+    from visualseek_retrieval.fusion import load_visual
+
+    assert load_visual(tmp_path, ["a1"], "cpu") == (None, None)

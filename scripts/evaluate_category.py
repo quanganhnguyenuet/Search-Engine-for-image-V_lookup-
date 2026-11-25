@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import dataclasses
+import functools
 import json
 import os
 import sys
@@ -26,6 +27,7 @@ sys.path.insert(0, str(ROOT / "packages" / "retrieval" / "src"))
 
 from visualseek_retrieval.encoder import TextEncoder  # noqa: E402
 from visualseek_retrieval.entity_review import EntityReview  # noqa: E402
+from visualseek_retrieval.fusion import asset_payloads, load_visual  # noqa: E402
 from visualseek_retrieval.pipeline import SearchPipeline, Settings  # noqa: E402
 from visualseek_retrieval.qdrant_store import COLLECTION, connect  # noqa: E402
 
@@ -43,10 +45,29 @@ def load_env() -> None:
             os.environ.setdefault(key.strip(), value.strip().strip('"'))
 
 
-def build_pipeline(settings: Settings, encoder, client) -> SearchPipeline:
+@functools.cache
+def visual_parts(device: str) -> tuple:
+    """(image encoder, fusion, payloads) as the API builds them; loaded once per process."""
+    graph = json.loads((SEARCH / "graph.json").read_text(encoding="utf-8"))
+    categories = json.loads((SEARCH / "entity_categories.json").read_text(encoding="utf-8"))
+    review = EntityReview.load(graph, REVIEW.read_bytes())
+    rows = [
+        json.loads(line)
+        for line in (SEARCH / "doc_texts.jsonl").read_text(encoding="utf-8").splitlines()
+    ]
+    image_encoder, fusion = load_visual(SEARCH, [row["asset_id"] for row in rows], device)
+    return image_encoder, fusion, asset_payloads(rows, review, categories)
+
+
+def build_pipeline(
+    settings: Settings, encoder, client, visual: bool = True, device: str = "cpu"
+) -> SearchPipeline:
+    """The pipeline the API serves. ``visual=False`` leaves out the SigLIP2 fusion channel
+    (P6) entirely; ``Settings(visual_fusion=False)`` keeps it loaded but unused."""
     graph = json.loads((SEARCH / "graph.json").read_text(encoding="utf-8"))
     short = json.loads((SEARCH / "short_aliases.json").read_text(encoding="utf-8"))
     categories = json.loads((SEARCH / "entity_categories.json").read_text(encoding="utf-8"))
+    image_encoder, fusion, payloads = visual_parts(device) if visual else (None, None, None)
     return SearchPipeline(
         graph,
         np.load(SEARCH / "entity_dense.npy"),
@@ -58,6 +79,9 @@ def build_pipeline(settings: Settings, encoder, client) -> SearchPipeline:
         short_aliases=short["aliases"],
         suppressed_aliases=short["suppressed"]["aliases"],
         categories=categories,
+        image_encoder=image_encoder,
+        fusion=fusion,
+        payloads=payloads,
     )
 
 

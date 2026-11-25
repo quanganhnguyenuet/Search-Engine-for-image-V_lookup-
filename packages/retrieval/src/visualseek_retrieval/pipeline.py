@@ -19,6 +19,7 @@ from qdrant_client.http.exceptions import ApiException
 
 from visualseek_retrieval import connectors, lexical, type_request
 from visualseek_retrieval.categories import CategoryIntent, CategoryLexicon, knn_votes
+from visualseek_retrieval.enrichment import RelationIndex, query_material
 from visualseek_retrieval.entity_review import EntityReview
 from visualseek_retrieval.fusion import VisualFusion, fuse, starts_with_visual_attribute
 from visualseek_retrieval.qdrant_store import (
@@ -45,6 +46,20 @@ OTHER_FOLDED = re.compile(r"\b(khac|tru)\b")
 
 # Relation cues the graph cannot answer yet (PLAN_PRODUCTS_V1.md section 4.1). They are only
 # reported in the trace so a content-only answer is visibly partial; they change no ranking.
+# Class nouns that name a top-level category outright; the category lexicon is built from product
+# types and does not know them ("đặc sản"), or reads them wrongly ("mỹ phẩm", "thực phẩm").
+RELATION_SCOPE_WORDS = {
+    "dac san": "food",
+    "mon an": "food",
+    "mon": "food",
+    "do an": "food",
+    "thuc an": "food",
+    "do uong": "food",
+    "thuc uong": "food",
+    "thuoc": "drug",
+    "my pham": "beauty",
+}
+
 UNSUPPORTED_CUES: tuple[tuple[str, re.Pattern, re.Pattern], ...] = tuple(
     (relation, re.compile(rf"\b({accented})\b"), re.compile(rf"\b({folded})\b"))
     for relation, accented, folded in (
@@ -60,8 +75,8 @@ UNSUPPORTED_CUES: tuple[tuple[str, re.Pattern, re.Pattern], ...] = tuple(
         ),
         (
             "FITS",
-            "lắp cùng|lắp cho cùng|cùng dòng xe|tương thích với",
-            "lap cung|lap cho cung|cung dong xe|tuong thich voi",
+            "lắp cùng|lắp cho cùng|cùng dòng xe|tương thích với|lắp được cho|lắp cho xe",
+            "lap cung|lap cho cung|cung dong xe|tuong thich voi|lap duoc cho|lap cho xe",
         ),
         (
             "ORIGIN",
@@ -126,6 +141,7 @@ class Plan:
     out_of_scope: bool = False
     clarification: list[dict] | None = None
     relation_cue: str | None = None
+    relation_name: str | None = None
     # A relation was asked and its value found, but no other entity carries it: answering
     # with content search would return unrelated images, so the search returns none.
     no_target: bool = False
@@ -177,6 +193,7 @@ class SearchPipeline:
         self.entities = {entity["id"]: entity for entity in graph["entities"]}
         self.short_aliases = short_aliases or {}
         self.brands = {brand["id"]: brand for brand in graph["brands"]}
+        self.enrichment = RelationIndex.build(graph, categories, self.review)
         # B2 categories: lexicon cues + the category of every entity-card row for the kNN vote.
         self.category_names: dict[str, str] = {}
         self.lexicon: CategoryLexicon | None = None
@@ -269,6 +286,8 @@ class SearchPipeline:
             ],
         )
         entities, brands = list(spotting.entities), list(spotting.brands)
+        if not entities and plan.unsupported_cues:
+            entities = self.enrichment.resolve_origins_from_query(query)
         if not entities and not brands and spotting.ambiguous:
             plan.clarification = [
                 {
@@ -285,8 +304,12 @@ class SearchPipeline:
             runner = spotting.dense_top[1][1] if len(spotting.dense_top) > 1 else -1.0
             if score >= s.dense_seed_min and score - runner >= s.dense_seed_margin:
                 entities, plan.dense_seed = [best], True
-            elif score < s.out_of_scope_max:
+            elif score < s.out_of_scope_max and not plan.unsupported_cues:
                 plan.out_of_scope = True
+        if plan.unsupported_cues and self._expand_enriched_relation(
+            plan, query, entities, spotting
+        ):
+            return plan
         if not entities and not brands and self.lexicon is not None:
             self._category_intent(plan, query, spotting)
         if plan.out_of_scope:
@@ -299,6 +322,7 @@ class SearchPipeline:
             } - {None}
             plan.origin_ids = entities
             plan.value_ids = sorted(anchor_brands)
+            plan.relation_name = "MADE_BY"
             siblings = sorted(
                 {self.review.canonical(o) for b in anchor_brands for o in self.by_brand[b]}
             )
@@ -353,6 +377,85 @@ class SearchPipeline:
             plan.no_target = True
         plan.intents = len(plan.seeds) + len(brands) + (1 if plan.generic_hits else 0)
         return plan
+
+    def _entity_l1(self, entity_id: str) -> str:
+        return ((self.product_types.get(entity_id) or {}).get("category") or "").split(".")[0]
+
+    def _relation_scope(
+        self, query: str, cue: str, spotting: Spotting, origins: list[str]
+    ) -> tuple[set[str], bool]:
+        """Top-level categories a relation may return, and whether the query asked for them.
+
+        The query names them ("đặc sản", "món", "thuốc") once the entity names and the relation
+        cue are cut out of it; otherwise the anchors' own categories apply."""
+        spans = [(m.start, m.end) for m in [*spotting.matches, *spotting.ambiguous]]
+        cue_words = {*normalize(cue).split(), "khac"}
+        rest = " ".join(
+            w
+            for i, w in enumerate(query_words(query))
+            if not any(a <= i < b for a, b in spans) and normalize(w) not in cue_words
+        )
+        folded = normalize(rest)
+        for phrase, l1 in RELATION_SCOPE_WORDS.items():
+            if re.search(r"\b" + phrase + r"\b", folded):
+                return {l1}, True
+        if self.lexicon is not None and rest:
+            detected = self.lexicon.detect(rest).categories
+            if detected:
+                return {c.split(".")[0] for c in detected}, False
+        return {self._entity_l1(o) for o in origins} - {""}, False
+
+    def _expand_enriched_relation(
+        self, plan: Plan, query: str, entities: list[str], spotting: Spotting
+    ) -> bool:
+        """Expand TREATS, HAS_INGREDIENT, FITS, ORIGIN or IS_A when the graph has edges for it."""
+        origins = list(dict.fromkeys(self.review.canonical(e) for e in entities))
+        for cue_item in list(plan.unsupported_cues):
+            rel = cue_item["relation"]
+            val_ids: list[str] = []
+            siblings: list[str] = []
+            if origins:
+                val_ids = self.enrichment.values_of(rel, origins)
+                if rel == "ORIGIN" and {"vung", "que"} & set(normalize(cue_item["cue"]).split()):
+                    # "cùng vùng" is a region; a country holds hundreds of unrelated products.
+                    val_ids = [
+                        v for v in val_ids if self.enrichment.nodes[v].get("scope") != "country"
+                    ]
+                siblings = [
+                    self.review.canonical(o) for o in self.enrichment.entities_of(rel, val_ids)
+                ]
+                siblings = list(dict.fromkeys(siblings))
+                if rel in ("TREATS", "HAS_INGREDIENT", "ORIGIN"):
+                    # A shared purpose, ingredient or place links products of one kind of goods:
+                    # "thuốc cùng bệnh" is not a herb, "món cùng thành phần" is not a body scrub.
+                    scope, asked = self._relation_scope(query, cue_item["cue"], spotting, origins)
+                    kept = [o for o in siblings if self._entity_l1(o) in scope]
+                    if scope and not kept and not asked:
+                        # A category the lexicon guessed is not worth an empty answer.
+                        own = {self._entity_l1(o) for o in origins}
+                        kept = [o for o in siblings if self._entity_l1(o) in own]
+                    siblings = kept if scope else siblings
+            if not siblings and rel == "FITS":
+                val_ids, fitting = self.enrichment.resolve_fits_from_query(query)
+                siblings = list(dict.fromkeys(self.review.canonical(o) for o in fitting))
+            if not (val_ids and siblings):
+                continue
+            plan.relation = True
+            plan.relation_name = rel
+            plan.relation_cue = cue_item["cue"]
+            plan.unsupported_cues = [c for c in plan.unsupported_cues if c["relation"] != rel]
+            plan.origin_ids = origins
+            plan.value_ids = val_ids
+            plan.anchors = list(origins) if (plan.negation and origins) else []
+            plan.hops = (
+                [o for o in siblings if o not in origins]
+                if (plan.negation and origins)
+                else siblings
+            )
+            plan.intents = len(val_ids)
+            plan.no_target = not plan.hops
+            return True
+        return False
 
     # ---- P1: the type of product a brand query asks for ------------------------------------
     def _query_request(
@@ -766,12 +869,19 @@ class SearchPipeline:
         parts = (
             connectors.segments(query, protected) if self.settings.segment_categories else [query]
         )
-        if len(parts) >= 2 and self.encoder is not None:
+        if len(parts) >= 2:
             # Each part gets its own cue and its own nearest cards: voting over the whole
             # query lets one object outvote the others ("tai nghe và chuột máy tính").
-            vectors = self.encoder.encode(parts)
+            vectors = (
+                self.encoder.encode(parts) if self.encoder is not None else [None] * len(parts)
+            )
             found = [
-                (part, *self._segment_intent(part, self.spotter.entity_dense @ vector))
+                (
+                    part,
+                    *self._segment_intent(
+                        part, self.spotter.entity_dense @ vector if vector is not None else None
+                    ),
+                )
                 for part, vector in zip(parts, vectors, strict=True)
             ]
         else:
@@ -798,6 +908,25 @@ class SearchPipeline:
             groups = [intent.categories[0] for _, intent, _ in useful if intent.categories]
             if len(set(groups)) >= 2:
                 plan.category_groups = list(dict.fromkeys(groups))
+        # When a segment explicitly asks for a material ("đồ thờ cúng bằng đồng"), penalise
+        # entities of that segment's category whose known material conflicts ("gốm sứ", "đá", "gỗ").
+        for part, intent, _ in useful:
+            req_mat = query_material(part)
+            if not req_mat or not intent.categories:
+                continue
+            cat_set = set(intent.categories)
+            has_matching = any(
+                (self.product_types.get(eid) or {}).get("category") in cat_set
+                and self.enrichment.materials.get(eid) == req_mat
+                for eid in self.product_types
+            )
+            if not has_matching:
+                continue
+            for eid, info in self.product_types.items():
+                if info.get("category") in cat_set:
+                    known_mat = self.enrichment.materials.get(eid)
+                    if known_mat and known_mat != req_mat and eid not in plan.anchors:
+                        plan.anchors.append(eid)
 
     def _segment_intent(self, text: str, scores) -> tuple[CategoryIntent, str]:
         s = self.settings
@@ -829,30 +958,53 @@ class SearchPipeline:
 
     def _trace(self, plan: Plan, brand_filter: str | None) -> dict:
         relation = bool(plan.relation or plan.value_ids)
+        rel_name = plan.relation_name or ("MADE_BY" if relation else None)
         targets = set(plan.hops)
         values = []
-        for brand_id in plan.value_ids:
-            edges = self.by_brand[brand_id]
-            values.append(
-                {
-                    "id": brand_id,
-                    "label": self.brands[brand_id]["name"],
-                    "kind": "Brand",
-                    "origin_edges": [
-                        self._edge_trace(e, brand_id)
-                        for e in self.review.indexed_ids(plan.origin_ids)
-                        if (e, brand_id) in self.brand_edges
-                    ],
-                    "target_edges": [
-                        self._edge_trace(e, brand_id)
-                        for e in edges
-                        if self.review.canonical(e) in targets
-                    ],
-                }
-            )
+        for value_id in plan.value_ids:
+            if value_id in self.brands:
+                edges = self.by_brand[value_id]
+                values.append(
+                    {
+                        "id": value_id,
+                        "label": self.brands[value_id]["name"],
+                        "kind": "Brand",
+                        "origin_edges": [
+                            self._edge_trace(e, value_id)
+                            for e in self.review.indexed_ids(plan.origin_ids)
+                            if (e, value_id) in self.brand_edges
+                        ],
+                        "target_edges": [
+                            self._edge_trace(e, value_id)
+                            for e in edges
+                            if self.review.canonical(e) in targets
+                        ],
+                    }
+                )
+            elif value_id in self.enrichment.nodes and rel_name:
+                node = self.enrichment.nodes[value_id]
+                edges = self.enrichment.by_node.get((rel_name, value_id), [])
+                values.append(
+                    {
+                        "id": value_id,
+                        "label": node["label"],
+                        "kind": node["kind"],
+                        "origin_edges": [
+                            self._enriched_edge_trace(rel_name, e, value_id)
+                            for e in plan.origin_ids
+                            if (rel_name, e, value_id) in self.enrichment.edges
+                        ],
+                        "target_edges": [
+                            self._enriched_edge_trace(rel_name, e, value_id)
+                            for e in edges
+                            if self.review.canonical(e) in targets
+                            and (rel_name, e, value_id) in self.enrichment.edges
+                        ],
+                    }
+                )
         return {
             "version": 1,
-            "relation": "MADE_BY" if relation else None,
+            "relation": rel_name if relation else None,
             "cue": plan.relation_cue,
             "mode": (
                 "shared_value"
@@ -861,7 +1013,14 @@ class SearchPipeline:
                 if plan.value_ids
                 else None
             ),
-            "origins": [self._entity_ref(e) for e in plan.origin_ids or plan.seeds or plan.anchors],
+            "origins": [
+                self._entity_ref(e)
+                for e in (
+                    plan.origin_ids
+                    or plan.seeds
+                    or (plan.anchors if plan.negation or plan.relation else [])
+                )
+            ],
             "values": values,
             "targets": [self._entity_ref(e) for e in dict.fromkeys(plan.hops)],
             "excluded": [self._entity_ref(e) for e in plan.anchors],
@@ -948,6 +1107,18 @@ class SearchPipeline:
             "evidence": [{"field": "name", "text": entity["label"]}],
         }
 
+    def _enriched_edge_trace(self, rel: str, entity_id: str, value_id: str) -> dict:
+        edge = self.enrichment.edges[rel, entity_id, value_id]
+        entity = self._entity_ref(entity_id)
+        return {
+            "entity_id": self.review.canonical(entity_id),
+            "source_entity_id": entity_id,
+            "source": edge.get("source"),
+            "confidence": edge.get("confidence"),
+            "reviewed": edge.get("reviewed", True),
+            "evidence": [{"field": "name", "text": entity["label"]}],
+        }
+
     # ---- S3 ------------------------------------------------------------------------------
     def search(self, query: str, brand_id: str | None = None) -> dict:
         s = self.settings
@@ -1002,10 +1173,16 @@ class SearchPipeline:
                 or bool(plan.generic_hits)
                 or len(plan.category_groups) >= 2
             )
+            # Fusion was tuned on queries about one object. One image vector for "A và B" leans
+            # to one of them, and the ranking then loses the other part (category-v1 multi:
+            # all intents 0.80 -> 0.67 with fusion), so a query of several parts stays on text.
+            spans = [(m.start, m.end) for m in [*spotting.matches, *spotting.ambiguous]]
+            one_part = len(connectors.segments(query, spans)) < 2
             use_fusion = (
                 s.visual_fusion
                 and self.fusion is not None
                 and self.image_encoder is not None
+                and one_part
                 and not grouped
                 and not plan.seeds
                 and not all_hops

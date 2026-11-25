@@ -9,8 +9,10 @@ channel only breaks ties. Tuned on eval/descriptive-v1 dev, see scripts/tune_fus
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 
@@ -109,6 +111,61 @@ class FusionSettings:
     img_candidates: int = 100
     alpha_attribute: float = 0.3
     alpha_plain: float = 0.7
+
+
+# Chosen on eval/descriptive-v1 dev with scripts/tune_fusion.py (fusion-descriptive-v1.json):
+# the image channel leads for every query that reaches fusion, the text cosine breaks ties.
+TUNED = FusionSettings(text_candidates=50, img_candidates=25, alpha_attribute=0.1, alpha_plain=0.1)
+
+
+def asset_payloads(rows: list[dict], review, categories: dict | None) -> dict[str, dict]:
+    """The Qdrant payload of every asset, from doc_texts.jsonl rows, kept in memory.
+
+    Fusion can rank an image that no Qdrant channel returned (image-only candidates); its
+    payload, with the categories and fashion tiers of its canonical entities, comes from here.
+    """
+    labels = (categories or {}).get("entities", {})
+    out = {}
+    for row in rows:
+        entity_ids = row.get("entity_ids") or []
+        infos = [
+            labels[e]
+            for e in (review.canonical(e) if review else e for e in entity_ids)
+            if e in labels
+        ]
+        out[row["asset_id"]] = {
+            "asset_id": row["asset_id"],
+            "entity_ids": entity_ids,
+            "brand_ids": row.get("brand_ids") or [],
+            "image_path": row.get("image_path"),
+            "page_title": row.get("page_title"),
+            "domain": row.get("domain"),
+            "categories": sorted({i["category"] for i in infos if i.get("category")}),
+            "market_tiers": sorted(
+                {
+                    i["market_tier"]
+                    for i in infos
+                    if i.get("category_l1") == "fashion" and i.get("market_tier")
+                }
+            ),
+        }
+    return out
+
+
+def load_visual(root: Path, asset_ids: list[str], device: str):
+    """(SigLIP2 text encoder, VisualFusion) for an artifact dir, or (None, None) without the
+    image vectors. The image vectors must have been embedded with the encoder's checkpoint and
+    in the row order of doc_texts.jsonl."""
+    from visualseek_retrieval.image_text import MODEL_REVISION, ImageTextEncoder
+
+    doc_path, img_path = root / "doc_dense.npy", root / "img_siglip2.npy"
+    if not (doc_path.exists() and img_path.exists()):
+        return None, None
+    manifest = json.loads((root / "img_manifest.json").read_text(encoding="utf-8"))
+    if manifest.get("revision") != MODEL_REVISION:
+        raise RuntimeError("img_siglip2.npy was embedded with another SigLIP2 revision")
+    fusion = VisualFusion(asset_ids, np.load(doc_path), np.load(img_path), TUNED)
+    return ImageTextEncoder(device=device), fusion
 
 
 def zscore(values: np.ndarray) -> np.ndarray:

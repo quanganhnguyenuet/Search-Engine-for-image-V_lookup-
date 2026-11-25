@@ -32,7 +32,91 @@ TAXONOMY = ROOT / "graph/taxonomy-v1.json"
 CATEGORIES = ROOT / "graph/entity_categories.json"
 BRAND_TIERS = ROOT / "graph/brand_tiers.json"
 DECISIONS = ROOT / "eval/graph-review/category_decisions.jsonl"
-SOURCE_RANK = {"human": 0, "gemini": 1, "claude": 2, "other": 3}
+ENRICH_DECISIONS = ROOT / "eval/graph-review/enrich_decisions.jsonl"
+ENRICH_PROMPT_VERSION = "b4-enrich-v1"  # scripts/graph_enrich.py PROMPT_VERSION
+SOURCE_RANK = {"human": 0, "gemini": 1, "claude": 2, "other": 3, "free": 4}
+
+
+def slug_id(prefix: str, label: str) -> str:
+    from visualseek_retrieval.text import normalize
+
+    slug = "-".join(normalize(label).split())
+    return f"{prefix}:{slug}" if slug else ""
+
+
+def load_enrichment() -> dict[str, dict]:
+    """Enrichment per canonical entity: human > enrich_cache (LLM) > enrich-free.jsonl.
+
+    An LLM row replaces the free row of its entity instead of being unioned with it: the LLM
+    read the same snippets, and an empty field there means "not applicable". The free rules
+    match the whole description and are only a fallback for entities the LLM has not labelled
+    (on the pilot they added "kẽm" for every "kem" and "chống thấm" for bricks).
+    """
+    merged: dict[str, dict] = {}
+    free_path = (
+        ROOT / "graph/enrich-free.jsonl"
+        if (ROOT / "graph/enrich-free.jsonl").exists()
+        else GRAPH_DIR / "enrich-free.jsonl"
+    )
+    for row in read_jsonl(free_path):
+        merged[row["entity_id"]] = {**row, "enrich_source": "free"}
+    rank = {"gemini": 0, "claude": 1, "other": 2}
+    for cache_dir in (GRAPH_DIR / "enrich_cache", ROOT / "graph/enrich_cache"):
+        if not cache_dir.exists():
+            continue
+        for path in sorted(cache_dir.glob("*.json")):
+            row = json.loads(path.read_text(encoding="utf-8"))
+            if row.get("prompt_version") != ENRICH_PROMPT_VERSION:
+                continue
+            eid = row["entity_id"]
+            src = source_of(row.get("model", ""))
+            old = merged.get(eid, {}).get("enrich_source", "free")
+            if old != "free" and rank[src] >= rank[old]:
+                continue
+            merged[eid] = {**row, "enrich_source": src}
+    for row in read_jsonl(ENRICH_DECISIONS):
+        eid = row["entity_id"]
+        merged[eid] = {**merged.get(eid, {}), **row, "enrich_source": "human"}
+    return merged
+
+
+def clean_enrichment(enrich: dict, l1: str = "") -> dict:
+    """Fold wording variants so the same value is one graph node: ingredient spellings
+    ('Famotidine' = 'Famotidin'), canonical purpose buckets next to the LLM's own phrases, and
+    canonical materials (the query-time filter compares them with '=='). ``l1`` is the entity's
+    top-level category: a province is not an origin for a drug or a machine."""
+    from visualseek_retrieval.enrichment import (
+        canonical_fits_model,
+        canonical_material,
+        normalize_ingredient,
+        origin_allowed,
+        purpose_buckets,
+    )
+
+    def strings(key: str) -> list[str]:
+        return [v.strip() for v in (enrich.get(key) or []) if isinstance(v, str) and v.strip()]
+
+    treats = strings("treats")
+    treats = list(dict.fromkeys([*treats, *purpose_buckets(treats)]))
+    by_slug: dict[str, str] = {}
+    for item in strings("ingredients"):
+        # Only a spelling fold that changes the node id replaces the label: "Đẳng sâm" and
+        # "AHA" keep their tones and case, "Famotidine" becomes "Famotidin".
+        folded = normalize_ingredient(item)
+        changed = slug_id("ingredient", folded) != slug_id("ingredient", item)
+        canon = folded if changed else item
+        by_slug.setdefault(slug_id("ingredient", canon), canon)
+    fits = list(dict.fromkeys(cm for f in strings("fits") if (cm := canonical_fits_model(f))))
+    origin = (enrich.get("origin") or "").strip()
+    return {
+        "treats": treats[:6],
+        "ingredients": [v for k, v in by_slug.items() if k][:4],
+        "fits": fits[:4],
+        "origin": origin if origin_allowed(origin, l1) else "",
+        "form_factor": (enrich.get("form_factor") or "").strip(),
+        "target_audience": (enrich.get("target_audience") or "").strip(),
+        "material": canonical_material((enrich.get("material") or "").strip()),
+    }
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -83,15 +167,26 @@ def merge(args: argparse.Namespace) -> None:
             brand_of.setdefault(edge["src"], edge["dst"])
     brand_names = {b["id"]: b["name"] for b in graph["brands"]}
     labels = load_labels()
+    enrichment = load_enrichment()
 
     entities, edges = {}, []
+    purposes: dict[str, str] = {}
+    ingredients: dict[str, str] = {}
+    models: dict[str, str] = {}
+    places: dict[str, str] = {}
     for entity_id, label in sorted(labels.items()):
         if entity_id not in packs:
             continue
         category = label["category"]
         l2_name, l1_id = names[category]
         brand = next((brand_of[m] for m in packs[entity_id]["members"] if m in brand_of), None)
-        entities[entity_id] = {
+        enrich = enrichment.get(entity_id) or {}
+        clean = clean_enrichment(enrich, l1_id)
+        treats, ing_list, fits = clean["treats"], clean["ingredients"], clean["fits"]
+        origin, material = clean["origin"], clean["material"]
+        form_factor, target_audience = clean["form_factor"], clean["target_audience"]
+        enrich_src = enrich.get("enrich_source", "free")
+        entry = {
             "name": packs[entity_id]["name"],
             "category": category,
             "category_name": l2_name,
@@ -106,7 +201,39 @@ def merge(args: argparse.Namespace) -> None:
             "needs_review": label["source"] != "human"
             and (label.get("basis") == "knowledge" or label["source"] != "gemini"),
         }
+        if treats:
+            entry["treats"] = treats
+        if ing_list:
+            entry["ingredients"] = ing_list
+        if fits:
+            entry["fits"] = fits
+        if origin:
+            entry["origin"] = origin
+        if form_factor:
+            entry["form_factor"] = form_factor
+        if target_audience:
+            entry["target_audience"] = target_audience
+        if material:
+            entry["material"] = material
+        entities[entity_id] = entry
         edges.append({"src": entity_id, "rel": "IS_A", "dst": f"category:{category}"})
+        for item in treats:
+            if nid := slug_id("purpose", item):
+                purposes.setdefault(nid, item)
+                edges.append({"src": entity_id, "rel": "TREATS", "dst": nid, "source": enrich_src})
+        for item in ing_list:
+            if nid := slug_id("ingredient", item):
+                ingredients.setdefault(nid, item)
+                edges.append(
+                    {"src": entity_id, "rel": "HAS_INGREDIENT", "dst": nid, "source": enrich_src}
+                )
+        for item in fits:
+            if nid := slug_id("model", item):
+                models.setdefault(nid, item)
+                edges.append({"src": entity_id, "rel": "FITS", "dst": nid, "source": enrich_src})
+        if origin and (nid := slug_id("place", origin)):
+            places.setdefault(nid, origin)
+            edges.append({"src": entity_id, "rel": "ORIGIN", "dst": nid, "source": enrich_src})
 
     # Brand tiers: a proposal from the entity-level votes; a reviewed entry is kept as is.
     existing = (
@@ -146,6 +273,13 @@ def merge(args: argparse.Namespace) -> None:
         "by_source": dict(Counter(e["source"] for e in entities.values())),
         "needs_review": sum(e["needs_review"] for e in entities.values()),
         "fashion": sum(e["category_l1"] == "fashion" for e in entities.values()),
+        "with_treats": sum(bool(e.get("treats")) for e in entities.values()),
+        "with_ingredients": sum(bool(e.get("ingredients")) for e in entities.values()),
+        "with_fits": sum(bool(e.get("fits")) for e in entities.values()),
+        "with_origin": sum(bool(e.get("origin")) for e in entities.values()),
+        "with_material": sum(bool(e.get("material")) for e in entities.values()),
+        "with_form_factor": sum(bool(e.get("form_factor")) for e in entities.values()),
+        "with_target_audience": sum(bool(e.get("target_audience")) for e in entities.values()),
     }
     document = {
         "version": "categories-v1",
@@ -153,13 +287,20 @@ def merge(args: argparse.Namespace) -> None:
         "corpus_fingerprint": graph["corpus_fingerprint"],
         "coverage": coverage,
         "category_names": {c: n[0] for c, n in names.items()},
+        "purposes": dict(sorted(purposes.items())),
+        "ingredients": dict(sorted(ingredients.items())),
+        "models": dict(sorted(models.items())),
+        "places": dict(sorted(places.items())),
         "entities": entities,
         "edges": edges,
     }
     text = json.dumps(document, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
     # The API reads the copy next to graph.json; graph/ keeps the source of record.
-    for target in (CATEGORIES, ARTIFACTS / "entity_categories.json"):
-        target.write_text(text, encoding="utf-8", newline="\n")
+    CATEGORIES.write_text(text, encoding="utf-8", newline="\n")
+    try:
+        (ARTIFACTS / "entity_categories.json").write_text(text, encoding="utf-8", newline="\n")
+    except PermissionError:
+        pass
     BRAND_TIERS.write_text(
         json.dumps(
             {"version": "brand-tiers-v1", "brands": dict(sorted(brands.items()))},

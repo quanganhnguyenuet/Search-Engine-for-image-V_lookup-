@@ -22,6 +22,7 @@ NEO4J_AUTH in .env and the driver (``pip install "neo4j>=5.28,<6"``).
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -43,6 +44,10 @@ SCHEMA = (
     "CREATE CONSTRAINT entity_id IF NOT EXISTS FOR (n:Entity) REQUIRE n.id IS UNIQUE",
     "CREATE CONSTRAINT brand_id IF NOT EXISTS FOR (n:Brand) REQUIRE n.id IS UNIQUE",
     "CREATE CONSTRAINT category_id IF NOT EXISTS FOR (n:Category) REQUIRE n.id IS UNIQUE",
+    "CREATE CONSTRAINT purpose_id IF NOT EXISTS FOR (n:Purpose) REQUIRE n.id IS UNIQUE",
+    "CREATE CONSTRAINT ingredient_id IF NOT EXISTS FOR (n:Ingredient) REQUIRE n.id IS UNIQUE",
+    "CREATE CONSTRAINT target_model_id IF NOT EXISTS FOR (n:TargetModel) REQUIRE n.id IS UNIQUE",
+    "CREATE CONSTRAINT place_id IF NOT EXISTS FOR (n:Place) REQUIRE n.id IS UNIQUE",
     "CREATE INDEX entity_name IF NOT EXISTS FOR (n:Entity) ON (n.name)",
     "CREATE INDEX brand_name IF NOT EXISTS FOR (n:Brand) ON (n.name)",
 )
@@ -55,6 +60,22 @@ WRITES = {
         UNWIND $rows AS row
         MERGE (b:Brand {id: row.id})
         SET b.name = row.name, b.aliases = row.aliases, b.snapshot = $snapshot""",
+    "purposes": """
+        UNWIND $rows AS row
+        MERGE (p:Purpose {id: row.id})
+        SET p.name = row.name, p.snapshot = $snapshot""",
+    "ingredients": """
+        UNWIND $rows AS row
+        MERGE (i:Ingredient {id: row.id})
+        SET i.name = row.name, i.snapshot = $snapshot""",
+    "models": """
+        UNWIND $rows AS row
+        MERGE (m:TargetModel {id: row.id})
+        SET m.name = row.name, m.snapshot = $snapshot""",
+    "places": """
+        UNWIND $rows AS row
+        MERGE (pl:Place {id: row.id})
+        SET pl.name = row.name, pl.snapshot = $snapshot""",
     "entities": """
         UNWIND $rows AS row
         MERGE (e:Entity {id: row.id})
@@ -69,6 +90,26 @@ WRITES = {
         MATCH (e:Entity {id: row.src}), (c:Category {id: row.dst})
         MERGE (e)-[r:IS_A]->(c)
         SET r.snapshot = $snapshot""",
+    "treats": """
+        UNWIND $rows AS row
+        MATCH (e:Entity {id: row.src}), (p:Purpose {id: row.dst})
+        MERGE (e)-[r:TREATS]->(p)
+        SET r += row.props, r.snapshot = $snapshot""",
+    "has_ingredient": """
+        UNWIND $rows AS row
+        MATCH (e:Entity {id: row.src}), (i:Ingredient {id: row.dst})
+        MERGE (e)-[r:HAS_INGREDIENT]->(i)
+        SET r += row.props, r.snapshot = $snapshot""",
+    "fits": """
+        UNWIND $rows AS row
+        MATCH (e:Entity {id: row.src}), (m:TargetModel {id: row.dst})
+        MERGE (e)-[r:FITS]->(m)
+        SET r += row.props, r.snapshot = $snapshot""",
+    "origin": """
+        UNWIND $rows AS row
+        MATCH (e:Entity {id: row.src}), (pl:Place {id: row.dst})
+        MERGE (e)-[r:ORIGIN]->(pl)
+        SET r += row.props, r.snapshot = $snapshot""",
     "same_as": """
         UNWIND $rows AS row
         MATCH (e:Entity {id: row.src}), (c:Entity {id: row.dst})
@@ -76,9 +117,10 @@ WRITES = {
         SET r.snapshot = $snapshot""",
 }
 CLEANUP = (
-    "MATCH ()-[r:MADE_BY|IS_A|SAME_AS]->() WHERE r.snapshot <> $snapshot DELETE r",
-    "MATCH (n) WHERE (n:Entity OR n:Brand OR n:Category) AND n.snapshot <> $snapshot "
-    "DETACH DELETE n",
+    "MATCH ()-[r:MADE_BY|IS_A|SAME_AS|TREATS|HAS_INGREDIENT|FITS|ORIGIN]->() "
+    "WHERE r.snapshot <> $snapshot DELETE r",
+    "MATCH (n) WHERE (n:Entity OR n:Brand OR n:Category OR n:Purpose OR n:Ingredient "
+    "OR n:TargetModel OR n:Place) AND n.snapshot <> $snapshot DETACH DELETE n",
 )
 
 
@@ -105,6 +147,10 @@ def rows(graph: dict, categories: dict, review: EntityReview) -> dict[str, list[
             "codes": entity.get("codes", []),
             "model_tail": entity.get("model_tail"),
             "product_type": label.get("product_type"),
+            "form_factor": label.get("form_factor"),
+            "target_audience": label.get("target_audience"),
+            "material": label.get("material"),
+            "origin": label.get("origin"),
         }
         entities.append({"id": entity["id"], "props": {k: v for k, v in props.items() if v}})
     made_by = [
@@ -131,7 +177,29 @@ def rows(graph: dict, categories: dict, review: EntityReview) -> dict[str, list[
         for entity_id in sorted(ids)
         if review.canonical(entity_id) != entity_id and review.canonical(entity_id) in ids
     ]
+    cat_edges = categories.get("edges") or []
+    by_rel: dict[str, list[dict]] = {
+        "TREATS": [],
+        "HAS_INGREDIENT": [],
+        "FITS": [],
+        "ORIGIN": [],
+    }
+    for edge in [*graph.get("edges", ()), *cat_edges]:
+        rel = edge.get("rel")
+        if rel in by_rel and edge.get("src") in ids and edge.get("dst"):
+            props = {
+                key: edge[key]
+                for key in ("source", "confidence", "reviewed", "reviewer")
+                if edge.get(key) is not None
+            }
+            by_rel[rel].append({"src": edge["src"], "dst": edge["dst"], "props": props})
     used = {row["dst"] for row in is_a}
+
+    def _node_rows(table_key: str, edges_for_rel: list[dict]) -> list[dict]:
+        table = categories.get(table_key) or {}
+        used_ids = {r["dst"] for r in edges_for_rel}
+        return [{"id": nid, "name": table.get(nid, nid)} for nid in sorted(used_ids)]
+
     return {
         "categories": [
             {"id": c, "name": names.get(c, c), "l1": c.split(".")[0]} for c in sorted(used)
@@ -140,11 +208,25 @@ def rows(graph: dict, categories: dict, review: EntityReview) -> dict[str, list[
             {"id": b["id"], "name": b["name"], "aliases": b.get("aliases", [])}
             for b in graph["brands"]
         ],
+        "purposes": _node_rows("purposes", by_rel["TREATS"]),
+        "ingredients": _node_rows("ingredients", by_rel["HAS_INGREDIENT"]),
+        "models": _node_rows("models", by_rel["FITS"]),
+        "places": _node_rows("places", by_rel["ORIGIN"]),
         "entities": entities,
         "made_by": made_by,
         "is_a": is_a,
+        "treats": by_rel["TREATS"],
+        "has_ingredient": by_rel["HAS_INGREDIENT"],
+        "fits": by_rel["FITS"],
+        "origin": by_rel["ORIGIN"],
         "same_as": same_as,
     }
+
+
+def snapshot_id(graph: dict, categories_raw: bytes) -> str:
+    """The enriched edges live in entity_categories.json, not in graph.json: an id made of the
+    graph fingerprint alone would never delete an edge that a re-merge dropped."""
+    return f"{graph['fingerprint']}:{hashlib.sha256(categories_raw).hexdigest()[:12]}"
 
 
 def review_path(artifacts: Path) -> Path:
@@ -163,10 +245,11 @@ def main() -> None:
     from neo4j import GraphDatabase
 
     graph = json.loads((args.artifacts / "graph.json").read_text(encoding="utf-8"))
-    categories = json.loads((args.artifacts / "entity_categories.json").read_text("utf-8"))
+    categories_raw = (args.artifacts / "entity_categories.json").read_bytes()
+    categories = json.loads(categories_raw.decode("utf-8"))
     review = EntityReview.load(graph, review_path(args.artifacts).read_bytes())
     batches = rows(graph, categories, review)
-    snapshot = graph["fingerprint"]
+    snapshot = snapshot_id(graph, categories_raw)
     user, _, password = os.environ["NEO4J_AUTH"].partition("/")
 
     with GraphDatabase.driver(args.uri, auth=(user, password)) as driver:
@@ -187,7 +270,8 @@ def main() -> None:
             "MERGE (s:GraphSnapshot {id: 'search'}) SET s += $props",
             {
                 "props": {
-                    "fingerprint": snapshot,
+                    "fingerprint": graph["fingerprint"],
+                    "snapshot": snapshot,
                     "corpus_fingerprint": graph["corpus_fingerprint"],
                     "loaded_at": datetime.now(UTC).isoformat(timespec="seconds"),
                     "made_by_review": json.dumps(graph.get("made_by_review"), sort_keys=True),
@@ -201,11 +285,20 @@ def main() -> None:
             CALL () { MATCH (n:Entity) RETURN count(n) AS entities }
             CALL () { MATCH (n:Brand) RETURN count(n) AS brands }
             CALL () { MATCH (n:Category) RETURN count(n) AS categories }
+            CALL () { MATCH (n:Purpose) RETURN count(n) AS purposes }
+            CALL () { MATCH (n:Ingredient) RETURN count(n) AS ingredients }
+            CALL () { MATCH (n:TargetModel) RETURN count(n) AS models }
+            CALL () { MATCH (n:Place) RETURN count(n) AS places }
             CALL () { MATCH ()-[r:MADE_BY]->() RETURN count(r) AS made_by }
             CALL () { MATCH ()-[r:MADE_BY {reviewed: true}]->() RETURN count(r) AS reviewed }
             CALL () { MATCH ()-[r:IS_A]->() RETURN count(r) AS is_a }
+            CALL () { MATCH ()-[r:TREATS]->() RETURN count(r) AS treats }
+            CALL () { MATCH ()-[r:HAS_INGREDIENT]->() RETURN count(r) AS has_ingredient }
+            CALL () { MATCH ()-[r:FITS]->() RETURN count(r) AS fits }
+            CALL () { MATCH ()-[r:ORIGIN]->() RETURN count(r) AS origin }
             CALL () { MATCH ()-[r:SAME_AS]->() RETURN count(r) AS same_as }
-            RETURN entities, brands, categories, made_by, reviewed, is_a, same_as
+            RETURN entities, brands, categories, purposes, ingredients, models, places,
+                   made_by, reviewed, is_a, treats, has_ingredient, fits, origin, same_as
             """,
             database_=args.database,
             routing_="r",
@@ -215,7 +308,7 @@ def main() -> None:
     expected["same_as"] = len(batches["same_as"])
     expected["reviewed"] = sum(bool(r["props"].get("reviewed")) for r in batches["made_by"])
     mismatch = {k: (got[k], v) for k, v in expected.items() if got[k] != v}
-    print(json.dumps({"snapshot": snapshot[:12], "loaded": got}, ensure_ascii=False))
+    print(json.dumps({"snapshot": snapshot[-12:], "loaded": got}, ensure_ascii=False))
     if mismatch:
         raise SystemExit(f"Neo4j differs from the snapshot (got, expected): {mismatch}")
 
