@@ -114,10 +114,20 @@ class SearchTrace(BaseModel):
     channels: dict[str, Literal["ready", "inactive", "unavailable"]]
 
 
+class Similarity(BaseModel):
+    """Exact cosines of the query against this image (L2-normalised vectors, so dot = cosine)."""
+
+    text: float  # bge-m3: query vs the description text that was embedded
+    image: float | None  # SigLIP2: query text vs the image itself
+
+
 class SearchHit(BaseModel):
     asset_id: str
     score: float
     scores: SearchScores
+    similarity: Similarity | None = None
+    description: str | None = None
+    page_url: str | None = None
     entity_ids: list[str]
     brand_ids: list[str] | None = None
     image_path: str | None = None

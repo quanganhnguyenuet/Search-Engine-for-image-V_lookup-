@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass, field
+from urllib.parse import urlparse
 
+import httpx
 from qdrant_client import QdrantClient, models
 
 from visualseek_retrieval.encoder import DIM
@@ -16,6 +18,12 @@ SPARSE = "sparse"
 IMAGE = "img"  # SigLIP2 image tower, see scripts/embed_images.py
 IMAGE_DIM = 768
 POINT_NAMESPACE = uuid.UUID("7b1d1f0e-3c55-4c1e-9a52-6a0f4f1d2b3c")
+# What the ranker reads from a hit. Everything else shown with a result (image_path, page_title,
+# domain, brand_ids) is in memory (asset_payloads), so it is not sent back for every candidate:
+# a full payload is ~0.8 KB x 50-60 hits per search, which cost ~160 ms over the WAN.
+RANK_PAYLOAD = models.PayloadSelectorInclude(
+    include=["asset_id", "entity_ids", "categories", "market_tiers"]
+)
 PAYLOAD_INDEXES = (
     "entity_ids",
     "brand_ids",
@@ -30,9 +38,29 @@ def point_id(asset_id: str) -> str:
     return str(uuid.uuid5(POINT_NAMESPACE, asset_id))
 
 
-def connect(url: str, api_key: str | None, timeout: int = 10) -> QdrantClient:
-    # REST over a pooled httpx client keeps the TLS session alive between requests.
-    return QdrantClient(url=url, api_key=api_key or None, timeout=timeout, prefer_grpc=False)
+KEEPALIVE_SECONDS = 120
+
+
+def connect(
+    url: str, api_key: str | None, timeout: int = 10, prefer_grpc: bool = False
+) -> QdrantClient:
+    """REST over a pooled httpx client, or gRPC when ``prefer_grpc`` (search serving only: the
+    offline scripts keep REST).
+
+    httpx drops an idle connection after 5 s, so a person who pauses between searches pays a new
+    TCP + TLS handshake to a remote cluster on every one (measured: +~380 ms to Seoul, 712 ms ->
+    263 ms per search once connections stay open). Keep them for KEEPALIVE_SECONDS; the server
+    closes idle ones after roughly 30-40 s, which the API's heartbeat stays under. A local
+    Qdrant keeps qdrant-client's own default (keep-alive off for localhost).
+    """
+    extra = {}
+    if urlparse(url).hostname not in ("localhost", "127.0.0.1"):
+        extra["limits"] = httpx.Limits(
+            max_connections=8, max_keepalive_connections=4, keepalive_expiry=KEEPALIVE_SECONDS
+        )
+    return QdrantClient(
+        url=url, api_key=api_key or None, timeout=timeout, prefer_grpc=prefer_grpc, **extra
+    )
 
 
 def ensure_collection(client: QdrantClient, name: str = COLLECTION) -> None:

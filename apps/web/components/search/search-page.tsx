@@ -2,10 +2,12 @@
 
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
+import { QueryGraph } from "@/components/graph/query-graph";
 import { Button } from "@/components/ui/button";
+import { ImageDetail } from "@/components/search/image-detail";
+import { PlanChips } from "@/components/search/plan-chips";
 import { SearchTracePanel } from "@/components/search/search-trace";
-import { API_URL, relationLabel, type SearchResponse, searchText } from "@/lib/search";
-import { cn } from "@/lib/utils";
+import { API_URL, type SearchResponse, searchText } from "@/lib/search";
 
 const EXAMPLES = [
   "Chuột Logitech MX Master 3",
@@ -32,6 +34,7 @@ type State =
 export function SearchPage() {
   const [query, setQuery] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const controller = useRef<AbortController | null>(null);
   const input = useRef<HTMLInputElement>(null);
 
@@ -45,6 +48,7 @@ export function SearchPage() {
     const current = new AbortController();
     controller.current = current;
     setQuery(trimmed);
+    setOpenIndex(null);
     setState({ kind: "loading", query: trimmed });
     const url = new URL(window.location.href);
     url.searchParams.set("q", trimmed);
@@ -63,9 +67,16 @@ export function SearchPage() {
     }
   }, []);
 
+  // React StrictMode (dev) mounts effects twice; the first request would be aborted client-side
+  // but the API still runs it, and its single worker then queues the real one behind it.
+  const initialRun = useRef(false);
+
   useEffect(() => {
     const initial = new URL(window.location.href).searchParams.get("q");
-    if (initial) void run(initial);
+    if (initial && !initialRun.current) {
+      initialRun.current = true;
+      void run(initial);
+    }
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (event.key === "/" && target?.tagName !== "INPUT") {
@@ -156,7 +167,13 @@ export function SearchPage() {
         {state.kind === "done" && (
           <>
             <SearchTracePanel data={state.data} />
-            <Results data={state.data} clientMs={state.clientMs} onPick={run} />
+            <Results data={state.data} clientMs={state.clientMs} onPick={run} onOpen={setOpenIndex} />
+            <ImageDetail
+              data={state.data}
+              index={openIndex}
+              onIndex={setOpenIndex}
+              onClose={() => setOpenIndex(null)}
+            />
           </>
         )}
       </section>
@@ -168,10 +185,12 @@ function Results({
   data,
   clientMs,
   onPick,
+  onOpen,
 }: {
   data: SearchResponse;
   clientMs: number;
   onPick: (text: string) => void;
+  onOpen: (index: number) => void;
 }) {
   if (data.clarification) {
     return (
@@ -226,73 +245,42 @@ function Results({
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {data.results.map((hit, index) => (
             <li key={hit.asset_id}>
-              <figure className="group flex h-full flex-col overflow-hidden rounded-lg border bg-surface">
-                <div className="relative aspect-square bg-white">
+              <button
+                type="button"
+                onClick={() => onOpen(index)}
+                aria-haspopup="dialog"
+                aria-label={`Xem chi tiết ảnh ${index + 1}: ${hit.entity_names.join(", ")}`}
+                className="group flex h-full w-full flex-col overflow-hidden rounded-lg border bg-surface text-left transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              >
+                <span className="relative block aspect-square bg-white">
                   {/* eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary */}
                   <img
                     src={`${API_URL}${hit.image_url}`}
-                    alt={hit.entity_names.join(", ")}
+                    alt=""
                     width={320}
                     height={320}
                     loading={index < 5 ? "eager" : "lazy"}
-                    className="h-full w-full object-contain p-2"
+                    className="h-full w-full object-contain p-2 transition-transform duration-200 group-hover:scale-[1.03]"
                   />
                   <span className="absolute left-2 top-2 rounded bg-background/90 px-1.5 font-mono text-[11px] text-muted-foreground">
                     {index + 1}
                   </span>
-                </div>
-                <figcaption className="flex flex-1 flex-col gap-1 border-t p-3">
+                </span>
+                <span className="flex flex-1 flex-col gap-1 border-t p-3">
                   <span className="line-clamp-2 text-sm font-medium leading-snug">
                     {hit.entity_names.join(" · ")}
                   </span>
                   {hit.domain && (
                     <span className="truncate text-xs text-muted-foreground">{hit.domain}</span>
                   )}
-                </figcaption>
-              </figure>
+                </span>
+              </button>
             </li>
           ))}
         </ul>
       )}
+      {data.results.length > 0 && <QueryGraph key={data.query} data={data} />}
     </>
-  );
-}
-
-const TIERS: Record<string, string> = { luxury: "cao cấp", premium: "tầm trung cao", mass: "phổ thông" };
-
-function PlanChips({ data }: { data: SearchResponse }) {
-  const { plan } = data;
-  const chips: { label: string; tone?: "brand" | "warn" }[] = [];
-  const seeds = plan.seed_names.slice(0, plan.seeds.length);
-  const anchors = plan.seed_names.slice(plan.seeds.length);
-  for (const name of seeds) chips.push({ label: `Thực thể: ${name}`, tone: "brand" });
-  if (plan.relation) chips.push({ label: `Quan hệ: ${relationLabel(data.trace.relation)}`, tone: "brand" });
-  for (const name of anchors) chips.push({ label: `Loại trừ: ${name}`, tone: "warn" });
-  if (plan.hops) chips.push({ label: `${plan.hops} sản phẩm liên quan` });
-  if (plan.dense_seed) chips.push({ label: "Khớp gần đúng" });
-  const byCategory = (data.trace.category?.groups.length ?? 0) > 1;
-  if (plan.grouped && !byCategory) chips.push({ label: "Chia đều theo sản phẩm" });
-  const category = data.trace.category;
-  for (const { label } of category?.categories ?? []) chips.push({ label: `Loại hàng: ${label}`, tone: "brand" });
-  for (const tier of category?.tiers ?? []) chips.push({ label: `Hạng: ${TIERS[tier] ?? tier}`, tone: "brand" });
-  if (byCategory) chips.push({ label: "Chia đều theo loại hàng" });
-  if (!chips.length) chips.push({ label: "Tìm theo nội dung" });
-  return (
-    <ul className="flex flex-wrap gap-1.5" aria-label="Cách hệ thống hiểu câu">
-      {chips.map((chip) => (
-        <li
-          key={chip.label}
-          className={cn(
-            "rounded-md border px-2 py-0.5 text-xs",
-            chip.tone === "brand" && "border-brand/30 bg-brand-soft text-foreground",
-            chip.tone === "warn" && "border-warn/40 bg-warn-soft text-foreground",
-            !chip.tone && "bg-muted text-muted-foreground",
-          )}
-        >
-          {chip.label}
-        </li>
-      ))}
-    </ul>
   );
 }
 

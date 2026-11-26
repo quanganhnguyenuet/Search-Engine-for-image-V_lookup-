@@ -59,13 +59,12 @@ def recall(ranked: list[str], rel: list[set[str]], k_intents: int | None) -> flo
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--set", default="hops-v1")
+    parser.add_argument("--pool", type=Path, help="pool file (default: the set's pool)")
     parser.add_argument("--before-pool", type=Path, help="an older pool of the same set")
     args = parser.parse_args()
     queries = {q["qid"]: q for q in read_jsonl(ROOT / "eval" / args.set / "queries.jsonl")}
-    pool = {
-        p["qid"]: p
-        for p in read_jsonl(ROOT / f"data/processed/products-v1/eval/{args.set}/pool.jsonl")
-    }
+    pool_path = args.pool or ROOT / f"data/processed/products-v1/eval/{args.set}/pool.jsonl"
+    pool = {p["qid"]: p for p in read_jsonl(pool_path)}
     judged = {r["qid"]: r for r in read_jsonl(ROOT / "eval" / args.set / "judgments.jsonl")}
     older = {p["qid"]: p for p in read_jsonl(args.before_pool)} if args.before_pool else {}
     usable = [

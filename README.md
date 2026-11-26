@@ -62,6 +62,11 @@ cd apps/web; npm run dev
 docker compose --profile graph up -d --wait neo4j
 ```
 
+Qdrant is reached over gRPC (port 6334) with a keep-alive heartbeat; `search/info` shows the
+`qdrant_transport` in use. The API falls back to REST by itself if 6334 is unreachable, or set
+`QDRANT_PREFER_GRPC=false` in `.env` to force REST. Always call the API as `127.0.0.1`, not
+`localhost`, when timing it from Windows tools (`localhost` adds ~200 ms to connect).
+
 Check that the API is up: <http://localhost:8000/api/v1/search/info>, then open
 <http://localhost:3000>. That is all you need day to day: the enriched graph is already
 on disk, in Qdrant and in Neo4j.

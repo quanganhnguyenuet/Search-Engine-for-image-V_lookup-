@@ -20,6 +20,14 @@
     --danger: 0 70% 42%;
     --danger-soft: 0 80% 95%;
     --radius: 0.75rem;
+    /* Graph node types: also told apart by shape and legend, never by colour alone. */
+    --node-entity: 174 72% 28%;
+    --node-brand: 28 90% 42%;
+    --node-category: 215 65% 46%;
+    --node-purpose: 340 65% 46%;
+    --node-ingredient: 120 42% 34%;
+    --node-model: 262 45% 52%;
+    --node-place: 195 75% 36%;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -39,6 +47,13 @@
       --warn-soft: 38 50% 16%;
       --danger: 0 80% 68%;
       --danger-soft: 0 40% 16%;
+      --node-entity: 172 55% 52%;
+      --node-brand: 32 90% 58%;
+      --node-category: 213 80% 66%;
+      --node-purpose: 340 75% 68%;
+      --node-ingredient: 120 45% 58%;
+      --node-model: 262 70% 72%;
+      --node-place: 195 75% 56%;
     }
   }
 
@@ -48,6 +63,17 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  .graph-node {
+    outline: none;
+    cursor: grab;
+  }
+  .graph-node .node-ring {
+    opacity: 0;
+  }
+  .graph-node:focus-visible .node-ring {
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {

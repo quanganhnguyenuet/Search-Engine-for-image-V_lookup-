@@ -13,6 +13,7 @@ import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
+from types import SimpleNamespace
 
 import numpy as np
 from qdrant_client.http.exceptions import ApiException
@@ -24,6 +25,7 @@ from visualseek_retrieval.entity_review import EntityReview
 from visualseek_retrieval.fusion import VisualFusion, fuse, starts_with_visual_attribute
 from visualseek_retrieval.qdrant_store import (
     COLLECTION,
+    RANK_PAYLOAD,
     EntityBoosts,
     branch_scores,
     build_request,
@@ -59,6 +61,16 @@ RELATION_SCOPE_WORDS = {
     "thuoc": "drug",
     "my pham": "beauty",
 }
+
+# Words around a place in a place query that say nothing about the goods ("đặc sản nổi tiếng ở
+# Bến Tre", "sản phẩm của Bến Tre").
+PLACE_FILLER = frozenset(
+    normalize(word)
+    for word in ("của", "ở", "tại", "từ", "các", "những", "nổi", "tiếng", "sản", "phẩm", "hàng",
+                 "đồ", "ngon", "đặc", "trưng", "nào", "gì", "có")
+)  # fmt: skip
+# What S1 found in a query that names no product: nothing.
+_NO_SPOTTING = SimpleNamespace(matches=[], ambiguous=[])
 
 UNSUPPORTED_CUES: tuple[tuple[str, re.Pattern, re.Pattern], ...] = tuple(
     (relation, re.compile(rf"\b({accented})\b"), re.compile(rf"\b({folded})\b"))
@@ -177,6 +189,7 @@ class SearchPipeline:
         image_encoder=None,
         fusion: VisualFusion | None = None,
         payloads: dict[str, dict] | None = None,
+        category_descriptions: dict[str, str] | None = None,
     ) -> None:
         self.graph = graph
         self.settings = settings or Settings()
@@ -200,7 +213,9 @@ class SearchPipeline:
         self.entity_category: list[str | None] = []
         if categories:
             self.category_names = categories["category_names"]
-            self.lexicon = CategoryLexicon.build(categories["entities"], self.category_names)
+            self.lexicon = CategoryLexicon.build(
+                categories["entities"], self.category_names, category_descriptions
+            )
             self.entity_category = [
                 (categories["entities"].get(self.review.canonical(e["id"])) or {}).get("category")
                 for e in graph["entities"]
@@ -299,6 +314,16 @@ class SearchPipeline:
                 for match in spotting.ambiguous
             ]
             return plan
+        place_query = (
+            not entities
+            and not brands
+            and not plan.relation
+            and not plan.negation
+            and not plan.unsupported_cues
+        )
+        if place_query and not self._confident_dense_entity(spotting):
+            if self._expand_place(plan, query):
+                return plan
         if not entities and not brands and spotting.dense_top:
             best, score = spotting.dense_top[0]
             runner = spotting.dense_top[1][1] if len(spotting.dense_top) > 1 else -1.0
@@ -377,6 +402,78 @@ class SearchPipeline:
             plan.no_target = True
         plan.intents = len(plan.seeds) + len(brands) + (1 if plan.generic_hits else 0)
         return plan
+
+    def _confident_dense_entity(self, spotting: Spotting) -> bool:
+        """A product the query names that S1's names missed but the entity cards match at once
+        (the dense-seed rule): a place in its name must not turn it into a place query."""
+        if not spotting.dense_top:
+            return False
+        best = spotting.dense_top[0][1]
+        runner = spotting.dense_top[1][1] if len(spotting.dense_top) > 1 else -1.0
+        s = self.settings
+        return best >= s.dense_seed_min and best - runner >= s.dense_seed_margin
+
+    def _expand_place(self, plan: Plan, query: str) -> bool:
+        """"đặc sản Bến Tre": a Vietnamese place with no product, brand or relation cue.
+
+        The products whose ORIGIN is that place are the answer, and only they: when fewer than
+        top-k exist the search shows fewer images rather than other places' products. The
+        class noun of the query ("đặc sản", "đồ gốm") narrows them to one kind of goods; a place
+        with nothing of that kind falls back to content search instead of an empty answer."""
+        value_ids, rest = self.enrichment.resolve_places_from_query(query)
+        if not value_ids or not self._names_only_goods(rest):
+            return False
+        scope, asked = self._relation_scope(rest, "", _NO_SPOTTING, [])
+        found: dict[str, list[str]] = {}
+        for value_id in value_ids:
+            products = list(
+                dict.fromkeys(
+                    self.review.canonical(o)
+                    for o in self.enrichment.entities_of("ORIGIN", [value_id])
+                )
+            )
+            if scope:
+                kept = [o for o in products if self._entity_l1(o) in scope]
+                # A category the lexicon guessed is not worth an empty answer; one asked for is.
+                products = kept if (kept or asked) else products
+            if products:
+                found[value_id] = products
+        if not found:
+            return False
+        plan.relation = True
+        plan.relation_name = "ORIGIN"
+        plan.value_ids = list(found)
+        plan.hops = list(dict.fromkeys(o for products in found.values() for o in products))
+        plan.intents = len(found)
+        plan.no_target = False
+        plan.out_of_scope = False
+        return True
+
+    def _names_only_goods(self, rest: str) -> bool:
+        """Whether what a query says besides its place is a kind of goods and nothing else.
+
+        "đặc sản", "món", "đồ gốm" are; "kết quả xổ số", "dự báo thời tiết ... ngày mai" or a long
+        page title are not: the place there is incidental, and a place filter would hide the
+        product (or the out-of-scope answer) the rest of the words ask for."""
+        words = rest.split()
+        folded = [normalize(word) for word in words]
+        keep = [True] * len(words)
+        for phrase in sorted(RELATION_SCOPE_WORDS, key=lambda p: -len(p.split())):
+            parts = phrase.split()
+            for start in range(len(folded) - len(parts) + 1):
+                span = slice(start, start + len(parts))
+                if all(keep[span]) and folded[span] == parts:
+                    keep[span] = [False] * len(parts)
+        remaining = [w for w, kept in zip(words, keep, strict=True) if kept]
+        meaning = [w for w in remaining if normalize(w) not in PLACE_FILLER]
+        if not meaning:
+            return True
+        if self.lexicon is None:
+            return False
+        # The filler stays in what the lexicon reads ("đồ gốm" is a cue, "gốm" alone is not).
+        matches = self.lexicon.detect(" ".join(remaining)).matches
+        covered = {word for m in matches for word in m["text"].split()}
+        return all(word in covered for word in meaning)
 
     def _entity_l1(self, entity_id: str) -> str:
         return ((self.product_types.get(entity_id) or {}).get("category") or "").split(".")[0]
@@ -1120,7 +1217,12 @@ class SearchPipeline:
         }
 
     # ---- S3 ------------------------------------------------------------------------------
-    def search(self, query: str, brand_id: str | None = None) -> dict:
+    def search(
+        self, query: str, brand_id: str | None = None, with_similarity: bool = False
+    ) -> dict:
+        """Run the one search path. ``with_similarity`` adds the exact query-to-result cosines
+        (``hit["similarity"]``) for display; it costs one SigLIP2 text encode when the query did
+        not already need it, so offline evaluation leaves it off."""
         s = self.settings
         timings: dict[str, float] = {}
         started = time.perf_counter()
@@ -1139,6 +1241,7 @@ class SearchPipeline:
 
         hits: list[dict] = []
         grouped = False
+        img_vector = None
         channels = dict.fromkeys(
             ("dense", "sparse", "graph_prefetch", "graph", "category", "img"), "inactive"
         )
@@ -1248,12 +1351,18 @@ class SearchPipeline:
                         "asset_id": asset_id,
                         "score": point.score,
                         "scores": parts,
-                        **_public(payload),
+                        # image_path, page_title, domain... come from memory: the rank query
+                        # fetches only RANK_PAYLOAD, so the response stays small.
+                        **_public({**self.payloads.get(asset_id, {}), **payload}),
                         "entity_ids": entity_ids,
                     }
                 )
                 if len(hits) == s.top_k:
                     break
+        if with_similarity and hits:
+            tick = time.perf_counter()
+            self._attach_similarity(query, vector, img_vector, hits)
+            timings["similarity"] = _ms(tick)
         trace = self._trace(plan, brand_id)
         trace["channels"] = channels
         timings["total"] = _ms(started)
@@ -1278,6 +1387,29 @@ class SearchPipeline:
             "cache": {"embedding": False, "result": False},
             "graph_fingerprint": self.graph["fingerprint"],
         }
+
+    def _attach_similarity(
+        self, query: str, text_vector: np.ndarray, img_vector: np.ndarray | None, hits: list[dict]
+    ) -> None:
+        """Exact cosines of the query against every hit, from the in-memory doc and image
+        matrices. Both sides are L2-normalised, so the dot product is the cosine. Without the
+        image artifacts (no fusion) nothing is attached."""
+        if self.fusion is None:
+            return
+        if img_vector is None and self.image_encoder is not None:
+            img_vector = self.image_encoder.encode([query])[0]
+        for hit in hits:
+            row = self.fusion.row.get(hit["asset_id"])
+            if row is None:
+                continue
+            hit["similarity"] = {
+                "text": round(float(self.fusion.doc[row] @ text_vector), 4),
+                "image": (
+                    round(float(self.fusion.img[row] @ img_vector), 4)
+                    if img_vector is not None
+                    else None
+                ),
+            }
 
     def _fuse_visual(
         self,
@@ -1371,7 +1503,7 @@ class SearchPipeline:
                 else s.top_k
             )
             result = self.client.query_points(
-                self.collection, limit=limit, with_payload=True, **request
+                self.collection, limit=limit, with_payload=RANK_PAYLOAD, **request
             )
             return self._related(plan, result.points)
         has_targets = bool(plan.hops or plan.seeds or plan.generic_hits)
@@ -1382,7 +1514,7 @@ class SearchPipeline:
                 group_by="categories",
                 limit=s.top_k * GROUP_OVERFETCH,
                 group_size=size,
-                with_payload=True,
+                with_payload=RANK_PAYLOAD,
                 **request,
             )
             return merge_groups(result.groups, str, size, set(plan.category_groups))
@@ -1404,7 +1536,7 @@ class SearchPipeline:
                 group_by="entity_ids",
                 limit=s.top_k * GROUP_OVERFETCH,
                 group_size=size,
-                with_payload=True,
+                with_payload=RANK_PAYLOAD,
                 **request,
             )
             first = merge_groups(
@@ -1438,7 +1570,7 @@ class SearchPipeline:
             group_by="entity_ids",
             limit=s.top_k * GROUP_OVERFETCH,
             group_size=size,
-            with_payload=True,
+            with_payload=RANK_PAYLOAD,
             **request,
         )
         targets = {self.review.canonical(e) for e in plan.seeds + plan.hops + plan.generic_hits}

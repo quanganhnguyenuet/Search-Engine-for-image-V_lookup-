@@ -12,9 +12,12 @@ because labels are about 98 % accurate. Tier cues apply to fashion only.
 
 from __future__ import annotations
 
+import json
 import re
+import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from visualseek_retrieval.text import normalize, surface
 
@@ -25,6 +28,14 @@ MIN_SHARE = 0.75
 MIN_SHARE_ONE_WORD = 0.9
 MIN_SUPPORT_ONE_WORD = 3
 NAME_VOTES = 3  # a category's own Vietnamese name counts as this many entities
+# A phrase listed in a category's taxonomy description ("Nước ép, sinh tố, nước ngọt, ...") counts
+# as this many entities, but only to back up what the corpus already says: the phrase must have
+# a vote from an entity's product_type (or the category name) and the description's category must
+# be the one leading it. A description never makes a cue alone (it also holds notes for the
+# classifier, "ghi ở producttype", and phrases no product carries) and never weakens or flips an
+# existing cue. Only whole phrases of 2..MAX_NGRAM words vote: a longer part is a sentence, and
+# a single word ("gói", "kem") is too ambiguous to be a cue.
+DESCRIPTION_VOTES = 3
 STOPWORDS = frozenset(
     (
         "va cua cho voi la co khong loai dang cac nhung mot the trong tren duoi tu den "
@@ -47,6 +58,31 @@ TIER_CUES: tuple[tuple[str, re.Pattern, bool], ...] = tuple(
 
 def split_label(text: str) -> list[str]:
     return [part for part in re.split(r"[,&/;]", text) if normalize(part)]
+
+
+def description_phrases(text: str) -> list[str]:
+    """The listed noun phrases of a taxonomy description, without negated parts
+    ("không phải thuốc điều trị" says what the category is not)."""
+    # NFC first: in decomposed text the combining marks of "hoặc" break the  word boundary.
+    text = unicodedata.normalize("NFC", text)
+    parts = [part.strip() for part in re.split(r"[,&/;.()]|hoặc|và", text)]
+    return [part for part in parts if part and not normalize(part).startswith("khong")]
+
+
+def load_descriptions(taxonomy_path: Path, expected_sha256: str | None) -> dict[str, str] | None:
+    """Category id -> description from the frozen taxonomy, or None when the file is missing or
+    is not the taxonomy the entity categories were assigned with."""
+    if not taxonomy_path.exists():
+        return None
+    taxonomy = json.loads(taxonomy_path.read_text(encoding="utf-8"))
+    if expected_sha256 and taxonomy.get("taxonomy_sha256") != expected_sha256:
+        return None
+    return {
+        child["id"]: child["description"]
+        for group in taxonomy["categories"]
+        for child in group.get("children", ())
+        if child.get("description")
+    }
 
 
 def words_of(text: str, accented: bool) -> list[str]:
@@ -84,7 +120,11 @@ class CategoryLexicon:
 
     @staticmethod
     def _table(
-        entities: dict[str, dict], names: dict[str, str], accented: bool, head: bool = False
+        entities: dict[str, dict],
+        names: dict[str, str],
+        accented: bool,
+        head: bool = False,
+        descriptions: dict[str, str] | None = None,
     ) -> dict:
         votes: dict[tuple[str, ...], Counter] = defaultdict(Counter)
         for entity in entities.values():
@@ -94,6 +134,14 @@ class CategoryLexicon:
             for part in split_label(name):
                 for gram in ngrams(words_of(part, accented), head):
                     votes[gram][category] += NAME_VOTES
+        for category, text in (descriptions or {}).items():
+            for part in description_phrases(text):
+                words = words_of(part, accented)
+                gram = tuple(words)
+                if not 2 <= len(words) <= MAX_NGRAM or gram not in votes:
+                    continue
+                if votes[gram].most_common(1)[0][0] == category:
+                    votes[gram][category] += DESCRIPTION_VOTES
         table = {}
         for gram, counter in votes.items():
             category, top = counter.most_common(1)[0]
@@ -106,15 +154,21 @@ class CategoryLexicon:
         return table
 
     @classmethod
-    def build(cls, entities: dict[str, dict], names: dict[str, str]) -> CategoryLexicon:
+    def build(
+        cls,
+        entities: dict[str, dict],
+        names: dict[str, str],
+        descriptions: dict[str, str] | None = None,
+    ) -> CategoryLexicon:
         """Vietnamese noun phrases are head-first: "xe máy" in "Lốp xe máy" only qualifies a
         tyre. The votes of phrases at the head of a product type ("Xe máy điện") decide a cue
         first; votes from anywhere in the type are the fallback for the other phrases."""
 
         def table(accented: bool) -> dict:
-            anywhere = cls._table(entities, names, accented)
+            anywhere = cls._table(entities, names, accented, descriptions=descriptions)
             out = {gram: (*entry, False) for gram, entry in anywhere.items()}
-            for gram, entry in cls._table(entities, names, accented, head=True).items():
+            head_table = cls._table(entities, names, accented, True, descriptions)
+            for gram, entry in head_table.items():
                 # Flag the cues that only the head votes make: in a query they must head their
                 # phrase too ("xe máy" alone, not in "lốp xe máy").
                 out[gram] = (*entry, anywhere.get(gram, (None,))[0] != entry[0])

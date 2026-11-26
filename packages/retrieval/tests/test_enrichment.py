@@ -302,3 +302,122 @@ def test_origin_province_is_kept_for_specialties_only():
     assert not origin_allowed("Bến Tre", "drug")  # the manufacturer's address
     assert origin_allowed("Ấn Độ", "drug") and place_scope("Ấn Độ") == "country"
     assert not origin_allowed("", "food")
+
+
+def _place_pipeline() -> SearchPipeline:
+    def entity(eid: str, name: str) -> dict:
+        folded = normalize(name)
+        return {"id": eid, "name": name, "core": name, "brand_id": None, "aliases": [folded]}
+
+    def info(category: str, ptype: str, origin: str) -> dict:
+        return {
+            "name": ptype,
+            "category": category,
+            "category_l1": category.split(".")[0],
+            "product_type": ptype,
+            "origin": origin,
+        }
+
+    ids = {
+        "keo": ("Kẹo gừng Thành Long", info("food.cake_snack", "Đặc sản kẹo", "Bến Tre")),
+        "dua": ("Dừa sấy giòn", info("food.cake_snack", "Dừa sấy", "Bến Tre")),
+        "quao": ("Gốm Quao", info("culture.craft", "Gốm thủ công", "Bến Tre")),
+        "pha": ("Phà Hưng Phong Bến Tre", info("other.place", "Bến phà", "Bến Tre")),
+        "bat_trang": ("Bình gốm men rạn", info("culture.craft", "Bình gốm", "Bát Tràng")),
+        "chu_dau": ("Gốm Chu Đậu men lam", info("culture.craft", "Gốm men lam", "Chu Đậu")),
+        "da_nang": ("Tượng Shiva Phong Lệ", info("culture.statue_fengshui", "Tượng đá", "Đà Nẵng")),
+        "mien_bac": ("Cà pháo muối xổi", info("food.packaged", "Cà muối", "miền Bắc")),
+        "xi_ga": ("Xì gà Cohiba", info("food.packaged", "Xì gà", "Cuba")),
+        "ngong": ("Ngỗng Rheinland", info("food.dish", "Món ngỗng", "Đức")),
+    }
+    graph = {
+        "fingerprint": "test-places",
+        "entities": [entity(k, v[0]) for k, v in ids.items()],
+        "brands": [],
+        "edges": [],
+    }
+    categories = {
+        "category_names": {v[1]["category"]: v[1]["category"] for v in ids.values()},
+        "entities": {k: v[1] for k, v in ids.items()},
+    }
+    return SearchPipeline(
+        graph, np.eye(len(ids), dtype=np.float32), encoder=None, client=None, categories=categories
+    )
+
+
+def _place_plan(query: str) -> tuple[SearchPipeline, object]:
+    p = _place_pipeline()
+    return p, p.plan(query, p.spotter.spot(query, None))
+
+
+def test_place_query_returns_only_the_products_of_that_place_and_kind():
+    p, plan = _place_plan("đặc sản Bến Tre")
+    assert plan.relation_name == "ORIGIN" and plan.value_ids == ["place:ben-tre"]
+    assert set(plan.hops) == {"keo", "dua"}  # not the craft, not the ferry, not other places
+    assert plan.origin_ids == [] and plan.anchors == [] and not plan.negation
+    trace = p._trace(plan, None)
+    assert trace["status"] == "expanded" and trace["mode"] == "value_filter"
+    assert trace["origins"] == [] and trace["values"][0]["label"] == "Bến Tre"
+
+
+def test_place_query_accepts_an_unaccented_spelling():
+    _, plan = _place_plan("dac san ben tre")
+    assert plan.relation_name == "ORIGIN" and set(plan.hops) == {"keo", "dua"}
+    _, mixed = _place_plan("đặc sản ben tre")
+    assert set(mixed.hops) == {"keo", "dua"}
+
+
+def test_place_alone_returns_every_product_of_the_place():
+    _, plan = _place_plan("Bến Tre")
+    assert set(plan.hops) == {"keo", "dua", "quao", "pha"}
+
+
+def test_place_with_a_class_noun_keeps_only_that_kind_of_goods():
+    _, plan = _place_plan("gốm Bát Tràng")  # "gốm" is a category cue of the lexicon
+    assert plan.relation_name == "ORIGIN" and plan.hops == ["bat_trang"]
+    _, filler = _place_plan("đặc sản nổi tiếng ở Bến Tre")
+    assert set(filler.hops) == {"keo", "dua"}
+
+
+def test_a_place_that_is_only_incidental_is_not_a_place_query():
+    # Out-of-scope probes and page titles: the words besides the place ask for something else.
+    for query in (
+        "kết quả xổ số miền Bắc",
+        "dự báo thời tiết Đà Nẵng ngày mai",
+        "Trải nghiệm du thuyền sông Bến Tre đẳng cấp bậc nhất",
+        "Mặt Trống Đồng Đông Sơn Treo Tường",
+    ):
+        _, plan = _place_plan(query)
+        assert plan.relation_name != "ORIGIN" and plan.value_ids == [], query
+
+
+def test_place_with_nothing_of_the_asked_kind_falls_back_to_content_search():
+    _, plan = _place_plan("đặc sản Bát Tràng")  # Bát Tràng only has a craft
+    assert not plan.relation and plan.hops == [] and plan.value_ids == []
+
+
+def test_a_place_outside_vietnam_is_never_a_place_query():
+    from visualseek_retrieval.enrichment import is_vietnamese_place
+
+    p = _place_pipeline()
+    for query in ("đặc sản Cuba", "món ăn Đức", "xì gà Cuba"):
+        assert p.enrichment.resolve_places_from_query(query)[0] == []
+        assert p.plan(query, p.spotter.spot(query, None)).relation_name != "ORIGIN"
+    assert not any(is_vietnamese_place(x) for x in ("Cuba", "USA", "Milan", "Đức", "Nhật Bản"))
+    assert all(is_vietnamese_place(x) for x in ("Bến Tre", "Hà Nội", "Huế", "Bát Tràng"))
+
+
+def test_a_product_named_with_its_place_is_not_a_place_query():
+    _, plan = _place_plan("Phà Hưng Phong Bến Tre")
+    assert plan.seeds == ["pha"] and plan.relation_name != "ORIGIN"
+
+
+def test_longest_place_name_wins_and_the_rest_is_kept():
+    from visualseek_retrieval.enrichment import RelationIndex
+
+    idx = RelationIndex()
+    for entity_id, label in (("a", "Miền Tây"), ("b", "Miền Tây Nam Bộ")):
+        idx.add_edge("ORIGIN", entity_id, f"place:{normalize(label).replace(' ', '-')}", label)
+    idx.index_places()
+    nodes, rest = idx.resolve_places_from_query("đặc sản miền tây nam bộ")
+    assert nodes == ["place:mien-tay-nam-bo"] and rest == "đặc sản"

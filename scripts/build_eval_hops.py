@@ -60,9 +60,20 @@ CONFIGS = {
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--set", default=DEFAULT_SET, help="query set under eval/")
+    parser.add_argument(
+        "--configs",
+        nargs="*",
+        choices=sorted(CONFIGS),
+        help="only these configurations (default all); pair a partial pool with --out",
+    )
+    parser.add_argument("--out", type=Path, help="pool file to write (default: the set's pool)")
     args = parser.parse_args()
     source = ROOT / "eval" / args.set / "queries.jsonl"
-    out = ROOT / "data/processed/products-v1/eval" / args.set / "pool.jsonl"
+    out = args.out or ROOT / "data/processed/products-v1/eval" / args.set / "pool.jsonl"
+    if args.configs and "current" not in args.configs:
+        parser.error("--configs must include current")
+    if args.configs and args.out is None:
+        parser.error("a partial --configs pool needs --out, it would replace the full pool")
     load_env()
     queries = [json.loads(line) for line in source.read_text(encoding="utf-8").splitlines() if line]
     encoder = TextEncoder(device="cpu")
@@ -70,6 +81,7 @@ def main() -> None:
     pipelines = {
         name: build_pipeline(dataclasses.replace(Settings(), **change), encoder, client)
         for name, change in CONFIGS.items()
+        if not args.configs or name in args.configs
     }
     review = pipelines["current"].review
     names = {e["id"]: e["name"] for e in pipelines["current"].graph["entities"]}

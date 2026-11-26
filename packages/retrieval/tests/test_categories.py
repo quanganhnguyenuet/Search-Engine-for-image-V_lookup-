@@ -169,3 +169,60 @@ def test_a_phrase_at_the_head_of_types_is_a_cue_even_when_it_also_qualifies_othe
     # In a query a head-only cue must head its phrase as well: here it qualifies "lốp".
     assert "moto.vehicle" not in lexicon.detect("lốp xe máy").categories
     assert lexicon.detect("cho xe máy").categories == ["moto.vehicle"]
+
+
+DESCRIPTIONS = {
+    "food.drink": "Nước ép, sinh tố, nước ngọt, nước khoáng, sữa uống.",
+    "household.paper": "Giấy in, giấy ăn; không phải giấy vệ sinh y tế.",
+}
+# No single word is shared, so the bigram "nước ngọt" has exactly one entity vote.
+DRINK_ENTITIES = {
+    "d1": entity("Nước ngọt có gas", "food.drink"),
+    "d2": entity("Trà sữa", "food.drink"),
+}
+DRINK_NAMES = {"food.drink": "Đồ uống"}
+
+
+def test_description_phrase_with_one_entity_vote_becomes_a_cue():
+    without = CategoryLexicon.build(DRINK_ENTITIES, DRINK_NAMES)
+    assert without.detect("nước ngọt").categories == []  # one entity is not enough alone
+    with_desc = CategoryLexicon.build(DRINK_ENTITIES, DRINK_NAMES, DESCRIPTIONS)
+    assert with_desc.detect("nước ngọt").categories == ["food.drink"]
+
+
+def test_description_alone_never_makes_a_cue():
+    lex = CategoryLexicon.build(DRINK_ENTITIES, DRINK_NAMES, DESCRIPTIONS)
+    # "nước khoáng" is in the description but no entity or name carries it
+    assert lex.detect("nước khoáng").categories == []
+
+
+def test_negated_description_part_is_ignored():
+    from visualseek_retrieval.categories import description_phrases
+
+    assert description_phrases(DESCRIPTIONS["household.paper"]) == ["Giấy in", "giấy ăn"]
+    assert "Nước ép" in description_phrases(DESCRIPTIONS["food.drink"])
+
+
+def test_description_does_not_flip_or_weaken_an_existing_cue():
+    entities = {**ENTITIES, "d1": entity("Giày da", "household.paper")}
+    before = CategoryLexicon.build(entities, NAMES).tables[True]
+    after = CategoryLexicon.build(entities, NAMES, {"household.paper": "Giày da, giấy in"})
+    for gram, entry in before.items():
+        assert gram in after.tables[True] and after.tables[True][gram][0] == entry[0]
+
+
+def test_load_descriptions_needs_the_matching_taxonomy():
+    import json
+    import tempfile
+    from pathlib import Path
+
+    from visualseek_retrieval.categories import load_descriptions
+
+    drink = {"id": "food.drink", "description": "Nước ngọt."}
+    taxonomy = {"taxonomy_sha256": "abc", "categories": [{"id": "food", "children": [drink]}]}
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder) / "taxonomy.json"
+        path.write_text(json.dumps(taxonomy), encoding="utf-8")
+        assert load_descriptions(path, "abc") == {"food.drink": "Nước ngọt."}
+        assert load_descriptions(path, "other") is None
+        assert load_descriptions(Path(folder) / "missing.json", "abc") is None

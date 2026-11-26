@@ -34,6 +34,7 @@ async def search_text(body: TextSearchRequest, request: Request) -> TextSearchRe
     for hit in result["results"]:
         hit["entity_names"] = [names.get(e, e) for e in hit.get("entity_ids") or []]
         hit["image_url"] = f"/api/v1/images/{hit['asset_id']}"
+        hit.update(service.details.get(hit["asset_id"], {}))
     return TextSearchResponse(**result)
 
 

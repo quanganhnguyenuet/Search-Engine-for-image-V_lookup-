@@ -18,6 +18,10 @@ class Settings(BaseSettings):
 
     qdrant_url: str = "http://localhost:6333"
     qdrant_api_key: str = ""
+    # gRPC (port 6334) to a remote cluster: binary vectors on one multiplexed connection. Measured
+    # against Qdrant Cloud in Seoul: 791 ms -> 170 ms per search. Falls back to REST at start-up
+    # if the port is unreachable; set QDRANT_PREFER_GRPC=false to force REST.
+    qdrant_prefer_grpc: bool = True
 
     # products-v1 text search; off by default so tests do not load the encoder.
     search_enabled: bool = False

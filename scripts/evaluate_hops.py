@@ -80,9 +80,10 @@ def bootstrap(deltas: list[float]) -> list[float]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--set", default=DEFAULT_SET, help="query set under eval/")
+    parser.add_argument("--pool", type=Path, help="pool file (default: the set's pool)")
     args = parser.parse_args()
     queries = {q["qid"]: q for q in read_jsonl(ROOT / "eval" / args.set / "queries.jsonl")}
-    pool_path = ROOT / "data/processed/products-v1/eval" / args.set / "pool.jsonl"
+    pool_path = args.pool or ROOT / "data/processed/products-v1/eval" / args.set / "pool.jsonl"
     pool = {p["qid"]: p for p in read_jsonl(pool_path)}
     judged = {row["qid"]: row for row in read_jsonl(ROOT / "eval" / args.set / "judgments.jsonl")}
     usable = [q for q in judged if judged[q].get("flag") != "bad_query" and q in pool]

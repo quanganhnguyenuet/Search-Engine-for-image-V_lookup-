@@ -25,6 +25,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "packages" / "retrieval" / "src"))
 
+from visualseek_retrieval.categories import load_descriptions  # noqa: E402
 from visualseek_retrieval.encoder import TextEncoder  # noqa: E402
 from visualseek_retrieval.entity_review import EntityReview  # noqa: E402
 from visualseek_retrieval.fusion import asset_payloads, load_visual  # noqa: E402
@@ -60,7 +61,12 @@ def visual_parts(device: str) -> tuple:
 
 
 def build_pipeline(
-    settings: Settings, encoder, client, visual: bool = True, device: str = "cpu"
+    settings: Settings,
+    encoder,
+    client,
+    visual: bool = True,
+    device: str = "cpu",
+    descriptions: bool = True,
 ) -> SearchPipeline:
     """The pipeline the API serves. ``visual=False`` leaves out the SigLIP2 fusion channel
     (P6) entirely; ``Settings(visual_fusion=False)`` keeps it loaded but unused."""
@@ -79,6 +85,11 @@ def build_pipeline(
         short_aliases=short["aliases"],
         suppressed_aliases=short["suppressed"]["aliases"],
         categories=categories,
+        category_descriptions=(
+            load_descriptions(ROOT / "graph/taxonomy-v1.json", categories["taxonomy_sha256"])
+            if descriptions
+            else None
+        ),
         image_encoder=image_encoder,
         fusion=fusion,
         payloads=payloads,
@@ -163,6 +174,9 @@ def main() -> None:
     parser.add_argument("--prefetch", action="store_true", help="add the category dense channel")
     parser.add_argument("--lex-share", type=float, default=Settings().lexicon_min_share)
     parser.add_argument("--multi", action="store_true", help="eval/category-v1/multi.jsonl")
+    parser.add_argument(
+        "--no-descriptions", action="store_true", help="lexicon without taxonomy descriptions (A/B)"
+    )
     parser.add_argument("--out", type=Path)
     parser.add_argument("--show", action="store_true", help="print every query of the last run")
     args = parser.parse_args()
@@ -188,7 +202,10 @@ def main() -> None:
         )
     results = {}
     for name, settings in configs.items():
-        results[name] = run(build_pipeline(settings, encoder, client), queries)
+        pipeline = build_pipeline(
+            settings, encoder, client, descriptions=not args.no_descriptions
+        )
+        results[name] = run(pipeline, queries)
         print(name, json.dumps(summary(results[name])))
     last = list(results)[-1]
     if args.show:

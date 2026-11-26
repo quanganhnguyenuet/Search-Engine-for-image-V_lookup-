@@ -1,9 +1,20 @@
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/, "");
 
+/** Exact cosines of the query against one image; absent when the API cannot compute them. */
+export type Similarity = {
+  /** bge-m3: query vs the description text that was embedded. */
+  text: number;
+  /** SigLIP2: query text vs the image itself. */
+  image: number | null;
+};
+
 export type SearchHit = {
   asset_id: string;
   score: number;
   scores: SearchScores;
+  similarity?: Similarity | null;
+  description?: string | null;
+  page_url?: string | null;
   entity_ids: string[];
   entity_names: string[];
   brand_ids?: string[] | null;

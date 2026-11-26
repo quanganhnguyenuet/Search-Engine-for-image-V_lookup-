@@ -1,7 +1,7 @@
 import { relationLabel } from "@/lib/search";
 import type { SearchResponse, SearchScores, SearchTrace, TraceEdge } from "@/lib/search";
 
-const STATUS: Record<SearchTrace["status"], string> = {
+export const STATUS: Record<SearchTrace["status"], string> = {
   expanded: "Đã mở rộng qua graph",
   no_target: "Không còn entity đích",
   no_edge: "Không tìm thấy cạnh cho entity gốc",
@@ -33,7 +33,7 @@ const TIER_IGNORED = {
 
 const SOURCE = { lexicon: "từ cụm từ", knn: "từ entity gần nhất", mixed: "theo từng vế" } as const;
 
-const CHANNELS = [
+export const CHANNELS = [
   ["dense", "Dense"],
   ["sparse", "Sparse"],
   ["graph_prefetch", "Dense theo tập đích"],
@@ -226,7 +226,7 @@ function EdgeList({ title, edges, labels }: {
   );
 }
 
-function formatScore(value: SearchScores[keyof SearchScores], status: SearchTrace["channels"]["dense"]) {
+export function formatScore(value: SearchScores[keyof SearchScores], status: SearchTrace["channels"]["dense"]) {
   if (value === null) {
     if (status === "inactive") return "Chưa chạy";
     return status === "unavailable" ? "Không lấy được điểm" : "Ngoài danh sách nhánh";

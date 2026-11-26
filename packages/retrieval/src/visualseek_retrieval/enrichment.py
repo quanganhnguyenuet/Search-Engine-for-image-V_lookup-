@@ -11,7 +11,7 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass, field
 
-from visualseek_retrieval.text import normalize, surface
+from visualseek_retrieval.text import normalize, surface, token_matches
 
 REL_KIND = {
     "MADE_BY": "Brand",
@@ -368,6 +368,21 @@ def place_scope(label: str) -> str:
     return "country" if normalize(label) in COUNTRIES else "region"
 
 
+# Places outside Vietnam that are not countries, so COUNTRIES misses them (a Cuban cigar, a
+# Milan brand). The place named in a query must be one of Vietnam: this corpus is a Vietnamese
+# one, and "đặc sản" or "đồ thủ công" of a foreign place is not a question it can answer.
+FOREIGN_PLACES = frozenset(
+    normalize(name)
+    for name in ("Ai Cập", "Bermuda", "Cuba", "Liên Xô", "Milan", "Quảng Đông", "Sudan",
+                 "Triều Tiên", "USA")
+)  # fmt: skip
+
+
+def is_vietnamese_place(label: str) -> bool:
+    folded = normalize(label)
+    return folded not in COUNTRIES and folded not in FOREIGN_PLACES
+
+
 def origin_allowed(origin: str, l1: str) -> bool:
     """A province or village is kept for specialties only: for a drug or a machine it is the
     manufacturer's address ("Công ty Dược phẩm Bến Tre"), not where the product comes from."""
@@ -525,6 +540,8 @@ class RelationIndex:
     audiences: dict[str, str] = field(default_factory=dict)
     ingredient_lookup: dict[str, list[str]] = field(default_factory=lambda: defaultdict(list))
     model_lookup: dict[str, str] = field(default_factory=dict)
+    # Folded words of a Vietnamese place -> (node id, its accented words), for place queries.
+    place_forms: dict[tuple[str, ...], tuple[str, tuple[str, ...]]] = field(default_factory=dict)
 
     def add_edge(
         self,
@@ -598,6 +615,7 @@ class RelationIndex:
             )
 
         if not cat_entities:
+            idx.index_places()
             return idx
 
         # 2. Entity-level enriched fields + fallback inference from name & product_type
@@ -677,7 +695,49 @@ class RelationIndex:
             if info.get("target_audience"):
                 idx.audiences.setdefault(eid, info["target_audience"])
 
+        idx.index_places()
         return idx
+
+    def index_places(self) -> None:
+        """The Vietnamese places that have at least one entity, keyed by their folded words. A
+        folded form shared by two places is dropped: it cannot say which one is meant."""
+        forms: dict[tuple[str, ...], dict[str, tuple[str, ...]]] = defaultdict(dict)
+        for node_id, node in self.nodes.items():
+            label = node["label"]
+            if (
+                node["kind"] != REL_KIND["ORIGIN"]
+                or not is_vietnamese_place(label)
+                or not self.by_node.get(("ORIGIN", node_id))
+            ):
+                continue
+            folded = tuple(normalize(label).split())
+            if folded:
+                forms[folded][node_id] = tuple(surface(label).split())
+        self.place_forms = {
+            folded: next(iter(ids.items())) for folded, ids in forms.items() if len(ids) == 1
+        }
+
+    def resolve_places_from_query(self, query: str) -> tuple[list[str], str]:
+        """Place nodes named in a query (longest name first, an unaccented spelling accepted)
+        and the words left over, which say what is asked of them ("đặc sản", "đồ gốm")."""
+        words = surface(query).split()
+        longest = max((len(folded) for folded in self.place_forms), default=0)
+        covered = [False] * len(words)
+        found: list[tuple[int, str]] = []
+        for size in range(min(longest, len(words)), 0, -1):
+            for start in range(len(words) - size + 1):
+                if any(covered[start : start + size]):
+                    continue
+                window = words[start : start + size]
+                entry = self.place_forms.get(tuple(normalize(word) for word in window))
+                if entry and all(
+                    token_matches(w, t) for w, t in zip(window, entry[1], strict=True)
+                ):
+                    covered[start : start + size] = [True] * size
+                    found.append((start, entry[0]))
+        node_ids = list(dict.fromkeys(node for _, node in sorted(found)))
+        rest = " ".join(word for i, word in enumerate(words) if not covered[i])
+        return node_ids, rest
 
     def values_of(self, rel: str, entity_ids: list[str]) -> list[str]:
         out: list[str] = []
