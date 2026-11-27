@@ -1105,6 +1105,7 @@ class ImportService:
 
         path = Path(self.settings.admin_dir) / NEW_ENTITIES_FILE
         with self.admin.store.lock:
+            row = {**row, "actor": self.admin.store.actors.public(row.get("actor"))}
             path.parent.mkdir(parents=True, exist_ok=True)
             with path.open("a", encoding="utf-8", newline="\n") as handle:
                 handle.write(json.dumps(row, ensure_ascii=False) + "\n")

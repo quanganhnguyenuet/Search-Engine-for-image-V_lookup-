@@ -126,7 +126,28 @@ def test_an_edit_is_pending_and_logged_with_who_and_before(admin) -> None:
     assert detail["live"]["treats"] == ["ho"]
     row = detail["history"][0]
     assert (row["field"], row["before"], row["after"]) == ("treats", ["ho"], ["ho", "đau họng"])
-    assert row["actor"] == {"id": "admin-1", "email": "admin@example.com"}
+    assert row["actor"]["email"] == "admin@example.com"  # resolved for the admin pages
+    stored = service_admin.store.changes()[0]["actor"]
+    assert stored == {"id": row["actor"]["id"]} and stored["id"].startswith("admin-")
+
+
+def test_the_logs_in_git_hold_an_alias_and_never_who_it_is(admin) -> None:
+    service_admin, service = admin
+
+    service_admin.edit(service, "e1", {"origin": "Huế"}, "", user())
+    service_admin.set_hidden(service, A1, True, "", user())
+
+    store = service_admin.store
+    written = store.changes_path.read_text("utf-8") + store.images_path.read_text("utf-8")
+    assert "admin@example.com" not in written and '"admin-1"' not in written
+    aliases = {r["actor"]["id"] for r in [*store.changes(), *store.image_events()]}
+    assert len(aliases) == 1  # one account, one alias
+    (alias,) = aliases
+    assert store.actors.name(alias) == "admin@example.com"
+    assert store.actors.public({"id": alias}) == {"id": alias}  # never aliased twice
+    assert store.actors.path.parent == store.data_dir  # outside the tracked admin dir
+    store.actors.path.unlink()
+    assert store.actors.name(alias) == alias
 
 
 def test_an_unchanged_value_writes_no_row(admin) -> None:

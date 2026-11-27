@@ -54,6 +54,7 @@ from visualseek_retrieval.admin_overlay import (  # noqa: E402
     ENRICH_FIELDS,
     LABEL_FIELDS,
     LIST_FIELDS,
+    ActorDirectory,
     apply_made_by,
     enrich_override,
     fold,
@@ -411,10 +412,17 @@ def release(write: bool, actor: str = "", device: str = "cuda", encoder=None) ->
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true")
-    parser.add_argument("--actor", default="", help="who started the release (for the record)")
+    parser.add_argument(
+        "--actor",
+        default="",
+        help="who started the release; releases.jsonl is in git, an e-mail is stored as an alias",
+    )
     parser.add_argument("--device", default="cuda", help="for re-embedding changed doc texts")
     args = parser.parse_args()
-    release(args.write, args.actor, args.device)
+    actor = args.actor
+    if "@" in actor:
+        actor = ActorDirectory(UPLOADS.parent).alias(actor, actor)
+    release(args.write, actor, args.device)
 
 
 if __name__ == "__main__":

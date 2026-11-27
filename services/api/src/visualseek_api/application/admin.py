@@ -78,6 +78,9 @@ class AdminStore:
     """Append-only JSONL files; one lock serialises the writers of this process."""
 
     def __init__(self, admin_dir: Path, data_dir: Path) -> None:
+        from visualseek_retrieval.admin_overlay import ActorDirectory
+
+        self.actors = ActorDirectory(data_dir)
         self.admin_dir = admin_dir
         self.data_dir = data_dir
         self.changes_path = admin_dir / "changes.jsonl"
@@ -107,7 +110,10 @@ class AdminStore:
     def append_changes(self, rows: list[dict]) -> list[dict]:
         with self.lock:
             seq = max((row["seq"] for row in self.changes()), default=0)
-            stamped = [{"seq": seq + i + 1, **row} for i, row in enumerate(rows)]
+            stamped = [
+                {"seq": seq + i + 1, **row, "actor": self.actors.public(row.get("actor"))}
+                for i, row in enumerate(rows)
+            ]
             self._append(self.changes_path, stamped)
         return stamped
 
@@ -126,7 +132,13 @@ class AdminStore:
 
     def append_image_event(self, row: dict) -> None:
         with self.lock:
+            row = {**row, "actor": self.actors.public(row.get("actor"))}
             self._append(self.images_path, [row])
+
+    def named(self, row: dict) -> dict:
+        """A log row for the admin pages, with the e-mail behind its actor alias."""
+        alias = (row.get("actor") or {}).get("id")
+        return {**row, "actor": {"id": alias, "email": self.actors.name(alias)}}
 
     def uploads(self) -> dict[str, dict]:
         """asset id -> latest record of every uploaded image that is not deleted."""
@@ -162,7 +174,8 @@ class ReleaseJob:
     status: str = "idle"  # idle | running | succeeded | failed
     started_at: str | None = None
     finished_at: str | None = None
-    actor: str | None = None
+    actor: str | None = None  # shown while running; releases.jsonl gets actor_alias
+    actor_alias: str | None = None
     log_path: Path | None = None
     error: str | None = None
 
@@ -307,7 +320,7 @@ class AdminService:
                 bool(index.labels.get(e, {}).get("imported")) for e in index.entities
             ),
             "pending_new_entities": len(self.imports.pending_new_entities(service)),
-            "last_release": _release_summary(releases[-1]) if releases else None,
+            "last_release": self._release_view(releases[-1]) if releases else None,
             "graph_fingerprint": service.info["graph_fingerprint"],
         }
 
@@ -411,8 +424,11 @@ class AdminService:
                 }
                 for asset_id in images
             ],
-            "history": sorted(history, key=lambda r: -r["seq"])[:HISTORY_LIMIT],
-            "image_history": image_history[-HISTORY_LIMIT:][::-1],
+            "history": [
+                self.store.named(r)
+                for r in sorted(history, key=lambda r: -r["seq"])[:HISTORY_LIMIT]
+            ],
+            "image_history": [self.store.named(r) for r in image_history[-HISTORY_LIMIT:][::-1]],
         }
 
     def vocab(self, service, kind: str, q: str, limit: int) -> list[dict]:
@@ -816,8 +832,11 @@ class AdminService:
             "pending": items,
             "new_entities": self.imports.pending_new_entities(service),
             "job": self._job_view(),
-            "history": [_release_summary(r) for r in self.store.releases()[-20:][::-1]],
+            "history": [self._release_view(r) for r in self.store.releases()[-20:][::-1]],
         }
+
+    def _release_view(self, row: dict) -> dict:
+        return {**_release_summary(row), "actor": self.store.actors.name(row.get("actor"))}
 
     def _job_view(self) -> dict:
         job = self.job
@@ -853,6 +872,7 @@ class AdminService:
                 status="running",
                 started_at=_now(),
                 actor=user.email or user.id,
+                actor_alias=self.store.actors.alias(user.id, user.email),
                 log_path=self.store.logs_dir / f"release-{stamp}.log",
             )
         threading.Thread(
@@ -873,7 +893,7 @@ class AdminService:
                 try:
                     release.release(
                         True,
-                        actor=job.actor or "",
+                        actor=job.actor_alias or "",
                         device=self.settings.search_embed_device,
                         encoder=_SharedDocEncoder(service),
                     )

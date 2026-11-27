@@ -12,11 +12,15 @@ a rebuild from the raw sources keeps the edits.
 
 ``graph/admin/releases.jsonl`` holds one row per release with the folded state it applied; a
 field is pending while its folded value differs from the one in the last release.
+
+These files are in git, so ``actor`` is an alias ("admin-3f9a1c2e", see ActorDirectory), never an
+account id or an e-mail address. Notes are free text: they are stored as typed.
 """
 
 from __future__ import annotations
 
 import json
+import secrets
 from collections import defaultdict
 from pathlib import Path
 
@@ -45,6 +49,55 @@ def read_jsonl(path: Path) -> list[dict]:
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+
+
+ACTORS_FILE = "actors.json"
+ALIAS_PREFIX = "admin-"
+
+
+class ActorDirectory:
+    """alias -> {"id", "email"} in <data dir>/actors.json, which is not in git.
+
+    Aliases are random, so nothing about a person can be derived or guessed from the logs.
+    Without this file (another machine, a lost data dir) the logs show the aliases."""
+
+    def __init__(self, data_dir: Path) -> None:
+        self.path = data_dir / ACTORS_FILE
+
+    def _load(self) -> dict[str, dict]:
+        if not self.path.exists():
+            return {}
+        return json.loads(self.path.read_text(encoding="utf-8"))
+
+    def alias(self, user_id: str, email: str | None = None) -> str:
+        """The alias of an account, created the first time; its e-mail is kept up to date."""
+        people = self._load()
+        found = next((a for a, p in people.items() if p["id"] == user_id), None)
+        if found and (not email or people[found].get("email") == email):
+            return found
+        while found is None or (found in people and people[found]["id"] != user_id):
+            found = f"{ALIAS_PREFIX}{secrets.token_hex(4)}"
+        people[found] = {"id": user_id, "email": email or people.get(found, {}).get("email")}
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = self.path.with_suffix(".tmp")
+        temporary.write_text(json.dumps(people, ensure_ascii=False, indent=1), encoding="utf-8")
+        temporary.replace(self.path)
+        return found
+
+    def public(self, actor: dict | None) -> dict:
+        """The form of an {"id", "email"} actor that may be written to a file in git."""
+        actor = actor or {}
+        if str(actor.get("id", "")).startswith(ALIAS_PREFIX) and "email" not in actor:
+            return {"id": actor["id"]}
+        if not actor.get("id"):
+            return {"id": None}
+        return {"id": self.alias(actor["id"], actor.get("email"))}
+
+    def name(self, alias: str | None) -> str | None:
+        """What the admin pages show for a stored alias (or any older stored value)."""
+        if not alias:
+            return alias
+        return self._load().get(alias, {}).get("email") or alias
 
 
 def fold(changes: list[dict]) -> dict[str, dict]:
