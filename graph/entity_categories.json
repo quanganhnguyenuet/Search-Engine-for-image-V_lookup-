@@ -109,22 +109,80 @@
  "corpus_fingerprint": "861911cb10dd5651e2b2297585230bf8dfe72a2265820011914791f4777e3455",
  "coverage": {
   "by_source": {
-   "gemini": 2076,
-   "human": 200
+   "gemini": 2077,
+   "human": 201
   },
-  "canonical_entities": 2276,
+  "canonical_entities": 2278,
   "fashion": 120,
-  "labelled": 2276,
-  "needs_review": 136,
+  "labelled": 2278,
+  "needs_review": 137,
   "with_fits": 150,
-  "with_form_factor": 655,
-  "with_ingredients": 521,
-  "with_material": 917,
-  "with_origin": 687,
+  "with_form_factor": 657,
+  "with_ingredients": 522,
+  "with_material": 918,
+  "with_origin": 689,
   "with_target_audience": 627,
-  "with_treats": 1190
+  "with_treats": 1191
  },
  "edges": [
+  {
+   "dst": "category:home.building_material",
+   "rel": "IS_A",
+   "src": "00027075-a949-4782-af26-32f389ebf5a3"
+  },
+  {
+   "dst": "purpose:op-tuong",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "00027075-a949-4782-af26-32f389ebf5a3"
+  },
+  {
+   "dst": "purpose:lat-san-vuon",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "00027075-a949-4782-af26-32f389ebf5a3"
+  },
+  {
+   "dst": "purpose:trang-tri",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "00027075-a949-4782-af26-32f389ebf5a3"
+  },
+  {
+   "dst": "category:food.dish",
+   "rel": "IS_A",
+   "src": "000508e5-9234-4538-9cba-7ea91995ba1f"
+  },
+  {
+   "dst": "ingredient:thit-ga",
+   "rel": "HAS_INGREDIENT",
+   "source": "gemini",
+   "src": "000508e5-9234-4538-9cba-7ea91995ba1f"
+  },
+  {
+   "dst": "ingredient:la-chanh",
+   "rel": "HAS_INGREDIENT",
+   "source": "gemini",
+   "src": "000508e5-9234-4538-9cba-7ea91995ba1f"
+  },
+  {
+   "dst": "ingredient:rau-bap-cai",
+   "rel": "HAS_INGREDIENT",
+   "source": "gemini",
+   "src": "000508e5-9234-4538-9cba-7ea91995ba1f"
+  },
+  {
+   "dst": "ingredient:rau-ram",
+   "rel": "HAS_INGREDIENT",
+   "source": "gemini",
+   "src": "000508e5-9234-4538-9cba-7ea91995ba1f"
+  },
+  {
+   "dst": "place:viet-nam",
+   "rel": "ORIGIN",
+   "source": "gemini",
+   "src": "000508e5-9234-4538-9cba-7ea91995ba1f"
+  },
   {
    "dst": "category:food.drink",
    "rel": "IS_A",
@@ -8052,6 +8110,12 @@
    "dst": "ingredient:du-du",
    "rel": "HAS_INGREDIENT",
    "source": "gemini",
+   "src": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d"
+  },
+  {
+   "dst": "place:ben-tre",
+   "rel": "ORIGIN",
+   "source": "admin",
    "src": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d"
   },
   {
@@ -36413,6 +36477,51 @@
   }
  ],
  "entities": {
+  "00027075-a949-4782-af26-32f389ebf5a3": {
+   "basis": "evidence",
+   "brand_id": null,
+   "category": "home.building_material",
+   "category_l1": "home",
+   "category_name": "Vật liệu xây dựng",
+   "confidence": "high",
+   "form_factor": "viên",
+   "imported": true,
+   "market_tier": "not_applicable",
+   "material": "đá",
+   "model": "agy:gemini-3.8-flash-medium",
+   "name": "Đá ong Bình Phước",
+   "needs_review": true,
+   "product_type": "Đá ốp lát",
+   "source": "gemini",
+   "treats": [
+    "ốp tường",
+    "lát sân vườn",
+    "trang trí"
+   ]
+  },
+  "000508e5-9234-4538-9cba-7ea91995ba1f": {
+   "basis": "evidence",
+   "brand_id": null,
+   "category": "food.dish",
+   "category_l1": "food",
+   "category_name": "Món ăn",
+   "confidence": "high",
+   "form_factor": "món ăn",
+   "imported": true,
+   "ingredients": [
+    "thịt gà",
+    "lá chanh",
+    "rau bắp cải",
+    "rau răm"
+   ],
+   "market_tier": "not_applicable",
+   "model": "agy:gemini-3.8-flash-medium",
+   "name": "Gỏi gà lá chanh",
+   "needs_review": true,
+   "origin": "Việt Nam",
+   "product_type": "Gỏi gà",
+   "source": "gemini"
+  },
   "0005e132-439d-48c9-9a93-d4259136419f": {
    "basis": "evidence",
    "brand_id": null,
@@ -45698,9 +45807,10 @@
    "market_tier": "not_applicable",
    "model": "agy:gemini-3.8-flash-low",
    "name": "Đu đủ ngâm chua ngọt",
-   "needs_review": true,
+   "needs_review": false,
+   "origin": "Bến Tre",
    "product_type": "Đu đủ ngâm chua ngọt",
-   "source": "gemini"
+   "source": "human"
   },
   "01307b46-11d3-42b3-b806-f5806a355a20": {
    "basis": "evidence",
@@ -78632,6 +78742,7 @@
   "ingredient:khoai-tay": "khoai tây",
   "ingredient:khoang-chat": "khoáng chất",
   "ingredient:l-lysin": "L lysin",
+  "ingredient:la-chanh": "lá chanh",
   "ingredient:la-dua": "lá dứa",
   "ingredient:la-mo": "Lá mơ",
   "ingredient:lac": "lạc",
@@ -78767,7 +78878,9 @@
   "ingredient:que": "Quế",
   "ingredient:rabeprazol": "Rabeprazol",
   "ingredient:racecadotril": "Racecadotril",
+  "ingredient:rau-bap-cai": "rau bắp cải",
   "ingredient:rau-cu": "rau củ",
+  "ingredient:rau-ram": "rau răm",
   "ingredient:rieng": "riềng",
   "ingredient:robusta": "Robusta",
   "ingredient:rong-bien": "rong biển",
