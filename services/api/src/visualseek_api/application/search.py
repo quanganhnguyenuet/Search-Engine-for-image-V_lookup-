@@ -71,6 +71,15 @@ class SearchService:
     graph_view: GraphView
     # asset_id -> {"description": text that was embedded, "page_url": source page}
     details: dict[str, dict]
+    # asset_id -> graph entity ids of the image (doc_texts.jsonl), for the admin pages
+    asset_entities: dict[str, list[str]] = field(default_factory=dict)
+    categories: dict | None = None
+    # Qdrant BM25 length normalisation of the collection (index_manifest.json)
+    avg_doc_tokens: float = 0.0
+    # Assets the identity review blocks; hidden images are added on top (application/admin.py).
+    base_blocked: list[str] = field(default_factory=list)
+    # asset_id -> file of an image uploaded in /admin
+    upload_paths: dict[str, Path] = field(default_factory=dict)
     # One dedicated thread: CUDA work stays on a warmed thread (per-thread handles were
     # costing 20-30 ms on first use) and GPU access is serialised.
     executor: ThreadPoolExecutor = field(
@@ -78,16 +87,26 @@ class SearchService:
     )
 
     @classmethod
-    def load(cls, settings: Settings) -> SearchService:
+    def load(cls, settings: Settings, reuse: SearchService | None = None) -> SearchService:
+        """Load the artifacts. ``reuse`` (the running service) lends its encoders, Qdrant client
+        and worker thread, so a reload after an admin release needs no second model copy."""
         from visualseek_retrieval.categories import load_descriptions
         from visualseek_retrieval.encoder import TextEncoder
         from visualseek_retrieval.entity_review import EntityReview
         from visualseek_retrieval.fusion import asset_payloads, load_visual
+        from visualseek_retrieval.image_text import ImageTextEncoder
         from visualseek_retrieval.pipeline import SearchPipeline
         from visualseek_retrieval.qdrant_store import connect
 
         started = time.perf_counter()
         root = Path(settings.search_artifact_dir)
+        # Both models come first, before the artifacts: mapping a checkpoint needs its size in
+        # free Windows commit, and running out crashes the process (access violation in torch).
+        old = reuse.pipeline if reuse else None
+        encoder = old.encoder if old else TextEncoder(device=settings.search_embed_device)
+        loaded_image_encoder = old.image_encoder if old else None
+        if loaded_image_encoder is None and (root / "img_siglip2.npy").exists():
+            loaded_image_encoder = ImageTextEncoder(device=settings.search_embed_device)
         graph = json.loads((root / "graph.json").read_text(encoding="utf-8"))
         entity_dense = np.load(root / "entity_dense.npy")
         index = json.loads((root / "index_manifest.json").read_text(encoding="utf-8"))
@@ -127,15 +146,22 @@ class SearchService:
             for row in rows
         }
         payloads = asset_payloads(rows, review, categories)
-        encoder = TextEncoder(device=settings.search_embed_device)
         image_encoder, fusion = load_visual(
-            root, [row["asset_id"] for row in rows], settings.search_embed_device
+            root,
+            [row["asset_id"] for row in rows],
+            settings.search_embed_device,
+            encoder=loaded_image_encoder,
         )
-        client = connect(
-            settings.qdrant_url, settings.qdrant_api_key, prefer_grpc=settings.qdrant_prefer_grpc
-        )
-        transport = "grpc" if settings.qdrant_prefer_grpc else "rest"
-        if settings.qdrant_prefer_grpc:
+        if old:
+            client, transport = old.client, reuse.info["qdrant_transport"]
+        else:
+            client = connect(
+                settings.qdrant_url,
+                settings.qdrant_api_key,
+                prefer_grpc=settings.qdrant_prefer_grpc,
+            )
+            transport = "grpc" if settings.qdrant_prefer_grpc else "rest"
+        if settings.qdrant_prefer_grpc and not old:
             try:
                 client.collection_exists(settings.search_collection)
             except Exception as error:  # port 6334 blocked, TLS interception, ...
@@ -157,18 +183,23 @@ class SearchService:
             fusion=fusion,
             payloads=payloads,
         )
-        executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="search")
-        for query in WARMUP_QUERIES:  # pay TLS, CUDA and tokenizer start-up before serving
+        executor = (
+            reuse.executor
+            if reuse
+            else ThreadPoolExecutor(max_workers=1, thread_name_prefix="search")
+        )
+        for query in () if reuse else WARMUP_QUERIES:  # TLS, CUDA, tokenizer start-up
             try:
                 executor.submit(pipeline.search, query).result()
             except Exception as error:  # a vector-store stall must not keep the API from starting
                 logger.warning("warmup_query_failed", query=query, error=str(error)[:200])
-        threading.Thread(
-            target=_keep_connections_warm,
-            args=(client, settings.search_collection),
-            name="qdrant-keepalive",
-            daemon=True,
-        ).start()
+        if not reuse:
+            threading.Thread(
+                target=_keep_connections_warm,
+                args=(client, settings.search_collection),
+                name="qdrant-keepalive",
+                daemon=True,
+            ).start()
         image_root = (
             Path(settings.products_image_root)
             if settings.products_image_root
@@ -197,12 +228,27 @@ class SearchService:
         }
         logger.info("search_loaded", seconds=round(time.perf_counter() - started, 1), **info)
         graph_view = GraphView(graph, categories, pipeline.review)
-        return cls(pipeline, image_paths, image_root, info, graph_view, details, executor)
+        return cls(
+            pipeline,
+            image_paths,
+            image_root,
+            info,
+            graph_view,
+            details,
+            executor=executor,
+            asset_entities={row["asset_id"]: row["entity_ids"] for row in rows},
+            categories=categories,
+            avg_doc_tokens=float(index.get("avg_doc_tokens") or 0.0),
+            base_blocked=list(pipeline.review.blocked_assets),
+        )
 
     def search(self, query: str, brand_id: str | None = None) -> dict:
         return self.pipeline.search(query, brand_id=brand_id, with_similarity=True)
 
     def image_file(self, asset_id: str) -> Path | None:
+        uploaded = self.upload_paths.get(asset_id)
+        if uploaded is not None:
+            return uploaded if uploaded.exists() else None
         relative = self.image_paths.get(asset_id)
         if relative is None:
             return None

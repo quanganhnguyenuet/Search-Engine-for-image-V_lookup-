@@ -21,6 +21,10 @@ const config: Config = {
           foreground: "hsl(var(--muted-foreground))",
         },
         surface: "hsl(var(--surface))",
+        panel: {
+          DEFAULT: "hsl(var(--panel))",
+          border: "hsl(var(--panel-border))",
+        },
         brand: {
           DEFAULT: "hsl(var(--brand))",
           foreground: "hsl(var(--brand-foreground))",

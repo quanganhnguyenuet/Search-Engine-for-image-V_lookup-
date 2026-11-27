@@ -1,3 +1,5 @@
+import { authFetch } from "@/lib/api";
+
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/, "");
 
 /** Exact cosines of the query against one image; absent when the API cannot compute them. */
@@ -130,7 +132,7 @@ export type SearchResponse = {
 };
 
 export async function searchText(query: string, signal?: AbortSignal): Promise<SearchResponse> {
-  const response = await fetch(`${API_URL}/api/v1/search/text`, {
+  const response = await authFetch(`${API_URL}/api/v1/search/text`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),

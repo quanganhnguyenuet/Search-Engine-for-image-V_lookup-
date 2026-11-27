@@ -31,3 +31,9 @@ coverage/
 
 # Backup of .env before the 2026-11-22 cleanup (contains secrets)
 /.env.bak
+
+# Google OAuth client downloads (contain a client secret); never commit
+client_secret*.json
+
+# Local Next.js environment files
+.env*.local

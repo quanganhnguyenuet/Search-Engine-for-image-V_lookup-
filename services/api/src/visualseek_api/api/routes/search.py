@@ -1,18 +1,15 @@
 import asyncio
-import re
 
 from fastapi import APIRouter, Request, status
-from fastapi.responses import FileResponse
 
 from visualseek_api.application.search import SearchService
 from visualseek_api.core.errors import ApplicationError
 from visualseek_api.schemas.search import TextSearchRequest, TextSearchResponse
 
 router = APIRouter()
-ASSET_ID = re.compile(r"^[0-9a-f]{64}$")
 
 
-def _service(request: Request) -> SearchService:
+def loaded_service(request: Request) -> SearchService:
     service = getattr(request.app.state, "search", None)
     if service is None:
         raise ApplicationError(
@@ -25,7 +22,7 @@ def _service(request: Request) -> SearchService:
 
 @router.post("/search/text", response_model=TextSearchResponse, summary="Text to image search")
 async def search_text(body: TextSearchRequest, request: Request) -> TextSearchResponse:
-    service = _service(request)
+    service = loaded_service(request)
     loop = asyncio.get_running_loop()
     result = await loop.run_in_executor(
         service.executor, service.search, body.query.strip(), body.brand_id
@@ -40,16 +37,4 @@ async def search_text(body: TextSearchRequest, request: Request) -> TextSearchRe
 
 @router.get("/search/info", summary="Loaded index, graph and settings")
 async def search_info(request: Request) -> dict:
-    return _service(request).info
-
-
-@router.get("/images/{asset_id}", summary="Serve a corpus image")
-async def image(asset_id: str, request: Request) -> FileResponse:
-    if not ASSET_ID.match(asset_id):
-        raise ApplicationError("Invalid asset id.", code="invalid_asset_id")
-    path = _service(request).image_file(asset_id)
-    if path is None:
-        raise ApplicationError(
-            "Image not found.", code="not_found", status_code=status.HTTP_404_NOT_FOUND
-        )
-    return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
+    return loaded_service(request).info

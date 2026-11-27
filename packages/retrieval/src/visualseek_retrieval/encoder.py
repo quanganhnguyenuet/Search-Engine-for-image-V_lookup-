@@ -21,6 +21,8 @@ class TextEncoder:
 
     def __post_init__(self) -> None:
         os.environ.setdefault("HF_HUB_OFFLINE", "1")
+        # TensorFlow is never used, but transformers imports it when installed (~0.4 GB commit).
+        os.environ.setdefault("USE_TF", "0")
         import torch
         from sentence_transformers import SentenceTransformer
 

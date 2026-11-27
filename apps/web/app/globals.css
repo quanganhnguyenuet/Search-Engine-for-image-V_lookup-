@@ -4,21 +4,25 @@
 
 @layer base {
   :root {
-    --background: 40 33% 98%;
-    --foreground: 222 47% 11%;
+    color-scheme: light;
+    --background: 0 0% 100%;
+    --foreground: 224 36% 13%;
     --surface: 0 0% 100%;
-    --border: 215 20% 88%;
-    --primary: 222 47% 11%;
-    --primary-foreground: 210 40% 98%;
-    --muted: 210 30% 95%;
-    --muted-foreground: 215 16% 38%;
-    --brand: 174 72% 24%;
+    --border: 220 18% 88%;
+    --primary: 224 36% 13%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 220 24% 96%;
+    --muted-foreground: 220 12% 39%;
+    --brand: 224 76% 48%;
     --brand-foreground: 0 0% 100%;
-    --brand-soft: 172 45% 92%;
-    --warn: 35 92% 33%;
+    --brand-soft: 222 88% 95%;
+    /* Tinted surface behind the search box and the sign-in example. */
+    --panel: 220 70% 97%;
+    --panel-border: 220 50% 90%;
+    --warn: 35 92% 31%;
     --warn-soft: 45 90% 92%;
     --danger: 0 70% 42%;
-    --danger-soft: 0 80% 95%;
+    --danger-soft: 0 80% 96%;
     --radius: 0.75rem;
     /* Graph node types: also told apart by shape and legend, never by colour alone. */
     --node-entity: 174 72% 28%;
@@ -30,31 +34,33 @@
     --node-place: 195 75% 36%;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 222 30% 8%;
-      --foreground: 40 20% 94%;
-      --surface: 222 24% 12%;
-      --border: 220 14% 24%;
-      --primary: 40 20% 94%;
-      --primary-foreground: 222 30% 8%;
-      --muted: 222 18% 16%;
-      --muted-foreground: 218 12% 70%;
-      --brand: 172 55% 52%;
-      --brand-foreground: 222 30% 8%;
-      --brand-soft: 174 40% 16%;
-      --warn: 42 90% 62%;
-      --warn-soft: 38 50% 16%;
-      --danger: 0 80% 68%;
-      --danger-soft: 0 40% 16%;
-      --node-entity: 172 55% 52%;
-      --node-brand: 32 90% 58%;
-      --node-category: 213 80% 66%;
-      --node-purpose: 340 75% 68%;
-      --node-ingredient: 120 45% 58%;
-      --node-model: 262 70% 72%;
-      --node-place: 195 75% 56%;
-    }
+  /* Set on <html> before the first paint; see lib/theme.ts. */
+  :root.dark {
+    color-scheme: dark;
+    --background: 222 15% 9%;
+    --foreground: 220 22% 94%;
+    --surface: 222 13% 13%;
+    --border: 221 12% 23%;
+    --primary: 220 22% 94%;
+    --primary-foreground: 222 15% 9%;
+    --muted: 222 12% 17%;
+    --muted-foreground: 219 13% 71%;
+    --brand: 219 92% 73%;
+    --brand-foreground: 224 45% 11%;
+    --brand-soft: 222 40% 19%;
+    --panel: 222 20% 13%;
+    --panel-border: 221 16% 21%;
+    --warn: 42 90% 62%;
+    --warn-soft: 38 50% 16%;
+    --danger: 0 80% 70%;
+    --danger-soft: 0 40% 16%;
+    --node-entity: 172 55% 52%;
+    --node-brand: 32 90% 58%;
+    --node-category: 213 80% 66%;
+    --node-purpose: 340 75% 68%;
+    --node-ingredient: 120 45% 58%;
+    --node-model: 262 70% 72%;
+    --node-place: 195 75% 56%;
   }
 
   * {
@@ -63,6 +69,27 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  /* The one orchestrated moment: the example relation draws itself once. */
+  @media (prefers-reduced-motion: no-preference) {
+    .trace-line {
+      transform-origin: top;
+      animation: trace-grow 400ms ease-out both;
+    }
+    .trace-step {
+      animation: trace-show 300ms ease-out both;
+    }
+  }
+  @keyframes trace-grow {
+    from {
+      transform: scaleY(0);
+    }
+  }
+  @keyframes trace-show {
+    from {
+      opacity: 0;
+    }
   }
 
   .graph-node {

@@ -87,6 +87,12 @@ def main() -> None:
     parser.add_argument("--collection", default=COLLECTION)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--write", action="store_true")
+    parser.add_argument(
+        "--extra-points",
+        type=int,
+        default=0,
+        help="points outside doc_texts.jsonl (images uploaded in /admin) in the collection",
+    )
     args = parser.parse_args()
 
     old_rows, new_rows = (
@@ -201,7 +207,7 @@ def main() -> None:
         if offset is None:
             break
     total = client.count(args.collection, exact=True).count
-    if bad or stamped != total or total != len(new_rows):
+    if bad or stamped != total or total != len(new_rows) + args.extra_points:
         raise SystemExit(f"read-back failed: {bad} changed points wrong, {stamped}/{total} stamped")
     manifest = {
         **index,

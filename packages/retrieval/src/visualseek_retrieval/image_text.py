@@ -1,4 +1,4 @@
-"""SigLIP2 text tower: encodes a query into the space of the ``img`` vectors.
+"""SigLIP2: encodes a query (text tower) into the space of the ``img`` vectors (image tower).
 
 Must be the same checkpoint as ``scripts/embed_images.py``; callers check the revision
 against ``img_manifest.json`` before searching.
@@ -46,5 +46,20 @@ class ImageTextEncoder:
         ).to(self.device)
         with torch.inference_mode():
             out = self._model.get_text_features(**inputs)
+            features = out.pooler_output if hasattr(out, "pooler_output") else out
+        return torch.nn.functional.normalize(features.float(), dim=-1).cpu().numpy()
+
+    def encode_images(self, images: list) -> np.ndarray:
+        """L2-normalised float32 vectors for PIL images, preprocessed as scripts/embed_images.py
+        does (first frame, RGB)."""
+        torch = self._torch
+        frames = []
+        for image in images:
+            image.seek(0)
+            frames.append(image.convert("RGB"))
+        inputs = self._processor(images=frames, return_tensors="pt")
+        pixels = inputs["pixel_values"].to(self.device, self._model.dtype)
+        with torch.inference_mode():
+            out = self._model.get_image_features(pixel_values=pixels)
             features = out.pooler_output if hasattr(out, "pooler_output") else out
         return torch.nn.functional.normalize(features.float(), dim=-1).cpu().numpy()

@@ -11,7 +11,8 @@ silver, not the reviewed graph of PLAN_PRODUCTS_V1.md section 4.1.
 The MADE_BY review (scripts/brand_review_server.py) is then applied: the last decision per
 entity keeps the edge (``reviewed = true``), removes it, or moves the product to another
 brand; eval/graph-review/brand_apply.json names the new brands and the targets that are not
-manufacturers. The decisions must have been made on this same silver graph.
+manufacturers. The decisions must have been made on this same silver graph. Brand edits made in
+/admin (graph/admin/changes.jsonl) are applied after it.
 Output: ``<out>/graph.json`` with a fingerprint over the sorted edge list.
 """
 
@@ -32,6 +33,7 @@ from visualseek_retrieval.text import normalize  # noqa: E402
 
 BRAND_DECISIONS = ROOT / "eval/graph-review/brand_decisions.jsonl"
 BRAND_APPLY = ROOT / "eval/graph-review/brand_apply.json"
+ADMIN_DIR = ROOT / "graph/admin"  # admin change log, applied last
 
 # Normalised JSON-LD "brand" values that are categories, generic drugs or noise, not brands.
 BRAND_STOP = {
@@ -184,6 +186,45 @@ def brand_surface_in_name(name: str, brand_key: str) -> str | None:
     return None
 
 
+def entity_record(eid: str, name: str, brand_key: str | None, brand_id: str | None) -> dict:
+    """A graph entity without aliases: core name, notes, model codes, model tail, Latin head."""
+    core = strip_parens(name)
+    words = WORD.findall(core)
+    codes = [word for word in words if is_code(word)]
+    tail = None
+    if brand_key:
+        # The model name after the brand ("Kraken", "MX Master 3") is a common way to ask.
+        idx = next(
+            (
+                i
+                for i in range(len(words))
+                if normalize(" ".join(words[i : i + len(brand_key.split())])) == brand_key
+            ),
+            None,
+        )
+        rest = words[idx + len(brand_key.split()) :] if idx is not None else []
+        if rest and (any(ch.isdigit() for ch in "".join(rest)) or rest[0][0].isupper()):
+            tail = " ".join(rest)
+    # Latin head of the name ("Kindle Paperwhite" in "Kindle Paperwhite đọc sách"): the
+    # leading run of capitalised or numbered words, when a Vietnamese descriptor follows.
+    head_len = 0
+    for word in words:
+        if not (word[0].isupper() or any(ch.isdigit() for ch in word)):
+            break
+        head_len += 1
+    head = " ".join(words[:head_len]) if 2 <= head_len < len(words) else None
+    return {
+        "id": eid,
+        "name": name,
+        "core": core,
+        "notes": parentheticals(name),
+        "brand_id": brand_id,
+        "codes": codes,
+        "model_tail": tail,
+        "latin_head": head,
+    }
+
+
 def build(entities: list[dict], assets: list[dict]) -> dict:
     lowercase_words = collections.Counter(
         word.lower()
@@ -266,39 +307,7 @@ def build(entities: list[dict], assets: list[dict]) -> dict:
                     "reviewed": False,
                 }
             )
-        words = WORD.findall(core)
-        codes = [word for word in words if is_code(word)]
-        tail = None
-        if brand_key:
-            # The model name after the brand ("Kraken", "MX Master 3") is a common way to ask.
-            idx = next(
-                i
-                for i in range(len(words))
-                if normalize(" ".join(words[i : i + len(brand_key.split())])) == brand_key
-            )
-            rest = words[idx + len(brand_key.split()) :]
-            if rest and (any(ch.isdigit() for ch in "".join(rest)) or rest[0][0].isupper()):
-                tail = " ".join(rest)
-        # Latin head of the name ("Kindle Paperwhite" in "Kindle Paperwhite đọc sách"): the
-        # leading run of capitalised or numbered words, when a Vietnamese descriptor follows.
-        head_len = 0
-        for word in words:
-            if not (word[0].isupper() or any(ch.isdigit() for ch in word)):
-                break
-            head_len += 1
-        head = " ".join(words[:head_len]) if 2 <= head_len < len(words) else None
-        out_entities.append(
-            {
-                "id": eid,
-                "name": name,
-                "core": core,
-                "notes": parentheticals(name),
-                "brand_id": brand_id,
-                "codes": codes,
-                "model_tail": tail,
-                "latin_head": head,
-            }
-        )
+        out_entities.append(entity_record(eid, name, brand_key, brand_id))
 
     # Dictionary aliases; codes and model tails count only when they name a single entity.
     alias_owners: dict[str, set[str]] = collections.defaultdict(set)
@@ -409,6 +418,108 @@ def apply_brand_review(graph: dict, decisions: list[dict], plan: dict) -> dict:
     return seal(graph)
 
 
+def canonical_members(corpus: Path) -> dict[str, list[str]]:
+    """canonical entity id -> graph entity ids merged into it (graph/evidence.jsonl packs)."""
+    path = corpus / "graph/evidence.jsonl"
+    if not path.exists():
+        return {}
+    rows = (json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line)
+    return {row["entity_id"]: row["members"] for row in rows}
+
+
+def add_admin_entities(graph: dict, rows: list[dict]) -> list[str]:
+    """Add the entities created by a CSV import in /admin (graph/admin/new_entities.jsonl) that
+    the graph does not have yet; returns their ids. The caller re-seals the graph.
+
+    Brand: the LLM's brand, else a JSON-LD brand of the source pages. An existing brand (by name
+    or alias) gets a MADE_BY edge; an unknown one only when the entity name spells it
+    capitalised, as for corpus brands (build()). Aliases: name and core name, plus model codes,
+    model tail and Latin head when no other entity or brand uses them."""
+    entities = {entity["id"]: entity for entity in graph["entities"]}
+    brands = {brand["id"]: brand for brand in graph["brands"]}
+    by_key: dict[str, str] = {}
+    for brand in brands.values():
+        for key in [normalize(brand["name"]), *brand.get("aliases", ())]:
+            by_key.setdefault(key, brand["id"])
+    taken = collections.Counter()
+    for entity in graph["entities"]:
+        taken.update(set(entity.get("aliases") or ()))
+    added = []
+    for row in rows:
+        eid, name = row["entity_id"], row["name"]
+        if eid in entities:
+            continue
+        enrich = row.get("enrich") or {}
+        pack_brands = [
+            s["text"] for s in (row.get("pack") or {}).get("snippets", ()) if s["kind"] == "brand"
+        ]
+        brand_id = brand_key = None
+        source = None
+        for origin, value in [
+            ("gemini", enrich.get("brand") or ""),
+            *(("jsonld", b) for b in pack_brands),
+        ]:
+            key = normalize(value)
+            if not key or key in BRAND_STOP:
+                continue
+            target = LINE_TO_BRAND.get(key, key)
+            if target in by_key:
+                brand_id, brand_key, source = by_key[target], key, origin
+                break
+            surface = brand_surface_in_name(name, key)
+            if surface:
+                brand_id = f"brand:{target.replace(' ', '-')}"
+                brands[brand_id] = {"id": brand_id, "name": surface, "aliases": [target]}
+                by_key[target] = brand_id
+                brand_key, source = key, origin
+                break
+        entity = entity_record(eid, name, brand_key, brand_id)
+        aliases = {normalize(entity["name"]), normalize(entity["core"])}
+        extra = [entity[key] for key in ("model_tail", "latin_head") if entity[key]]
+        for alias in entity["codes"] + extra:
+            key = normalize(alias)
+            if len(key.replace(" ", "")) >= 3 and not taken[key] and key not in by_key:
+                aliases.add(key)
+        entity["aliases"] = sorted(a for a in aliases if a)
+        taken.update(entity["aliases"])
+        graph["entities"].append(entity)
+        entities[eid] = entity
+        if brand_id:
+            graph["edges"].append(
+                {
+                    "src": eid,
+                    "rel": "MADE_BY",
+                    "dst": brand_id,
+                    "source": source,
+                    "confidence": 0.8 if source == "gemini" else 0.7,
+                    "reviewed": False,
+                }
+            )
+        added.append(eid)
+    if added:
+        used = {edge["dst"] for edge in graph["edges"] if edge["rel"] == "MADE_BY"}
+        graph["brands"] = sorted((b for i, b in brands.items() if i in used), key=lambda b: b["id"])
+        graph["entities"].sort(key=lambda e: e["id"])
+    return added
+
+
+def admin_entity_rows() -> list[dict]:
+    from visualseek_retrieval.admin_overlay import load_new_entities
+
+    return list(load_new_entities(ADMIN_DIR).values())
+
+
+def apply_admin_brands(graph: dict, corpus: Path) -> list[str]:
+    """Brand edits made in /admin (graph/admin/changes.jsonl), after the MADE_BY review."""
+    from visualseek_retrieval.admin_overlay import apply_made_by, load_state
+
+    changed = apply_made_by(graph, load_state(ADMIN_DIR), canonical_members(corpus))
+    if changed:
+        graph["admin_review"] = {"made_by_changed": len(changed)}
+    seal(graph)
+    return changed
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--corpus", type=Path, default=ROOT / "data/processed/products-v1")
@@ -434,6 +545,10 @@ def main() -> None:
         ]
         plan = json.loads(BRAND_APPLY.read_text(encoding="utf-8")) if BRAND_APPLY.exists() else {}
         apply_brand_review(graph, decisions, plan)
+    if not args.silver:
+        if added := add_admin_entities(graph, admin_entity_rows()):
+            graph["admin_entities"] = len(added)
+        apply_admin_brands(graph, args.corpus)
     corpus_lock = json.loads((ROOT / "locks/products-v1-corpus.json").read_text(encoding="utf-8"))
     graph["corpus_fingerprint"] = corpus_lock["corpus_fingerprint"]
     args.out.mkdir(parents=True, exist_ok=True)

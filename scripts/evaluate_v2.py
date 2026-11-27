@@ -148,7 +148,10 @@ def run(args: argparse.Namespace) -> None:
     url = args.api.rstrip("/") + "/api/v1/search/text"
     client = httpx.Client(timeout=args.timeout)
 
-    health = client.get(args.api.rstrip("/") + "/api/v1/search/info").json()
+    info = client.get(args.api.rstrip("/") + "/api/v1/search/info")
+    if info.status_code == 401:
+        raise SystemExit("The API requires login. Restart it with REQUIRE_LOGIN=false.")
+    health = info.json()
     cold_start_ms = None
     for index, item in enumerate(warmup):
         tick = time.perf_counter()

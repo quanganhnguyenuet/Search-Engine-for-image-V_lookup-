@@ -57,7 +57,7 @@ export function ImageDetail({ data, index, onIndex, onClose }: Props) {
       {hit && index !== null && (
         <div className="flex max-h-[94dvh] flex-col">
           <header className="flex items-center justify-between gap-3 border-b px-4 py-3">
-            <p className="font-mono text-xs text-muted-foreground">
+            <p className="text-sm tabular-nums text-muted-foreground">
               Ảnh {index + 1} / {total}
             </p>
             <div className="flex items-center gap-1.5">
@@ -97,10 +97,10 @@ function DetailBody({ data, hit, rank }: { data: SearchResponse; hit: SearchHit;
     <>
       <div>
         <h2 id="detail-title" className="text-xl font-semibold leading-snug">
-          {hit.entity_names.join(" · ") || "Ảnh không gắn entity"}
+          {hit.entity_names.join(" · ") || "Ảnh chưa gắn sản phẩm"}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Hạng {rank} · {hit.domain ?? "không rõ nguồn"}
+          Hạng {rank} · {hit.domain?.replace(/^www\./, "") ?? "không rõ nguồn"}
           {hit.page_url && (
             <>
               {" · "}
@@ -110,20 +110,37 @@ function DetailBody({ data, hit, rank }: { data: SearchResponse; hit: SearchHit;
                 rel="noopener noreferrer"
                 className="rounded text-brand underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
               >
-                Mở trang nguồn ↗
+                Mở trang nguồn
               </a>
             </>
           )}
         </p>
       </div>
 
-      <Section title="Câu truy vấn">
+      <Section title="Mô tả sản phẩm">
+        <Description text={hit.description} fallbackTitle={hit.page_title} />
+        {(hit.categories?.length ?? 0) > 0 && (
+          <ul className="flex flex-wrap gap-1.5" aria-label="Loại hàng">
+            {hit.categories!.map((category) => (
+              <li key={category} className="rounded-md border bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                {category}
+              </li>
+            ))}
+          </ul>
+        )}
+      </Section>
+
+      <Section title="Sản phẩm này liên quan tới gì">
+        <FocusGraph hit={hit} />
+      </Section>
+
+      <Section title="Câu bạn đã tìm">
         <p className="text-base font-medium">“{data.query}”</p>
         <PlanChips data={data} />
         <p className="text-xs text-muted-foreground">{STATUS[trace.status]}</p>
       </Section>
 
-      <Section title="Độ tương đồng cosine">
+      <Section title="Mức độ khớp với câu tìm">
         {hit.similarity ? (
           <>
             <Meter label="Câu truy vấn ↔ mô tả" model="bge-m3" value={hit.similarity.text} max={1} />
@@ -140,7 +157,8 @@ function DetailBody({ data, hit, rank }: { data: SearchResponse; hit: SearchHit;
                 Cosine nằm trong khoảng −1 đến 1. Hai vector đã chuẩn hoá L2 nên tích vô hướng chính là cosine.
                 Hai số đo bằng hai mô hình khác nhau, không so trực tiếp được: văn bản–văn bản thường 0,4–0,7,
                 văn bản–ảnh thường 0,1–0,3. Dùng chúng để so các ảnh với nhau trong cùng một câu. Thứ hạng cuối
-                không chỉ theo cosine: nó hợp nhất nhiều nhánh rồi cộng điều chỉnh graph (bảng dưới).
+                không chỉ theo cosine: nó hợp nhất nhiều nhánh rồi cộng điều chỉnh theo đồ thị (bảng dưới). Số “câu
+                truy vấn ↔ mô tả” được đo trên đoạn mô tả sản phẩm ở phía trên.
               </p>
             </details>
           </>
@@ -151,23 +169,6 @@ function DetailBody({ data, hit, rank }: { data: SearchResponse; hit: SearchHit;
         )}
         <ScoreBreakdown hit={hit} channels={trace.channels} />
       </Section>
-
-      <Section title="Mô tả">
-        <Description text={hit.description} fallbackTitle={hit.page_title} />
-        {(hit.categories?.length ?? 0) > 0 && (
-          <ul className="flex flex-wrap gap-1.5" aria-label="Loại hàng">
-            {hit.categories!.map((category) => (
-              <li key={category} className="rounded-md border bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
-                {category}
-              </li>
-            ))}
-          </ul>
-        )}
-      </Section>
-
-      <Section title="Quan hệ của entity trong graph">
-        <FocusGraph hit={hit} />
-      </Section>
     </>
   );
 }
@@ -175,7 +176,7 @@ function DetailBody({ data, hit, rank }: { data: SearchResponse; hit: SearchHit;
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="space-y-3" aria-label={title}>
-      <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">{title}</h3>
+      <h3 className="text-base font-semibold">{title}</h3>
       {children}
     </section>
   );
@@ -227,7 +228,7 @@ function ScoreBreakdown({ hit, channels }: { hit: SearchHit; channels: SearchRes
         Điểm xếp hạng <span className="font-mono tabular-nums">{hit.score.toFixed(4)}</span>
       </summary>
       <p className="mt-2 text-xs text-muted-foreground">
-        Không phải cosine: là điểm hợp nhất các nhánh (RRF hoặc trộn văn bản và ảnh) cộng điều chỉnh graph và
+        Không phải cosine: là điểm hợp nhất các nhánh (RRF hoặc trộn văn bản và ảnh) cộng điều chỉnh theo đồ thị và
         loại hàng. Nhánh dense và sparse hiện điểm gốc trong Qdrant kèm hạng trong danh sách ứng viên.
       </p>
       <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-xs">
@@ -285,9 +286,6 @@ function Description({ text, fallbackTitle }: { text?: string | null; fallbackTi
           {expanded ? "Thu gọn" : "Xem thêm"}
         </button>
       )}
-      <p className="text-xs text-muted-foreground">
-        Đây là đoạn văn bản được embed bằng bge-m3; cosine “câu truy vấn ↔ mô tả” đo trên chính đoạn này.
-      </p>
     </div>
   );
 }
@@ -297,7 +295,7 @@ function FocusGraph({ hit }: { hit: SearchHit }) {
   const thumb = `${API_URL}${hit.image_url}`;
   const thumbs = Object.fromEntries(hit.entity_ids.map((id) => [id, thumb]));
   if (hit.entity_ids.length === 0) {
-    return <p className="text-sm text-muted-foreground">Ảnh này chưa gắn với entity nào.</p>;
+    return <p className="text-sm text-muted-foreground">Ảnh này chưa gắn với sản phẩm nào.</p>;
   }
   if (state.status === "error") {
     return (
@@ -312,8 +310,8 @@ function FocusGraph({ hit }: { hit: SearchHit }) {
   return (
     <>
       <p className="max-w-[70ch] text-xs text-muted-foreground">
-        Entity của ảnh (có ảnh trong nút) với hãng, loại hàng, công dụng, xuất xứ… của nó. Nút nét đứt là vài sản phẩm
-        khác dùng chung giá trị, thêm để có ngữ cảnh.
+        Sản phẩm trong ảnh (nút có hình) cùng hãng, loại hàng, công dụng, xuất xứ của nó. Nút nét đứt là vài sản
+        phẩm khác có chung thông tin.
       </p>
       <RelationGraph graph={state.data} thumbs={thumbs} layout="stacked" />
     </>

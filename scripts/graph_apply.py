@@ -77,6 +77,13 @@ def load_enrichment() -> dict[str, dict]:
     for row in read_jsonl(ENRICH_DECISIONS):
         eid = row["entity_id"]
         merged[eid] = {**merged.get(eid, {}), **row, "enrich_source": "human"}
+    from visualseek_retrieval.admin_overlay import enrich_override, load_state
+
+    # Admin edits replace single fields; the other fields keep their source and their checks.
+    for eid, fields in load_state(ROOT / "graph/admin").items():
+        if edited := enrich_override(fields):
+            base = merged.get(eid, {"enrich_source": "free"})
+            merged[eid] = {**base, **edited, "admin_fields": sorted(edited)}
     return merged
 
 
@@ -84,7 +91,10 @@ def clean_enrichment(enrich: dict, l1: str = "") -> dict:
     """Fold wording variants so the same value is one graph node: ingredient spellings
     ('Famotidine' = 'Famotidin'), canonical purpose buckets next to the LLM's own phrases, and
     canonical materials (the query-time filter compares them with '=='). ``l1`` is the entity's
-    top-level category: a province is not an origin for a drug or a machine."""
+    top-level category: a province is not an origin for a drug or a machine.
+
+    Fields named in ``enrich["admin_fields"]`` were typed by an admin: they are folded the same
+    way but not capped, not gated by category, and kept when no canonical form is known."""
     from visualseek_retrieval.enrichment import (
         canonical_fits_model,
         canonical_material,
@@ -96,6 +106,11 @@ def clean_enrichment(enrich: dict, l1: str = "") -> dict:
     def strings(key: str) -> list[str]:
         return [v.strip() for v in (enrich.get(key) or []) if isinstance(v, str) and v.strip()]
 
+    trusted = set(enrich.get("admin_fields") or ())
+
+    def cap(key: str, values: list, size: int) -> list:
+        return values if key in trusted else values[:size]
+
     treats = strings("treats")
     treats = list(dict.fromkeys([*treats, *purpose_buckets(treats)]))
     by_slug: dict[str, str] = {}
@@ -106,16 +121,23 @@ def clean_enrichment(enrich: dict, l1: str = "") -> dict:
         changed = slug_id("ingredient", folded) != slug_id("ingredient", item)
         canon = folded if changed else item
         by_slug.setdefault(slug_id("ingredient", canon), canon)
-    fits = list(dict.fromkeys(cm for f in strings("fits") if (cm := canonical_fits_model(f))))
+    fits = list(
+        dict.fromkeys(
+            cm
+            for f in strings("fits")
+            if (cm := canonical_fits_model(f) or (f if "fits" in trusted else None))
+        )
+    )
     origin = (enrich.get("origin") or "").strip()
     return {
-        "treats": treats[:6],
-        "ingredients": [v for k, v in by_slug.items() if k][:4],
-        "fits": fits[:4],
-        "origin": origin if origin_allowed(origin, l1) else "",
+        "treats": cap("treats", treats, 6),
+        "ingredients": cap("ingredients", [v for k, v in by_slug.items() if k], 4),
+        "fits": cap("fits", fits, 4),
+        "origin": origin if "origin" in trusted or origin_allowed(origin, l1) else "",
         "form_factor": (enrich.get("form_factor") or "").strip(),
         "target_audience": (enrich.get("target_audience") or "").strip(),
-        "material": canonical_material((enrich.get("material") or "").strip()),
+        "material": canonical_material((enrich.get("material") or "").strip())
+        or ((enrich.get("material") or "").strip() if "material" in trusted else ""),
     }
 
 
@@ -151,7 +173,90 @@ def load_labels() -> dict[str, dict]:
             "market_tier": row["market_tier"],
             "source": "human",
         }
+    from visualseek_retrieval.admin_overlay import label_override, load_state
+
+    for entity_id, fields in load_state(ROOT / "graph/admin").items():
+        edited = label_override(fields)
+        base = best.get(entity_id)
+        if edited and (base or "category" in edited):
+            best[entity_id] = {**(base or {}), "entity_id": entity_id, **edited}
     return best
+
+
+def imported_label(row: dict) -> dict:
+    """The classify result of an entity created by a CSV import, as a load_labels() row."""
+    label = row["label"]
+    return {
+        **label,
+        "entity_id": row["entity_id"],
+        "source": source_of(label.get("model", "")),
+        "imported": True,
+    }
+
+
+def category_entry(
+    name: str, label: dict, enrich: dict, brand: str | None, names: dict, entity_id: str
+) -> tuple[dict, list[dict], list[tuple[str, str, str]]]:
+    """(entity_categories entry, its IS_A and relation edges, (prefix, node id, label) of the
+    relation nodes) for one canonical entity."""
+    category = label["category"]
+    l2_name, l1_id = names[category]
+    clean = clean_enrichment(enrich, l1_id)
+    treats, ing_list, fits = clean["treats"], clean["ingredients"], clean["fits"]
+    origin, material = clean["origin"], clean["material"]
+    form_factor, target_audience = clean["form_factor"], clean["target_audience"]
+    enrich_src = enrich.get("enrich_source", "free")
+    admin_fields = set(enrich.get("admin_fields") or ())
+
+    def src_of(field: str) -> str:
+        return "admin" if field in admin_fields else enrich_src
+
+    entry = {
+        "name": name,
+        "category": category,
+        "category_name": l2_name,
+        "category_l1": l1_id,
+        "product_type": label["product_type"],
+        "market_tier": label["market_tier"] if l1_id == "fashion" else "not_applicable",
+        "brand_id": brand,
+        "source": label["source"],
+        "model": label.get("model"),
+        "basis": label.get("basis"),
+        "confidence": label.get("confidence"),
+        # An imported entity stays in the review queue until a person checks its label.
+        "needs_review": label["source"] != "human"
+        and (
+            label.get("basis") == "knowledge"
+            or label["source"] != "gemini"
+            or bool(label.get("imported"))
+        ),
+    }
+    if label.get("imported"):
+        entry["imported"] = True
+    for key, value in (
+        ("treats", treats),
+        ("ingredients", ing_list),
+        ("fits", fits),
+        ("origin", origin),
+        ("form_factor", form_factor),
+        ("target_audience", target_audience),
+        ("material", material),
+    ):
+        if value:
+            entry[key] = value
+    edges = [{"src": entity_id, "rel": "IS_A", "dst": f"category:{category}"}]
+    nodes: list[tuple[str, str, str]] = []
+    for field, rel, prefix, values in (
+        ("treats", "TREATS", "purpose", treats),
+        ("ingredients", "HAS_INGREDIENT", "ingredient", ing_list),
+        ("fits", "FITS", "model", fits),
+        ("origin", "ORIGIN", "place", [origin] if origin else []),
+    ):
+        for item in values:
+            if nid := slug_id(prefix, item):
+                nodes.append((prefix, nid, item))
+                edges.append({"src": entity_id, "rel": rel, "dst": nid, "source": src_of(field)})
+    return entry, edges, nodes
 
 
 def merge(args: argparse.Namespace) -> None:
@@ -174,66 +279,48 @@ def merge(args: argparse.Namespace) -> None:
     ingredients: dict[str, str] = {}
     models: dict[str, str] = {}
     places: dict[str, str] = {}
+    from visualseek_retrieval.admin_overlay import label_override, load_new_entities, load_state
+
+    # Entities created by a CSV import in /admin: their own evidence pack and LLM results, under
+    # any human label or admin edit made after their release.
+    state = load_state(ROOT / "graph/admin")
+    for row in load_new_entities(ROOT / "graph/admin").values():
+        eid = row["entity_id"]
+        if eid in packs:
+            continue
+        packs[eid] = row["pack"]
+        if row.get("label") and labels.get(eid, {}).get("source") != "human":
+            labels[eid] = {
+                **imported_label(row),
+                **label_override(state.get(eid, {})),
+            }
+        base = enrichment.get(eid) or {}
+        if row.get("enrich") and base.get("enrich_source", "free") == "free":
+            admin_fields = list(base.get("admin_fields") or ())
+            enrichment[eid] = {
+                **row["enrich"],
+                "enrich_source": source_of(row["enrich"].get("model", "")),
+                **{field: base[field] for field in admin_fields},
+                "admin_fields": admin_fields,
+            }
+
+    tables = {"purpose": purposes, "ingredient": ingredients, "model": models, "place": places}
     for entity_id, label in sorted(labels.items()):
         if entity_id not in packs:
             continue
-        category = label["category"]
-        l2_name, l1_id = names[category]
         brand = next((brand_of[m] for m in packs[entity_id]["members"] if m in brand_of), None)
-        enrich = enrichment.get(entity_id) or {}
-        clean = clean_enrichment(enrich, l1_id)
-        treats, ing_list, fits = clean["treats"], clean["ingredients"], clean["fits"]
-        origin, material = clean["origin"], clean["material"]
-        form_factor, target_audience = clean["form_factor"], clean["target_audience"]
-        enrich_src = enrich.get("enrich_source", "free")
-        entry = {
-            "name": packs[entity_id]["name"],
-            "category": category,
-            "category_name": l2_name,
-            "category_l1": l1_id,
-            "product_type": label["product_type"],
-            "market_tier": label["market_tier"] if l1_id == "fashion" else "not_applicable",
-            "brand_id": brand,
-            "source": label["source"],
-            "model": label.get("model"),
-            "basis": label.get("basis"),
-            "confidence": label.get("confidence"),
-            "needs_review": label["source"] != "human"
-            and (label.get("basis") == "knowledge" or label["source"] != "gemini"),
-        }
-        if treats:
-            entry["treats"] = treats
-        if ing_list:
-            entry["ingredients"] = ing_list
-        if fits:
-            entry["fits"] = fits
-        if origin:
-            entry["origin"] = origin
-        if form_factor:
-            entry["form_factor"] = form_factor
-        if target_audience:
-            entry["target_audience"] = target_audience
-        if material:
-            entry["material"] = material
+        entry, entity_edges, nodes = category_entry(
+            packs[entity_id]["name"],
+            label,
+            enrichment.get(entity_id) or {},
+            brand,
+            names,
+            entity_id,
+        )
         entities[entity_id] = entry
-        edges.append({"src": entity_id, "rel": "IS_A", "dst": f"category:{category}"})
-        for item in treats:
-            if nid := slug_id("purpose", item):
-                purposes.setdefault(nid, item)
-                edges.append({"src": entity_id, "rel": "TREATS", "dst": nid, "source": enrich_src})
-        for item in ing_list:
-            if nid := slug_id("ingredient", item):
-                ingredients.setdefault(nid, item)
-                edges.append(
-                    {"src": entity_id, "rel": "HAS_INGREDIENT", "dst": nid, "source": enrich_src}
-                )
-        for item in fits:
-            if nid := slug_id("model", item):
-                models.setdefault(nid, item)
-                edges.append({"src": entity_id, "rel": "FITS", "dst": nid, "source": enrich_src})
-        if origin and (nid := slug_id("place", origin)):
-            places.setdefault(nid, origin)
-            edges.append({"src": entity_id, "rel": "ORIGIN", "dst": nid, "source": enrich_src})
+        edges += entity_edges
+        for prefix, nid, value in nodes:
+            tables[prefix].setdefault(nid, value)
 
     # Brand tiers: a proposal from the entity-level votes; a reviewed entry is kept as is.
     existing = (
@@ -322,18 +409,21 @@ def load_env() -> None:
             os.environ.setdefault(key.strip(), value.strip().strip('"'))
 
 
-def expected_payloads() -> tuple[dict, dict[str, dict], list[dict]]:
+def expected_payloads(
+    categories_path: Path = CATEGORIES, artifacts: Path = ARTIFACTS
+) -> tuple[dict, dict[str, dict], list[dict]]:
     """point id -> payload that Qdrant must hold for the current entity_categories.json."""
     from visualseek_retrieval.qdrant_store import point_id
 
-    categories = json.loads(CATEGORIES.read_text(encoding="utf-8"))
+    categories = json.loads(categories_path.read_text(encoding="utf-8"))
     packs = {p["entity_id"]: p for p in read_jsonl(GRAPH_DIR / "evidence.jsonl")}
     by_member = {
         member: entity
         for entity_id, entity in categories["entities"].items()
-        for member in packs[entity_id]["members"]
+        # Entities created by a CSV import have no corpus evidence pack: they are their own member.
+        for member in (packs.get(entity_id) or {}).get("members") or [entity_id]
     }
-    rows = read_jsonl(ARTIFACTS / "doc_texts.jsonl")
+    rows = read_jsonl(artifacts / "doc_texts.jsonl")
     out = {}
     for row in rows:
         found = [by_member[m] for m in row["entity_ids"] if m in by_member]

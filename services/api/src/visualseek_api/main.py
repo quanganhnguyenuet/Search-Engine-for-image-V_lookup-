@@ -19,10 +19,33 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     configure_logging(settings.log_level)
     logger = structlog.get_logger(__name__)
     application.state.search = None
+    application.state.admin = None
     if settings.search_enabled:
+        from visualseek_api.application.admin import AdminService
         from visualseek_api.application.search import SearchService
 
-        application.state.search = SearchService.load(settings)
+        admin = AdminService(settings)
+        search = SearchService.load(settings)
+        admin.prepare(search)
+
+        def reload() -> None:
+            """After an admin release: load the new artifacts beside the running service, then
+            swap; requests in flight finish on the old one."""
+            fresh = SearchService.load(settings, reuse=application.state.search)
+            admin.prepare(fresh)
+            application.state.search = fresh
+            logger.info("search_reloaded", graph_fingerprint=fresh.info["graph_fingerprint"])
+
+        admin.on_reload = reload
+        application.state.search = search
+        application.state.admin = admin
+        # CSV imports run on the current service (a release swaps it); unfinished ones resume.
+        admin.imports.get_service = lambda: application.state.search
+        admin.imports.resume()
+    if not settings.require_login:
+        logger.warning("login_not_required", detail="search is open to anyone who can reach it")
+    elif not settings.supabase_url:
+        logger.warning("auth_unconfigured", detail="set SUPABASE_URL; search returns 503")
     logger.info("application_started", environment=settings.app_env)
     yield
     logger.info("application_stopped")
@@ -39,7 +62,7 @@ def create_app() -> FastAPI:
     application.add_middleware(
         CORSMiddleware,
         allow_origins=[o.strip() for o in get_settings().cors_origins.split(",") if o.strip()],
-        allow_methods=["GET", "POST"],
+        allow_methods=["GET", "POST", "DELETE"],
         allow_headers=["*"],
     )
     register_exception_handlers(application)

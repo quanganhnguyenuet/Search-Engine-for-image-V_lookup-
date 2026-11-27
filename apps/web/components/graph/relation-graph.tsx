@@ -36,6 +36,7 @@ import {
   REL_TEXT,
   type Subgraph,
 } from "@/lib/graph";
+import { SOURCE_LABEL } from "@/lib/admin";
 import { cn } from "@/lib/utils";
 
 type SimNode = GraphNode & SimulationNodeDatum;
@@ -98,7 +99,13 @@ export type RelationGraphProps = {
   /** "side": node panel beside the graph on wide screens; "stacked": always below it. */
   layout?: "side" | "stacked";
   className?: string;
+  /** A product's relations (admin edit page), not the graph of a search query. */
+  preview?: boolean;
 };
+
+const CHANGE_COLOR = { added: "brand", removed: "danger" } as const;
+const CHANGE_SIGN = { added: "+", removed: "−" } as const;
+const CHANGE_TEXT = { added: "sẽ thêm", removed: "sẽ bỏ" } as const;
 
 export function RelationGraph({
   graph,
@@ -106,6 +113,7 @@ export function RelationGraph({
   imageCounts = {},
   layout: arrangement = "side",
   className,
+  preview = false,
 }: RelationGraphProps) {
   const uid = useId().replace(/:/g, "");
   const svgRef = useRef<SVGSVGElement>(null);
@@ -292,6 +300,11 @@ export function RelationGraph({
               <marker id={`${uid}-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                 <path d="M0,0 L10,5 L0,10 z" fill="hsl(var(--muted-foreground))" />
               </marker>
+              {(["added", "removed"] as const).map((change) => (
+                <marker key={change} id={`${uid}-arrow-${change}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill={`hsl(var(--${CHANGE_COLOR[change]}))`} />
+                </marker>
+              ))}
               {layout.nodes
                 .filter((n) => thumbs[n.id])
                 .map((n) => (
@@ -305,7 +318,8 @@ export function RelationGraph({
               {layout.links.map((link) => {
                 const { source, target, edge } = link as { source: SimNode; target: SimNode; edge: GraphEdge };
                 const active = !focusId || (neighbours.has(source.id) && neighbours.has(target.id));
-                const label = showAllEdgeLabels || (focusId && (source.id === focusId || target.id === focusId));
+                const label = showAllEdgeLabels || edge.change || (focusId && (source.id === focusId || target.id === focusId));
+                const stroke = edge.change ? `hsl(var(--${CHANGE_COLOR[edge.change]}))` : "hsl(var(--muted-foreground))";
                 const dx = (target.x ?? 0) - (source.x ?? 0);
                 const dy = (target.y ?? 0) - (source.y ?? 0);
                 const length = Math.hypot(dx, dy) || 1;
@@ -319,11 +333,11 @@ export function RelationGraph({
                       y1={source.y}
                       x2={ex}
                       y2={ey}
-                      stroke="hsl(var(--muted-foreground))"
-                      strokeOpacity={0.7}
-                      strokeWidth={1.4}
-                      strokeDasharray={edge.reviewed === false ? "4 3" : undefined}
-                      markerEnd={`url(#${uid}-arrow)`}
+                      stroke={stroke}
+                      strokeOpacity={edge.change ? 1 : 0.7}
+                      strokeWidth={edge.change ? 3 : 1.4}
+                      strokeDasharray={edge.change === "removed" ? "7 5" : !edge.change && edge.reviewed === false ? "4 3" : undefined}
+                      markerEnd={`url(#${uid}-arrow${edge.change ? `-${edge.change}` : ""})`}
                     />
                     {label && (
                       <text
@@ -337,6 +351,7 @@ export function RelationGraph({
                         strokeWidth={3}
                         paintOrder="stroke"
                       >
+                        {edge.change ? `${CHANGE_SIGN[edge.change]} ` : ""}
                         {REL_SHORT[edge.rel] ?? edge.rel}
                       </text>
                     )}
@@ -358,11 +373,11 @@ export function RelationGraph({
                     key={node.id}
                     className="graph-node"
                     transform={`translate(${node.x ?? 0} ${node.y ?? 0})`}
-                    opacity={dim ? 0.2 : 1}
+                    opacity={dim ? 0.2 : node.change === "removed" ? 0.55 : 1}
                     tabIndex={0}
                     role="button"
                     aria-pressed={isSelected}
-                    aria-label={`${NODE_LABEL[node.type]}: ${node.label}${node.role === "origin" ? " (thực thể gốc của câu)" : ""}`}
+                    aria-label={`${NODE_LABEL[node.type]}: ${node.label}${node.role === "origin" && !preview ? " (thực thể gốc của câu)" : ""}${node.change ? ` (${CHANGE_TEXT[node.change]})` : ""}`}
                     onKeyDown={(event) => onNodeKey(event, node.id)}
                     onPointerDown={(event) => {
                       event.stopPropagation();
@@ -381,6 +396,14 @@ export function RelationGraph({
                     )}
                     {node.role === "origin" && (
                       <circle r={r + 4} fill="none" stroke="hsl(var(--foreground))" strokeWidth={1.5} />
+                    )}
+                    {node.change && (
+                      <>
+                        <circle r={r + 7} fill="none" stroke={`hsl(var(--${CHANGE_COLOR[node.change]}))`} strokeWidth={3} strokeDasharray={node.change === "removed" ? "6 4" : undefined} />
+                        <text y={-r - 12} textAnchor="middle" fontSize={10} fontWeight={700} fill={`hsl(var(--${CHANGE_COLOR[node.change]}))`} stroke="hsl(var(--surface))" strokeWidth={3} paintOrder="stroke">
+                          {node.change === "added" ? "THÊM" : "BỎ"}
+                        </text>
+                      </>
                     )}
                     {shape === "circle" && (
                       <circle
@@ -424,7 +447,7 @@ export function RelationGraph({
                     >
                       {shorten(node.label)}
                     </text>
-                    {node.role === "origin" && (
+                    {node.role === "origin" && !preview && (
                       <text y={-r - 9} textAnchor="middle" fontSize={9} className="fill-muted-foreground font-mono" stroke="hsl(var(--surface))" strokeWidth={3} paintOrder="stroke">
                         GỐC
                       </text>
@@ -455,7 +478,17 @@ export function RelationGraph({
               {NODE_LABEL[type]}
             </span>
           ))}
-          <span>Nét đứt: cạnh chưa duyệt hoặc sản phẩm ngữ cảnh</span>
+          {layout.links.some((l) => l.edge.change) && (
+            <>
+              <span className="inline-flex items-center gap-1 font-medium text-brand">
+                <span aria-hidden="true" className="inline-block h-0.5 w-5 bg-brand" /> sẽ thêm
+              </span>
+              <span className="inline-flex items-center gap-1 font-medium text-danger">
+                <span aria-hidden="true" className="inline-block w-5 border-t-2 border-dashed border-danger" /> sẽ bỏ
+              </span>
+            </>
+          )}
+          <span>Nét đứt mảnh: quan hệ chưa duyệt</span>
           <span>Kéo nút để di chuyển · kéo nền để dịch · Ctrl + cuộn để zoom</span>
         </div>
         {graph.truncated && (
@@ -470,6 +503,7 @@ export function RelationGraph({
               return (
                 <li key={edge.id}>
                   <strong>{source.label}</strong> {REL_TEXT[edge.rel] ?? edge.rel} <strong>{target.label}</strong>
+                  {edge.change && ` (${CHANGE_TEXT[edge.change]})`}
                 </li>
               );
             })}
@@ -535,8 +569,8 @@ function NodePanel({
 
       <p className="text-xs text-muted-foreground">
         {node.type === "entity"
-          ? `${node.degree} quan hệ trong graph`
-          : `Gắn với ${node.degree} sản phẩm trong graph${shown < node.degree ? `, đồ thị chỉ vẽ ${shown}` : ""}`}
+          ? `${node.degree} quan hệ trong đồ thị`
+          : `Gắn với ${node.degree} sản phẩm trong đồ thị${shown < node.degree ? `, đồ thị chỉ vẽ ${shown}` : ""}`}
       </p>
 
       <ul className="max-h-64 space-y-2 overflow-auto text-xs">
@@ -547,7 +581,7 @@ function NodePanel({
             <li key={edge.id} className="space-y-0.5 border-t pt-2 first:border-t-0 first:pt-0">
               <p>
                 <span className="text-muted-foreground">
-                  {outgoing ? REL_TEXT[edge.rel] ?? edge.rel : `${REL_SHORT[edge.rel] ?? edge.rel} từ`}
+                  {outgoing ? REL_TEXT[edge.rel] ?? edge.rel : `${REL_SHORT[edge.rel] ?? edge.rel} của`}
                 </span>{" "}
                 <button
                   type="button"
@@ -558,8 +592,8 @@ function NodePanel({
                 </button>
               </p>
               <p className="font-mono text-[11px] text-muted-foreground">
-                {edge.rel}
-                {edge.origin && ` · ${edge.origin}`}
+                {edge.change ? CHANGE_TEXT[edge.change] : "đang chạy"}
+                {edge.origin && ` · nguồn ${SOURCE_LABEL[edge.origin] ?? edge.origin}`}
                 {edge.confidence !== null && ` · ${edge.confidence.toFixed(2)}`}
                 {edge.reviewed !== null && ` · ${edge.reviewed ? "đã duyệt" : "chưa duyệt"}`}
               </p>

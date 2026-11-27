@@ -2,21 +2,21 @@ import { relationLabel } from "@/lib/search";
 import type { SearchResponse, SearchScores, SearchTrace, TraceEdge } from "@/lib/search";
 
 export const STATUS: Record<SearchTrace["status"], string> = {
-  expanded: "Đã mở rộng qua graph",
-  no_target: "Không còn entity đích",
-  no_edge: "Không tìm thấy cạnh cho entity gốc",
-  no_origin: "Chưa xác định được entity gốc",
+  expanded: "Đã mở rộng qua đồ thị",
+  no_target: "Không còn sản phẩm đích",
+  no_edge: "Không tìm thấy quan hệ của sản phẩm gốc",
+  no_origin: "Chưa xác định được sản phẩm gốc",
   unsupported_relation: "Quan hệ chưa hỗ trợ, chỉ tìm theo nội dung",
   category: "Tìm theo nội dung, ưu tiên loại hàng",
   content: "Tìm theo nội dung",
-  clarification: "Cần xác định entity",
+  clarification: "Cần xác định sản phẩm",
   out_of_scope: "Ngoài phạm vi dữ liệu",
 };
 
 const NEGATION = {
-  applied: "đã loại entity gốc khỏi kết quả",
-  no_targets: "bị bỏ qua: không có tập đích để loại, entity gốc vẫn được tìm và cộng điểm",
-  no_origin: "bị bỏ qua: không xác định được entity cần loại",
+  applied: "đã loại sản phẩm gốc khỏi kết quả",
+  no_targets: "bị bỏ qua: không có tập đích để loại, sản phẩm gốc vẫn được tìm và cộng điểm",
+  no_origin: "bị bỏ qua: không xác định được sản phẩm cần loại",
   not_searched: "bị bỏ qua: câu không được tìm",
 } as const;
 
@@ -31,13 +31,13 @@ const TIER_IGNORED = {
   no_fashion_category: "bỏ qua: chưa nhận ra loại hàng thời trang",
 } as const;
 
-const SOURCE = { lexicon: "từ cụm từ", knn: "từ entity gần nhất", mixed: "theo từng vế" } as const;
+const SOURCE = { lexicon: "từ cụm từ", knn: "từ sản phẩm gần nhất", mixed: "theo từng vế" } as const;
 
 export const CHANNELS = [
   ["dense", "Dense"],
   ["sparse", "Sparse"],
   ["graph_prefetch", "Dense theo tập đích"],
-  ["graph", "Điều chỉnh graph"],
+  ["graph", "Điều chỉnh theo đồ thị"],
   ["category", "Điều chỉnh loại hàng"],
   ["img", "Ảnh"],
 ] as const;
@@ -50,7 +50,7 @@ export function SearchTracePanel({ data }: { data: SearchResponse }) {
   return (
     <details key={data.query} className="rounded-lg border bg-surface text-sm">
       <summary className="cursor-pointer px-4 py-3 font-medium focus-visible:outline-brand">
-        Trace truy vấn · {STATUS[trace.status]}
+        Chi tiết kỹ thuật: {STATUS[trace.status]}
       </summary>
       <div className="space-y-4 border-t p-4">
         <dl className="grid gap-3 sm:grid-cols-2">
@@ -68,11 +68,11 @@ export function SearchTracePanel({ data }: { data: SearchResponse }) {
             </dd>
           </div>
           <div>
-            <dt className="text-muted-foreground">Entity gốc</dt>
+            <dt className="text-muted-foreground">Sản phẩm gốc</dt>
             <dd>{trace.origins.map((node) => node.label).join(", ") || "—"}</dd>
           </div>
           <div>
-            <dt className="text-muted-foreground">Entity bị loại khỏi tập đích và trừ điểm</dt>
+            <dt className="text-muted-foreground">Sản phẩm bị loại khỏi tập đích và trừ điểm</dt>
             <dd>{trace.excluded.map((node) => node.label).join(", ") || "—"}</dd>
           </div>
           {trace.brand_filter && (
@@ -148,7 +148,7 @@ export function SearchTracePanel({ data }: { data: SearchResponse }) {
 
         {trace.relation && (
           <details className="rounded-md border px-3 py-2">
-            <summary className="cursor-pointer font-medium">Tập entity đích · {trace.targets.length}</summary>
+            <summary className="cursor-pointer font-medium">Tập sản phẩm đích · {trace.targets.length}</summary>
             {trace.targets.length > 0 && (
               <ul className="mt-2 max-h-60 list-disc space-y-1 overflow-auto pl-5">
                 {trace.targets.map((node) => <li key={node.id}>{node.label}</li>)}
@@ -162,7 +162,7 @@ export function SearchTracePanel({ data }: { data: SearchResponse }) {
             <h2 className="font-medium">Điểm theo ảnh</h2>
             <p className="text-xs text-muted-foreground">
               Các nhánh dense và sparse hiển thị điểm gốc và hạng trong danh sách ứng viên.
-              Điểm cuối bằng RRF cộng điều chỉnh graph.
+              Điểm cuối bằng RRF cộng điều chỉnh theo đồ thị.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">

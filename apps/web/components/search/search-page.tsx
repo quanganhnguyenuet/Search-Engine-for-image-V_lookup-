@@ -2,20 +2,16 @@
 
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
+import { AccountBar } from "@/components/auth/account-bar";
 import { QueryGraph } from "@/components/graph/query-graph";
 import { Button } from "@/components/ui/button";
 import { ImageDetail } from "@/components/search/image-detail";
 import { PlanChips } from "@/components/search/plan-chips";
+import { SearchIntro } from "@/components/search/search-intro";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { SearchTracePanel } from "@/components/search/search-trace";
 import { API_URL, type SearchResponse, searchText } from "@/lib/search";
-
-const EXAMPLES = [
-  "Chuột Logitech MX Master 3",
-  "chuột không dây màu đen",
-  "Kindle Paperwhite và chuột Logitech MX Master 3",
-  "sản phẩm khác của hãng làm tai nghe Kraken",
-  "sản phẩm Shimano",
-];
+import { cn } from "@/lib/utils";
 
 const STAGES: [string, string][] = [
   ["embed_query", "embed"],
@@ -61,7 +57,7 @@ export function SearchPage() {
       if (current.signal.aborted) return;
       const message =
         error instanceof TypeError
-          ? `Không kết nối được API tại ${API_URL}. Kiểm tra API đang chạy với SEARCH_ENABLED=true.`
+          ? `Chưa kết nối được máy chủ tìm kiếm (${API_URL}). Kiểm tra máy chủ đang chạy rồi thử lại.`
           : (error as Error).message;
       setState({ kind: "error", query: trimmed, message });
     }
@@ -88,107 +84,148 @@ export function SearchPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [run]);
 
+  const reset = () => {
+    controller.current?.abort();
+    setQuery("");
+    setOpenIndex(null);
+    setState({ kind: "idle" });
+    const url = new URL(window.location.href);
+    url.searchParams.delete("q");
+    window.history.replaceState(null, "", url);
+    input.current?.focus();
+  };
+
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
     void run(query);
   };
 
+  const idle = state.kind === "idle";
+
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:py-12">
-      <header className="flex flex-col gap-2">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">products-v1</p>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">V-Lookup</h1>
-        <p className="max-w-[65ch] text-base text-muted-foreground">
-          Tìm ảnh sản phẩm bằng câu tiếng Việt: tên sản phẩm, mô tả, nhiều sản phẩm một lúc hoặc
-          quan hệ theo hãng. Một đường xử lý duy nhất, không gọi LLM lúc truy vấn.
-        </p>
+    <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-5 px-4 py-4 sm:px-6">
+      <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+        <button
+          type="button"
+          onClick={reset}
+          aria-label="V-Lookup, về trang tìm kiếm ban đầu"
+          className="min-h-11 rounded text-xl font-bold tracking-tight text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        >
+          V-Lookup
+        </button>
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-x-3 gap-y-1">
+          <ThemeToggle />
+          <AccountBar />
+        </div>
       </header>
 
-      <form onSubmit={onSubmit} role="search" className="flex flex-col gap-3">
-        <label htmlFor="q" className="text-sm font-medium">
-          Câu tìm kiếm
-        </label>
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <input
-            ref={input}
-            id="q"
-            name="q"
-            type="search"
-            autoComplete="off"
-            enterKeyHint="search"
-            maxLength={300}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Ví dụ: sản phẩm khác của hãng làm tai nghe Kraken"
-            className="h-12 w-full rounded-md border bg-surface px-4 text-base shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/80 focus-visible:ring-2 focus-visible:ring-brand"
-          />
-          <Button
-            type="submit"
-            variant="brand"
-            size="lg"
-            className="h-12 focus-visible:ring-brand"
-            disabled={state.kind === "loading"}
-          >
-            {state.kind === "loading" ? "Đang tìm…" : "Tìm"}
-          </Button>
-        </div>
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Thử:</span>
-          {EXAMPLES.map((example) => (
-            <button
-              key={example}
-              type="button"
-              onClick={() => void run(example)}
-              className="min-h-9 rounded-full border bg-surface px-3 py-1 text-left transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-            >
-              {example}
-            </button>
-          ))}
-        </div>
-      </form>
-
-      <section aria-live="polite" aria-busy={state.kind === "loading"} className="flex flex-col gap-4">
-        {state.kind === "idle" && (
-          <p className="rounded-lg border border-dashed p-6 text-sm text-muted-foreground">
-            Nhập một câu rồi nhấn Enter, hoặc chọn một ví dụ. Phím tắt: <kbd className="rounded border px-1 font-mono">/</kbd> để
-            đưa con trỏ vào ô tìm kiếm.
-          </p>
-        )}
-        {state.kind === "loading" && <ResultSkeleton />}
-        {state.kind === "error" && (
-          <div role="alert" className="rounded-lg border border-danger/40 bg-danger-soft p-4 text-sm">
-            <p className="font-medium text-danger">Không tìm được</p>
-            <p className="mt-1">{state.message}</p>
-            <Button variant="outline" className="mt-3" onClick={() => void run(state.query)}>
-              Thử lại
-            </Button>
+      <main className="flex flex-col gap-8">
+        <div
+          className={cn(
+            "flex flex-col rounded-lg border border-panel-border bg-panel",
+            idle ? "gap-6 px-5 py-8 sm:px-10 sm:py-12" : "gap-2 p-4 sm:px-6",
+          )}
+        >
+          <div className={idle ? "flex flex-col gap-3" : "sr-only"}>
+            <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-5xl sm:leading-tight">
+              Tìm ảnh sản phẩm bằng tiếng Việt
+            </h1>
+            <p className="max-w-[62ch] text-muted-foreground sm:text-lg">
+              Đồ điện tử, thuốc, món đặc sản, phụ tùng, đồ thủ công. Mỗi kết quả là ảnh sản phẩm,
+              xem được trang nguồn.
+            </p>
           </div>
-        )}
-        {state.kind === "done" && (
-          <>
-            <SearchTracePanel data={state.data} />
-            <Results data={state.data} clientMs={state.clientMs} onPick={run} onOpen={setOpenIndex} />
-            <ImageDetail
-              data={state.data}
-              index={openIndex}
-              onIndex={setOpenIndex}
-              onClose={() => setOpenIndex(null)}
-            />
-          </>
-        )}
-      </section>
-    </main>
+
+          <form onSubmit={onSubmit} role="search" className="flex flex-col gap-2">
+            <label htmlFor="q" className={idle ? "text-sm font-medium" : "sr-only"}>
+              Bạn đang tìm sản phẩm gì?
+            </label>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <input
+                ref={input}
+                id="q"
+                name="q"
+                type="search"
+                autoComplete="off"
+                enterKeyHint="search"
+                maxLength={300}
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Tên, mô tả, hãng hoặc đặc sản…"
+                className={cn(
+                  "w-full min-w-0 rounded-md border bg-surface px-4 text-base outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-brand",
+                  idle ? "min-h-14 sm:text-lg" : "min-h-12",
+                )}
+              />
+              <Button
+                type="submit"
+                variant="brand"
+                size="lg"
+                className={cn(
+                  "shrink-0 text-base font-semibold focus-visible:ring-brand",
+                  idle ? "h-14" : "h-12",
+                )}
+                disabled={state.kind === "loading"}
+              >
+                {state.kind === "loading" ? "Đang tìm…" : "Tìm kiếm"}
+              </Button>
+            </div>
+            {idle && (
+              <p className="hidden text-sm text-muted-foreground sm:block">
+                Mẹo: nhấn phím <kbd className="rounded border bg-surface px-1.5">/</kbd> để gõ
+                vào ô tìm kiếm.
+              </p>
+            )}
+          </form>
+        </div>
+
+        {idle && <SearchIntro onPick={(text) => void run(text)} />}
+
+        <section
+          aria-live="polite"
+          aria-busy={state.kind === "loading"}
+          className={cn("flex flex-col gap-4", idle && "sr-only")}
+        >
+          {state.kind === "loading" && (
+            <>
+              <p className="text-muted-foreground">Đang tìm “{state.query}”…</p>
+              <ResultSkeleton />
+            </>
+          )}
+          {state.kind === "error" && (
+            <div role="alert" className="rounded-lg border border-danger/40 bg-danger-soft p-4">
+              <p className="font-semibold text-danger">Chưa tìm được</p>
+              <p className="mt-1 text-sm">{state.message}</p>
+              <Button variant="outline" className="mt-3 h-11" onClick={() => void run(state.query)}>
+                Thử lại
+              </Button>
+            </div>
+          )}
+          {state.kind === "done" && (
+            <>
+              <Results data={state.data} onPick={run} onOpen={setOpenIndex} />
+              <SearchTracePanel data={state.data} />
+              <Timings timings={state.data.timings} clientMs={state.clientMs} />
+              <ImageDetail
+                data={state.data}
+                index={openIndex}
+                onIndex={setOpenIndex}
+                onClose={() => setOpenIndex(null)}
+              />
+            </>
+          )}
+        </section>
+      </main>
+    </div>
   );
 }
 
 function Results({
   data,
-  clientMs,
   onPick,
   onOpen,
 }: {
   data: SearchResponse;
-  clientMs: number;
   onPick: (text: string) => void;
   onOpen: (index: number) => void;
 }) {
@@ -211,35 +248,32 @@ function Results({
   if (data.out_of_scope) {
     return (
       <div className="rounded-lg border bg-surface p-4 text-sm">
-        <p className="font-medium">Câu này nằm ngoài phạm vi dữ liệu sản phẩm.</p>
+        <p className="text-base font-semibold">Câu này không nói về sản phẩm nào trong kho.</p>
         <p className="mt-1 text-muted-foreground">
-          Kho ảnh gồm sản phẩm có hãng/mẫu, thuốc, món ăn, phụ tùng, đồ thủ công. Hãy nêu tên hoặc mô tả
-          một sản phẩm.
+          Hãy nêu tên hoặc mô tả một sản phẩm: đồ điện tử, thuốc, món đặc sản, phụ tùng hay đồ thủ công.
         </p>
-        <Timings timings={data.timings} clientMs={clientMs} />
       </div>
     );
   }
   return (
     <>
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-col gap-2">
-          <p className="text-sm">
-            <span className="font-semibold">{data.results.length}</span> ảnh cho{" "}
-            <q className="font-medium">{data.query}</q>
-          </p>
+      <div className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold sm:text-2xl">
+          {data.results.length} ảnh cho “{data.query}”
+        </h2>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <p className="text-sm text-muted-foreground">Hệ thống hiểu là:</p>
           <PlanChips data={data} />
         </div>
-        <Timings timings={data.timings} clientMs={clientMs} />
       </div>
       {data.results.length === 0 && data.trace.status === "no_target" ? (
         <p className="rounded-lg border border-dashed p-6 text-sm text-muted-foreground">
-          {data.trace.values.map((value) => value.label).join(", ") || "Hãng này"} không còn sản phẩm
-          nào khác ngoài {data.trace.origins.map((node) => node.label).join(", ")} trong dữ liệu.
+          Trong kho, {data.trace.values.map((value) => value.label).join(", ") || "hãng này"} chưa có sản
+          phẩm nào khác ngoài {data.trace.origins.map((node) => node.label).join(", ")}.
         </p>
       ) : data.results.length === 0 ? (
         <p className="rounded-lg border border-dashed p-6 text-sm text-muted-foreground">
-          Không có ảnh phù hợp. Thử bỏ bớt chi tiết hoặc dùng tên sản phẩm.
+          Chưa có ảnh phù hợp. Thử bỏ bớt chi tiết, hoặc gõ tên sản phẩm.
         </p>
       ) : (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
@@ -262,7 +296,7 @@ function Results({
                     loading={index < 5 ? "eager" : "lazy"}
                     className="h-full w-full object-contain p-2 transition-transform duration-200 group-hover:scale-[1.03]"
                   />
-                  <span className="absolute left-2 top-2 rounded bg-background/90 px-1.5 font-mono text-[11px] text-muted-foreground">
+                  <span className="absolute left-2 top-2 rounded bg-slate-900/75 px-2 text-xs font-medium text-white">
                     {index + 1}
                   </span>
                 </span>
@@ -271,7 +305,9 @@ function Results({
                     {hit.entity_names.join(" · ")}
                   </span>
                   {hit.domain && (
-                    <span className="truncate text-xs text-muted-foreground">{hit.domain}</span>
+                    <span className="truncate text-xs text-muted-foreground">
+                      {hit.domain.replace(/^www\./, "")}
+                    </span>
                   )}
                 </span>
               </button>
@@ -286,7 +322,7 @@ function Results({
 
 function Timings({ timings, clientMs }: { timings: Record<string, number>; clientMs: number }) {
   return (
-    <dl className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground sm:mt-0">
+    <dl aria-label="Thời gian xử lý" className="flex flex-wrap gap-x-3 gap-y-1 text-xs tabular-nums text-muted-foreground">
       {STAGES.filter(([key]) => key in timings).map(([key, label]) => (
         <div key={key} className="flex gap-1">
           <dt>{label}</dt>

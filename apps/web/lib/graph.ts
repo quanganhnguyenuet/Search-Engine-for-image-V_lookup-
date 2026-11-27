@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { authFetch } from "@/lib/api";
 import { API_URL } from "@/lib/search";
 
 export type NodeType = "entity" | "brand" | "category" | "purpose" | "ingredient" | "model" | "place";
@@ -13,7 +14,11 @@ export type GraphNode = {
   /** Number of relations (entity) or of linked entities (value) in the whole snapshot. */
   degree: number;
   props: Record<string, string | number>;
+  /** Preview only: applying the pending edits adds or removes it. */
+  change?: Change;
 };
+
+export type Change = "added" | "removed" | null;
 
 export type GraphEdge = {
   id: string;
@@ -23,6 +28,7 @@ export type GraphEdge = {
   origin: string | null;
   confidence: number | null;
   reviewed: boolean | null;
+  change?: Change;
 };
 
 export type Subgraph = { nodes: GraphNode[]; edges: GraphEdge[]; truncated: boolean };
@@ -35,7 +41,7 @@ export const NODE_LABEL: Record<NodeType, string> = {
   category: "Loại hàng",
   purpose: "Công dụng",
   ingredient: "Thành phần",
-  model: "Dòng xe / model",
+  model: "Dòng xe / thiết bị",
   place: "Xuất xứ",
 };
 
@@ -51,12 +57,12 @@ export const REL_TEXT: Record<string, string> = {
 
 /** Short label drawn on the edge. */
 export const REL_SHORT: Record<string, string> = {
-  MADE_BY: "MADE_BY",
-  IS_A: "IS_A",
-  TREATS: "TREATS",
-  HAS_INGREDIENT: "HAS_INGREDIENT",
-  FITS: "FITS",
-  ORIGIN: "ORIGIN",
+  MADE_BY: "hãng",
+  IS_A: "loại",
+  TREATS: "công dụng",
+  HAS_INGREDIENT: "thành phần",
+  FITS: "lắp cho",
+  ORIGIN: "xuất xứ",
 };
 
 export const PROP_LABEL: Record<string, string> = {
@@ -81,7 +87,7 @@ export async function fetchSubgraph(query: SubgraphQuery, signal?: AbortSignal):
   for (const id of query.origins ?? []) params.append("origin", id);
   if (query.siblings) params.set("siblings", String(query.siblings));
   if (query.sharedOnly) params.set("shared_only", "true");
-  const response = await fetch(`${API_URL}/api/v1/graph/subgraph?${params}`, { signal });
+  const response = await authFetch(`${API_URL}/api/v1/graph/subgraph?${params}`, { signal });
   if (response.status === 404) {
     throw new Error("API chưa có đồ thị quan hệ. Khởi động lại API để nạp phiên bản mới.");
   }
@@ -98,6 +104,11 @@ type SubgraphState =
   | { status: "done"; data: Subgraph };
 
 const cache = new Map<string, Subgraph>();
+
+/** After the admin applies changes, cached answers describe the old graph. */
+export function clearSubgraphCache(): void {
+  cache.clear();
+}
 
 /** Loads a subgraph; `null` keeps it idle. Answers are cached for the page's lifetime. */
 export function useSubgraph(query: SubgraphQuery | null): SubgraphState {

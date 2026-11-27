@@ -152,7 +152,7 @@ def asset_payloads(rows: list[dict], review, categories: dict | None) -> dict[st
     return out
 
 
-def load_visual(root: Path, asset_ids: list[str], device: str):
+def load_visual(root: Path, asset_ids: list[str], device: str, encoder=None):
     """(SigLIP2 text encoder, VisualFusion) for an artifact dir, or (None, None) without the
     image vectors. The image vectors must have been embedded with the encoder's checkpoint and
     in the row order of doc_texts.jsonl."""
@@ -165,7 +165,8 @@ def load_visual(root: Path, asset_ids: list[str], device: str):
     if manifest.get("revision") != MODEL_REVISION:
         raise RuntimeError("img_siglip2.npy was embedded with another SigLIP2 revision")
     fusion = VisualFusion(asset_ids, np.load(doc_path), np.load(img_path), TUNED)
-    return ImageTextEncoder(device=device), fusion
+    # A reload passes the encoder already on the GPU instead of loading a second copy.
+    return encoder or ImageTextEncoder(device=device), fusion
 
 
 def zscore(values: np.ndarray) -> np.ndarray:
@@ -197,6 +198,20 @@ class VisualFusion:
         self.doc = doc_dense.astype(np.float32, copy=False)
         self.img = img.astype(np.float32, copy=False)
         self.settings = settings or FusionSettings()
+
+    def extend(self, asset_ids: list[str], doc: np.ndarray, img: np.ndarray) -> None:
+        """Add rows (images uploaded after the artifacts were built). Not thread-safe: call it
+        on the thread that runs the searches."""
+        if not (len(asset_ids) == len(doc) == len(img)):
+            raise ValueError("asset_ids, doc and img must have the same row count")
+        new = [a for a in asset_ids if a not in self.row]
+        if not new:
+            return
+        keep = [i for i, a in enumerate(asset_ids) if a not in self.row]
+        self.doc = np.vstack([self.doc, doc[keep].astype(np.float32)])
+        self.img = np.vstack([self.img, img[keep].astype(np.float32)])
+        self.asset_ids = [*self.asset_ids, *new]
+        self.row = {asset_id: i for i, asset_id in enumerate(self.asset_ids)}
 
     def img_top(self, img_query: np.ndarray, k: int) -> list[str]:
         if k <= 0:

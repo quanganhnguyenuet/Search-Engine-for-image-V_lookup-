@@ -44,7 +44,7 @@ export function QueryGraph({ data }: { data: SearchResponse }) {
       className="rounded-lg border bg-surface text-sm"
     >
       <summary className="cursor-pointer px-4 py-3 font-medium focus-visible:outline-brand">
-        Đồ thị quan hệ
+        Các sản phẩm liên quan với nhau thế nào
         <span className="font-normal text-muted-foreground">
           {" "}
           · {origins ? `từ ${origins} tới ${results.length} ảnh kết quả` : `${results.length} ảnh kết quả`}
@@ -52,9 +52,8 @@ export function QueryGraph({ data }: { data: SearchResponse }) {
       </summary>
       <div className="space-y-3 border-t p-4">
         <p className="max-w-[75ch] text-xs text-muted-foreground">
-          Thực thể gốc của câu (nếu có), sản phẩm của các ảnh kết quả và những hãng, loại hàng, công dụng… mà
-          chúng dùng chung. Hãng và loại hàng luôn hiện; các giá trị khác chỉ hiện khi nối được hai sản phẩm
-          trở lên.
+          Hình dưới nối sản phẩm trong kết quả (và sản phẩm bạn nhắc tới, nếu có) với hãng, loại hàng, công
+          dụng… của chúng. Hãng và loại hàng luôn hiện; thông tin khác chỉ hiện khi nối được từ hai sản phẩm.
         </p>
         {state.status === "loading" && (
           <div className="h-[22rem] animate-pulse rounded-lg bg-muted sm:h-[28rem]" role="status" aria-label="Đang tải đồ thị" />
@@ -70,7 +69,7 @@ export function QueryGraph({ data }: { data: SearchResponse }) {
         {state.status === "done" &&
           (state.data.nodes.length === 0 ? (
             <p className="rounded-lg border border-dashed p-4 text-muted-foreground">
-              Các ảnh này không có thực thể trong graph để vẽ.
+              Các ảnh này không có sản phẩm trong đồ thị để vẽ.
             </p>
           ) : (
             <RelationGraph graph={state.data} thumbs={thumbs} imageCounts={imageCounts} />
