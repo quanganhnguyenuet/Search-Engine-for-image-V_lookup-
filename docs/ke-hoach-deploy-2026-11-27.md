@@ -86,8 +86,8 @@ Nguồn: [Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/qu
 
 | Việc | Trạng thái |
 | --- | --- |
-| P0.1 Commit và gắn tag `demo-rc1` | **Chưa làm** (chờ đồng ý) |
-| P0.2 Nâng Next lên 16.4.6 | `package.json` và lockfile đã nâng; **còn phải cài**: tắt dev server, rồi `cd apps\web; npm ci` |
+| P0.1 Commit và gắn tag `demo-rc1` | Xong (28/11, ở máy local) |
+| P0.2 Nâng Next lên 16.4.6 | Xong; bản đang cài là 16.4.6 |
 | P0.3 Web và API chung một origin | Xong |
 | P0.4 `scripts/start_demo.ps1` | Xong; đã chạy thử bản sao trên cổng 3100 |
 | P0.5 Luật an toàn | Script tự kiểm tra phần kiểm tra được; phần còn lại làm tay |
