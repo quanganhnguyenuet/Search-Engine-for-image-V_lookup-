@@ -1,0 +1,24 @@
+{"qid": "d01", "kind": "condition", "query": "thuốc đau dạ dày"}
+{"qid": "d02", "kind": "condition", "query": "thuốc trị trào ngược dạ dày"}
+{"qid": "d03", "kind": "condition", "query": "thuốc ho"}
+{"qid": "d04", "kind": "condition", "query": "thuốc trị ho cho trẻ em"}
+{"qid": "d05", "kind": "condition", "query": "thuốc đau đầu"}
+{"qid": "d06", "kind": "condition", "query": "thuốc hạ sốt"}
+{"qid": "d07", "kind": "condition", "query": "thuốc trị tiểu đường"}
+{"qid": "d08", "kind": "condition", "query": "thuốc cao huyết áp"}
+{"qid": "d09", "kind": "condition", "query": "thuốc dị ứng"}
+{"qid": "d10", "kind": "condition", "query": "thuốc trị tiêu chảy"}
+{"qid": "d11", "kind": "condition", "query": "thuốc táo bón"}
+{"qid": "d12", "kind": "condition", "query": "thuốc mất ngủ"}
+{"qid": "d13", "kind": "condition", "query": "thuốc đau xương khớp"}
+{"qid": "d14", "kind": "condition", "query": "thuốc hạ mỡ máu"}
+{"qid": "d15", "kind": "condition", "query": "thuốc kháng sinh"}
+{"qid": "d16", "kind": "condition", "query": "thuốc đầy hơi chướng bụng"}
+{"qid": "d17", "kind": "condition", "query": "thuốc viêm họng"}
+{"qid": "d18", "kind": "condition", "query": "thuốc đau bụng"}
+{"qid": "d19", "kind": "other_drug", "query": "thuốc nhỏ mắt"}
+{"qid": "d20", "kind": "other_drug", "query": "thuốc tiêm"}
+{"qid": "d21", "kind": "other_drug", "query": "thuốc bổ gan"}
+{"qid": "d22", "kind": "other_drug", "query": "thuốc trị gút"}
+{"qid": "d23", "kind": "other_drug", "query": "thuốc đông y dạng siro"}
+{"qid": "d24", "kind": "other_drug", "query": "hộp thuốc màu xanh lá"}

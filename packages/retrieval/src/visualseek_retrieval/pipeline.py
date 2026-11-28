@@ -18,9 +18,9 @@ from types import SimpleNamespace
 import numpy as np
 from qdrant_client.http.exceptions import ApiException
 
-from visualseek_retrieval import connectors, lexical, type_request
+from visualseek_retrieval import condition, connectors, lexical, type_request
 from visualseek_retrieval.categories import CategoryIntent, CategoryLexicon, knn_votes
-from visualseek_retrieval.enrichment import RelationIndex, query_material
+from visualseek_retrieval.enrichment import REL_KIND, RelationIndex, query_material
 from visualseek_retrieval.entity_review import EntityReview
 from visualseek_retrieval.fusion import VisualFusion, fuse, starts_with_visual_attribute
 from visualseek_retrieval.qdrant_store import (
@@ -139,6 +139,10 @@ class Settings:
     group_prefetch: bool = True
     # P6: S4 visual fusion (bge-m3 doc + SigLIP2 img) for descriptive/category queries.
     visual_fusion: bool = True
+    # "thuốc đau dạ dày": show the drugs whose TREATS purposes match the complaint. With
+    # fewer matching products than this, the query is answered by content search.
+    condition_search: bool = True
+    condition_min_targets: int = 3
 
 
 @dataclass
@@ -339,6 +343,16 @@ class SearchPipeline:
             self._category_intent(plan, query, spotting)
         if plan.out_of_scope:
             return plan
+        if (
+            s.condition_search
+            and not entities
+            and not brands
+            and not plan.relation
+            and not plan.negation
+            and not plan.unsupported_cues
+            and self._expand_condition(plan, query, spotting)
+        ):
+            return plan
 
         if plan.relation and entities:
             # "sản phẩm khác của hãng làm X": X is the anchor, the targets are X's brand siblings.
@@ -402,6 +416,55 @@ class SearchPipeline:
             plan.no_target = True
         plan.intents = len(plan.seeds) + len(brands) + (1 if plan.generic_hits else 0)
         return plan
+
+    def _expand_condition(self, plan: Plan, query: str, spotting: Spotting) -> bool:
+        """A query for medicine by complaint: the drugs labelled with it are the targets.
+
+        It never lifts the out-of-scope gate, and it steps back (False) for a query of several
+        parts, for another kind of goods, or when too few drugs carry the purpose."""
+        phrase = condition.condition_phrase(query)
+        if phrase is None:
+            return False
+        spans = [(m.start, m.end) for m in [*spotting.matches, *spotting.ambiguous]]
+        if len(connectors.segments(query, spans)) >= 2:
+            return False
+        asked = {c.split(".")[0] for c in plan.category.categories} if plan.category else set()
+        if asked and "drug" not in asked:
+            return False
+        purposes = {
+            node_id: node["label"]
+            for node_id, node in self.enrichment.nodes.items()
+            if node["kind"] == REL_KIND["TREATS"]
+        }
+        for value_ids in condition.match_purposes(phrase, purposes):
+            found: dict[str, list[str]] = {}
+            for value_id in value_ids:
+                drugs = [
+                    product
+                    for product in dict.fromkeys(
+                        self.review.canonical(o)
+                        for o in self.enrichment.entities_of("TREATS", [value_id])
+                    )
+                    if self._entity_l1(product) == "drug"
+                ]
+                if drugs:
+                    found[value_id] = drugs
+            targets = list(dict.fromkeys(o for drugs in found.values() for o in drugs))
+            if len(targets) >= self.settings.condition_min_targets:
+                break
+        else:
+            return False
+        plan.relation = True
+        plan.relation_name = "TREATS"
+        plan.relation_cue = phrase
+        # Widest purpose first: it is the one that says best what was matched.
+        plan.value_ids = sorted(found, key=lambda v: (-len(found[v]), v))
+        plan.hops = targets
+        plan.intents = 1
+        # The category prior has done its work (scope); every target is a drug.
+        plan.category, plan.category_source = None, None
+        plan.category_groups, plan.category_segments = [], []
+        return True
 
     def _confident_dense_entity(self, spotting: Spotting) -> bool:
         """A product the query names that S1's names missed but the entity cards match at once

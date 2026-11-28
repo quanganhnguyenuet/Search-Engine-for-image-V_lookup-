@@ -11,8 +11,14 @@ export function PlanChips({ data }: { data: SearchResponse }) {
   for (const name of seeds) chips.push({ label: `Sản phẩm: ${name}`, tone: "brand" });
   // "đặc sản Bến Tre": the place is the value, there is no product to relate it to.
   const placeQuery = data.trace.relation === "ORIGIN" && data.trace.origins.length === 0;
+  // "thuốc đau dạ dày": the complaint picked the drugs, again with no product to start from.
+  const conditionQuery = data.trace.relation === "TREATS" && data.trace.origins.length === 0;
   if (plan.relation && placeQuery) {
     for (const { label } of data.trace.values) chips.push({ label: `Địa danh: ${label}`, tone: "brand" });
+  } else if (plan.relation && conditionQuery) {
+    const { values } = data.trace;
+    for (const { label } of values.slice(0, 3)) chips.push({ label: `Công dụng: ${label}`, tone: "brand" });
+    if (values.length > 3) chips.push({ label: `và ${values.length - 3} công dụng gần nghĩa` });
   } else if (plan.relation) {
     chips.push({ label: `Tìm theo: ${relationLabel(data.trace.relation)}`, tone: "brand" });
   }
@@ -26,7 +32,7 @@ export function PlanChips({ data }: { data: SearchResponse }) {
   for (const tier of category?.tiers ?? []) chips.push({ label: `Hạng: ${TIERS[tier] ?? tier}`, tone: "brand" });
   if (byCategory) chips.push({ label: "Chia đều theo loại hàng" });
   if (!chips.length) chips.push({ label: "Tìm theo mô tả" });
-  return (
+  const list = (
     <ul className="flex flex-wrap gap-1.5" aria-label="Cách hệ thống hiểu câu">
       {chips.map((chip) => (
         <li
@@ -42,5 +48,15 @@ export function PlanChips({ data }: { data: SearchResponse }) {
         </li>
       ))}
     </ul>
+  );
+  if (!conditionQuery) return list;
+  return (
+    <div className="flex flex-col gap-2">
+      {list}
+      <p role="note" className="max-w-[70ch] rounded-md border border-warn/40 bg-warn-soft px-3 py-2 text-sm">
+        Danh sách dựa trên công dụng do AI ghi nhận, chưa được dược sĩ duyệt, và không xét độ tuổi hay bệnh nền. Đây
+        không phải lời khuyên dùng thuốc: hãy hỏi bác sĩ hoặc dược sĩ.
+      </p>
+    </div>
   );
 }
