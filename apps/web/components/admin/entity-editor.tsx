@@ -7,7 +7,7 @@ import { ErrorBox, PendingBadge } from "@/components/admin/admin-shell";
 import { type Apply, ApplyBox, useApply } from "@/components/admin/apply-changes";
 import { EntityImages } from "@/components/admin/entity-images";
 import { BrandInput, ChipsInput, Field, inputClass, SuggestInput } from "@/components/admin/fields";
-import { RelationGraph } from "@/components/graph/relation-graph";
+import { type NodeAction, RelationGraph } from "@/components/graph/relation-graph";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -24,7 +24,7 @@ import {
   SOURCE_LABEL,
   type VocabItem,
 } from "@/lib/admin";
-import { REL_TEXT } from "@/lib/graph";
+import { type GraphNode, REL_TEXT } from "@/lib/graph";
 
 type Draft = {
   brand: string | null;
@@ -99,8 +99,8 @@ export function EntityEditor({ id }: { id: string }) {
 
 function Loaded({ detail, onDetail }: { detail: EntityDetail; onDetail: (d: EntityDetail) => void }) {
   const label = detail.label;
-  // The form's unsaved values, so the graph preview follows them.
-  const [unsaved, setUnsaved] = useState<Partial<Record<FieldName, unknown>>>({});
+  // One state for the form and the graph: removing a node edits the form's draft.
+  const editor = useEditor(detail, onDetail);
   // Bumped after an apply, so the preview reloads the new live graph.
   const [version, setVersion] = useState(0);
   const apply = useApply(async () => {
@@ -153,15 +153,9 @@ function Loaded({ detail, onDetail }: { detail: EntityDetail; onDetail: (d: Enti
       <PendingPanel detail={detail} onDetail={onDetail} apply={apply} />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
-        <EditorForm
-          detail={detail}
-          onDetail={onDetail}
-          onUnsaved={setUnsaved}
-          onApply={applyNow}
-          applying={apply.state.kind === "running"}
-        />
+        <EditorForm detail={detail} editor={editor} onApply={applyNow} applying={apply.state.kind === "running"} />
         <div className="flex min-w-0 flex-col gap-6">
-          <Relations detail={detail} unsaved={unsaved} version={version} />
+          <Relations detail={detail} editor={editor} version={version} onApply={applyNow} applying={apply.state.kind === "running"} />
           <Identity detail={detail} />
         </div>
       </div>
@@ -237,46 +231,17 @@ function PendingPanel({ detail, onDetail, apply }: { detail: EntityDetail; onDet
   );
 }
 
-function EditorForm({
-  detail,
-  onDetail,
-  onUnsaved,
-  onApply,
-  applying,
-}: {
-  detail: EntityDetail;
-  onDetail: (d: EntityDetail) => void;
-  onUnsaved: (changes: Partial<Record<FieldName, unknown>>) => void;
-  onApply: () => void;
-  applying: boolean;
-}) {
+type SaveStatus = { kind: "idle" | "saving" | "saved" } | { kind: "error"; message: string };
+
+function useEditor(detail: EntityDetail, onDetail: (d: EntityDetail) => void) {
   const base = useMemo(() => toDraft(detail.draft), [detail]);
-  const live = detail.live;
   const [draft, setDraft] = useState<Draft>(base);
   const [note, setNote] = useState("");
-  const [categories, setCategories] = useState<VocabItem[]>([]);
-  const [status, setStatus] = useState<{ kind: "idle" | "saving" | "saved" } | { kind: "error"; message: string }>({ kind: "idle" });
-
+  const [status, setStatus] = useState<SaveStatus>({ kind: "idle" });
   useEffect(() => setDraft(base), [base]);
-  useEffect(() => {
-    admin.vocab("category", "", 200).then(
-      (items) => setCategories([...items].sort((a, b) => a.id.localeCompare(b.id))),
-      () => setCategories([]),
-    );
-  }, []);
 
   const changes = changesOf(base, draft);
   const dirty = Object.keys(changes).length > 0;
-  const changesKey = JSON.stringify(changes);
-  useEffect(() => onUnsaved(JSON.parse(changesKey)), [changesKey, onUnsaved]);
-  const pending = new Set(detail.pending);
-  const set = <K extends keyof Draft>(key: K, value: Draft[K]) => {
-    setDraft((d) => ({ ...d, [key]: value }));
-    setStatus({ kind: "idle" });
-  };
-  const isFashion = (draft.category ?? "").startsWith("fashion.");
-  const changed = (key: FieldName) => key in changes;
-
   const save = async (): Promise<boolean> => {
     if (!dirty) return true;
     setStatus({ kind: "saving" });
@@ -290,6 +255,65 @@ function EditorForm({
       return false;
     }
   };
+  const update = (next: (d: Draft) => Draft) => {
+    setDraft(next);
+    setStatus({ kind: "idle" });
+  };
+  return { base, draft, setDraft, update, changes, dirty, note, setNote, status, save };
+}
+
+type Editor = ReturnType<typeof useEditor>;
+
+const tidy = (value: string) => value.split(/\s+/).filter(Boolean).join(" ");
+
+/** The draft without the values behind a relation (`form` of a preview row). */
+function removeRelation(d: Draft, form: NonNullable<Preview["table"][number]["form"]>): Draft {
+  if (form.field === "brand") return { ...d, brand: null, brandLabel: "" };
+  if (form.field === "origin") return { ...d, origin: "" };
+  const field = form.field as (typeof LIST_KEYS)[number];
+  const gone = new Set(form.items.map(tidy));
+  return { ...d, [field]: d[field].filter((v) => !gone.has(tidy(v))) };
+}
+
+/** The draft with the released values of a relation put back, in their released order. */
+function keepRelation(d: Draft, live: Draft, form: NonNullable<Preview["table"][number]["form"]>): Draft {
+  if (form.field === "brand") return { ...d, brand: live.brand, brandLabel: live.brandLabel };
+  if (form.field === "origin") return { ...d, origin: live.origin };
+  const field = form.field as (typeof LIST_KEYS)[number];
+  const keep = new Set([...d[field], ...form.items].map(tidy));
+  // Released order first: a list that only differs in order would still count as changed.
+  const released = live[field].filter((v) => keep.has(tidy(v)));
+  const added = d[field].filter((v) => !live[field].some((o) => tidy(o) === tidy(v)));
+  return { ...d, [field]: [...released, ...added] };
+}
+
+function EditorForm({
+  detail,
+  editor,
+  onApply,
+  applying,
+}: {
+  detail: EntityDetail;
+  editor: Editor;
+  onApply: () => void;
+  applying: boolean;
+}) {
+  const live = detail.live;
+  const { base, draft, setDraft, changes, dirty, note, setNote, status, save } = editor;
+  const [categories, setCategories] = useState<VocabItem[]>([]);
+
+  useEffect(() => {
+    admin.vocab("category", "", 200).then(
+      (items) => setCategories([...items].sort((a, b) => a.id.localeCompare(b.id))),
+      () => setCategories([]),
+    );
+  }, []);
+
+  const pending = new Set(detail.pending);
+  const set = <K extends keyof Draft>(key: K, value: Draft[K]) => editor.update((d) => ({ ...d, [key]: value }));
+  const isFashion = (draft.category ?? "").startsWith("fashion.");
+  const changed = (key: FieldName) => key in changes;
+
   const submit = (event: FormEvent) => {
     event.preventDefault();
     void save();
@@ -450,7 +474,20 @@ function usePreview(id: string, changesKey: string, siblings: number, version: s
   return { state, stale };
 }
 
-function Relations({ detail, unsaved, version }: { detail: EntityDetail; unsaved: Partial<Record<FieldName, unknown>>; version: number }) {
+function Relations({
+  detail,
+  editor,
+  version,
+  onApply,
+  applying,
+}: {
+  detail: EntityDetail;
+  editor: Editor;
+  version: number;
+  onApply: () => void;
+  applying: boolean;
+}) {
+  const unsaved = editor.changes;
   const [siblings, setSiblings] = useState(3);
   // An empty product type is refused by the API; it is a field being typed, not a value.
   const changesKey = JSON.stringify(
@@ -468,6 +505,38 @@ function Relations({ detail, unsaved, version }: { detail: EntityDetail; unsaved
     const [nodes, edges] = JSON.parse(graphKey) as [Preview["nodes"], Preview["edges"]];
     return { nodes, edges, truncated: false };
   }, [graphKey]);
+  const nodeActions = (node: GraphNode): NodeAction[] => {
+    if (node.type === "entity") {
+      return [
+        {
+          label: node.role === "sibling" ? "Sản phẩm khác dùng chung giá trị, không gỡ ở đây." : "Không xoá sản phẩm ở đây.",
+          hint: "Chỉ gỡ được các node giá trị nối với sản phẩm đang mở.",
+        },
+      ];
+    }
+    if (node.type === "category") return [{ label: "Loại hàng không gỡ được.", hint: "Đổi loại ở ô Loại hàng của biểu mẫu." }];
+    // A preview that is being redrawn describes an older draft.
+    if (stale || !data) return [{ label: "Đang cập nhật đồ thị…" }];
+    const row = data.table.find((r) => r.target === node.id);
+    if (!row) return [{ label: "Node này không nối trực tiếp với sản phẩm đang mở." }];
+    const form = row.form;
+    if (!form) return [{ label: "Không gỡ được ở đây.", hint: "Quan hệ này đến từ một bản ghi đã gộp." }];
+    if (row.change === "removed") {
+      return [{ label: `Giữ lại “${node.label}”`, run: () => editor.update((d) => keepRelation(d, toDraft(detail.live), form)) }];
+    }
+    const others = form.field === "brand" ? [] : form.items.filter((v) => v.toLocaleLowerCase("vi") !== node.label.toLocaleLowerCase("vi"));
+    return [
+      {
+        label: `Gỡ “${node.label}” khỏi sản phẩm này`,
+        hint: others.length ? `Cũng gỡ: ${others.join(", ")} (vì tạo ra “${node.label}”).` : undefined,
+        danger: true,
+        run: () => editor.update((d) => removeRelation(d, form)),
+      },
+    ];
+  };
+  const saveAndApply = async () => {
+    if (await editor.save()) onApply();
+  };
   return (
     <section aria-labelledby="relations-title" aria-busy={stale} className="rounded-lg border bg-surface p-4 sm:p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -516,8 +585,25 @@ function Relations({ detail, unsaved, version }: { detail: EntityDetail; unsaved
       <div className={cn("mt-3 transition-opacity", stale && graph && "opacity-60")}>
         {state.kind === "loading" && <div className="h-80 animate-pulse rounded-lg bg-muted" role="status" aria-label="Đang tải đồ thị" />}
         {state.kind === "error" && <ErrorBox message={state.message} />}
-        {graph && <RelationGraph graph={graph} layout="stacked" preview />}
+        {graph && <RelationGraph graph={graph} layout="stacked" preview nodeActions={nodeActions} />}
       </div>
+      {editor.dirty && (
+        <div className="mt-3 flex flex-wrap items-center gap-2 rounded-md border border-warn/40 bg-warn-soft p-3 text-sm">
+          <p className="min-w-0 basis-full font-medium sm:basis-0 sm:grow">{Object.keys(unsaved).length} thay đổi chưa lưu</p>
+          <Button variant="outline" disabled={editor.status.kind === "saving"} onClick={() => editor.setDraft(editor.base)}>
+            Hoàn tác
+          </Button>
+          <Button variant="outline" disabled={editor.status.kind === "saving"} onClick={() => void editor.save()}>
+            Lưu nháp
+          </Button>
+          <Button variant="brand" disabled={editor.status.kind === "saving" || applying} onClick={() => void saveAndApply()}>
+            Lưu và áp dụng
+          </Button>
+          {editor.status.kind === "error" && (
+            <p role="alert" className="w-full text-danger">{editor.status.message}</p>
+          )}
+        </div>
+      )}
       {data && (
         <div className="overflow-x-auto">
           <table className="mt-4 w-full text-left text-sm">

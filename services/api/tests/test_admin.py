@@ -347,6 +347,29 @@ def test_preview_without_edits_is_the_live_graph_and_a_brand_edit_moves_the_edge
     assert unlabelled["blocked"] == "category_required"
 
 
+def test_preview_names_the_form_values_that_remove_or_restore_a_relation(admin) -> None:
+    service_admin, service = admin
+
+    def form(result: dict) -> dict:
+        return {(r["rel"], r["label"]): r["form"] for r in result["table"]}
+
+    live = form(service_admin.preview(service, "e1", {}, 0))
+    assert live["TREATS", "ho"] == {"field": "treats", "items": ["ho"]}
+    assert live["MADE_BY", "Bảo Thanh"] == {"field": "brand", "items": ["brand:bt"]}
+    assert live["IS_A", "Thuốc uống"] is None  # a category is changed, never removed
+
+    # A phrase also produces its purpose bucket: removing the bucket node must drop both.
+    typed = {"treats": ["ho", "trào ngược dạ dày"]}
+    rows = form(service_admin.preview(service, "e1", typed, 0))
+    assert rows["TREATS", "dạ dày"] == {"field": "treats", "items": ["trào ngược dạ dày"]}
+    without = service_admin.preview(service, "e1", {"treats": ["ho"]}, 0)
+    assert not any(r["label"] == "dạ dày" for r in without["table"])
+
+    gone = form(service_admin.preview(service, "e1", {"treats": [], "brand": None}, 0))
+    assert gone["TREATS", "ho"] == {"field": "treats", "items": ["ho"]}  # restores it
+    assert gone["MADE_BY", "Bảo Thanh"] == {"field": "brand", "items": ["brand:bt"]}
+
+
 def test_vocabulary(client: TestClient) -> None:
     brands = client.get("/api/v1/admin/vocab/brand?q=bao", headers=token()).json()
     purposes = client.get("/api/v1/admin/vocab/purpose", headers=token()).json()

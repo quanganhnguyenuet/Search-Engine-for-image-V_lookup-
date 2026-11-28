@@ -4,6 +4,12 @@ The relation edges are built by the release itself (scripts/admin_release.apply_
 on a copy of this entity's entry, so value folding and the extra purpose buckets show exactly as
 they will be applied. The result is a subgraph in the shape of GraphView.subgraph where nodes and
 edges also say whether the release adds or removes them (``change``).
+
+Each table row also carries ``form``: the edit-form field behind the relation and the values of
+that field which produce it. Removing those values removes the relation; for a relation that is
+about to be removed they are the released values that bring it back. One node can have several:
+"trào ngược dạ dày" also produces the purpose bucket "dạ dày", which would come back on release if
+only "dạ dày" were removed.
 """
 
 from __future__ import annotations
@@ -111,8 +117,10 @@ def preview_relations(
                 }
         value_changes.setdefault(dst, set()).add(status)
         edges.append(_edge(entity_id, rel, dst, meta, status))
+        old = old_entry if status == "removed" else new_entry
         table_rows.append(
             {
+                "form": _form_source(release, rel, dst, fields, old, status == "removed"),
                 "rel": rel,
                 "target": dst,
                 "label": nodes[dst]["label"],
@@ -155,6 +163,33 @@ def preview_relations(
         "removed": sum(row["change"] == "removed" for row in table_rows),
         "blocked": blocked,
     }
+
+
+def _form_source(
+    release, rel: str, dst: str, fields: dict, entry: dict, removed: bool
+) -> dict | None:
+    """{"field", "items"} behind a relation, or None when the form cannot remove it (the
+    category, or a relation that only a merged record carries).
+
+    For a relation that stays or is added, the items are those of the form's current value: the
+    saved or typed one in ``fields``, else the entry's. For a removed one, ``entry`` is the
+    released entry."""
+    if rel == "MADE_BY":
+        return {"field": "brand", "items": [dst]}
+    field = next((f for f, r in release.FIELD_REL.items() if r == rel), None)
+    if field is None:
+        return None
+    value = fields[field] if field in fields and not removed else entry.get(field)
+    values = value if isinstance(value, list) else [value] if value else []
+    table, prefix = release.RELATION_TABLES[rel]
+    items = []
+    for item in values:
+        raw = {field: [item] if isinstance(value, list) else item, "admin_fields": [field]}
+        clean = release.clean_enrichment(raw, entry.get("category_l1") or "")[field]
+        produced = clean if isinstance(clean, list) else [clean]
+        if any(release.slug_id(prefix, v) == dst for v in produced if v):
+            items.append(item)
+    return {"field": field, "items": items} if items else None
 
 
 def _edge(src: str, rel: str, dst: str, meta: dict, change: str | None) -> dict:

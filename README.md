@@ -104,7 +104,9 @@ starts from the entity page or, for the new products of a CSV, from the import p
 previews the
 relations the next release would build, from the saved drafts and the form's unsaved values
 (`POST /api/v1/admin/entities/{id}/preview`, which runs the release's own edge builder on a copy),
-and can start the release itself. A release applies every pending change, wherever it starts; the
+and can start the release itself. Right-clicking a value node of that graph (or selecting it, on a
+touch screen) removes it from the product: the form draft drops every value that produces the node, so a
+purpose bucket cannot come back on release. Category and product nodes cannot be removed. A release applies every pending change, wherever it starts; the
 confirm step lists them. Products with pending edits are the "Chờ áp dụng" filter of the product list.
 
 `REQUIRE_LOGIN=false` never opens the admin routes. What an admin can do, and when it takes effect:

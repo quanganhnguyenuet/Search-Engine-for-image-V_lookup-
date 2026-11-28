@@ -101,7 +101,14 @@ export type RelationGraphProps = {
   className?: string;
   /** A product's relations (admin edit page), not the graph of a search query. */
   preview?: boolean;
+  /** Right-click (or the node panel) menu of a node; without it the graph is read-only. */
+  nodeActions?: (node: GraphNode) => NodeAction[];
 };
+
+/** A menu entry; one without `run` only explains why there is nothing to do. */
+export type NodeAction = { label: string; hint?: string; danger?: boolean; run?: () => void };
+
+const MENU_WIDTH = 272;
 
 const CHANGE_COLOR = { added: "brand", removed: "danger" } as const;
 const CHANGE_SIGN = { added: "+", removed: "−" } as const;
@@ -114,6 +121,7 @@ export function RelationGraph({
   layout: arrangement = "side",
   className,
   preview = false,
+  nodeActions,
 }: RelationGraphProps) {
   const uid = useId().replace(/:/g, "");
   const svgRef = useRef<SVGSVGElement>(null);
@@ -131,6 +139,8 @@ export function RelationGraph({
   const [view, setView] = useState<View>({ x: -300, y: -200, w: 600, h: 400 });
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [menu, setMenu] = useState<{ node: SimNode; x: number; y: number; from: Element } | null>(null);
 
   useEffect(() => {
     reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -178,6 +188,7 @@ export function RelationGraph({
   useEffect(() => {
     build();
     setSelected(null);
+    setMenu(null);
     return () => {
       simRef.current?.stop();
     };
@@ -205,7 +216,26 @@ export function RelationGraph({
     return { x: point.x, y: point.y };
   };
 
+  /** Opens the node menu at the pointer, or beside the node when opened from the keyboard. */
+  const openMenu = (node: SimNode, target: Element, clientX?: number, clientY?: number) => {
+    const frame = frameRef.current?.getBoundingClientRect();
+    if (!frame) return;
+    const box = target.getBoundingClientRect();
+    const x = (clientX || box.left + box.width / 2) - frame.left;
+    const y = (clientY || box.top + box.height / 2) - frame.top;
+    gesture.current = null;
+    setSelected(node.id);
+    setMenu({
+      node,
+      x: Math.max(8, Math.min(x, frame.width - MENU_WIDTH - 8)),
+      y: Math.max(8, Math.min(y, frame.height - 150)),
+      from: target,
+    });
+  };
+
   const onPointerDown = (event: PointerEvent<Element>, node?: SimNode) => {
+    if (event.button !== 0) return; // the right button opens the menu, it does not drag
+    setMenu(null);
     event.currentTarget.setPointerCapture(event.pointerId);
     gesture.current = {
       kind: node ? "node" : "pan",
@@ -265,6 +295,12 @@ export function RelationGraph({
     });
 
   const onNodeKey = (event: KeyboardEvent, id: string) => {
+    const node = byId.get(id);
+    if (nodeActions && node && (event.key === "ContextMenu" || event.key === "Delete" || (event.shiftKey && event.key === "F10"))) {
+      event.preventDefault();
+      openMenu(node, event.currentTarget);
+      return;
+    }
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       setSelected((current) => (current === id ? null : id));
@@ -281,7 +317,7 @@ export function RelationGraph({
   return (
     <div className={cn("grid gap-3", arrangement === "side" && "lg:grid-cols-[minmax(0,1fr)_17rem]", className)}>
       <div className="flex min-w-0 flex-col gap-2">
-        <div className="relative overflow-hidden rounded-lg border bg-surface">
+        <div ref={frameRef} className="relative overflow-hidden rounded-lg border bg-surface">
           <svg
             ref={svgRef}
             viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
@@ -379,6 +415,14 @@ export function RelationGraph({
                     aria-pressed={isSelected}
                     aria-label={`${NODE_LABEL[node.type]}: ${node.label}${node.role === "origin" && !preview ? " (thực thể gốc của câu)" : ""}${node.change ? ` (${CHANGE_TEXT[node.change]})` : ""}`}
                     onKeyDown={(event) => onNodeKey(event, node.id)}
+                    onContextMenu={
+                      nodeActions
+                        ? (event) => {
+                            event.preventDefault();
+                            openMenu(node, event.currentTarget, event.clientX, event.clientY);
+                          }
+                        : undefined
+                    }
                     onPointerDown={(event) => {
                       event.stopPropagation();
                       onPointerDown(event, node);
@@ -458,6 +502,19 @@ export function RelationGraph({
             </g>
           </svg>
 
+          {menu && nodeActions && (
+            <NodeMenu
+              title={`${NODE_LABEL[menu.node.type]}: ${menu.node.label}`}
+              x={menu.x}
+              y={menu.y}
+              actions={nodeActions(menu.node)}
+              onClose={(refocus) => {
+                if (refocus) (menu.from as SVGGElement).focus();
+                setMenu(null);
+              }}
+            />
+          )}
+
           <div className="absolute right-2 top-2 flex flex-col gap-1">
             <Button variant="outline" className="h-9 w-9 px-0" onClick={() => zoom(0.8)} aria-label="Phóng to đồ thị">
               +
@@ -490,6 +547,7 @@ export function RelationGraph({
           )}
           <span>Nét đứt mảnh: quan hệ chưa duyệt</span>
           <span>Kéo nút để di chuyển · kéo nền để dịch · Ctrl + cuộn để zoom</span>
+          {nodeActions && <span className="font-medium text-foreground">Chuột phải (hoặc bấm) vào một node để gỡ nó khỏi sản phẩm</span>}
         </div>
         {graph.truncated && (
           <p className="text-xs text-warn">Đồ thị chỉ vẽ phần đầu của danh sách sản phẩm để dễ đọc.</p>
@@ -516,7 +574,79 @@ export function RelationGraph({
         links={layout.links as unknown as { source: SimNode; target: SimNode; edge: GraphEdge }[]}
         imageCounts={imageCounts}
         onSelect={setSelected}
+        actions={selectedNode && nodeActions ? nodeActions(selectedNode) : []}
       />
+    </div>
+  );
+}
+
+function NodeMenu({
+  title,
+  x,
+  y,
+  actions,
+  onClose,
+}: {
+  title: string;
+  x: number;
+  y: number;
+  actions: NodeAction[];
+  onClose: (refocus: boolean) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const close = useRef(onClose);
+  close.current = onClose;
+  useEffect(() => {
+    (ref.current?.querySelector<HTMLElement>("button") ?? ref.current)?.focus();
+    const outside = (event: Event) => {
+      if (!ref.current?.contains(event.target as Node)) close.current(false);
+    };
+    const escape = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") close.current(true);
+    };
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("keydown", escape);
+    return () => {
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("keydown", escape);
+    };
+  }, []);
+  return (
+    <div
+      ref={ref}
+      role="menu"
+      aria-label={title}
+      tabIndex={-1}
+      className="absolute z-10 rounded-lg border bg-surface p-1 text-sm shadow-lg"
+      style={{ left: x, top: y, width: MENU_WIDTH }}
+      onContextMenu={(event) => event.preventDefault()}
+    >
+      <p className="truncate border-b px-2 py-1.5 text-xs text-muted-foreground">{title}</p>
+      {actions.map((action) => (
+        <div key={action.label}>
+          {action.run ? (
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => {
+                action.run?.();
+                onClose(false);
+              }}
+              className={cn(
+                "block min-h-10 w-full rounded-md px-2 py-2 text-left font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand",
+                action.danger && "text-danger hover:bg-danger-soft",
+              )}
+            >
+              {action.label}
+            </button>
+          ) : (
+            <p role="menuitem" aria-disabled="true" className="px-2 py-2 text-muted-foreground">
+              {action.label}
+            </p>
+          )}
+          {action.hint && <p className="px-2 pb-2 text-xs text-muted-foreground">{action.hint}</p>}
+        </div>
+      ))}
     </div>
   );
 }
@@ -526,7 +656,9 @@ function NodePanel({
   links,
   imageCounts,
   onSelect,
+  actions,
 }: {
+  actions: NodeAction[];
   node: SimNode | undefined;
   links: { source: SimNode; target: SimNode; edge: GraphEdge }[];
   imageCounts: Record<string, number>;
@@ -551,6 +683,22 @@ function NodePanel({
           {node.role === "sibling" && " · ngữ cảnh"}
         </p>
         <h3 className="mt-0.5 break-words font-semibold leading-snug">{node.label}</h3>
+        {actions.length > 0 && (
+          <div className="mt-2 space-y-1">
+            {actions.map((action) => (
+              <div key={action.label}>
+                {action.run ? (
+                  <Button variant="outline" className={cn("h-auto min-h-10 w-full whitespace-normal py-2 text-left", action.danger && "text-danger")} onClick={action.run}>
+                    {action.label}
+                  </Button>
+                ) : (
+                  <p className="text-xs text-muted-foreground">{action.label}</p>
+                )}
+                {action.hint && <p className="mt-1 text-xs text-muted-foreground">{action.hint}</p>}
+              </div>
+            ))}
+          </div>
+        )}
         {imageCounts[node.id] ? (
           <p className="mt-1 text-xs text-muted-foreground">{imageCounts[node.id]} ảnh trong kết quả</p>
         ) : null}

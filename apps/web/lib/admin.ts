@@ -113,6 +113,8 @@ export type EntityDetail = {
 /** Relations as applying the pending edits would build them (application/preview.py). */
 export type Preview = Subgraph & {
   table: {
+    /** The form field and values behind the relation; null when it cannot be removed. */
+    form: { field: FieldName; items: string[] } | null;
     rel: string;
     target: string;
     label: string;
