@@ -1,6 +1,6 @@
 import { authFetch } from "@/lib/api";
 import type { Subgraph } from "@/lib/graph";
-import { API_URL } from "@/lib/search";
+import { API_URL, thumbnailOf } from "@/lib/search";
 
 // Types of /api/v1/admin (services/api/src/visualseek_api/application/admin.py).
 
@@ -434,6 +434,10 @@ export const admin = {
 
 export function imageUrl(assetId: string): string {
   return `${API_URL}/api/v1/images/${assetId}`;
+}
+
+export function thumbUrl(assetId: string): string {
+  return thumbnailOf(imageUrl(assetId));
 }
 
 const STEP_TEXT: Record<string, string> = {

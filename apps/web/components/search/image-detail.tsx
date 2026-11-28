@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { PlanChips } from "@/components/search/plan-chips";
 import { CHANNELS, formatScore, STATUS } from "@/components/search/search-trace";
 import { useSubgraph } from "@/lib/graph";
-import { API_URL, type SearchHit, type SearchResponse } from "@/lib/search";
+import { API_URL, type SearchHit, type SearchResponse, thumbnailOf } from "@/lib/search";
 
 type Props = {
   data: SearchResponse;
@@ -16,6 +16,36 @@ type Props = {
   onIndex: (index: number) => void;
   onClose: () => void;
 };
+
+/** The original image. The grid's thumbnail (already cached) stands in until it has loaded. */
+function FullImage({ url, alt }: { url: string; alt: string }) {
+  const image = useRef<HTMLImageElement>(null);
+  const [settled, setSettled] = useState(false);
+
+  // A cached original can finish before React attaches onLoad.
+  useEffect(() => {
+    if (image.current?.complete) setSettled(true);
+  }, []);
+
+  const frame = "col-start-1 row-start-1 max-h-[70dvh] w-full object-contain";
+  return (
+    <span className="grid w-full">
+      {!settled && (
+        // eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary
+        <img src={thumbnailOf(url)} alt="" aria-hidden="true" className={frame} />
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary */}
+      <img
+        ref={image}
+        src={url}
+        alt={alt}
+        onLoad={() => setSettled(true)}
+        onError={() => setSettled(true)}
+        className={settled ? frame : `${frame} opacity-0`}
+      />
+    </span>
+  );
+}
 
 export function ImageDetail({ data, index, onIndex, onClose }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -74,12 +104,7 @@ export function ImageDetail({ data, index, onIndex, onClose }: Props) {
           </header>
           <div className="grid min-h-0 flex-1 gap-0 overflow-y-auto lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:overflow-hidden">
             <div className="flex items-start justify-center bg-white p-4 lg:overflow-y-auto">
-              {/* eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary */}
-              <img
-                src={`${API_URL}${hit.image_url}`}
-                alt={hit.entity_names.join(", ")}
-                className="max-h-[70dvh] w-full object-contain"
-              />
+              <FullImage key={hit.asset_id} url={`${API_URL}${hit.image_url}`} alt={hit.entity_names.join(", ")} />
             </div>
             <div className="space-y-6 p-4 sm:p-6 lg:overflow-y-auto">
               <DetailBody key={hit.asset_id} data={data} hit={hit} rank={index + 1} />
@@ -292,7 +317,7 @@ function Description({ text, fallbackTitle }: { text?: string | null; fallbackTi
 
 function FocusGraph({ hit }: { hit: SearchHit }) {
   const state = useSubgraph({ ids: hit.entity_ids, siblings: 4 });
-  const thumb = `${API_URL}${hit.image_url}`;
+  const thumb = thumbnailOf(`${API_URL}${hit.image_url}`);
   const thumbs = Object.fromEntries(hit.entity_ids.map((id) => [id, thumb]));
   if (hit.entity_ids.length === 0) {
     return <p className="text-sm text-muted-foreground">Ảnh này chưa gắn với sản phẩm nào.</p>;

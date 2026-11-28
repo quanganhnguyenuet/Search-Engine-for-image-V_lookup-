@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from visualseek_api import __version__
 from visualseek_api.api.router import api_router
+from visualseek_api.core.auth import keep_keys_warm
 from visualseek_api.core.config import get_settings
 from visualseek_api.core.errors import register_exception_handlers
 from visualseek_api.core.logging import configure_logging
@@ -20,6 +21,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     logger = structlog.get_logger(__name__)
     application.state.search = None
     application.state.admin = None
+    keys_stop = None
     if settings.search_enabled:
         from visualseek_api.application.admin import AdminService
         from visualseek_api.application.search import SearchService
@@ -42,12 +44,16 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         # CSV imports run on the current service (a release swaps it); unfinished ones resume.
         admin.imports.get_service = lambda: application.state.search
         admin.imports.resume()
+        if settings.require_login and settings.supabase_url:
+            keys_stop = keep_keys_warm(settings.supabase_url)
     if not settings.require_login:
         logger.warning("login_not_required", detail="search is open to anyone who can reach it")
     elif not settings.supabase_url:
         logger.warning("auth_unconfigured", detail="set SUPABASE_URL; search returns 503")
     logger.info("application_started", environment=settings.app_env)
     yield
+    if keys_stop is not None:
+        keys_stop.set()
     logger.info("application_stopped")
 
 

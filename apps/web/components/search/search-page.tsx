@@ -10,7 +10,7 @@ import { PlanChips } from "@/components/search/plan-chips";
 import { SearchIntro } from "@/components/search/search-intro";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { SearchTracePanel } from "@/components/search/search-trace";
-import { API_URL, type SearchResponse, searchText } from "@/lib/search";
+import { API_URL, type SearchResponse, searchText, thumbnailOf } from "@/lib/search";
 import { cn } from "@/lib/utils";
 
 const STAGES: [string, string][] = [
@@ -289,7 +289,7 @@ function Results({
                 <span className="relative block aspect-square bg-white">
                   {/* eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary */}
                   <img
-                    src={`${API_URL}${hit.image_url}`}
+                    src={thumbnailOf(`${API_URL}${hit.image_url}`)}
                     alt=""
                     width={320}
                     height={320}

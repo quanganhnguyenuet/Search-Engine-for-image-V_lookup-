@@ -4,7 +4,7 @@ import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 
 import { inputClass } from "@/components/admin/fields";
 import { Button } from "@/components/ui/button";
-import { admin, type EntityDetail, type EntityImage, imageUrl } from "@/lib/admin";
+import { admin, type EntityDetail, type EntityImage, imageUrl, thumbUrl } from "@/lib/admin";
 import { cn } from "@/lib/utils";
 
 const ACCEPT = "image/jpeg,image/png,image/webp";
@@ -64,7 +64,7 @@ function ImageCard({ image, onChanged }: { image: EntityImage; onChanged: () => 
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary */}
         <img
-          src={imageUrl(image.asset_id)}
+          src={thumbUrl(image.asset_id)}
           alt=""
           width={240}
           height={240}

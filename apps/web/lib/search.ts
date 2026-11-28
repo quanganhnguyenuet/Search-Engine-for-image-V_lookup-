@@ -6,6 +6,9 @@ export const API_URL = (
   (process.env.NODE_ENV === "production" ? "" : "http://localhost:8000")
 ).replace(/\/$/, "");
 
+/** The API's small WebP copy of an image, for grids. The same URL without it is the original. */
+export const thumbnailOf = (url: string) => `${url}?w=480`;
+
 /** Exact cosines of the query against one image; absent when the API cannot compute them. */
 export type Similarity = {
   /** bge-m3: query vs the description text that was embedded. */

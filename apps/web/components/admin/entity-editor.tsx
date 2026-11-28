@@ -19,7 +19,7 @@ import {
   formatTime,
   type Preview,
   formatValue,
-  imageUrl,
+  thumbUrl,
   MARKET_TIERS,
   SOURCE_LABEL,
   type VocabItem,
@@ -124,7 +124,7 @@ function Loaded({ detail, onDetail }: { detail: EntityDetail; onDetail: (d: Enti
         {cover && (
           <span className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border bg-white">
             {/* eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary */}
-            <img src={imageUrl(cover.asset_id)} alt="" width={80} height={80} className="size-full object-contain" />
+            <img src={thumbUrl(cover.asset_id)} alt="" width={80} height={80} className="size-full object-contain" />
           </span>
         )}
         <div className="min-w-0 flex-1">

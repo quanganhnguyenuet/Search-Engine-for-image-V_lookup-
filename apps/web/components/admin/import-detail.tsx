@@ -14,6 +14,7 @@ import {
   type ImportDetail,
   type ImportGroup,
   imageUrl,
+  thumbUrl,
 } from "@/lib/admin";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +31,7 @@ function Thumb({ assetId, size = 56, label = "" }: { assetId: string | null; siz
     >
       {assetId ? (
         // eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary
-        <img src={imageUrl(assetId)} alt={label} width={size} height={size} loading="lazy" className="size-full object-contain" />
+        <img src={thumbUrl(assetId)} alt={label} width={size} height={size} loading="lazy" className="size-full object-contain" />
       ) : (
         <span className="text-[10px] text-slate-500">không ảnh</span>
       )}

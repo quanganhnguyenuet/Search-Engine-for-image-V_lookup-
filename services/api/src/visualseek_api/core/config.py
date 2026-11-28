@@ -41,6 +41,8 @@ class Settings(BaseSettings):
     admin_dir: str = "graph/admin"
     # ... and uploaded images with their vectors (data, not in git).
     admin_data_dir: str = "data/admin"
+    # Cache of the 480 px copies served to grids; safe to delete.
+    thumbs_dir: str = "data/thumbs"
     admin_upload_max_bytes: int = 10 * 1024 * 1024
     # CSV import: how new entities are classified and enriched (scripts/graph_classify.py,
     # graph_enrich.py): "agy" (local CLI), "api" (GEMINI_API_KEY in .env) or "off".

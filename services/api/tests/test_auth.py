@@ -230,3 +230,19 @@ def test_switching_login_off_does_not_open_admin(client: TestClient) -> None:
 
 def test_a_plain_user_still_searches(client: TestClient) -> None:
     assert client.get(GRAPH_URL, headers=bearer(token(user_role="user"))).status_code == 200
+
+
+def test_key_refresh_failure_keeps_the_cached_keys(monkeypatch) -> None:
+    verifier = auth.TokenVerifier("https://project.supabase.co")
+    monkeypatch.setattr(jwt.PyJWKClient, "fetch_data", lambda self: JWKS)
+    assert verifier.refresh_keys() is True
+    cached = verifier._keys.jwk_set_cache.get()
+
+    def offline(self):
+        raise jwt.PyJWKClientConnectionError("offline")
+
+    monkeypatch.setattr(jwt.PyJWKClient, "fetch_data", offline)
+
+    assert verifier.refresh_keys() is False
+    assert verifier._keys.jwk_set_cache.get() is cached
+

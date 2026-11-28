@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { RelationGraph } from "@/components/graph/relation-graph";
 import { Button } from "@/components/ui/button";
 import { useSubgraph } from "@/lib/graph";
-import { API_URL, type SearchResponse } from "@/lib/search";
+import { API_URL, type SearchResponse, thumbnailOf } from "@/lib/search";
 
 const MAX_ENTITIES = 40;
 
@@ -20,7 +20,7 @@ export function QueryGraph({ data }: { data: SearchResponse }) {
     for (const hit of results) {
       for (const id of hit.entity_ids) {
         imageCounts[id] = (imageCounts[id] ?? 0) + 1;
-        thumbs[id] ??= `${API_URL}${hit.image_url}`;
+        thumbs[id] ??= thumbnailOf(`${API_URL}${hit.image_url}`);
       }
     }
     return {

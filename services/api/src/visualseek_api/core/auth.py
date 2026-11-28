@@ -6,6 +6,7 @@ not call Supabase. A token therefore stays valid until it expires, even after si
 
 from dataclasses import dataclass
 from functools import lru_cache
+from threading import Event, Thread
 from typing import Annotated
 
 import jwt
@@ -25,6 +26,9 @@ ADMIN_ROLE = "admin"
 # Supabase caches its JWKS endpoint for 10 minutes. An unknown key id still forces a refetch.
 JWKS_LIFESPAN_SECONDS = 600
 JWKS_TIMEOUT_SECONDS = 5
+# Refetched before the cache expires, so no request waits for the download (150-500 ms measured).
+JWKS_REFRESH_SECONDS = JWKS_LIFESPAN_SECONDS - 120
+JWKS_RETRY_SECONDS = 30
 
 _bearer = HTTPBearer(auto_error=False, description="Supabase access token")
 
@@ -50,6 +54,15 @@ class TokenVerifier:
             lifespan=JWKS_LIFESPAN_SECONDS,
             timeout=JWKS_TIMEOUT_SECONDS,
         )
+
+    def refresh_keys(self) -> bool:
+        """Download the keys now. A failure leaves the cached ones in place."""
+        try:
+            self._keys.get_jwk_set(refresh=True)
+        except Exception as error:  # offline or a bad answer: requests still try on their own
+            structlog.get_logger(__name__).warning("jwks_refresh_failed", error=str(error)[:200])
+            return False
+        return True
 
     def verify(self, token: str) -> AuthUser:
         """Raises jwt.PyJWTError when the token cannot be trusted."""
@@ -78,6 +91,19 @@ class TokenVerifier:
 def _verifier(supabase_url: str) -> TokenVerifier:
     # One per project URL, so that the downloaded keys are reused between requests.
     return TokenVerifier(supabase_url)
+
+
+def keep_keys_warm(supabase_url: str) -> Event:
+    """Load the keys now and refresh them in the background until the returned event is set."""
+    verifier, stop = _verifier(supabase_url), Event()
+
+    def run() -> None:
+        while not stop.is_set():
+            ok = verifier.refresh_keys()
+            stop.wait(JWKS_REFRESH_SECONDS if ok else JWKS_RETRY_SECONDS)
+
+    Thread(target=run, name="jwks-keep-warm", daemon=True).start()
+    return stop
 
 
 def _unauthorized(code: str, message: str) -> ApplicationError:

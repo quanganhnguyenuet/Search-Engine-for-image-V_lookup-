@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { thumbnailOf } from "@/lib/search";
 import { imageUrl } from "@/lib/showcase";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +23,7 @@ export function PreviewImage({ assetId, className }: { assetId: string; classNam
         // eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary
         <img
           ref={image}
-          src={imageUrl(assetId)}
+          src={thumbnailOf(imageUrl(assetId))}
           alt=""
           width={160}
           height={160}

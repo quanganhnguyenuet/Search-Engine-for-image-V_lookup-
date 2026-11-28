@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ErrorBox, PageTitle, PendingBadge } from "@/components/admin/admin-shell";
 import { Button } from "@/components/ui/button";
-import { admin, ENTITY_FILTERS, type EntityFilter, type EntityRow, FIELD_LABEL, type FieldName, imageUrl } from "@/lib/admin";
+import { admin, ENTITY_FILTERS, type EntityFilter, type EntityRow, FIELD_LABEL, type FieldName, thumbUrl } from "@/lib/admin";
 import { cn } from "@/lib/utils";
 
 const PAGE = 30;
@@ -147,7 +147,7 @@ export function EntityList() {
                 <span className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded border bg-white">
                   {row.thumb ? (
                     // eslint-disable-next-line @next/next/no-img-element -- served by the API, sizes vary
-                    <img src={imageUrl(row.thumb)} alt="" width={48} height={48} loading="lazy" className="size-full object-contain" />
+                    <img src={thumbUrl(row.thumb)} alt="" width={48} height={48} loading="lazy" className="size-full object-contain" />
                   ) : (
                     <span className="text-[10px] text-slate-500">không ảnh</span>
                   )}
