@@ -367,7 +367,11 @@ class ImportService:
                 if entity_id not in service.admin_index.entities:
                     raise _bad("Không có entity này.", "not_found")
             previous = group.get("decision") or {}
-            if previous.get("type") == "new" and group.get("registered"):
+            if (
+                previous.get("type") == "new"
+                and group.get("target") in self._waiting_entities(service)
+                and not self._wanted_elsewhere(group)
+            ):
                 self._drop_new_entity(state, group, actor)
             group["decision"] = {
                 "type": "new" if new else "existing",
@@ -400,17 +404,30 @@ class ImportService:
         self.enqueue(import_id)
         return self.view(import_id)
 
-    def pending_new_entities(self, service) -> list[dict]:
-        """Registered new entities the live graph does not have yet (the next release adds them)."""
+    def _waiting_entities(self, service) -> dict[str, dict]:
+        """Registry rows of new entities the live graph does not have yet, by entity id."""
         from visualseek_retrieval.admin_overlay import load_new_entities
 
         live = service.admin_index.graph_entities
         rows = load_new_entities(Path(self.settings.admin_dir))
+        return {entity_id: row for entity_id, row in rows.items() if entity_id not in live}
+
+    def _wanted_elsewhere(self, group: dict) -> bool:
+        """Another group, of any import, shares this group's new entity."""
+        return any(
+            other is not group
+            and other.get("target") == group["target"]
+            and (other.get("decision") or {}).get("type") == "new"
+            for state in self.states.values()
+            for other in state["groups"]
+        )
+
+    def pending_new_entities(self, service) -> list[dict]:
+        """Registered new entities the live graph does not have yet (the next release adds them)."""
+        rows = self._waiting_entities(service)
         names = service.admin_index.category_names
         out = []
         for entity_id, row in sorted(rows.items(), key=lambda kv: kv[1]["name"].casefold()):
-            if entity_id in live:
-                continue
             label = row.get("label") or {}
             out.append(
                 {
@@ -1021,37 +1038,22 @@ class ImportService:
     # step 5: new entities ----------------------------------------------------------------
 
     def _label_new(self, state: dict, service) -> None:
-        from visualseek_retrieval.csv_import import evidence_pack, new_entity_id
+        from visualseek_retrieval.csv_import import evidence_pack
 
         index = service.admin_index
-        todo = [
-            g
-            for g in state["groups"]
-            if (g.get("decision") or {}).get("type") == "new"
-            and not g.get("registered")
-            and self._kept(state, g)
-        ]
-        if not todo:
+        claims = self._claim_new(state, service)
+        if not claims:
             return
-        self._set(state, step="label", progress={"done": 0, "total": len(todo)})
-        taken = set(index.graph_entities)
-        with self.lock:
-            for s in self.states.values():
-                for g in s["groups"]:
-                    if g.get("registered") and g.get("target"):
-                        taken.add(g["target"])
+        self._set(state, step="label", progress={"done": 0, "total": len(claims)})
         packs = {}
-        for group in todo:
-            if not group.get("target"):
-                group["target"] = new_entity_id(group["csv_entity_id"], group["name"], taken)
-            taken.add(group["target"])
+        for group, _, entity_id in claims:
             items = [self._item(state, a) for a in self._kept(state, group)]
-            packs[group["key"]] = evidence_pack(group["target"], group["name"], items)
+            packs[entity_id] = evidence_pack(entity_id, group["name"], items)
         unavailable = self.labeller.available()
         done = 0
-        for start in range(0, len(todo), LABEL_BATCH):
-            chunk = todo[start : start + LABEL_BATCH]
-            chunk_packs = [packs[g["key"]] for g in chunk]
+        for start in range(0, len(claims), LABEL_BATCH):
+            chunk = claims[start : start + LABEL_BATCH]
+            chunk_packs = [packs[entity_id] for _, _, entity_id in chunk]
             labels, enrich, error = {}, {}, unavailable
             if not unavailable:
                 try:
@@ -1060,18 +1062,60 @@ class ImportService:
                 except Exception as exc:  # the entity is still registered, without a label
                     logger.warning("import_label_failed", error=str(exc)[:300])
                     error = str(exc)[:300]
-            for group in chunk:
-                eid = group["target"]
-                label, extra = labels.get(eid), enrich.get(eid)
+            for group, decision, entity_id in chunk:
+                label, extra = labels.get(entity_id), enrich.get(entity_id)
                 if label is None and not error:
                     error = "LLM không trả nhãn cho entity này"
-                self._register(state, group, packs[group["key"]], label, extra)
-                with self.lock:
+                done += 1
+                with self.lock:  # decide() takes it too
+                    if group.get("decision") is not decision:
+                        continue  # decided again while the labeller ran; that queued a new run
+                    self._register(state, group, packs[entity_id], label, extra)
                     group["label"], group["enrich"] = label, extra
                     group["registered"] = True
                     group["error"] = None if label else error
-                done += 1
-            self._set(state, progress={"done": done, "total": len(todo)})
+            self._set(state, progress={"done": done, "total": len(claims)})
+
+    def _claim_new(self, state: dict, service) -> list[tuple[dict, dict, str]]:
+        """Give every unregistered new group its entity id, and return (group, decision, id) for
+        the ones to label. A product that already waits for a release (the same dataset id, else
+        the same name) keeps its id, and its label when it has one."""
+        from visualseek_retrieval.csv_import import new_entity_id
+        from visualseek_retrieval.text import normalize
+
+        claims = []
+        with self.lock:
+            todo = [
+                g
+                for g in state["groups"]
+                if (g.get("decision") or {}).get("type") == "new"
+                and not g.get("registered")
+                and self._kept(state, g)
+            ]
+            if not todo:
+                return []
+            waiting = self._waiting_entities(service)
+            by_name = {normalize(row["name"]): entity_id for entity_id, row in waiting.items()}
+            taken = {*service.admin_index.graph_entities, *waiting}
+            for s in self.states.values():
+                taken.update(g["target"] for g in s["groups"] if g.get("registered"))
+            for group in todo:
+                if not group.get("target"):
+                    known = group["csv_entity_id"] if group["csv_entity_id"] in waiting else None
+                    group["target"] = (
+                        known
+                        or by_name.get(normalize(group["name"]))
+                        or new_entity_id(group["csv_entity_id"], group["name"], taken)
+                    )
+                taken.add(group["target"])
+                row = waiting.get(group["target"])
+                if row and row.get("label"):
+                    group.update(label=row["label"], enrich=row.get("enrich"))
+                    group.update(registered=True, error=None)
+                else:
+                    claims.append((group, group["decision"], group["target"]))
+            self._save(state)
+        return claims
 
     def _register(self, state: dict, group: dict, pack: dict, label, enrich) -> None:
         actor = (group.get("decision") or {}).get("actor") or state.get("actor") or {}
@@ -1121,6 +1165,8 @@ def _normalise_image(body: bytes) -> tuple[bytes, str, tuple[int, int]]:
             probe.verify()
         image = Image.open(io.BytesIO(body))
         image.load()
+    except Image.DecompressionBombError as error:  # not an OSError: it would end the import
+        raise ValueError("ảnh quá lớn") from error
     except (UnidentifiedImageError, OSError, SyntaxError, ValueError) as error:
         raise ValueError("không đọc được ảnh") from error
     if min(image.size) < MIN_IMAGE_SIDE:

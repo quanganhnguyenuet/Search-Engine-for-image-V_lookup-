@@ -1,3 +1,6 @@
+import csv
+import io
+
 import pytest
 
 from visualseek_retrieval.csv_import import (
@@ -125,3 +128,33 @@ def test_evidence_pack_has_the_corpus_snippet_kinds() -> None:
         ("o1", "ocr"),
     ]
     assert pack["members"] == ["n1"]
+
+
+@pytest.mark.parametrize("delimiter", [",", ";", "\t"])
+def test_quotes_far_down_the_file_are_read_as_csv_writes_them(delimiter) -> None:
+    """csv.Sniffer turned doubled quotes off when its sample had none, which lost later rows."""
+    titles = [f"San pham so {i} chinh hang gia tot nhat thi truong hom nay" for i in range(200)]
+    titles[150] = 'Tivi 55" Samsung, loại "xịn"; chính hãng'
+    titles[170] = 'Kem "Hot" trend, giá rẻ'
+    out = io.StringIO()
+    writer = csv.writer(out, delimiter=delimiter)
+    writer.writerow(["Tên entity", "URL ảnh", "Tiêu đề nguồn", "approve"])
+    for i, title in enumerate(titles):
+        writer.writerow([f"San pham {i}", f"https://shop.vn/{i}.png", title, "yes"])
+
+    rows, skipped = read_rows(out.getvalue())
+
+    assert skipped == []
+    assert [r["page_title"] for r in rows] == titles
+    assert [r["image_url"] for r in rows] == [f"https://shop.vn/{i}.png" for i in range(200)]
+
+
+def test_a_space_after_the_delimiter_still_opens_a_quoted_cell() -> None:
+    rows, _ = read_rows('entity_name, image_url, doc_title\nA, https://b.vn/x.png, "Dừa, xiêm"\n')
+
+    assert rows[0]["page_title"] == "Dừa, xiêm"
+
+
+def test_a_cell_over_the_csv_limit_is_a_csv_error() -> None:
+    with pytest.raises(CsvError, match="ô quá dài"):
+        read_rows("Tên entity,URL ảnh\n" + "x" * 200_000 + ",https://shop.vn/x.png\n")

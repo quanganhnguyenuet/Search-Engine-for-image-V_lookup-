@@ -216,7 +216,8 @@ def get(url, polite, referer=None):
     raise ValueError('quá nhiều chuyển hướng')
 
 
-IMAGE_HEADERS = {'Accept': 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+# No image/avif: Pillow cannot read it, and shops sent AVIF to whoever asked for it.
+IMAGE_HEADERS = {'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
                  'Accept-Language': 'vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7',
                  'Sec-Fetch-Dest': 'image', 'Sec-Fetch-Mode': 'no-cors', 'Sec-Fetch-Site': 'cross-site'}
 

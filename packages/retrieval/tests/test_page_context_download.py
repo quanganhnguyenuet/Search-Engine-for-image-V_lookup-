@@ -151,3 +151,12 @@ def test_parallel_downloads_with_failures(base_url, client):
         outcomes = list(pool.map(one, range(300)))
     assert outcomes[0] == outcomes[2] == "ok"
     assert outcomes[1] == outcomes[3] == "refused"
+
+
+def test_only_image_types_pillow_can_read_are_asked_for():
+    """Pillow 10 has no AVIF reader: asking for AVIF got pictures the import then dropped."""
+    from PIL import Image
+
+    Image.init()
+    asked = {part.split(";")[0] for part in page_context.IMAGE_HEADERS["Accept"].split(",")}
+    assert asked - set(Image.MIME.values()) - {"image/apng", "image/*", "*/*"} == set()

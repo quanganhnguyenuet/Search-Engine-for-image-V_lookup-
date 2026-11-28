@@ -295,3 +295,133 @@ def test_the_same_picture_at_another_size_is_a_near_duplicate(setup) -> None:
     view = imports.view(created["id"])
     assert [(i["line"], i["reason"]) for i in view["issues"]] == [(3, "gần trùng một ảnh đã có")]
     assert by_name(view)["Siro ho Bảo Thanh"]["published"] == 1
+
+
+def registry(tmp_path) -> list[dict]:
+    path = tmp_path / "admin/new_entities.jsonl"
+    return [json.loads(x) for x in path.read_text("utf-8").splitlines()] if path.exists() else []
+
+
+def run(imports, text: str) -> dict:
+    created = imports.create("f.csv", text.encode("utf-8"), ACTOR)
+    imports._run(created["id"])
+    return imports.view(created["id"])
+
+
+def release(service, entity_id: str, name: str) -> None:
+    index = service.admin_index
+    index.graph_entities[entity_id] = {"id": entity_id, "name": name, "aliases": [],
+                                       "notes": [], "brand_id": None}  # fmt: skip
+    index.entities.append(entity_id)
+
+
+PIA = "Bánh pía Sóc Trăng"
+PIA_ONE = f"Tên entity,URL ảnh\n{PIA},https://shop.vn/pia-1.png\n"
+PIA_TWO = f"Tên entity,URL ảnh\n{PIA},https://shop.vn/pia-2.png\n"
+
+
+def test_a_picture_with_too_many_pixels_fails_only_its_row(setup, monkeypatch) -> None:
+    _, imports, _, _ = setup
+    monkeypatch.setattr(Image, "MAX_IMAGE_PIXELS", 5000)  # 64x64 passes, 128x128 is refused
+    monkeypatch.setitem(IMAGES, "https://shop.vn/bomb.png", png((9, 9, 9), size=128))
+
+    view = run(
+        imports,
+        "Tên entity,URL ảnh\n"
+        "Siro ho Bảo Thanh,https://shop.vn/siro-1.png\n"
+        "Siro ho Bảo Thanh,https://shop.vn/bomb.png\n",
+    )
+
+    assert (view["status"], view["error"]) == ("done", None)
+    assert [(i["line"], i["status"], i["reason"]) for i in view["issues"]] == [
+        (3, "failed", "ảnh quá lớn")
+    ]
+    assert by_name(view)["Siro ho Bảo Thanh"]["published"] == 1
+
+
+@pytest.mark.parametrize("second", [PIA_ONE, PIA_TWO], ids=["same file", "other picture"])
+def test_a_new_product_waiting_for_a_release_is_registered_once(setup, monkeypatch, second) -> None:
+    admin, imports, service, _ = setup
+    classify, asked = imports_module.Labeller.classify, []
+
+    def counting(self, packs):
+        asked.append(len(packs))
+        return classify(self, packs)
+
+    monkeypatch.setattr(imports_module.Labeller, "classify", counting)
+    one, two = run(imports, PIA_ONE), run(imports, second)
+
+    target = by_name(one)[PIA]["target"]["id"]
+    assert by_name(two)[PIA]["target"]["id"] == target
+    assert by_name(two)[PIA]["status"] == "ready"
+    assert by_name(two)[PIA]["label"]["category"] == "food.drink"
+    assert [n["entity_id"] for n in imports.pending_new_entities(service)] == [target]
+    assert asked == [1]
+
+    release(service, target, PIA)
+    for view in (one, two):
+        imports._run(view["id"])
+        assert imports.view(view["id"])["status"] == "done"
+    assert len(admin.store.uploads()) == (1 if second == PIA_ONE else 2)
+
+
+def test_leaving_a_shared_new_entity_keeps_it_for_the_other_import(setup) -> None:
+    _, imports, service, tmp_path = setup
+    one, two = run(imports, PIA_ONE), run(imports, PIA_TWO)
+    key = by_name(one)[PIA]["key"]
+
+    imports.decide(two["id"], key, "e2", False, ACTOR)
+    assert [n["name"] for n in imports.pending_new_entities(service)] == [PIA]
+    assert [r["op"] for r in registry(tmp_path)] == ["add"]
+
+    imports.decide(one["id"], key, "e2", False, ACTOR)
+    assert imports.pending_new_entities(service) == []
+    assert [r["op"] for r in registry(tmp_path)] == ["add", "drop"]
+
+
+def test_an_unlabelled_pending_entity_is_labelled_under_the_same_id(setup, monkeypatch) -> None:
+    _, imports, service, _ = setup
+    available = imports_module.Labeller.available
+    monkeypatch.setattr(imports_module.Labeller, "available", lambda self: "off")
+    one = run(imports, PIA_ONE)
+    assert by_name(one)[PIA]["status"] == "ready_unlabelled"
+
+    monkeypatch.setattr(imports_module.Labeller, "available", available)
+    two = run(imports, PIA_TWO)
+
+    assert by_name(two)[PIA]["target"]["id"] == by_name(one)[PIA]["target"]["id"]
+    assert [(n["name"], n["labelled"]) for n in imports.pending_new_entities(service)] == [
+        (PIA, True)
+    ]
+
+
+@pytest.mark.parametrize("choice", ["existing", "new"])
+def test_a_decision_made_while_labelling_wins(setup, monkeypatch, choice) -> None:
+    """The admin may change a group while the labeller runs; the old answer is then dropped."""
+    _, imports, _, tmp_path = setup
+    created = imports.create("batch.csv", CSV.encode("utf-8"), ACTOR)
+    classify, decided = imports_module.Labeller.classify, []
+
+    def decide_during_labelling(self, packs):
+        if not decided:
+            pia = by_name(imports.view(created["id"]))[PIA]
+            assert pia["status"] == "labelling"
+            entity_id = "e2" if choice == "existing" else None
+            imports.decide(created["id"], pia["key"], entity_id, choice == "new", ACTOR)
+            decided.append(pia["key"])
+        return classify(self, packs)
+
+    monkeypatch.setattr(imports_module.Labeller, "classify", decide_during_labelling)
+    imports._run(created["id"])
+    assert registry(tmp_path) == []
+
+    imports._run(created["id"])  # decide() queued the job again
+    pia = by_name(imports.view(created["id"]))[PIA]
+    if choice == "existing":
+        assert (pia["status"], pia["target"]["id"], registry(tmp_path)) == ("published", "e2", [])
+    else:
+        assert pia["status"] == "ready"
+        assert pia["target"]["id"] not in (None, "e2")
+        assert [(r["op"], r["entity_id"]) for r in registry(tmp_path)] == [
+            ("add", pia["target"]["id"])
+        ]

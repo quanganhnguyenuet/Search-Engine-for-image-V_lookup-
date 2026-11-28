@@ -57,16 +57,23 @@ def _key(name: str) -> str:
     return normalize(name or "").replace(" ", "")
 
 
+def _delimiter(text: str) -> str:
+    """The delimiter of the header line, a comma when it has none. Only the delimiter is guessed:
+    csv.Sniffer also guesses the quoting, and turned doubled quotes off when its sample had none,
+    which lost the later rows that did."""
+    header = text.split("\n", 1)[0]
+    return max(",;\t", key=header.count)
+
+
 def read_rows(text: str) -> tuple[list[dict], list[dict]]:
     """(rows, skipped). Each row has every canonical column (missing ones are '') and ``line``."""
     text = text.lstrip("﻿")
-    sample = text[:4096]
+    reader = csv.DictReader(io.StringIO(text), delimiter=_delimiter(text), skipinitialspace=True)
     try:
-        dialect = csv.Sniffer().sniff(sample, delimiters=",;\t")
-    except csv.Error:
-        dialect = csv.excel
-    reader = csv.DictReader(io.StringIO(text), dialect=dialect)
-    header = reader.fieldnames or []
+        header = reader.fieldnames or []
+        records = list(reader)
+    except csv.Error as error:  # a cell over csv.field_size_limit(), often an unclosed quote
+        raise CsvError("CSV không đọc được: có ô quá dài hoặc dấu ngoặc kép bị lỗi.") from error
     present = {_key(h): h for h in header if h}
     mapping = {}
     for name, options in ALIASES.items():
@@ -79,7 +86,7 @@ def read_rows(text: str) -> tuple[list[dict], list[dict]]:
         wanted = "; ".join(" / ".join(ALIASES[name][:3]) for name in missing)
         raise CsvError(f"CSV thiếu cột: {wanted}")
     rows, skipped = [], []
-    for line, raw in enumerate(reader, start=2):
+    for line, raw in enumerate(records, start=2):
         row = {name: " ".join(str(raw.get(col) or "").split()) for name, col in mapping.items()}
         row = {name: row.get(name, "") for name in ALIASES} | {"line": line}
         if not row["entity_name"] and not row["image_url"]:
