@@ -1,6 +1,10 @@
 import { authFetch } from "@/lib/api";
 
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/, "");
+// Empty means same origin: the web server rewrites /api/v1 to the API (next.config.ts).
+export const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL ??
+  (process.env.NODE_ENV === "production" ? "" : "http://localhost:8000")
+).replace(/\/$/, "");
 
 /** Exact cosines of the query against one image; absent when the API cannot compute them. */
 export type Similarity = {

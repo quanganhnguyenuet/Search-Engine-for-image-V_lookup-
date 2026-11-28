@@ -71,6 +71,20 @@ Check that the API is up: <http://localhost:8000/api/v1/health>, then open
 <http://localhost:3000>. That is all you need day to day: the enriched graph is already
 on disk, in Qdrant and in Neo4j.
 
+### Demo (production build)
+
+Stop `npm run dev` first, then from the repository root:
+
+```powershell
+.\scripts\start_demo.ps1                  # API + production web on http://127.0.0.1:3000
+.\scripts\start_demo.ps1 -Tunnel quick    # also a public address (needs cloudflared)
+```
+
+The web server forwards `/api/v1/*` to the API (`API_PROXY_URL`, default `http://127.0.0.1:8000`,
+read at build time). A production build calls its own origin; since `apps/web/.env.local` points
+at `localhost:8000`, keep `NEXT_PUBLIC_API_URL=` (empty) in `apps/web/.env.production.local`. See
+[docs/ke-hoach-deploy-2026-11-27.md](docs/ke-hoach-deploy-2026-11-27.md).
+
 ### Login
 
 The web app signs users in with Supabase Auth (email + password, 6-digit codes by email).
