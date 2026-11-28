@@ -127,19 +127,8 @@ class _UrllibResponse:
     """The part of a curl_cffi response that get() and fetch_image() use."""
 
     def __init__(self, raw):
-        self.raw = raw
         self.status_code = getattr(raw, 'status', None) or raw.getcode()
         self.headers = {k.lower(): v for k, v in raw.headers.items()}
-
-    def iter_content(self, chunk_size=65536):
-        while True:
-            chunk = self.raw.read(chunk_size)
-            if not chunk:
-                return
-            yield chunk
-
-    def close(self):
-        self.raw.close()
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -153,12 +142,20 @@ class _UrllibSession:
     def __init__(self):
         self.opener = urllib.request.build_opener(_NoRedirect())
 
-    def get(self, url, headers=None, timeout=25, allow_redirects=False, stream=True):
+    def get(self, url, headers=None, timeout=25, allow_redirects=False, content_callback=None):
         request = urllib.request.Request(url, headers={'User-Agent': USER_AGENT, **(headers or {})})
         try:
-            return _UrllibResponse(self.opener.open(request, timeout=timeout))
+            raw = self.opener.open(request, timeout=timeout[0] if isinstance(timeout, tuple) else timeout)
         except urllib.error.HTTPError as error:  # 3xx/4xx/5xx still carry headers and a body
-            return _UrllibResponse(error)
+            raw = error
+        try:
+            response = _UrllibResponse(raw)
+            while chunk := raw.read(65536):
+                if content_callback(chunk) == _ABORT:
+                    break
+            return response
+        finally:
+            raw.close()
 
 
 def session():
@@ -171,6 +168,38 @@ def session():
     return _local.s
 
 
+_ABORT = 0xFFFFFFFF  # CURL_WRITEFUNC_ERROR; any other return value does not stop libcurl
+TIMEOUT = (25, 35)  # curl_cffi: 25 s to connect, 25 + 35 = 60 s for the whole request
+
+
+def download(url, headers, max_bytes):
+    """One request, no redirects followed, keeping at most max_bytes of the body.
+
+    -> (response, body, truncated). Never use curl_cffi's stream=True here: it uses one curl
+    handle from two threads, and with the import's fetch threads it corrupted the heap and
+    killed the API process.
+    """
+    body, truncated = bytearray(), False
+
+    def write(chunk):
+        nonlocal truncated
+        room = max_bytes - len(body)
+        body.extend(chunk[:room])
+        if len(chunk) <= room:
+            return len(chunk)
+        truncated = True
+        return _ABORT
+
+    try:
+        response = session().get(url, headers=headers, timeout=TIMEOUT, allow_redirects=False,
+                                 content_callback=write)
+    except Exception as error:
+        response = getattr(error, 'response', None)
+        if not truncated or response is None:  # not the abort above: a real failure
+            raise
+    return response, bytes(body), truncated
+
+
 def get(url, polite, referer=None):
     """-> (http_status, final_url, content_type, body bytes ≤ MAX_BYTES, headers)."""
     for _ in range(6):
@@ -179,19 +208,11 @@ def get(url, polite, referer=None):
         headers = dict(HEADERS)
         if referer:
             headers['Referer'] = referer
-        r = session().get(url, headers=headers, timeout=25, allow_redirects=False, stream=True)
-        try:
-            if r.status_code in (301, 302, 303, 307, 308) and r.headers.get('location'):
-                url = urljoin(url, r.headers.get('location'))
-                continue
-            body = bytearray()
-            for chunk in r.iter_content(chunk_size=65536):
-                body += chunk
-                if len(body) >= MAX_BYTES:
-                    break  # long page: parse what we have instead of failing
-            return r.status_code, url, (r.headers.get('content-type') or '').lower(), bytes(body[:MAX_BYTES]), dict(r.headers)
-        finally:
-            r.close()
+        r, body, _ = download(url, headers, MAX_BYTES)  # long page: parse what we have instead of failing
+        if r.status_code in (301, 302, 303, 307, 308) and r.headers.get('location'):
+            url = urljoin(url, r.headers.get('location'))
+            continue
+        return r.status_code, url, (r.headers.get('content-type') or '').lower(), body, dict(r.headers)
     raise ValueError('quá nhiều chuyển hướng')
 
 
@@ -211,27 +232,21 @@ def fetch_image(url, max_bytes=15_000_000, referer=None):
         if referer:
             headers['Referer'] = referer
         try:
-            r = session().get(url, headers=headers, timeout=25, allow_redirects=False, stream=True)
+            r, body, truncated = download(url, headers, max_bytes)
         except Exception as error:
             text = str(error)
             raise ValueError(('timed out: ' if '(28)' in text or 'timed out' in text.lower() else 'chrome: ') + text[:200])
-        try:
-            if r.status_code in (301, 302, 303, 307, 308) and r.headers.get('location'):
-                url = urljoin(url, r.headers.get('location'))
-                continue
-            if r.status_code != 200:
-                raise ValueError('HTTP ' + str(r.status_code))
-            kind = (r.headers.get('content-type') or '').lower()
-            if not kind.startswith('image/'):
-                raise ValueError('URL không trả về ảnh')
-            body = bytearray()
-            for chunk in r.iter_content(chunk_size=65536):
-                body += chunk
-                if len(body) > max_bytes:
-                    raise ValueError('Nội dung vượt giới hạn tải')
-            return bytes(body), url, kind
-        finally:
-            r.close()
+        if r.status_code in (301, 302, 303, 307, 308) and r.headers.get('location'):
+            url = urljoin(url, r.headers.get('location'))
+            continue
+        if r.status_code != 200:
+            raise ValueError('HTTP ' + str(r.status_code))
+        kind = (r.headers.get('content-type') or '').lower()
+        if not kind.startswith('image/'):
+            raise ValueError('URL không trả về ảnh')
+        if truncated:
+            raise ValueError('Nội dung vượt giới hạn tải')
+        return body, url, kind
     raise ValueError('Quá nhiều chuyển hướng')
 
 
