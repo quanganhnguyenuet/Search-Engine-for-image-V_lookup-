@@ -5,15 +5,21 @@
 .DESCRIPTION
   The API and the web server open in their own windows. The script stops before the tunnel
   if a safety check fails. See docs/ke-hoach-deploy-2026-11-27.md.
+
+  -Expose api: the web runs on Render (render.yaml), so only the API starts here and the
+  tunnel points at it. Put the printed trycloudflare.com address in API_PROXY_URL on Render.
 .EXAMPLE
   .\scripts\start_demo.ps1                       # local only
   .\scripts\start_demo.ps1 -Tunnel quick         # random trycloudflare.com address
   .\scripts\start_demo.ps1 -Tunnel named -TunnelName vlookup
+  .\scripts\start_demo.ps1 -Expose api -Tunnel quick   # API for the web on Render
 #>
 param(
     [ValidateSet("none", "quick", "named")]
     [string]$Tunnel = "none",
     [string]$TunnelName = "vlookup",
+    [ValidateSet("web", "api")]
+    [string]$Expose = "web",
     [switch]$SkipBuild
 )
 
@@ -46,15 +52,17 @@ function Assert-Status([string]$Url, [int]$Expected, [string]$What, [string]$Met
 
 if (-not (Test-Path $python)) { throw "Python venv not found: $python" }
 
-$wanted = (Get-Content (Join-Path $web "package.json") -Raw | ConvertFrom-Json).dependencies.next
-$installedFile = Join-Path $web "node_modules\next\package.json"
-$installed = if (Test-Path $installedFile) { (Get-Content $installedFile -Raw | ConvertFrom-Json).version }
-if ($installed -ne $wanted) {
-    throw "next $wanted is required but '$installed' is installed. Stop the web server, then: cd apps\web; npm ci"
-}
+if ($Expose -eq "web") {
+    $wanted = (Get-Content (Join-Path $web "package.json") -Raw | ConvertFrom-Json).dependencies.next
+    $installedFile = Join-Path $web "node_modules\next\package.json"
+    $installed = if (Test-Path $installedFile) { (Get-Content $installedFile -Raw | ConvertFrom-Json).version }
+    if ($installed -ne $wanted) {
+        throw "next $wanted is required but '$installed' is installed. Stop the web server, then: cd apps\web; npm ci"
+    }
 
-if (Get-NetTCPConnection -State Listen -LocalPort 3000 -ErrorAction SilentlyContinue) {
-    throw "Port 3000 is in use (npm run dev?). Stop it first: the tunnel must serve the production build."
+    if (Get-NetTCPConnection -State Listen -LocalPort 3000 -ErrorAction SilentlyContinue) {
+        throw "Port 3000 is in use (npm run dev?). Stop it first: the tunnel must serve the production build."
+    }
 }
 
 if ($Tunnel -ne "none" -and -not (Get-Command cloudflared -ErrorAction SilentlyContinue)) {
@@ -81,6 +89,23 @@ if ((Get-HttpStatus "$apiUrl/api/v1/health") -eq 200) {
 Write-Host "Checking the API..."
 Assert-Status "$apiUrl/api/v1/search/info" 401 "search needs a signed-in user (REQUIRE_LOGIN=true)"
 Assert-Status "$apiUrl/api/v1/images/$('0' * 64)" 404 "search is loaded (SEARCH_ENABLED=true)"
+
+if ($Expose -eq "api") {
+    # The tunnel reaches the API itself, so its docs must be off (APP_ENV=production).
+    Assert-Status "$apiUrl/docs" 404 "the API docs are off (APP_ENV=production)"
+    Assert-Status "$apiUrl/openapi.json" 404 "the API schema is not exposed"
+    Write-Host ""
+    Write-Host "API is up for the web on Render. While the tunnel is open: never set REQUIRE_LOGIN=false."
+    if ($Tunnel -eq "quick") {
+        Write-Host "Copy the https://....trycloudflare.com address below into API_PROXY_URL on Render,"
+        Write-Host "then 'Save, rebuild, and deploy' (the address changes every time the tunnel restarts)."
+        & cloudflared tunnel --url $apiUrl
+    } elseif ($Tunnel -eq "named") {
+        Write-Host "Running tunnel '$TunnelName' (its hostname must point to $apiUrl). Ctrl+C closes it."
+        & cloudflared tunnel run $TunnelName
+    }
+    return
+}
 
 # --- Web ---------------------------------------------------------------------------------
 Push-Location $web

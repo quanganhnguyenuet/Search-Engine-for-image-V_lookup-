@@ -1,0 +1,27 @@
+# Render Blueprint: the Next.js web only. The API (two models, 8 GB of images) stays on the
+# laptop and is reached through a Cloudflare tunnel:
+#   .\scripts\start_demo.ps1 -Expose api -Tunnel quick
+# API_PROXY_URL is read when the app is built, so after the tunnel address changes use
+# "Save, rebuild, and deploy" on Render.
+services:
+  - type: web
+    name: vlookup-web
+    runtime: node
+    plan: starter
+    region: singapore
+    branch: chore/products-v1-cleanup
+    rootDir: apps/web
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    # /login does not depend on the API, so the web stays healthy while the laptop is off.
+    healthCheckPath: /login
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # The tunnel address of the API, e.g. https://xxxx.trycloudflare.com (no trailing slash).
+      - key: API_PROXY_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+        sync: false

@@ -52,11 +52,17 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
 
 
 def create_app() -> FastAPI:
+    # In production the API can sit behind a public tunnel (web on Render -> API on the
+    # laptop), so the interactive docs and the schema are not served.
+    public = get_settings().app_env == "production"
     application = FastAPI(
         title="VisualSeek API",
         description="V-Lookup product image search.",
         version=__version__,
         lifespan=lifespan,
+        docs_url=None if public else "/docs",
+        redoc_url=None if public else "/redoc",
+        openapi_url=None if public else "/openapi.json",
     )
     application.add_middleware(RequestContextMiddleware)
     application.add_middleware(
