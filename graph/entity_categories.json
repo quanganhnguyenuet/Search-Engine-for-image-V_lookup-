@@ -109,20 +109,20 @@
  "corpus_fingerprint": "861911cb10dd5651e2b2297585230bf8dfe72a2265820011914791f4777e3455",
  "coverage": {
   "by_source": {
-   "gemini": 2076,
+   "gemini": 2080,
    "human": 202
   },
-  "canonical_entities": 2278,
+  "canonical_entities": 2282,
   "fashion": 120,
-  "labelled": 2278,
-  "needs_review": 137,
+  "labelled": 2282,
+  "needs_review": 141,
   "with_fits": 150,
-  "with_form_factor": 657,
+  "with_form_factor": 658,
   "with_ingredients": 522,
-  "with_material": 918,
-  "with_origin": 688,
-  "with_target_audience": 627,
-  "with_treats": 1191
+  "with_material": 922,
+  "with_origin": 691,
+  "with_target_audience": 628,
+  "with_treats": 1194
  },
  "edges": [
   {
@@ -36468,6 +36468,86 @@
    "rel": "ORIGIN",
    "source": "gemini",
    "src": "0e29fc03-3dcf-4b40-94dc-27204b4766df"
+  },
+  {
+   "dst": "category:car.tyres_wheels",
+   "rel": "IS_A",
+   "src": "11fe0366-f1f8-4f4e-8baa-0dfad7eaefb8"
+  },
+  {
+   "dst": "place:trung-quoc",
+   "rel": "ORIGIN",
+   "source": "gemini",
+   "src": "11fe0366-f1f8-4f4e-8baa-0dfad7eaefb8"
+  },
+  {
+   "dst": "category:culture.antique",
+   "rel": "IS_A",
+   "src": "1200f028-14e4-44b0-b48b-2d1177700908"
+  },
+  {
+   "dst": "purpose:suu-tam",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "1200f028-14e4-44b0-b48b-2d1177700908"
+  },
+  {
+   "dst": "purpose:lam-phong-thuy",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "1200f028-14e4-44b0-b48b-2d1177700908"
+  },
+  {
+   "dst": "place:dong-duong",
+   "rel": "ORIGIN",
+   "source": "gemini",
+   "src": "1200f028-14e4-44b0-b48b-2d1177700908"
+  },
+  {
+   "dst": "category:outdoor.sports",
+   "rel": "IS_A",
+   "src": "12013e57-65a6-4b0e-a3b4-a3d45bc59996"
+  },
+  {
+   "dst": "purpose:bao-ve-co-tay",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "12013e57-65a6-4b0e-a3b4-a3d45bc59996"
+  },
+  {
+   "dst": "purpose:bao-ve-ban-tay",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "12013e57-65a6-4b0e-a3b4-a3d45bc59996"
+  },
+  {
+   "dst": "purpose:tap-luyen-vo-thuat",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "12013e57-65a6-4b0e-a3b4-a3d45bc59996"
+  },
+  {
+   "dst": "category:industrial.construction",
+   "rel": "IS_A",
+   "src": "12027037-8f4a-4b75-8eb7-7cfb73be562b"
+  },
+  {
+   "dst": "purpose:xuc-gat",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "12027037-8f4a-4b75-8eb7-7cfb73be562b"
+  },
+  {
+   "dst": "purpose:khai-khoang",
+   "rel": "TREATS",
+   "source": "gemini",
+   "src": "12027037-8f4a-4b75-8eb7-7cfb73be562b"
+  },
+  {
+   "dst": "place:my",
+   "rel": "ORIGIN",
+   "source": "gemini",
+   "src": "12027037-8f4a-4b75-8eb7-7cfb73be562b"
   }
  ],
  "entities": {
@@ -78451,6 +78531,88 @@
    "treats": [
     "báo hiệu âm thanh"
    ]
+  },
+  "11fe0366-f1f8-4f4e-8baa-0dfad7eaefb8": {
+   "basis": "evidence",
+   "brand_id": "brand:doublestar",
+   "category": "car.tyres_wheels",
+   "category_l1": "car",
+   "category_name": "Lốp & mâm ô tô",
+   "confidence": "high",
+   "imported": true,
+   "market_tier": "not_applicable",
+   "material": "cao su",
+   "model": "agy:gemini-3.8-flash-medium",
+   "name": "Doublestar DH05",
+   "needs_review": true,
+   "origin": "Trung Quốc",
+   "product_type": "Lốp ô tô",
+   "source": "gemini",
+   "target_audience": "ô tô"
+  },
+  "1200f028-14e4-44b0-b48b-2d1177700908": {
+   "basis": "evidence",
+   "brand_id": null,
+   "category": "culture.antique",
+   "category_l1": "culture",
+   "category_name": "Cổ vật, tiền cổ & sưu tầm",
+   "confidence": "high",
+   "form_factor": "đồng xu",
+   "imported": true,
+   "market_tier": "not_applicable",
+   "material": "kẽm",
+   "model": "agy:gemini-3.8-flash-medium",
+   "name": "Đồng 1/4 cent 1942 (kẽm)",
+   "needs_review": true,
+   "origin": "Đông Dương",
+   "product_type": "Tiền xu cổ",
+   "source": "gemini",
+   "treats": [
+    "sưu tầm",
+    "làm phong thủy"
+   ]
+  },
+  "12013e57-65a6-4b0e-a3b4-a3d45bc59996": {
+   "basis": "evidence",
+   "brand_id": null,
+   "category": "outdoor.sports",
+   "category_l1": "outdoor",
+   "category_name": "Dụng cụ thể thao",
+   "confidence": "high",
+   "imported": true,
+   "market_tier": "not_applicable",
+   "material": "vải",
+   "model": "agy:gemini-3.8-flash-medium",
+   "name": "Găng tay võ (boxing/MMA wrap)",
+   "needs_review": true,
+   "product_type": "Băng quấn tay boxing",
+   "source": "gemini",
+   "treats": [
+    "bảo vệ cổ tay",
+    "bảo vệ bàn tay",
+    "tập luyện võ thuật"
+   ]
+  },
+  "12027037-8f4a-4b75-8eb7-7cfb73be562b": {
+   "basis": "evidence",
+   "brand_id": "brand:caterpillar",
+   "category": "industrial.construction",
+   "category_l1": "industrial",
+   "category_name": "Máy xây dựng & xe công trình",
+   "confidence": "high",
+   "imported": true,
+   "market_tier": "not_applicable",
+   "material": "thép",
+   "model": "agy:gemini-3.8-flash-medium",
+   "name": "Caterpillar 994",
+   "needs_review": true,
+   "origin": "Mỹ",
+   "product_type": "Máy xúc lật",
+   "source": "gemini",
+   "treats": [
+    "xúc gạt",
+    "khai khoáng"
+   ]
   }
  },
  "ingredients": {
@@ -79444,8 +79606,10 @@
   "purpose:bao-quan-bia": "bảo quản bia",
   "purpose:bao-quan-thuc-pham": "bảo quản thực phẩm",
   "purpose:bao-ve-an-toan": "bảo vệ an toàn",
+  "purpose:bao-ve-ban-tay": "bảo vệ bàn tay",
   "purpose:bao-ve-binh-an": "bảo vệ bình an",
   "purpose:bao-ve-chan": "bảo vệ chân",
+  "purpose:bao-ve-co-tay": "bảo vệ cổ tay",
   "purpose:bao-ve-da": "bảo vệ da",
   "purpose:bao-ve-dau": "bảo vệ đầu",
   "purpose:bao-ve-dau-ti": "bảo vệ đầu ti",
@@ -80059,6 +80223,7 @@
   "purpose:keo-cuu-ho": "kéo cứu hộ",
   "purpose:keo-go": "kéo gỗ",
   "purpose:ket-noi-duong-ong": "kết nối đường ống",
+  "purpose:khai-khoang": "khai khoáng",
   "purpose:khai-thac-khoang-san": "khai thác khoáng sản",
   "purpose:khan-tieng": "khản tiếng",
   "purpose:khang-khuan": "kháng khuẩn",
@@ -80126,6 +80291,7 @@
   "purpose:lam-min-be-mat": "làm mịn bề mặt",
   "purpose:lam-nong-nuoc": "làm nóng nước",
   "purpose:lam-phang-be-mat": "làm phẳng bề mặt",
+  "purpose:lam-phong-thuy": "làm phong thủy",
   "purpose:lam-rau-cau": "làm rau câu",
   "purpose:lam-sach": "làm sạch",
   "purpose:lam-sach-be-mat": "làm sạch bề mặt",
@@ -80515,6 +80681,7 @@
   "purpose:tap-di-sau-tai-bien": "tập đi sau tai biến",
   "purpose:tap-di-sau-tai-nan": "tập đi sau tai nạn",
   "purpose:tap-gym": "tập gym",
+  "purpose:tap-luyen-vo-thuat": "tập luyện võ thuật",
   "purpose:tap-muay-thai": "tập muay thai",
   "purpose:tap-pilates": "tập pilates",
   "purpose:tap-tay": "tập tay",
@@ -80805,6 +80972,7 @@
   "purpose:xuc-dao": "xúc đào",
   "purpose:xuc-dat": "xúc đất",
   "purpose:xuc-dat-cat": "xúc đất cát",
+  "purpose:xuc-gat": "xúc gạt",
   "purpose:xuc-lat": "xúc lật",
   "purpose:xuong-khop": "xương khớp",
   "purpose:zona": "zona"
