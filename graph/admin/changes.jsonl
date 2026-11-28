@@ -1,2 +1,5 @@
 {"seq": 1, "at": "2026-11-27T04:46:40+00:00", "actor": {"id": "admin-3304cfb3"}, "entity_id": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d", "field": "origin", "before": "", "after": "Bến Tre", "note": ""}
 {"seq": 2, "at": "2026-11-27T04:46:47+00:00", "actor": {"id": "admin-3304cfb3"}, "entity_id": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d", "field": "reviewed", "before": false, "after": true, "note": ""}
+{"seq": 3, "at": "2026-11-27T10:39:21+00:00", "actor": {"id": "admin-3304cfb3"}, "entity_id": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d", "field": "origin", "before": "Bến Tre", "after": "", "note": ""}
+{"seq": 4, "at": "2026-11-27T10:44:00+00:00", "actor": {"id": "admin-3304cfb3"}, "entity_id": "01ee9872-bd31-4041-a80b-b5540b026f6f", "field": "brand", "before": null, "after": "new:Aba", "note": ""}
+{"seq": 5, "at": "2026-11-27T10:44:00+00:00", "actor": {"id": "admin-3304cfb3"}, "entity_id": "01ee9872-bd31-4041-a80b-b5540b026f6f", "field": "reviewed", "before": false, "after": true, "note": ""}

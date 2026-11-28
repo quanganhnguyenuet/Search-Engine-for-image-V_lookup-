@@ -109,8 +109,8 @@
  "corpus_fingerprint": "861911cb10dd5651e2b2297585230bf8dfe72a2265820011914791f4777e3455",
  "coverage": {
   "by_source": {
-   "gemini": 2077,
-   "human": 201
+   "gemini": 2076,
+   "human": 202
   },
   "canonical_entities": 2278,
   "fashion": 120,
@@ -120,7 +120,7 @@
   "with_form_factor": 657,
   "with_ingredients": 522,
   "with_material": 918,
-  "with_origin": 689,
+  "with_origin": 688,
   "with_target_audience": 627,
   "with_treats": 1191
  },
@@ -8110,12 +8110,6 @@
    "dst": "ingredient:du-du",
    "rel": "HAS_INGREDIENT",
    "source": "gemini",
-   "src": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d"
-  },
-  {
-   "dst": "place:ben-tre",
-   "rel": "ORIGIN",
-   "source": "admin",
    "src": "012fbe4e-e9e2-4b60-b23f-d3d678231c5d"
   },
   {
@@ -45808,7 +45802,6 @@
    "model": "agy:gemini-3.8-flash-low",
    "name": "Đu đủ ngâm chua ngọt",
    "needs_review": false,
-   "origin": "Bến Tre",
    "product_type": "Đu đủ ngâm chua ngọt",
    "source": "human"
   },
@@ -51506,7 +51499,7 @@
   },
   "01ee9872-bd31-4041-a80b-b5540b026f6f": {
    "basis": "evidence",
-   "brand_id": null,
+   "brand_id": "brand:aba",
    "category": "household.cleaning_storage",
    "category_l1": "household",
    "category_name": "Đồ dùng & vệ sinh nhà cửa",
@@ -51516,7 +51509,7 @@
    "name": "Aba nước giặt",
    "needs_review": false,
    "product_type": "Nước giặt",
-   "source": "gemini",
+   "source": "human",
    "treats": [
     "giặt xả",
     "làm sạch quần áo"
