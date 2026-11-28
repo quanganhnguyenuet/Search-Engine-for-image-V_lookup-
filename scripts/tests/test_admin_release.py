@@ -147,3 +147,15 @@ def test_release_is_idempotent() -> None:
 
     assert changed == []
     assert twice == once
+
+
+def test_active_uploads_counts_refreshed_rows_and_skips_deleted(tmp_path, monkeypatch) -> None:
+    ops = [("a", "add"), ("b", "add"), ("c", "add"), ("a", "update"), ("c", "delete")]
+    path = tmp_path / "uploads.jsonl"
+    path.write_text(
+        "".join(f'{{"asset_id": "{asset}", "op": "{op}"}}\n' for asset, op in ops),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(admin_release, "UPLOADS", path)
+
+    assert admin_release.active_uploads() == 2

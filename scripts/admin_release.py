@@ -253,11 +253,10 @@ def run(args: list[str]) -> None:
 
 
 def active_uploads() -> int:
-    rows = read_jsonl(UPLOADS)
-    state: dict[str, str] = {}
-    for row in rows:
-        state[row["asset_id"]] = row["op"]
-    return sum(op == "add" for op in state.values())
+    """Uploaded images that are in the collection: the latest row is "add" or "update" (the API
+    rewrites a row as "update" when a release changes its doc text or payload)."""
+    latest = {row["asset_id"]: row["op"] for row in read_jsonl(UPLOADS)}
+    return sum(op != "delete" for op in latest.values())
 
 
 def sync_category_payload(old_path: Path, new_path: Path, artifacts: Path, write: bool) -> int:
